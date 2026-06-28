@@ -1389,6 +1389,7 @@
 
   function renderForPath(path) {
     if (!String(path || '').startsWith('/admin')) return;
+    if (path === '/admin/reset-password') return;
     if (!isAdminActive()) {
       adminGate(path);
       return;

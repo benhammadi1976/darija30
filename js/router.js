@@ -29,7 +29,8 @@
     '/admin/phrases': 'page-admin-phrases',
     '/admin/audio': 'page-admin-audio',
     '/admin/users': 'page-admin-users',
-    '/admin/payments': 'page-admin-payments'
+    '/admin/payments': 'page-admin-payments',
+    '/admin/reset-password': 'page-admin-reset-password'
   };
 
   function currentPath() {
@@ -98,6 +99,7 @@
     window.DarijaLaunchQA?.renderForPath(path);
     window.DarijaAudioReadiness?.renderForPath(path);
     window.DarijaAdminPreview?.renderForPath(path);
+    window.DarijaAdminResetPassword?.renderForPath(path);
 
     window.scrollTo({ top: 0, behavior: 'auto' });
   }

@@ -13,7 +13,7 @@
 
     <script src="./js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/styles.css?v=d68">
+    <link rel="stylesheet" href="./css/styles.css?v=d68c">
 </head>
 <body class="bg-white text-medina min-h-screen flex flex-col font-sans">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -984,6 +984,21 @@
     </div>
 
     <!-- ==========================================
+         ADMIN HIDDEN PAGE: Reset Supabase Admin Password (/admin/reset-password)
+         ========================================== -->
+    <section id="page-admin-reset-password" class="page admin-content bg-gray-100 py-12 min-h-screen" dir="rtl">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="rounded-3xl bg-white border border-gray-200 shadow-xl p-8 text-center">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-50 text-chefchaouen flex items-center justify-center text-4xl mb-5">🔑</div>
+                <span class="inline-flex rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200 px-4 py-1 text-xs font-extrabold uppercase tracking-wide mb-4">Hidden Admin Tool</span>
+                <h1 class="text-3xl font-black text-gray-900 mb-3">تغيير كلمة سر أدمن Supabase</h1>
+                <p class="text-gray-600 mb-6 max-w-xl mx-auto">هذه الصفحة خاصة بروابط استرجاع كلمة السر القادمة من Supabase فقط. لا تستعمل صفحة دخول المتعلم.</p>
+                <div id="adminResetPasswordRoot" class="text-right"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
          ADMIN PAGE 1: Dashboard (/admin)
          ========================================== -->
     <section id="page-admin-dashboard" class="page admin-content bg-gray-100 py-12 min-h-screen" dir="rtl">
@@ -1433,15 +1448,16 @@
 
     <script src="./js/data/lessons-data.js"></script>
     <script src="./js/data/blog-data.js"></script>
-    <script src="./js/supabase-media.js?v=d68"></script>
-    <script src="./js/audio-player.js?v=d68"></script>
+    <script src="./js/supabase-media.js?v=d68c"></script>
+    <script src="./js/audio-player.js?v=d68c"></script>
     <script src="./js/progress-store.js"></script>
-    <script src="./js/lesson-player.js?v=d68"></script>
+    <script src="./js/lesson-player.js?v=d68c"></script>
     <script src="./js/blog.js"></script>
     <script src="./js/launch-qa.js"></script>
     <script src="./js/audio-readiness.js"></script>
     <script src="./js/admin-session.js"></script>
-    <script src="./js/admin-content-manager.js?v=d68"></script>
+    <script src="./js/admin-content-manager.js?v=d68c"></script>
+    <script src="./js/admin-reset-password.js?v=d68c"></script>
     <script src="./js/router.js"></script>
     <script src="./js/app.js"></script>
 </body>

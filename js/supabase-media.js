@@ -2,6 +2,7 @@
   const DEFAULT_SUPABASE_URL = 'https://ueovreadkfmwsniksohn.supabase.co';
   const CONFIG_STORAGE_KEY = 'darija30_supabase_media_config';
   const SESSION_STORAGE_KEY = 'darija30_supabase_media_session';
+  const RECOVERY_SESSION_STORAGE_KEY = 'darija30_supabase_recovery_session';
   const PHRASE_OVERRIDES_STORAGE_KEY = 'darija30_phrase_overrides_cache_v1';
   const PHRASE_OVERRIDES_BUCKET = 'images';
   const PHRASE_OVERRIDES_PATH = 'admin/phrase-overrides.json';
@@ -130,6 +131,78 @@
 
   function clearSession() {
     localStorage.removeItem(SESSION_STORAGE_KEY);
+  }
+
+  function parseRecoveryHash(hashValue = window.location.hash || '') {
+    const raw = String(hashValue || '');
+    if (!raw.includes('access_token=')) return null;
+    const clean = raw.replace(/^#/, '');
+    const accessTokenIndex = clean.indexOf('access_token=');
+    const params = new URLSearchParams(clean.slice(accessTokenIndex));
+    const accessToken = params.get('access_token') || '';
+    if (!accessToken) return null;
+    return {
+      access_token: accessToken,
+      refresh_token: params.get('refresh_token') || '',
+      token_type: params.get('token_type') || 'bearer',
+      expires_at: Number(params.get('expires_at') || 0),
+      expires_in: Number(params.get('expires_in') || 0),
+      type: params.get('type') || 'recovery',
+      captured_at: Date.now()
+    };
+  }
+
+  function saveRecoverySession(session) {
+    if (!session?.access_token) return null;
+    localStorage.setItem(RECOVERY_SESSION_STORAGE_KEY, JSON.stringify(session));
+    return session;
+  }
+
+  function readRecoverySession() {
+    const session = safeJsonParse(localStorage.getItem(RECOVERY_SESSION_STORAGE_KEY), null);
+    if (!session?.access_token) return null;
+    if (session.expires_at && Number(session.expires_at) * 1000 <= Date.now()) {
+      clearRecoverySession();
+      return null;
+    }
+    return session;
+  }
+
+  function clearRecoverySession() {
+    localStorage.removeItem(RECOVERY_SESSION_STORAGE_KEY);
+  }
+
+  function captureRecoveryFromUrl() {
+    const recoverySession = parseRecoveryHash(window.location.hash);
+    if (!recoverySession) return null;
+    saveRecoverySession(recoverySession);
+    const cleanUrl = `${window.location.pathname}${window.location.search}#/admin/reset-password`;
+    window.history.replaceState(null, document.title, cleanUrl);
+    return recoverySession;
+  }
+
+  async function updateRecoveryPassword(newPassword) {
+    const config = requireConfig();
+    const recoverySession = readRecoverySession();
+    const password = String(newPassword || '');
+    if (!recoverySession?.access_token) throw new Error('Password recovery link is missing or expired. Send a new recovery email.');
+    if (password.length < 8) throw new Error('Password must be at least 8 characters.');
+    const response = await fetch(`${config.url}/auth/v1/user`, {
+      method: 'PUT',
+      headers: {
+        apikey: config.publishableKey,
+        Authorization: `Bearer ${recoverySession.access_token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(payload?.error_description || payload?.msg || payload?.message || 'Could not update password. Send a new recovery link and try again.');
+    }
+    clearRecoverySession();
+    clearSession();
+    return payload;
   }
 
   function requireConfig() {
@@ -341,6 +414,10 @@
     saveConfig,
     readSession,
     clearSession,
+    readRecoverySession,
+    clearRecoverySession,
+    captureRecoveryFromUrl,
+    updateRecoveryPassword,
     signIn,
     signOut,
     assetPathToStorage,
@@ -362,6 +439,7 @@
     isReadyForAdminUpload
   };
 
+  captureRecoveryFromUrl();
   applyPhraseOverridesToLessons(readPhraseOverridesLocal());
   function refreshPhraseOverridesAfterLoad() {
     fetchPhraseOverrides({ force: true }).then(() => {
