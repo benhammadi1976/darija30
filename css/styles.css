@@ -3500,7 +3500,7 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
   }
 
   .lesson-scenario-card {
-    order: 1;
+    order: 3;
     border: 1px solid rgb(243 244 246);
     border-radius: 1rem;
     background: rgb(249 250 251);
@@ -3509,7 +3509,7 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
   }
 
   .lesson-say-card {
-    order: 2;
+    order: 1;
     border: 1px solid rgb(243 244 246);
     border-radius: 1rem;
     background: #fff;
@@ -3518,7 +3518,7 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
   }
 
   .lesson-watch-repeat {
-    order: 3;
+    order: 2;
     border: 1px solid rgb(243 244 246);
     border-radius: 1rem;
     background: #fff;
@@ -3567,4 +3567,15 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
     box-shadow: 0 10px 24px rgba(15, 23, 42, 0.045);
     margin-bottom: 0;
   }
+}
+
+
+/* Phase D62 — Mobile Column Order Consistency
+   On phones, keep desktop visual columns unchanged, but read the left learning column first,
+   then the right practice column. This prevents Scenario from becoming the first mobile card. */
+@media (max-width: 1023px) {
+  .lesson-say-card { order: 1; }
+  .lesson-watch-repeat { order: 2; }
+  .lesson-scenario-card { order: 3; }
+  .lesson-speaking-stack { order: 4; }
 }
