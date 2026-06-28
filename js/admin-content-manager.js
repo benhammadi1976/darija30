@@ -18,6 +18,7 @@
   ]);
 
   let state = {
+    selectedLevel: 1,
     selectedDay: 1,
     selectedPhraseId: null,
     filter: 'all'
@@ -25,6 +26,61 @@
 
   function lessons() {
     return Array.isArray(window.DARIJA30_LESSONS) ? window.DARIJA30_LESSONS : [];
+  }
+
+
+  const DARIJA30_LEVEL_COUNT = 12;
+
+  function levelNumber(value) {
+    const parsed = Number(value || 1);
+    if (!Number.isFinite(parsed) || parsed < 1) return 1;
+    return Math.min(Math.max(Math.round(parsed), 1), DARIJA30_LEVEL_COUNT);
+  }
+
+  function getLessonLevel(lesson) {
+    return levelNumber(lesson?.level || lesson?.levelNumber || lesson?.levelId || 1);
+  }
+
+  function levelCode(value) {
+    return `level${String(levelNumber(value)).padStart(2, '0')}`;
+  }
+
+  function dayCode(value) {
+    return `day${String(value || 1).padStart(2, '0')}`;
+  }
+
+  function lessonKey(lesson) {
+    return `${levelCode(getLessonLevel(lesson))}-${dayCode(lesson?.day || 1)}`;
+  }
+
+  function levelOptionsMarkup(selectedLevel = state.selectedLevel) {
+    return Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => {
+      const value = index + 1;
+      const available = lessons().some((lesson) => getLessonLevel(lesson) === value);
+      const label = `Level ${String(value).padStart(2, '0')}${available ? '' : ' — مستقل لاحقاً'}`;
+      return `<option value="${value}" ${value === levelNumber(selectedLevel) ? 'selected' : ''}>${escapeHtml(label)}</option>`;
+    }).join('');
+  }
+
+  function lessonsForLevel(level = state.selectedLevel) {
+    const selected = levelNumber(level);
+    return lessons().filter((lesson) => getLessonLevel(lesson) === selected);
+  }
+
+  function selectedLevelLessons() {
+    return lessonsForLevel(state.selectedLevel);
+  }
+
+  function firstLessonForLevel(level = state.selectedLevel) {
+    return lessonsForLevel(level)[0] || null;
+  }
+
+  function ensureSelectedLessonInLevel() {
+    const current = lessonsForLevel(state.selectedLevel).find((lesson) => String(lesson.day) === String(state.selectedDay));
+    if (current) return current;
+    const first = firstLessonForLevel(state.selectedLevel);
+    if (first) state.selectedDay = first.day;
+    return first;
   }
 
   function escapeHtml(value) {
@@ -80,7 +136,12 @@
 
   function findLesson(dayOrId) {
     const clean = String(dayOrId ?? state.selectedDay ?? '1');
-    return lessons().find((lesson) => String(lesson.day) === clean || lesson.id === clean) || lessons()[0] || null;
+    const sameLevel = lessonsForLevel(state.selectedLevel);
+    return sameLevel.find((lesson) => String(lesson.day) === clean || lesson.id === clean)
+      || lessons().find((lesson) => String(lesson.day) === clean || lesson.id === clean)
+      || sameLevel[0]
+      || lessons()[0]
+      || null;
   }
 
   function findPhrase(id) {
@@ -94,8 +155,9 @@
     const safeDay = encodeURIComponent(String(lesson?.day || 1));
     const phraseIndex = Math.max(Number(index) || 0, 0) + 1;
     const phraseId = phrase?.id ? `&phraseId=${encodeURIComponent(String(phrase.id))}` : '';
+    const level = `&level=${encodeURIComponent(String(getLessonLevel(lesson)))}`;
     const from = source ? `&from=${encodeURIComponent(String(source))}` : '';
-    return `#/app/lesson/${safeDay}?admin=1&phrase=${phraseIndex}${phraseId}${from}`;
+    return `#/app/lesson/${safeDay}?admin=1${level}&phrase=${phraseIndex}${phraseId}${from}`;
   }
 
   function learnerPhraseHrefFromPhrase(lesson, phrase, source = 'admin') {
@@ -187,21 +249,21 @@
     if (existing) return existing;
     const day = String(lesson?.day || '1').padStart(2, '0');
     const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
-    return `assets/audio/day${day}/${phraseId}-${kind === 'slow' ? 'slow' : 'normal'}.mp3`;
+    return `assets/audio/${levelCode(getLessonLevel(lesson))}/day${day}/${phraseId}-${kind === 'slow' ? 'slow' : 'normal'}.mp3`;
   }
 
   function buildAdminVideoTargetPath(lesson, phrase) {
     if (phrase?.sceneVideo) return phrase.sceneVideo;
     const day = String(lesson?.day || '1').padStart(2, '0');
     const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
-    return `assets/video/day${day}/${phraseId}-scene.mp4`;
+    return `assets/video/${levelCode(getLessonLevel(lesson))}/day${day}/${phraseId}-scene.mp4`;
   }
 
   function buildAdminVisualTargetPath(lesson, phrase) {
     if (phrase?.sceneVisual) return phrase.sceneVisual;
     const day = String(lesson?.day || '1').padStart(2, '0');
     const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
-    return `assets/images/lesson-scenes/day${day}-${phraseId}-scene.webp`;
+    return `assets/images/lesson-scenes/${levelCode(getLessonLevel(lesson))}/day${day}-${phraseId}-scene.webp`;
   }
 
   function getMediaItemConfig(kind) {
@@ -558,8 +620,8 @@
     });
   }
 
-  function mediaSummary() {
-    const entries = allPhrases();
+  function mediaSummary(lessonList = lessons()) {
+    const entries = lessonList.flatMap((lesson) => (lesson.phrases || []).map((phrase, index) => ({ lesson, phrase, index })));
     const total = entries.length;
     const normalReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'normal').label === 'موجود').length;
     const slowReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'slow').label === 'موجود').length;
@@ -568,7 +630,7 @@
     return { total, normalReady, slowReady, videoReady, visualReady };
   }
 
-  const ADMIN_AUDIO_OPEN_STORAGE_KEY = 'darija30_admin_audio_open_days';
+  const ADMIN_AUDIO_OPEN_STORAGE_KEY = 'darija30_admin_audio_open_lessons_v2';
 
   function readAdminAudioOpenDays() {
     try {
@@ -577,7 +639,7 @@
     } catch (error) {
       // Ignore corrupted localStorage and fall back to a clean default.
     }
-    return new Set(['1']);
+    return new Set([lessonKey(firstLessonForLevel(state.selectedLevel) || { level: 1, day: 1 })]);
   }
 
   function writeAdminAudioOpenDays(openDays) {
@@ -683,7 +745,7 @@
 
   function renderAudioDayGroup(lesson, openDays) {
     const stats = lessonMediaStats(lesson);
-    const dayKey = String(lesson.day);
+    const dayKey = lessonKey(lesson);
     const isOpen = openDays.has(dayKey);
     const statusTone = stats.complete ? 'green' : (stats.normal || stats.slow || stats.videos ? 'yellow' : 'red');
     const statusText = stats.complete ? 'Ready' : 'Needs recording';
@@ -694,7 +756,7 @@
             <div class="flex items-start gap-3">
               <span class="admin-audio-day__chevron ${isOpen ? 'is-open' : ''}" data-admin-audio-chevron>▾</span>
               <div>
-                <p class="text-xs font-black text-terracotta uppercase tracking-wide">Day ${escapeHtml(lesson.day)} • ${stats.total} phrases</p>
+                <p class="text-xs font-black text-terracotta uppercase tracking-wide">Level ${escapeHtml(getLessonLevel(lesson))} • Day ${escapeHtml(lesson.day)} • ${stats.total} phrases</p>
                 <h2 class="text-xl font-black text-gray-900">${escapeHtml(lesson.title)}</h2>
                 <p class="text-sm text-gray-500 mt-1">${escapeHtml(lesson.situation || lesson.module || '')}</p>
               </div>
@@ -779,15 +841,15 @@
             <div class="space-y-2 text-sm text-gray-700 mb-5">
               <p>✅ يعرف أين يضع الصوت Normal/Slow.</p>
               <p>✅ يعرف أين يضع الفيديو لكل جملة.</p>
-              <p>✅ يرى خريطة الدروس والجمل قبل بناء Admin حقيقي.</p>
+              <p>✅ يدير المستوى واليوم والجملة والملفات من مكان واحد.</p>
             </div>
-            <a href="#/admin/lessons" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح إدارة الدروس</a>
+            <a href="#/admin/audio" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
           </div>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-          ${statCard('الدروس', lessons().length, '30 lesson map', 'blue')}
-          ${statCard('الجمل', summary.total, '5 phrases each', 'purple')}
+          ${statCard('المستويات', '12', 'independent levels', 'blue')}
+          ${statCard('دروس Level 1', lessonsForLevel(1).length, 'current data', 'purple')}
           ${statCard('صوت Normal', `${summary.normalReady}/${summary.total}`, 'recorded now', 'green')}
           ${statCard('صوت Slow', `${summary.slowReady}/${summary.total}`, 'recorded now', 'yellow')}
           ${statCard('الفيديوهات', `${summary.videoReady}/${summary.total}`, 'ready now', 'red')}
@@ -856,39 +918,26 @@
     `;
   }
 
-  function renderLessons() {
-    const root = document.getElementById('page-admin-lessons');
+  function renderMergedAdminNotice(rootId, title) {
+    const root = document.getElementById(rootId);
     if (!root) return;
-    const selected = findLesson(state.selectedDay);
     root.innerHTML = `
-      <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('إدارة الدروس — رؤية الأدمين', 'هنا ترى خريطة 30 درس كما ستدار لاحقاً من لوحة حقيقية. كل درس له رابط معاينة كمتعلم، ومسارات الصوت والفيديو والصورة.')}
-        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-6">
-          <div class="rounded-3xl bg-white border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-5 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-              <div><h2 class="text-xl font-extrabold text-gray-900">كل الدروس</h2><p class="text-sm text-gray-500">اضغط على درس لرؤية تفاصيله من جهة الأدمين.</p></div>
-              <div class="flex gap-2" dir="ltr">
-                <button type="button" data-admin-filter="all" class="admin-filter-btn ${state.filter === 'all' ? 'bg-terracotta text-white' : 'bg-white text-terracotta border border-terracotta'} px-3 py-2 rounded-xl text-sm font-bold">All</button>
-                <button type="button" data-admin-filter="missing" class="admin-filter-btn ${state.filter === 'missing' ? 'bg-terracotta text-white' : 'bg-white text-terracotta border border-terracotta'} px-3 py-2 rounded-xl text-sm font-bold">Need Media</button>
-              </div>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm text-right">
-                <thead class="bg-gray-50 text-gray-500">
-                  <tr><th class="p-3">اليوم</th><th class="p-3">الدرس</th><th class="p-3">الجمل</th><th class="p-3">الصوت</th><th class="p-3">الفيديو</th><th class="p-3">عرض</th></tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                  ${lessonRows().join('')}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          ${lessonDetail(selected)}
+      <div class="max-w-4xl mx-auto px-4" dir="rtl">
+        ${adminHeader(title, 'تم دمج هذه الصفحة داخل مركز ملفات الدروس حتى لا تتكرر أدوات الإدارة.')}
+        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 text-center">
+          <div class="text-5xl mb-4">🧹</div>
+          <h2 class="text-2xl font-black text-gray-900 mb-3">هذه الصفحة أصبحت مدمجة</h2>
+          <p class="text-gray-600 mb-6">استعمل مركز ملفات الدروس لإدارة الجمل والملفات من مكان واحد: Level → Day → Phrase.</p>
+          <a href="#/admin/audio" class="inline-flex bg-terracotta hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
         </div>
       </div>
     `;
-    bindAdminControls(root);
   }
+
+  function renderLessons() {
+    renderMergedAdminNotice('page-admin-lessons', 'إدارة الدروس — مدمجة في مركز ملفات الدروس');
+  }
+
 
   function lessonRows() {
     return lessons().filter((lesson) => {
@@ -928,7 +977,7 @@
         </div>
         <div class="grid grid-cols-2 gap-3 mb-5">
           <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="text-center bg-terracotta hover:bg-red-700 text-white px-4 py-3 rounded-xl font-bold transition">افتح كمتعلم</a>
-          <a href="#/admin/phrases" data-admin-go-phrases="${escapeHtml(first?.id || '')}" class="text-center bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-4 py-3 rounded-xl font-bold transition">إدارة الجمل</a>
+          <a href="#/admin/audio" class="text-center bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-4 py-3 rounded-xl font-bold transition">مركز الملفات</a>
         </div>
         <div class="space-y-3">
           ${(lesson.phrases || []).map((phrase, index) => {
@@ -955,37 +1004,9 @@
   }
 
   function renderPhrases() {
-    const root = document.getElementById('page-admin-phrases');
-    if (!root) return;
-    const selected = findPhrase(state.selectedPhraseId);
-    const currentLesson = selected.lesson || findLesson(state.selectedDay);
-    const currentPhrase = selected.phrase || firstPhrase(currentLesson);
-    root.innerHTML = `
-      <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('إدارة الجمل — نموذج الإدخال قبل Backend', 'هنا ترى الحقول التي سيحتاجها الأدمين لاحقاً لإضافة الجمل. حالياً هذه قراءة/معاينة من ملف lessons-data.js وليست حفظاً في قاعدة بيانات.')}
-        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-6">
-          <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6">
-            <h2 class="text-xl font-extrabold text-gray-900 mb-4">اختر درساً وجملة</h2>
-            <label class="block text-sm font-bold text-gray-600 mb-2">الدرس</label>
-            <select data-admin-lesson-select class="w-full border border-gray-200 rounded-xl px-4 py-3 mb-4 bg-white">
-              ${lessons().map((lesson) => `<option value="${escapeHtml(lesson.day)}" ${String(lesson.day) === String(currentLesson?.day) ? 'selected' : ''}>Day ${escapeHtml(lesson.day)} — ${escapeHtml(lesson.title)}</option>`).join('')}
-            </select>
-            <div class="space-y-2">
-              ${(currentLesson?.phrases || []).map((phrase, index) => `
-                <button type="button" data-admin-select-phrase="${escapeHtml(phrase.id)}" class="w-full text-right rounded-xl border ${phrase.id === currentPhrase?.id ? 'border-terracotta bg-red-50' : 'border-gray-200 bg-white'} p-4 hover:border-terracotta transition">
-                  <span class="text-xs text-gray-400 font-bold">Phrase ${index + 1}</span>
-                  <span class="block font-mono font-extrabold text-gray-900" dir="ltr">${escapeHtml(phrase.friendlyLatin)}</span>
-                  <span class="block text-sm text-gray-600">${escapeHtml(phrase.english)}</span>
-                </button>
-              `).join('')}
-            </div>
-          </div>
-          ${phraseEditorMock(currentLesson, currentPhrase)}
-        </div>
-      </div>
-    `;
-    bindAdminControls(root);
+    renderMergedAdminNotice('page-admin-phrases', 'إدارة الجمل — مدمجة في مركز ملفات الدروس');
   }
+
 
   function phraseEditorMock(lesson, phrase) {
     if (!lesson || !phrase) return '<div class="rounded-3xl bg-white border border-gray-200 p-6">No phrase selected.</div>';
@@ -1037,14 +1058,59 @@
     `;
   }
 
+
+
+  function renderLevelLessonControls(selectedLesson, selectedLessons) {
+    const dayOptions = selectedLessons.map((lesson) => `<option value="${escapeHtml(lesson.day)}" ${String(lesson.day) === String(selectedLesson?.day) ? 'selected' : ''}>Day ${escapeHtml(lesson.day)} — ${escapeHtml(lesson.title)}</option>`).join('');
+    return `
+      <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-6">
+        <div class="flex flex-col lg:flex-row lg:items-end gap-4">
+          <div class="flex-1">
+            <label class="block text-xs font-extrabold uppercase tracking-wide text-gray-400 mb-2">المستوى</label>
+            <select data-admin-level-select class="w-full border border-gray-200 rounded-2xl px-4 py-3 bg-white font-extrabold text-gray-900">
+              ${levelOptionsMarkup(state.selectedLevel)}
+            </select>
+            <p class="text-xs text-gray-500 mt-2">كل مستوى مستقل: دروسه، جمله، ملفاته، تقدمه، ومراجعته لاحقاً.</p>
+          </div>
+          <div class="flex-1">
+            <label class="block text-xs font-extrabold uppercase tracking-wide text-gray-400 mb-2">اليوم / الدرس</label>
+            <select data-admin-day-select class="w-full border border-gray-200 rounded-2xl px-4 py-3 bg-white font-extrabold text-gray-900" ${selectedLessons.length ? '' : 'disabled'}>
+              ${dayOptions || '<option>لا توجد دروس لهذا المستوى بعد</option>'}
+            </select>
+            <p class="text-xs text-gray-500 mt-2">اعمل على درس واحد في كل مرة لتفادي التكرار والفوضى.</p>
+          </div>
+          <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-blue-900 lg:max-w-sm">
+            <p class="font-extrabold mb-1">قاعدة D68B</p>
+            <p>مركز ملفات الدروس هو المكان الرئيسي: الجملة تفتح التعديل، والحالات ترفع Normal / Slow / Video / Visual.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderNoLevelLessonsMessage() {
+    return `
+      <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 text-center">
+        <div class="text-4xl mb-3">🧱</div>
+        <h2 class="text-2xl font-black text-gray-900 mb-2">هذا المستوى مستقل وجاهز لاحقاً</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">لم نضف دروس Level ${escapeHtml(state.selectedLevel)} بعد. عندما نضيفه سيظهر هنا بنفس النظام بدون إعادة بناء لوحة الأدمن.</p>
+      </div>
+    `;
+  }
+
   function renderAudio() {
     const root = document.getElementById('page-admin-audio');
     if (!root) return;
-    const summary = mediaSummary();
+    const selectedLessons = selectedLevelLessons();
+    const selectedLesson = ensureSelectedLessonInLevel();
+    const summary = mediaSummary(selectedLessons);
     const openDays = readAdminAudioOpenDays();
+    if (selectedLesson) openDays.add(lessonKey(selectedLesson));
+    const lessonContent = selectedLesson ? renderAudioDayGroup(selectedLesson, openDays) : renderNoLevelLessonsMessage();
     root.innerHTML = `
       <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('مركز ملفات الدروس', 'مكان واحد لإدارة ملفات كل جملة: Normal MP3، Slow MP3، فيديو المحاكاة، والصورة الذهنية. اضغط على حالة الملف نفسها للرفع أو الاستبدال من الحاسوب.')}
+        ${adminHeader('مركز ملفات الدروس', 'المركز الرئيسي لإدارة كل مستوى مستقل: اختر Level ثم Day، وعدّل الجملة أو ارفع Normal / Slow / Video / Visual من نفس الجدول.')}
+        ${renderLevelLessonControls(selectedLesson, selectedLessons)}
         <div class="grid md:grid-cols-4 gap-4 mb-8">
           ${statCard('Normal Ready', `${summary.normalReady}/${summary.total}`, 'MP3 normal', 'green')}
           ${statCard('Slow Ready', `${summary.slowReady}/${summary.total}`, 'MP3 slow', 'yellow')}
@@ -1053,28 +1119,21 @@
         </div>
         ${supabaseMediaAdminPanel()}
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 mb-8">
-          <h2 class="text-xl font-extrabold text-gray-900 mb-3">قاعدة تسمية الملفات</h2>
+          <h2 class="text-xl font-extrabold text-gray-900 mb-3">قاعدة تسمية الملفات للمستويات 12</h2>
+          <p class="text-sm text-gray-500 mb-4">المسارات الحالية لـ Level 1 تبقى كما هي إذا كانت موجودة في البيانات. المسارات الجديدة لاحقاً تستعمل levelXX حتى يبقى كل مستوى مستقلاً.</p>
           <div class="grid md:grid-cols-4 gap-4" dir="ltr">
-            ${pathBox('normal audio', 'assets/audio/dayXX/phrase-id-normal.mp3')}
-            ${pathBox('slow audio', 'assets/audio/dayXX/phrase-id-slow.mp3')}
-            ${pathBox('micro video', 'assets/video/dayXX/phrase-id-scene.mp4')}
-            ${pathBox('visual image', 'assets/images/lesson-scenes/dayXX-phrase-id-scene.webp')}
+            ${pathBox('normal audio', 'assets/audio/level01/day01/phrase-id-normal.mp3')}
+            ${pathBox('slow audio', 'assets/audio/level01/day01/phrase-id-slow.mp3')}
+            ${pathBox('micro video', 'assets/video/level01/day01/phrase-id-scene.mp4')}
+            ${pathBox('visual image', 'assets/images/lesson-scenes/level01/day01-phrase-id-scene.webp')}
           </div>
         </div>
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
-          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-            <div>
-              <h2 class="text-xl font-extrabold text-gray-900">الملفات حسب الأيام</h2>
-              <p class="text-sm text-gray-500">افتح اليوم الذي تعمل عليه. اضغط على أي حالة للرفع أو الاستبدال مباشرة.</p>
-            </div>
-            <div class="flex flex-wrap gap-2" dir="ltr">
-              <button type="button" data-admin-audio-open-all class="bg-white border border-chefchaouen text-chefchaouen hover:bg-blue-50 px-4 py-2 rounded-xl font-bold text-sm transition">Open all</button>
-              <button type="button" data-admin-audio-close-all class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-xl font-bold text-sm transition">Close all</button>
-            </div>
-          </div>
+          <h2 class="text-xl font-extrabold text-gray-900">جدول الدرس المختار</h2>
+          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. لا توجد صفحة إدارة جمل منفصلة بعد D68B.</p>
         </div>
         <div class="space-y-4">
-          ${lessons().map((lesson) => renderAudioDayGroup(lesson, openDays)).join('')}
+          ${lessonContent}
         </div>
         ${phraseEditModalMarkup()}
       </div>
@@ -1311,6 +1370,22 @@
   }
 
   function bindAdminControls(root) {
+    root.querySelector('[data-admin-level-select]')?.addEventListener('change', (event) => {
+      state.selectedLevel = levelNumber(event.target.value);
+      const first = firstLessonForLevel(state.selectedLevel);
+      state.selectedDay = first?.day || 1;
+      state.selectedPhraseId = firstPhrase(first)?.id || null;
+      renderAudio();
+    });
+    root.querySelector('[data-admin-day-select]')?.addEventListener('change', (event) => {
+      state.selectedDay = event.target.value;
+      const lesson = findLesson(state.selectedDay);
+      state.selectedPhraseId = firstPhrase(lesson)?.id || null;
+      const openDays = readAdminAudioOpenDays();
+      if (lesson) openDays.add(lessonKey(lesson));
+      writeAdminAudioOpenDays(openDays);
+      renderAudio();
+    });
     root.querySelectorAll('[data-admin-select-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
         state.selectedDay = button.dataset.adminSelectLesson;
@@ -1363,7 +1438,7 @@
     });
 
     root.querySelector('[data-admin-audio-open-all]')?.addEventListener('click', () => {
-      const openDays = new Set(lessons().map((lesson) => String(lesson.day)));
+      const openDays = new Set(selectedLevelLessons().map((lesson) => lessonKey(lesson)));
       root.querySelectorAll('[data-admin-audio-day]').forEach((dayCard) => {
         dayCard.querySelector('[data-admin-audio-panel]')?.classList.remove('hidden');
         dayCard.querySelector('[data-admin-audio-toggle]')?.setAttribute('aria-expanded', 'true');
