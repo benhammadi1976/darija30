@@ -3726,3 +3726,120 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
   color: #fff;
   border-color: #16a34a;
 }
+
+
+/* D66 — Clean Admin MP3 Upload UI
+   Replace the previous teacher-recorder panel with simple per-target MP3 upload cards. */
+.admin-mp3-upload-card {
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.045);
+}
+
+.admin-mp3-upload-card__path code {
+  font-size: 0.78rem;
+}
+
+.admin-mp3-upload-card .admin-record-mp3-btn--start {
+  min-height: 3rem;
+  font-size: 0.95rem;
+}
+
+/* D67 — Lesson Media Center Inline Upload
+   Each media status is also the upload/replace button: Normal MP3, Slow MP3, Video MP4, and Visual image. */
+.admin-media-cell {
+  min-width: 9.5rem;
+}
+
+.admin-media-status-btn {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+  padding: 0.55rem 0.75rem;
+  font-weight: 900;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.admin-media-status-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.admin-media-status-btn__label {
+  font-size: 0.78rem;
+  line-height: 1.15;
+}
+
+.admin-media-status-btn__hint {
+  font-size: 0.62rem;
+  line-height: 1.1;
+  opacity: 0.72;
+}
+
+.admin-media-status-btn--green {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.admin-media-status-btn--yellow {
+  background: #fef9c3;
+  color: #854d0e;
+  border-color: #fde68a;
+}
+
+.admin-media-status-btn--gray {
+  background: #f8fafc;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.admin-media-status-btn--red {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.admin-media-status-btn--blue,
+.admin-media-status-btn--purple {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+.admin-media-path {
+  display: block;
+  margin-top: 0.45rem;
+  color: #64748b;
+  font-size: 0.67rem;
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.admin-media-upload-note {
+  margin-top: 0.45rem;
+  min-height: 1rem;
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.admin-media-upload-note.is-recording {
+  color: #92400e;
+}
+
+.admin-media-upload-note.is-success {
+  color: #166534;
+}
+
+.admin-media-upload-note.is-warning {
+  color: #92400e;
+}
+
+.admin-media-upload-note.is-error {
+  color: #991b1b;
+}

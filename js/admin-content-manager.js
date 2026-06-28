@@ -90,18 +90,61 @@
     return { lesson, phrase: firstPhrase(lesson), index: 0 };
   }
 
+  const MEDIA_UPLOAD_STATUS_STORAGE_KEY = 'darija30_admin_media_upload_status_v1';
+
+  function readMediaUploadStatus() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(MEDIA_UPLOAD_STATUS_STORAGE_KEY) || '{}');
+      return saved && typeof saved === 'object' ? saved : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function writeMediaUploadStatus(status) {
+    try {
+      localStorage.setItem(MEDIA_UPLOAD_STATUS_STORAGE_KEY, JSON.stringify(status || {}));
+    } catch (error) {
+      // The media center should still work even if localStorage is unavailable.
+    }
+  }
+
+  function markMediaUploaded(assetPath, result) {
+    if (!assetPath) return;
+    const status = readMediaUploadStatus();
+    status[assetPath] = {
+      uploadedAt: new Date().toISOString(),
+      bucket: result?.bucket || '',
+      path: result?.path || '',
+      publicUrl: result?.publicUrl || ''
+    };
+    writeMediaUploadStatus(status);
+  }
+
+  function isMediaUploaded(assetPath) {
+    if (!assetPath) return false;
+    return Boolean(readMediaUploadStatus()[assetPath]);
+  }
+
   function audioStatus(path) {
     if (!path) return { label: 'غير محدد', tone: 'gray' };
-    return RECORDED_AUDIO.has(path)
+    return RECORDED_AUDIO.has(path) || isMediaUploaded(path)
       ? { label: 'موجود', tone: 'green' }
       : { label: 'ينتظر التسجيل', tone: 'yellow' };
   }
 
   function videoStatus(path) {
     if (!path) return { label: 'غير محدد بعد', tone: 'gray' };
-    return READY_VIDEOS.has(path)
+    return READY_VIDEOS.has(path) || isMediaUploaded(path)
       ? { label: 'موجود', tone: 'green' }
       : { label: 'ينتظر الفيديو', tone: 'yellow' };
+  }
+
+  function visualStatus(path, hasOriginalVisual = false) {
+    if (!path) return { label: 'غير محدد بعد', tone: 'gray' };
+    return isMediaUploaded(path) || Boolean(hasOriginalVisual)
+      ? { label: 'موجود', tone: 'green' }
+      : { label: 'ينتظر الصورة', tone: 'yellow' };
   }
 
   function badge(text, tone = 'gray') {
@@ -133,38 +176,93 @@
     return `assets/audio/day${day}/${phraseId}-${kind === 'slow' ? 'slow' : 'normal'}.mp3`;
   }
 
+  function buildAdminVideoTargetPath(lesson, phrase) {
+    if (phrase?.sceneVideo) return phrase.sceneVideo;
+    const day = String(lesson?.day || '1').padStart(2, '0');
+    const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
+    return `assets/video/day${day}/${phraseId}-scene.mp4`;
+  }
+
+  function buildAdminVisualTargetPath(lesson, phrase) {
+    if (phrase?.sceneVisual) return phrase.sceneVisual;
+    const day = String(lesson?.day || '1').padStart(2, '0');
+    const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
+    return `assets/images/lesson-scenes/day${day}-${phraseId}-scene.webp`;
+  }
+
+  function getMediaItemConfig(kind) {
+    const config = {
+      normal: { label: 'Normal', bucket: 'audio', accept: '.mp3,audio/mpeg,audio/mp3', requiredExt: 'mp3', error: 'ارفع ملف MP3 فقط للصوت العادي.' },
+      slow: { label: 'Slow', bucket: 'audio', accept: '.mp3,audio/mpeg,audio/mp3', requiredExt: 'mp3', error: 'ارفع ملف MP3 فقط للصوت البطيء.' },
+      video: { label: 'Video', bucket: 'videos', accept: '.mp4,video/mp4', requiredExt: 'mp4', error: 'ارفع فيديو MP4 فقط.' },
+      visual: { label: 'Visual', bucket: 'images', accept: '.jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp', requiredExt: 'image', error: 'ارفع صورة JPG أو PNG أو WEBP فقط.' }
+    };
+    return config[kind] || config.normal;
+  }
+
+  function isAllowedMediaFile(file, kind) {
+    const name = String(file?.name || '').toLowerCase();
+    const type = String(file?.type || '').toLowerCase();
+    if (kind === 'normal' || kind === 'slow') return name.endsWith('.mp3') || type === 'audio/mpeg' || type === 'audio/mp3';
+    if (kind === 'video') return name.endsWith('.mp4') || type === 'video/mp4';
+    if (kind === 'visual') return /\.(jpe?g|png|webp)$/i.test(name) || ['image/jpeg', 'image/png', 'image/webp'].includes(type);
+    return false;
+  }
+
+  function mediaPathForKind(lesson, phrase, kind) {
+    if (kind === 'normal') return buildAdminAudioTargetPath(lesson, phrase, 'normal');
+    if (kind === 'slow') return buildAdminAudioTargetPath(lesson, phrase, 'slow');
+    if (kind === 'video') return buildAdminVideoTargetPath(lesson, phrase);
+    if (kind === 'visual') return buildAdminVisualTargetPath(lesson, phrase);
+    return '';
+  }
+
+  function statusForKind(lesson, phrase, kind) {
+    const path = mediaPathForKind(lesson, phrase, kind);
+    if (kind === 'normal' || kind === 'slow') return audioStatus(path);
+    if (kind === 'video') return videoStatus(path);
+    if (kind === 'visual') return visualStatus(path, Boolean(phrase?.sceneVisual));
+    return { label: 'غير محدد', tone: 'gray' };
+  }
+
+  function mediaStatusButton(lesson, phrase, kind) {
+    const path = mediaPathForKind(lesson, phrase, kind);
+    const status = statusForKind(lesson, phrase, kind);
+    const config = getMediaItemConfig(kind);
+    const actionText = status.label === 'موجود' ? 'اضغط للاستبدال' : 'اضغط للرفع';
+    return `
+      <div class="admin-media-cell" data-admin-media-cell data-media-kind="${escapeHtml(kind)}" data-media-path="${escapeHtml(path)}" data-media-bucket="${escapeHtml(config.bucket)}">
+        <input type="file" class="hidden" data-admin-media-file accept="${escapeHtml(config.accept)}">
+        <button type="button" class="admin-media-status-btn admin-media-status-btn--${escapeHtml(status.tone)}" data-admin-media-upload title="${escapeHtml(actionText)}">
+          <span class="admin-media-status-btn__label">${escapeHtml(status.label)}</span>
+          <span class="admin-media-status-btn__hint">${escapeHtml(actionText)}</span>
+        </button>
+        <code class="admin-media-path" dir="ltr">${escapeHtml(path || 'Not assigned yet')}</code>
+        <p class="admin-media-upload-note" data-admin-media-note></p>
+      </div>
+    `;
+  }
+
   function adminAudioRecorderCard(lesson, phrase, kind) {
     const label = kind === 'slow' ? 'Slow audio' : 'Normal audio';
     const targetPath = buildAdminAudioTargetPath(lesson, phrase, kind);
     const status = audioStatus(targetPath);
     return `
-      <article class="admin-record-mp3-card rounded-2xl border border-gray-200 bg-white p-4" data-admin-mp3-recorder data-admin-mp3-kind="${escapeHtml(kind)}" data-admin-mp3-path="${escapeHtml(targetPath)}">
+      <article class="admin-mp3-upload-card rounded-2xl border border-gray-200 bg-white p-4" data-admin-mp3-recorder data-admin-mp3-kind="${escapeHtml(kind)}" data-admin-mp3-path="${escapeHtml(targetPath)}">
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
           <div>
-            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Admin teacher voice</p>
-            <h3 class="text-lg font-black text-gray-900">${escapeHtml(label)}</h3>
-            <p class="text-xs text-gray-500">سجل صوت المعلم، ثم حمّل الملف واستعمل المسار الرسمي.</p>
+            <p class="text-[11px] font-black uppercase tracking-wide text-gray-400">${escapeHtml(label)} target</p>
+            <h3 class="text-base font-black text-gray-900">${escapeHtml(label)}</h3>
           </div>
           ${badge(status.label, status.tone)}
         </div>
-        <div class="admin-record-mp3-card__path rounded-xl bg-gray-50 border border-gray-200 p-3 mb-3" dir="ltr">
-          <p class="text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-1">Final MP3 target path</p>
+        <div class="admin-mp3-upload-card__path rounded-xl bg-gray-50 border border-gray-200 p-3 mb-3" dir="ltr">
+          <p class="text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-1">Official MP3 path</p>
           <code data-admin-record-path class="block text-xs text-gray-800 break-all">${escapeHtml(targetPath)}</code>
         </div>
-        <div class="grid sm:grid-cols-2 gap-2 mb-3" dir="ltr">
-          <button type="button" data-admin-record-start class="admin-record-mp3-btn admin-record-mp3-btn--start">● Record ${escapeHtml(kind)}</button>
-          <button type="button" data-admin-record-stop class="admin-record-mp3-btn admin-record-mp3-btn--stop" disabled>■ Stop</button>
-          <button type="button" data-admin-record-play class="admin-record-mp3-btn admin-record-mp3-btn--play" disabled>▶ Play</button>
-          <button type="button" data-admin-record-download class="admin-record-mp3-btn admin-record-mp3-btn--download" disabled>⬇ Download</button>
-          <button type="button" data-admin-record-upload-supabase class="admin-record-mp3-btn admin-record-mp3-btn--supabase sm:col-span-2" disabled>☁ Save recording to Supabase</button>
-          <button type="button" data-admin-audio-choose class="admin-record-mp3-btn admin-record-mp3-btn--copy">Choose audio file</button>
-          <button type="button" data-admin-audio-upload-file class="admin-record-mp3-btn admin-record-mp3-btn--supabase" disabled>☁ Upload chosen file</button>
-          <button type="button" data-admin-record-copy-path class="admin-record-mp3-btn admin-record-mp3-btn--copy sm:col-span-2">Copy final path</button>
-        </div>
-        <input data-admin-audio-file type="file" accept="audio/*" class="hidden">
-        <audio data-admin-record-audio class="hidden"></audio>
-        <p data-admin-record-status class="admin-record-mp3-status">Ready. Record the teacher voice for this phrase.</p>
-        <p class="admin-record-mp3-note">مهم: إذا كان المتصفح لا يدعم إخراج MP3 الحقيقي، سيتم تحميل ملف المصدر بصيغته الأصلية، ثم تحوّله إلى MP3 وتضعه في المسار أعلاه. لن نسمي ملفاً غير MP3 باسم MP3 كذباً.</p>
+        <input data-admin-audio-file type="file" accept=".mp3,audio/mpeg,audio/mp3" class="hidden">
+        <button type="button" data-admin-audio-choose class="admin-record-mp3-btn admin-record-mp3-btn--start w-full">رفع ملف MP3</button>
+        <p data-admin-record-status class="admin-record-mp3-status mt-3">اختر ملف MP3 رسمي لهذه الجملة.</p>
       </article>
     `;
   }
@@ -220,8 +318,8 @@
         <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
           <div>
             <p class="text-[11px] font-black uppercase tracking-wide text-green-700">Supabase Media Backend</p>
-            <h3 class="text-xl font-black text-gray-900">حفظ صوت المعلم في Supabase</h3>
-            <p class="text-sm text-green-900">الأدمن يسجل أو يختار ملفاً، ثم يحفظه في Bucket الصوت. المتعلم يسمعه من أي جهاز.</p>
+            <h3 class="text-xl font-black text-gray-900">حفظ ملفات الدروس في Supabase</h3>
+            <p class="text-sm text-green-900">الأدمن يرفع MP3 / MP4 / صورة إلى Supabase. المتعلم يشغل الملفات من أي جهاز.</p>
           </div>
           ${badge(ready ? 'Connected + Admin login' : (config.publishableKey ? 'Key saved' : 'Needs key/login'), ready ? 'green' : 'yellow')}
         </div>
@@ -245,7 +343,7 @@
               <button type="button" data-supabase-login class="admin-record-mp3-btn admin-record-mp3-btn--start">Login admin</button>
               <button type="button" data-supabase-logout class="admin-record-mp3-btn admin-record-mp3-btn--stop">Logout</button>
             </div>
-            <p data-supabase-status class="admin-record-mp3-status ${ready ? 'is-success' : ''}">${ready ? `Logged in as ${escapeHtml(email || 'admin')}` : 'Paste publishable key, save config, then login before uploading.'}</p>
+            <p data-supabase-status class="admin-record-mp3-status ${ready ? 'is-success' : ''}">${ready ? `Logged in as ${escapeHtml(email || 'admin')}` : 'Save media config, then login before uploading lesson media files.'}</p>
           </div>
         </div>
       </div>
@@ -414,7 +512,13 @@
     const input = card?.querySelector('[data-admin-audio-file]');
     const file = input?.files?.[0];
     if (!file) {
-      setAdminRecorderStatus(card, 'Choose an audio file first.', 'is-error');
+      setAdminRecorderStatus(card, 'اختر ملف MP3 أولاً.', 'is-error');
+      return;
+    }
+    const isMp3File = /\.mp3$/i.test(file.name || '') || /audio\/(mpeg|mp3)/i.test(file.type || '');
+    if (!isMp3File) {
+      if (input) input.value = '';
+      setAdminRecorderStatus(card, 'ارفع MP3 فقط. حوّل الملف أولاً إلى MP3 ثم أعد المحاولة.', 'is-error');
       return;
     }
     const media = window.DarijaSupabaseMedia;
@@ -425,46 +529,28 @@
     try {
       setAdminRecorderStatus(card, `Uploading ${file.name} to Supabase...`, 'is-recording');
       const result = await media.uploadFileForAsset(card.dataset.adminMp3Path || '', file, 'audio');
-      setAdminRecorderStatus(card, `Audio saved. Learner public URL: ${result.publicUrl}`, 'is-success');
+      setAdminRecorderStatus(card, `تم رفع MP3 بنجاح. المتعلم يستطيع تشغيله من: ${result.publicUrl}`, 'is-success');
     } catch (error) {
       setAdminRecorderStatus(card, error?.message || 'Supabase upload failed.', 'is-error');
+    } finally {
+      if (input) input.value = '';
     }
   }
 
   function bindAdminAudioRecorders(root) {
     root.querySelectorAll('[data-admin-mp3-recorder]').forEach((card) => {
-      card.querySelector('[data-admin-record-start]')?.addEventListener('click', () => startAdminAudioRecording(card));
-      card.querySelector('[data-admin-record-stop]')?.addEventListener('click', () => stopAdminAudioRecording(card));
-      card.querySelector('[data-admin-record-play]')?.addEventListener('click', () => playAdminAudioRecording(card));
-      card.querySelector('[data-admin-record-download]')?.addEventListener('click', () => downloadAdminAudioRecording(card));
-      card.querySelector('[data-admin-record-upload-supabase]')?.addEventListener('click', () => uploadAdminRecordingToSupabase(card));
       card.querySelector('[data-admin-audio-choose]')?.addEventListener('click', () => card.querySelector('[data-admin-audio-file]')?.click());
-      card.querySelector('[data-admin-audio-file]')?.addEventListener('change', () => {
-        const file = card.querySelector('[data-admin-audio-file]')?.files?.[0];
-        const uploadButton = card.querySelector('[data-admin-audio-upload-file]');
-        if (uploadButton) uploadButton.disabled = !file;
-        if (file) setAdminRecorderStatus(card, `Selected file: ${file.name}. Click Upload chosen file.`, 'is-warning');
-      });
-      card.querySelector('[data-admin-audio-upload-file]')?.addEventListener('click', () => uploadAdminChosenAudioFile(card));
-      card.querySelector('[data-admin-record-copy-path]')?.addEventListener('click', async () => {
-        const path = card.dataset.adminMp3Path || '';
-        try {
-          await navigator.clipboard?.writeText(path);
-          setAdminRecorderStatus(card, `Copied final path: ${path}`, 'is-success');
-        } catch (error) {
-          setAdminRecorderStatus(card, `Copy manually: ${path}`, 'is-warning');
-        }
-      });
+      card.querySelector('[data-admin-audio-file]')?.addEventListener('change', () => uploadAdminChosenAudioFile(card));
     });
   }
 
   function mediaSummary() {
     const entries = allPhrases();
     const total = entries.length;
-    const normalReady = entries.filter(({ phrase }) => RECORDED_AUDIO.has(phrase.audioNormal)).length;
-    const slowReady = entries.filter(({ phrase }) => RECORDED_AUDIO.has(phrase.audioSlow)).length;
-    const videoReady = entries.filter(({ phrase }) => READY_VIDEOS.has(phrase.sceneVideo)).length;
-    const visualReady = entries.filter(({ phrase }) => Boolean(phrase.sceneVisual)).length;
+    const normalReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'normal').label === 'موجود').length;
+    const slowReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'slow').label === 'موجود').length;
+    const videoReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'video').label === 'موجود').length;
+    const visualReady = entries.filter(({ lesson, phrase }) => statusForKind(lesson, phrase, 'visual').label === 'موجود').length;
     return { total, normalReady, slowReady, videoReady, visualReady };
   }
 
@@ -491,32 +577,31 @@
   function lessonMediaStats(lesson) {
     const phrases = Array.isArray(lesson?.phrases) ? lesson.phrases : [];
     const total = phrases.length;
-    const normal = phrases.filter((phrase) => RECORDED_AUDIO.has(phrase.audioNormal)).length;
-    const slow = phrases.filter((phrase) => RECORDED_AUDIO.has(phrase.audioSlow)).length;
-    const videos = phrases.filter((phrase) => READY_VIDEOS.has(phrase.sceneVideo)).length;
-    const visuals = phrases.filter((phrase) => Boolean(phrase.sceneVisual)).length;
+    const normal = phrases.filter((phrase) => statusForKind(lesson, phrase, 'normal').label === 'موجود').length;
+    const slow = phrases.filter((phrase) => statusForKind(lesson, phrase, 'slow').label === 'موجود').length;
+    const videos = phrases.filter((phrase) => statusForKind(lesson, phrase, 'video').label === 'موجود').length;
+    const visuals = phrases.filter((phrase) => statusForKind(lesson, phrase, 'visual').label === 'موجود').length;
     const complete = total > 0 && normal === total && slow === total && videos === total;
     return { total, normal, slow, videos, visuals, complete };
   }
 
   function renderAudioPhraseRow(lesson, phrase, index) {
-    const n = audioStatus(phrase.audioNormal);
-    const s = audioStatus(phrase.audioSlow);
-    const v = videoStatus(phrase.sceneVideo);
     return `
       <tr class="hover:bg-gray-50 align-top">
         <td class="p-3 font-black text-terracotta">${index + 1}</td>
-        <td class="p-3">
+        <td class="p-3 min-w-[220px]">
           <p class="font-mono font-extrabold" dir="ltr">${escapeHtml(phrase.friendlyLatin)}</p>
           <p class="text-xs text-gray-500">${escapeHtml(phrase.english)}</p>
         </td>
-        <td class="p-3">${badge(n.label, n.tone)}<code class="block text-[11px] text-gray-500 mt-1 break-all" dir="ltr">${escapeHtml(phrase.audioNormal)}</code></td>
-        <td class="p-3">${badge(s.label, s.tone)}<code class="block text-[11px] text-gray-500 mt-1 break-all" dir="ltr">${escapeHtml(phrase.audioSlow)}</code></td>
-        <td class="p-3">${badge(v.label, v.tone)}<code class="block text-[11px] text-gray-500 mt-1 break-all" dir="ltr">${escapeHtml(phrase.sceneVideo || 'Not assigned yet')}</code></td>
+        <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'normal')}</td>
+        <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'slow')}</td>
+        <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'video')}</td>
+        <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'visual')}</td>
         <td class="p-3"><a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="text-blue-700 font-bold hover:underline">عرض</a></td>
       </tr>
     `;
   }
+
 
   function renderAudioDayGroup(lesson, openDays) {
     const stats = lessonMediaStats(lesson);
@@ -549,7 +634,7 @@
           <div class="overflow-x-auto border-t border-gray-100">
             <table class="w-full text-sm text-right">
               <thead class="bg-gray-50 text-gray-500">
-                <tr><th class="p-3">#</th><th class="p-3">الجملة</th><th class="p-3">Normal</th><th class="p-3">Slow</th><th class="p-3">Video</th><th class="p-3">Learner</th></tr>
+                <tr><th class="p-3">#</th><th class="p-3">الجملة</th><th class="p-3">Normal</th><th class="p-3">Slow</th><th class="p-3">Video</th><th class="p-3">Visual</th><th class="p-3">Learner</th></tr>
               </thead>
               <tbody class="divide-y divide-gray-100">
                 ${(lesson.phrases || []).map((phrase, index) => renderAudioPhraseRow(lesson, phrase, index)).join('')}
@@ -730,12 +815,12 @@
   function lessonRows() {
     return lessons().filter((lesson) => {
       if (state.filter !== 'missing') return true;
-      return lesson.phrases.some((p) => !RECORDED_AUDIO.has(p.audioNormal) || !RECORDED_AUDIO.has(p.audioSlow) || !READY_VIDEOS.has(p.sceneVideo));
+      return lesson.phrases.some((p) => statusForKind(lesson, p, 'normal').label !== 'موجود' || statusForKind(lesson, p, 'slow').label !== 'موجود' || statusForKind(lesson, p, 'video').label !== 'موجود');
     }).map((lesson) => {
       const phraseCount = lesson.phrases?.length || 0;
-      const normal = lesson.phrases.filter((p) => RECORDED_AUDIO.has(p.audioNormal)).length;
-      const slow = lesson.phrases.filter((p) => RECORDED_AUDIO.has(p.audioSlow)).length;
-      const videos = lesson.phrases.filter((p) => READY_VIDEOS.has(p.sceneVideo)).length;
+      const normal = lesson.phrases.filter((p) => statusForKind(lesson, p, 'normal').label === 'موجود').length;
+      const slow = lesson.phrases.filter((p) => statusForKind(lesson, p, 'slow').label === 'موجود').length;
+      const videos = lesson.phrases.filter((p) => statusForKind(lesson, p, 'video').label === 'موجود').length;
       const selected = String(lesson.day) === String(state.selectedDay);
       return `
         <tr class="hover:bg-red-50/40 ${selected ? 'bg-red-50' : ''}">
@@ -848,30 +933,16 @@
           <div class="md:col-span-2">${readOnlyField('Memory Hook', phrase.memoryHook)}</div>
         </div>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div>${badge('Normal audio: ' + n.label, n.tone)}${pathBox('normal audio target', phrase.audioNormal)}</div>
-          <div>${badge('Slow audio: ' + s.label, s.tone)}${pathBox('slow audio target', phrase.audioSlow)}</div>
-          <div>${badge('video: ' + v.label, v.tone)}${pathBox('video target', phrase.sceneVideo)}</div>
-          <div>${badge(phrase.sceneVisual ? 'visual mapped' : 'visual missing', phrase.sceneVisual ? 'green' : 'gray')}${pathBox('scene visual', phrase.sceneVisual)}</div>
-        </div>
-        ${supabaseMediaAdminPanel()}
-        <div class="admin-record-mp3-panel rounded-3xl bg-orange-50/60 border border-orange-100 p-5 mb-6">
-          <div class="flex items-start gap-3 mb-4">
-            <span class="w-11 h-11 rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-2xl">🎙️</span>
-            <div>
-              <h3 class="text-xl font-black text-gray-900">Record teacher audio</h3>
-              <p class="text-sm text-gray-700">استعملها لتسجيل صوت Normal و Slow من داخل الأدمين. الصوت الرسمي للمتعلمين يبقى ملف MP3 في المسار الظاهر.</p>
-            </div>
-          </div>
-          <div class="grid lg:grid-cols-2 gap-4">
-            ${adminAudioRecorderCard(lesson, phrase, 'normal')}
-            ${adminAudioRecorderCard(lesson, phrase, 'slow')}
-          </div>
+          <div>${mediaStatusButton(lesson, phrase, 'normal')}</div>
+          <div>${mediaStatusButton(lesson, phrase, 'slow')}</div>
+          <div>${mediaStatusButton(lesson, phrase, 'video')}</div>
+          <div>${mediaStatusButton(lesson, phrase, 'visual')}</div>
         </div>
         <div class="rounded-2xl bg-blue-50 border border-blue-100 p-5">
-          <h3 class="font-extrabold text-blue-900 mb-2">كيف تستعملها الآن؟</h3>
-          <p class="text-sm text-blue-900 mb-3">الآن يستطيع الأدمن تسجيل أو اختيار الصوت وحفظه في Supabase. المتعلم سيحاول تشغيل صوت Supabase أولاً، ثم يرجع لملف assets إذا لم يوجد.</p>
+          <h3 class="font-extrabold text-blue-900 mb-2">مركز ملفات الدروس</h3>
+          <p class="text-sm text-blue-900 mb-3">كل حالة أعلاه زر مباشر: اضغط على “ينتظر التسجيل” أو “موجود” لرفع أو استبدال الملف من الحاسوب. لإدارة كل الجمل بسرعة افتح مركز ملفات الدروس.</p>
           <div class="flex flex-wrap gap-2" dir="ltr">
-            <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Media Matrix</a>
+            <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Lesson Media Center</a>
             <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-800">Learner Preview</a>
           </div>
         </div>
@@ -895,26 +966,28 @@
     const openDays = readAdminAudioOpenDays();
     root.innerHTML = `
       <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('إدارة الصوت والفيديو — Media Matrix', 'هذه الصفحة ترشدك أين توضع ملفات الصوت والفيديو لكل يوم وجملة. تم تقسيمها الآن حسب الأيام حتى لا تتحول 150 جملة إلى جدول طويل ومتعب.')}
+        ${adminHeader('مركز ملفات الدروس', 'مكان واحد لإدارة ملفات كل جملة: Normal MP3، Slow MP3، فيديو المحاكاة، والصورة الذهنية. اضغط على حالة الملف نفسها للرفع أو الاستبدال من الحاسوب.')}
         <div class="grid md:grid-cols-4 gap-4 mb-8">
           ${statCard('Normal Ready', `${summary.normalReady}/${summary.total}`, 'MP3 normal', 'green')}
           ${statCard('Slow Ready', `${summary.slowReady}/${summary.total}`, 'MP3 slow', 'yellow')}
           ${statCard('Videos Ready', `${summary.videoReady}/${summary.total}`, 'MP4 scenes', 'red')}
           ${statCard('Visuals Ready', `${summary.visualReady}/${summary.total}`, 'images/SVG', 'blue')}
         </div>
+        ${supabaseMediaAdminPanel()}
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 mb-8">
           <h2 class="text-xl font-extrabold text-gray-900 mb-3">قاعدة تسمية الملفات</h2>
-          <div class="grid md:grid-cols-3 gap-4" dir="ltr">
+          <div class="grid md:grid-cols-4 gap-4" dir="ltr">
             ${pathBox('normal audio', 'assets/audio/dayXX/phrase-id-normal.mp3')}
             ${pathBox('slow audio', 'assets/audio/dayXX/phrase-id-slow.mp3')}
             ${pathBox('micro video', 'assets/video/dayXX/phrase-id-scene.mp4')}
+            ${pathBox('visual image', 'assets/images/lesson-scenes/dayXX-phrase-id-scene.webp')}
           </div>
         </div>
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
           <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
-              <h2 class="text-xl font-extrabold text-gray-900">الصوت والفيديو حسب الأيام</h2>
-              <p class="text-sm text-gray-500">افتح اليوم الذي تعمل عليه فقط. كل يوم يعرض 5 جمل ومساراتها.</p>
+              <h2 class="text-xl font-extrabold text-gray-900">الملفات حسب الأيام</h2>
+              <p class="text-sm text-gray-500">افتح اليوم الذي تعمل عليه. اضغط على أي حالة للرفع أو الاستبدال مباشرة.</p>
             </div>
             <div class="flex flex-wrap gap-2" dir="ltr">
               <button type="button" data-admin-audio-open-all class="bg-white border border-chefchaouen text-chefchaouen hover:bg-blue-50 px-4 py-2 rounded-xl font-bold text-sm transition">Open all</button>
@@ -973,6 +1046,65 @@
   }
 
 
+
+  function setAdminMediaCellNote(cell, message, tone = '') {
+    const note = cell?.querySelector('[data-admin-media-note]');
+    if (!note) return;
+    note.textContent = message || '';
+    note.classList.remove('is-error', 'is-success', 'is-recording', 'is-warning');
+    if (tone) note.classList.add(tone);
+  }
+
+  function setAdminMediaCellStatus(cell, label = 'موجود', tone = 'green') {
+    const button = cell?.querySelector('[data-admin-media-upload]');
+    if (!button) return;
+    button.className = `admin-media-status-btn admin-media-status-btn--${tone}`;
+    const labelNode = button.querySelector('.admin-media-status-btn__label');
+    const hintNode = button.querySelector('.admin-media-status-btn__hint');
+    if (labelNode) labelNode.textContent = label;
+    if (hintNode) hintNode.textContent = label === 'موجود' ? 'اضغط للاستبدال' : 'اضغط للرفع';
+  }
+
+  async function uploadAdminMediaFromCell(cell) {
+    const input = cell?.querySelector('[data-admin-media-file]');
+    const file = input?.files?.[0];
+    const kind = cell?.dataset.mediaKind || 'normal';
+    const assetPath = cell?.dataset.mediaPath || '';
+    const config = getMediaItemConfig(kind);
+    if (!file) return;
+    if (!isAllowedMediaFile(file, kind)) {
+      if (input) input.value = '';
+      setAdminMediaCellNote(cell, config.error, 'is-error');
+      return;
+    }
+    const media = window.DarijaSupabaseMedia;
+    if (!media?.uploadFileForAsset) {
+      setAdminMediaCellNote(cell, 'Supabase media helper is not loaded.', 'is-error');
+      return;
+    }
+    try {
+      setAdminMediaCellNote(cell, `Uploading ${file.name}...`, 'is-recording');
+      const result = await media.uploadFileForAsset(assetPath, file, config.bucket);
+      markMediaUploaded(assetPath, result);
+      setAdminMediaCellStatus(cell, 'موجود', 'green');
+      setAdminMediaCellNote(cell, `تم الرفع بنجاح.`, 'is-success');
+    } catch (error) {
+      setAdminMediaCellNote(cell, error?.message || 'Supabase upload failed.', 'is-error');
+    } finally {
+      if (input) input.value = '';
+    }
+  }
+
+  function bindAdminMediaUploadButtons(root) {
+    root.querySelectorAll('[data-admin-media-cell]').forEach((cell) => {
+      cell.querySelector('[data-admin-media-upload]')?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        cell.querySelector('[data-admin-media-file]')?.click();
+      });
+      cell.querySelector('[data-admin-media-file]')?.addEventListener('change', () => uploadAdminMediaFromCell(cell));
+    });
+  }
+
   function bindSupabaseMediaControls(root) {
     const panel = root.querySelector('[data-admin-supabase-panel]');
     if (!panel) return;
@@ -992,7 +1124,7 @@
       try {
         setSupabasePanelStatus(panel, 'Logging in to Supabase...', 'is-recording');
         await window.DarijaSupabaseMedia?.signIn?.(email, password);
-        setSupabasePanelStatus(panel, `Logged in as ${email}. You can upload media now.`, 'is-success');
+        setSupabasePanelStatus(panel, `Logged in as ${email}. You can upload lesson media now.`, 'is-success');
       } catch (error) {
         setSupabasePanelStatus(panel, error?.message || 'Supabase login failed.', 'is-error');
       }
@@ -1075,6 +1207,7 @@
     });
 
     bindSupabaseMediaControls(root);
+    bindAdminMediaUploadButtons(root);
     bindAdminAudioRecorders(root);
   }
 

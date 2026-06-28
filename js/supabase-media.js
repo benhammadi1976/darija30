@@ -149,6 +149,26 @@
       .filter(Boolean);
   }
 
+  function publicUrlForAsset(assetPath, preferredBucket = '') {
+    const target = assetPathToStorage(assetPath, preferredBucket);
+    if (!target.bucket || !target.path) return '';
+    return publicUrl(target.bucket, target.path);
+  }
+
+  function videoCandidates(assetPath) {
+    const target = assetPathToStorage(assetPath, 'videos');
+    if (target.bucket !== 'videos' || !target.path) return [];
+    const url = publicUrl(target.bucket, target.path);
+    return url ? [url] : [];
+  }
+
+  function imageCandidates(assetPath) {
+    const target = assetPathToStorage(assetPath, 'images');
+    if (target.bucket !== 'images' || !target.path) return [];
+    const url = publicUrl(target.bucket, target.path);
+    return url ? [url] : [];
+  }
+
   async function uploadBlob(bucket, path, blob, contentType) {
     const config = requireConfig();
     const session = readSession();
@@ -202,6 +222,9 @@
     replaceExtension,
     extensionFromFile,
     publicUrl,
+    publicUrlForAsset,
+    videoCandidates,
+    imageCandidates,
     audioCandidates,
     uploadBlob,
     uploadFileForAsset,

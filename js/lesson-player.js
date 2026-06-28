@@ -177,6 +177,9 @@
   function sceneVisualMarkup(phrase) {
     if (!phrase?.sceneVisual) return '';
     const memoryPhrase = phrase.memoryBubble || phrase.memoryImagePhrase || phrase.friendlyLatin || '';
+    const supabaseImage = window.DarijaSupabaseMedia?.imageCandidates?.(phrase.sceneVisual)?.[0] || '';
+    const primaryImage = supabaseImage || phrase.sceneVisual;
+    const fallbackImage = phrase.sceneVisual;
     return `
       <div class="memory-visual-card mt-5 text-left" data-visual-system="scene-image-plus-ui-overlay">
         <div class="memory-visual-heading">
@@ -184,7 +187,7 @@
           <span class="memory-visual-badge">Memory Image</span>
         </div>
         <div class="memory-visual-frame">
-          <img src="${escapeHtml(phrase.sceneVisual)}" alt="${escapeHtml(phrase.sceneVisualAlt || phrase.english || phrase.friendlyLatin || 'Darija30 scene visual')}" class="memory-scene-image" loading="lazy">
+          <img src="${escapeHtml(primaryImage)}" ${supabaseImage ? `onerror="this.onerror=null;this.src='${escapeHtml(fallbackImage)}';"` : ''} alt="${escapeHtml(phrase.sceneVisualAlt || phrase.english || phrase.friendlyLatin || 'Darija30 scene visual')}" class="memory-scene-image" loading="lazy">
           ${memoryPhrase ? `
             <div class="memory-bubble" aria-label="Memory phrase: ${escapeHtml(memoryPhrase)}">
               <span>${escapeHtml(memoryPhrase)}</span>
@@ -221,6 +224,7 @@
 
   function imInMoroccoMarkup(phrase) {
     if (!phrase?.sceneVideo) return '';
+    const supabaseVideo = window.DarijaSupabaseMedia?.videoCandidates?.(phrase.sceneVideo)?.[0] || '';
     return `
       <section class="im-morocco-card im-morocco-card--compact mt-5" data-im-morocco data-phrase-id="${escapeHtml(phrase?.id || '')}">
         <div class="im-morocco-card__copy">
@@ -230,6 +234,7 @@
         </div>
         <div class="im-morocco-card__video-wrap">
           <video class="im-morocco-card__video" data-im-morocco-video playsinline preload="metadata" ${phrase.scenePoster ? `poster="${escapeHtml(phrase.scenePoster)}"` : ''}>
+            ${supabaseVideo ? `<source src="${escapeHtml(supabaseVideo)}" type="video/mp4">` : ''}
             <source src="${escapeHtml(phrase.sceneVideo)}" type="video/mp4">
             Your browser does not support this video.
           </video>
