@@ -3443,3 +3443,42 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
     width: min(100%, 15rem);
   }
 }
+
+/* Phase D58 — mobile lesson learning order + safer phone quiz confirmation */
+@media (max-width: 1023px) {
+  .lesson-main-grid {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lesson-left-column {
+    display: contents;
+  }
+
+  .lesson-context-block {
+    order: 1;
+    border: 1px solid rgb(243 244 246);
+    border-radius: 1rem;
+    background: rgb(249 250 251);
+    padding: 1.25rem;
+    text-align: left;
+  }
+
+  .lesson-say-card {
+    order: 2;
+  }
+
+  .lesson-practice-block {
+    order: 3;
+    border: 1px solid rgb(243 244 246);
+    border-radius: 1rem;
+    background: rgb(249 250 251);
+    padding: 1.25rem;
+    text-align: left;
+  }
+
+  .lesson-practice-block > :first-child {
+    margin-top: 0;
+  }
+}

@@ -448,23 +448,27 @@
           ${favoriteButtonMarkup(lesson, phrase)}
         </div>
         <div class="lesson-main-grid grid lg:grid-cols-[0.95fr_1.25fr] gap-6 items-stretch">
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scenario</p>
-            <h3 class="text-xl font-bold text-medina mb-3">${escapeHtml(phrase.scenario || lesson.situation)}</h3>
-            <p class="text-gray-600 mb-5"><strong>Goal:</strong> ${escapeHtml(phrase.goal || lesson.method || 'Use this phrase in the right Moroccan situation.')}</p>
-            ${methodPill()}
-            ${phrase.moroccanChat ? `
-              <details class="mt-4 text-sm text-gray-500">
-                <summary class="cursor-pointer font-bold">Show Moroccan chat spelling</summary>
-                <p class="font-mono mt-2 text-gray-700">${escapeHtml(phrase.moroccanChat)}</p>
-              </details>
-            ` : ''}
-            ${nowYouSpeakMarkup(phrase)}
-            ${imInMoroccoMarkup(phrase)}
-            ${supportCardsMarkup(phrase)}
+          <div class="lesson-left-column rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
+            <div class="lesson-context-block">
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scenario</p>
+              <h3 class="text-xl font-bold text-medina mb-3">${escapeHtml(phrase.scenario || lesson.situation)}</h3>
+              <p class="text-gray-600 mb-5"><strong>Goal:</strong> ${escapeHtml(phrase.goal || lesson.method || 'Use this phrase in the right Moroccan situation.')}</p>
+              ${methodPill()}
+              ${phrase.moroccanChat ? `
+                <details class="mt-4 text-sm text-gray-500">
+                  <summary class="cursor-pointer font-bold">Show Moroccan chat spelling</summary>
+                  <p class="font-mono mt-2 text-gray-700">${escapeHtml(phrase.moroccanChat)}</p>
+                </details>
+              ` : ''}
+            </div>
+            <div class="lesson-practice-block">
+              ${nowYouSpeakMarkup(phrase)}
+              ${imInMoroccoMarkup(phrase)}
+              ${supportCardsMarkup(phrase)}
+            </div>
           </div>
 
-          <div class="rounded-2xl border border-gray-100 p-6 text-center">
+          <div class="lesson-say-card rounded-2xl border border-gray-100 p-6 text-center">
             <div class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold mb-5">SAY THIS</div>
             <p class="font-mono text-4xl md:text-5xl font-extrabold text-chefchaouen mb-3">${escapeHtml(phrase.friendlyLatin)}</p>
             <p class="text-gray-400 text-sm mb-6">Friendly Latin Darija</p>
@@ -753,9 +757,17 @@
     bubble.classList.add('is-filled');
   }
 
-  function showSituationChoices(card) {
+  function showSituationChoices(card, message = 'Good try. Choose the phrase you remember.', tone = 'is-warning') {
     card.querySelector('[data-situation-choices]')?.classList.remove('hidden');
-    setSituationStatus(card, 'Good try. Choose the phrase you remember.', 'is-warning');
+    setSituationStatus(card, message, tone);
+  }
+
+  function isMobileSituationPractice() {
+    try {
+      return window.matchMedia?.('(max-width: 767px), (pointer: coarse)')?.matches || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
+    } catch (error) {
+      return false;
+    }
   }
 
   function showSituationReturn(card) {
@@ -1063,6 +1075,10 @@
         }
         const attempts = Number(card.dataset.attempts || 0) + 1;
         card.dataset.attempts = String(attempts);
+        if (isMobileSituationPractice()) {
+          showSituationChoices(card, 'Recording saved. Voice check on phones can be limited. Tap the phrase you said to confirm.', '');
+          return;
+        }
         if (attempts < 2) {
           setSituationStatus(card, 'We did not catch it clearly. Try once more, slowly.', 'is-warning');
         } else {
@@ -1130,7 +1146,7 @@
 
           if (Recognition) {
             recognition = new Recognition();
-            recognition.lang = 'ar-MA';
+            recognition.lang = isMobileSituationPractice() ? 'en-US' : 'ar-MA';
             recognition.interimResults = false;
             recognition.maxAlternatives = 3;
             recognition.addEventListener('result', (event) => {
