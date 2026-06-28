@@ -125,6 +125,225 @@
     `;
   }
 
+  function buildAdminAudioTargetPath(lesson, phrase, kind) {
+    const existing = kind === 'slow' ? phrase?.audioSlow : phrase?.audioNormal;
+    if (existing) return existing;
+    const day = String(lesson?.day || '1').padStart(2, '0');
+    const phraseId = String(phrase?.id || `day${day}-phrase`).trim() || `day${day}-phrase`;
+    return `assets/audio/day${day}/${phraseId}-${kind === 'slow' ? 'slow' : 'normal'}.mp3`;
+  }
+
+  function adminAudioRecorderCard(lesson, phrase, kind) {
+    const label = kind === 'slow' ? 'Slow audio' : 'Normal audio';
+    const targetPath = buildAdminAudioTargetPath(lesson, phrase, kind);
+    const status = audioStatus(targetPath);
+    return `
+      <article class="admin-record-mp3-card rounded-2xl border border-gray-200 bg-white p-4" data-admin-mp3-recorder data-admin-mp3-kind="${escapeHtml(kind)}" data-admin-mp3-path="${escapeHtml(targetPath)}">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Admin teacher voice</p>
+            <h3 class="text-lg font-black text-gray-900">${escapeHtml(label)}</h3>
+            <p class="text-xs text-gray-500">سجل صوت المعلم، ثم حمّل الملف واستعمل المسار الرسمي.</p>
+          </div>
+          ${badge(status.label, status.tone)}
+        </div>
+        <div class="admin-record-mp3-card__path rounded-xl bg-gray-50 border border-gray-200 p-3 mb-3" dir="ltr">
+          <p class="text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-1">Final MP3 target path</p>
+          <code data-admin-record-path class="block text-xs text-gray-800 break-all">${escapeHtml(targetPath)}</code>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-2 mb-3" dir="ltr">
+          <button type="button" data-admin-record-start class="admin-record-mp3-btn admin-record-mp3-btn--start">● Record ${escapeHtml(kind)}</button>
+          <button type="button" data-admin-record-stop class="admin-record-mp3-btn admin-record-mp3-btn--stop" disabled>■ Stop</button>
+          <button type="button" data-admin-record-play class="admin-record-mp3-btn admin-record-mp3-btn--play" disabled>▶ Play</button>
+          <button type="button" data-admin-record-download class="admin-record-mp3-btn admin-record-mp3-btn--download" disabled>⬇ Download</button>
+          <button type="button" data-admin-record-copy-path class="admin-record-mp3-btn admin-record-mp3-btn--copy sm:col-span-2">Copy final path</button>
+        </div>
+        <audio data-admin-record-audio class="hidden"></audio>
+        <p data-admin-record-status class="admin-record-mp3-status">Ready. Record the teacher voice for this phrase.</p>
+        <p class="admin-record-mp3-note">مهم: إذا كان المتصفح لا يدعم إخراج MP3 الحقيقي، سيتم تحميل ملف المصدر بصيغته الأصلية، ثم تحوّله إلى MP3 وتضعه في المسار أعلاه. لن نسمي ملفاً غير MP3 باسم MP3 كذباً.</p>
+      </article>
+    `;
+  }
+
+  function adminRecorderMimeType() {
+    if (!window.MediaRecorder?.isTypeSupported) return '';
+    return [
+      'audio/mpeg',
+      'audio/mp3',
+      'audio/webm;codecs=opus',
+      'audio/webm',
+      'audio/mp4',
+      'audio/ogg;codecs=opus'
+    ].find((type) => window.MediaRecorder.isTypeSupported(type)) || '';
+  }
+
+  function isMp3Mime(mimeType) {
+    return /audio\/(mpeg|mp3)/i.test(String(mimeType || ''));
+  }
+
+  function audioExtensionForMime(mimeType) {
+    const type = String(mimeType || '').toLowerCase();
+    if (type.includes('mpeg') || type.includes('mp3')) return 'mp3';
+    if (type.includes('mp4') || type.includes('aac')) return 'm4a';
+    if (type.includes('ogg')) return 'ogg';
+    if (type.includes('wav')) return 'wav';
+    return 'webm';
+  }
+
+  function fileNameFromAudioPath(path, extension) {
+    const clean = String(path || 'darija30-audio.mp3').split('/').pop() || 'darija30-audio.mp3';
+    const base = clean.replace(/\.[a-z0-9]+$/i, '');
+    return `${base}.${extension || 'mp3'}`;
+  }
+
+  function setAdminRecorderStatus(card, message, tone = '') {
+    const status = card?.querySelector('[data-admin-record-status]');
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove('is-error', 'is-success', 'is-recording', 'is-warning');
+    if (tone) status.classList.add(tone);
+  }
+
+  function stopAdminRecorderTracks(session) {
+    try {
+      session?.stream?.getTracks?.().forEach((track) => track.stop());
+    } catch (error) {
+      // Ignore cleanup errors in static admin preview.
+    }
+  }
+
+  const adminRecorderSessions = new WeakMap();
+
+  async function startAdminAudioRecording(card) {
+    if (!card) return;
+    if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+      setAdminRecorderStatus(card, 'This browser does not support recording. Try Chrome or Edge.', 'is-error');
+      return;
+    }
+    const startButton = card.querySelector('[data-admin-record-start]');
+    const stopButton = card.querySelector('[data-admin-record-stop]');
+    const playButton = card.querySelector('[data-admin-record-play]');
+    const downloadButton = card.querySelector('[data-admin-record-download]');
+    const audio = card.querySelector('[data-admin-record-audio]');
+    const previous = adminRecorderSessions.get(card);
+    if (previous?.url) URL.revokeObjectURL(previous.url);
+    stopAdminRecorderTracks(previous);
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: true, autoGainControl: false } });
+      const mimeType = adminRecorderMimeType();
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      const chunks = [];
+      const session = { recorder, stream, chunks, url: '', blob: null, mimeType: '' };
+      adminRecorderSessions.set(card, session);
+
+      recorder.addEventListener('dataavailable', (event) => {
+        if (event.data && event.data.size > 0) chunks.push(event.data);
+      });
+      recorder.addEventListener('stop', () => {
+        stopAdminRecorderTracks(session);
+        const actualMime = recorder.mimeType || mimeType || chunks[0]?.type || 'audio/webm';
+        const blob = new Blob(chunks, { type: actualMime });
+        const url = URL.createObjectURL(blob);
+        session.blob = blob;
+        session.url = url;
+        session.mimeType = actualMime;
+        if (audio) {
+          audio.src = url;
+          audio.classList.remove('hidden');
+        }
+        if (startButton) {
+          startButton.disabled = false;
+          startButton.textContent = `● Record ${card.dataset.adminMp3Kind || 'audio'}`;
+          startButton.classList.remove('is-recording');
+        }
+        if (stopButton) stopButton.disabled = true;
+        if (playButton) playButton.disabled = false;
+        if (downloadButton) {
+          downloadButton.disabled = false;
+          downloadButton.textContent = isMp3Mime(actualMime) ? '⬇ Download MP3' : `⬇ Download ${audioExtensionForMime(actualMime).toUpperCase()} source`;
+        }
+        const target = card.dataset.adminMp3Path || '';
+        if (isMp3Mime(actualMime)) {
+          setAdminRecorderStatus(card, `MP3 ready. Download it and place it at: ${target}`, 'is-success');
+        } else {
+          setAdminRecorderStatus(card, `Recording saved as ${actualMime || 'browser audio'}. Convert it to MP3, then use: ${target}`, 'is-warning');
+        }
+      });
+
+      recorder.start();
+      if (startButton) {
+        startButton.disabled = true;
+        startButton.textContent = 'Recording...';
+        startButton.classList.add('is-recording');
+      }
+      if (stopButton) stopButton.disabled = false;
+      if (playButton) playButton.disabled = true;
+      if (downloadButton) downloadButton.disabled = true;
+      setAdminRecorderStatus(card, 'Recording... speak clearly, then press Stop.', 'is-recording');
+    } catch (error) {
+      if (startButton) startButton.disabled = false;
+      if (stopButton) stopButton.disabled = true;
+      setAdminRecorderStatus(card, 'Could not access microphone. Check browser permission and try again.', 'is-error');
+    }
+  }
+
+  function stopAdminAudioRecording(card) {
+    const session = adminRecorderSessions.get(card);
+    if (session?.recorder && session.recorder.state === 'recording') {
+      session.recorder.stop();
+    }
+  }
+
+  function playAdminAudioRecording(card) {
+    const audio = card?.querySelector('[data-admin-record-audio]');
+    if (!audio?.src) {
+      setAdminRecorderStatus(card, 'Record first, then play.', 'is-error');
+      return;
+    }
+    audio.currentTime = 0;
+    audio.play().catch(() => setAdminRecorderStatus(card, 'Could not play recording in this browser.', 'is-error'));
+  }
+
+  function downloadAdminAudioRecording(card) {
+    const session = adminRecorderSessions.get(card);
+    if (!session?.blob) {
+      setAdminRecorderStatus(card, 'Record first, then download.', 'is-error');
+      return;
+    }
+    const extension = audioExtensionForMime(session.mimeType);
+    const filename = fileNameFromAudioPath(card.dataset.adminMp3Path, extension);
+    const link = document.createElement('a');
+    link.href = session.url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    if (extension === 'mp3') {
+      setAdminRecorderStatus(card, `Downloaded ${filename}. Put it in the final MP3 path.`, 'is-success');
+    } else {
+      setAdminRecorderStatus(card, `Downloaded ${filename}. Convert to MP3, then rename/place it using the final path.`, 'is-warning');
+    }
+  }
+
+  function bindAdminAudioRecorders(root) {
+    root.querySelectorAll('[data-admin-mp3-recorder]').forEach((card) => {
+      card.querySelector('[data-admin-record-start]')?.addEventListener('click', () => startAdminAudioRecording(card));
+      card.querySelector('[data-admin-record-stop]')?.addEventListener('click', () => stopAdminAudioRecording(card));
+      card.querySelector('[data-admin-record-play]')?.addEventListener('click', () => playAdminAudioRecording(card));
+      card.querySelector('[data-admin-record-download]')?.addEventListener('click', () => downloadAdminAudioRecording(card));
+      card.querySelector('[data-admin-record-copy-path]')?.addEventListener('click', async () => {
+        const path = card.dataset.adminMp3Path || '';
+        try {
+          await navigator.clipboard?.writeText(path);
+          setAdminRecorderStatus(card, `Copied final path: ${path}`, 'is-success');
+        } catch (error) {
+          setAdminRecorderStatus(card, `Copy manually: ${path}`, 'is-warning');
+        }
+      });
+    });
+  }
+
   function mediaSummary() {
     const entries = allPhrases();
     const total = entries.length;
@@ -520,6 +739,19 @@
           <div>${badge('video: ' + v.label, v.tone)}${pathBox('video target', phrase.sceneVideo)}</div>
           <div>${badge(phrase.sceneVisual ? 'visual mapped' : 'visual missing', phrase.sceneVisual ? 'green' : 'gray')}${pathBox('scene visual', phrase.sceneVisual)}</div>
         </div>
+        <div class="admin-record-mp3-panel rounded-3xl bg-orange-50/60 border border-orange-100 p-5 mb-6">
+          <div class="flex items-start gap-3 mb-4">
+            <span class="w-11 h-11 rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-2xl">🎙️</span>
+            <div>
+              <h3 class="text-xl font-black text-gray-900">Record teacher audio</h3>
+              <p class="text-sm text-gray-700">استعملها لتسجيل صوت Normal و Slow من داخل الأدمين. الصوت الرسمي للمتعلمين يبقى ملف MP3 في المسار الظاهر.</p>
+            </div>
+          </div>
+          <div class="grid lg:grid-cols-2 gap-4">
+            ${adminAudioRecorderCard(lesson, phrase, 'normal')}
+            ${adminAudioRecorderCard(lesson, phrase, 'slow')}
+          </div>
+        </div>
         <div class="rounded-2xl bg-blue-50 border border-blue-100 p-5">
           <h3 class="font-extrabold text-blue-900 mb-2">كيف تستعملها الآن؟</h3>
           <p class="text-sm text-blue-900 mb-3">عندما تسلمني الصوت أو الفيديو، أضعه في المسار الظاهر أعلاه. لاحقاً، في Admin الحقيقي، هذه الحقول ستصبح قابلة للحفظ في قاعدة البيانات.</p>
@@ -696,6 +928,7 @@
       writeAdminAudioOpenDays(new Set());
     });
 
+    bindAdminAudioRecorders(root);
   }
 
   function renderForPath(path) {

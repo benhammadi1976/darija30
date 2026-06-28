@@ -3579,3 +3579,110 @@ body.is-remember-standalone .situation-card__body--slide .situation-card__return
   .lesson-scenario-card { order: 3; }
   .lesson-speaking-stack { order: 4; }
 }
+
+/* D63 — Admin Record Audio Helper
+   Admin can record teacher voice from the phrase form, preview it, download the browser recording,
+   and place the final MP3 in the official phrase audio path. */
+.admin-record-mp3-panel {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.admin-record-mp3-card {
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.05);
+}
+
+.admin-record-mp3-card__path code {
+  font-size: 0.76rem;
+}
+
+.admin-record-mp3-btn {
+  border-radius: 0.9rem;
+  border: 1px solid rgba(201, 49, 29, 0.18);
+  background: #fff;
+  color: #7f1d1d;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 0.72rem 0.85rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.admin-record-mp3-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(201, 49, 29, 0.10);
+}
+
+.admin-record-mp3-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.admin-record-mp3-btn--start {
+  background: #C9311D;
+  color: #fff;
+  border-color: #C9311D;
+}
+
+.admin-record-mp3-btn--start.is-recording,
+.admin-record-mp3-btn--stop:not(:disabled) {
+  background: #7f1d1d;
+  color: #fff;
+  border-color: #7f1d1d;
+}
+
+.admin-record-mp3-btn--play:not(:disabled) {
+  border-color: rgba(28, 127, 184, 0.35);
+  color: #0f5f91;
+}
+
+.admin-record-mp3-btn--download:not(:disabled) {
+  border-color: rgba(22, 101, 52, 0.25);
+  color: #166534;
+}
+
+.admin-record-mp3-btn--copy {
+  border-color: rgba(100, 116, 139, 0.24);
+  color: #334155;
+}
+
+.admin-record-mp3-status {
+  border-radius: 0.9rem;
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.55;
+  padding: 0.75rem 0.85rem;
+}
+
+.admin-record-mp3-status.is-recording {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.20);
+  color: #991b1b;
+}
+
+.admin-record-mp3-status.is-success {
+  background: rgba(34, 197, 94, 0.10);
+  border-color: rgba(34, 197, 94, 0.24);
+  color: #166534;
+}
+
+.admin-record-mp3-status.is-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.24);
+  color: #92400e;
+}
+
+.admin-record-mp3-status.is-error {
+  background: rgba(239, 68, 68, 0.10);
+  border-color: rgba(239, 68, 68, 0.24);
+  color: #991b1b;
+}
+
+.admin-record-mp3-note {
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.7;
+  margin-top: 0.65rem;
+}
