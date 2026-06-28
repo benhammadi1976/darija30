@@ -447,8 +447,8 @@
         <div class="flex justify-end mb-4">
           ${favoriteButtonMarkup(lesson, phrase)}
         </div>
-        <div class="lesson-main-grid grid lg:grid-cols-[0.95fr_1.25fr] gap-6 items-stretch">
-          <div class="lesson-left-column rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
+        <div class="lesson-main-grid lesson-main-grid--teaching-first grid lg:grid-cols-[1.12fr_1fr] gap-6 items-start">
+          <div class="lesson-teaching-column lesson-left-column rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
             <div class="lesson-context-block">
               <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scenario</p>
               <h3 class="text-xl font-bold text-medina mb-3">${escapeHtml(phrase.scenario || lesson.situation)}</h3>
@@ -461,47 +461,54 @@
                 </details>
               ` : ''}
             </div>
+
+            <div class="lesson-say-card lesson-say-card--teaching mt-5 rounded-2xl border border-gray-100 p-6 text-center">
+              <div class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold mb-5">SAY THIS</div>
+              <p class="font-mono text-4xl md:text-5xl font-extrabold text-chefchaouen mb-3">${escapeHtml(phrase.friendlyLatin)}</p>
+              <p class="text-gray-400 text-sm mb-6">Friendly Latin Darija</p>
+
+              <div class="flex flex-wrap justify-center gap-4 mb-3">
+                <button data-audio-play data-speed="1" data-audio-url="${escapeHtml(phrase.audioNormal)}" class="flex items-center gap-2 bg-chefchaouen hover:bg-blue-700 text-white px-6 py-3 rounded-full font-bold transition">
+                  <span>▶</span> Normal Speed
+                </button>
+                <button data-audio-play data-speed="0.5" data-audio-url="${escapeHtml(phrase.audioSlow)}" class="flex items-center gap-2 bg-white border-2 border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-full font-bold transition">
+                  <span>🐌</span> Slow Speed
+                </button>
+              </div>
+              <p class="audio-recording-hint inline-block rounded-full px-4 py-2 text-xs font-bold mb-3">If audio is not recorded yet, the button will show the exact missing MP3 path.</p>
+              <p class="phrase-listen-tip" aria-label="Learning tip">🎧 Listen a few times. Then say it like you’re really in Morocco.</p>
+
+              ${phrase.arabic ? `
+              <details class="text-left bg-gray-50 rounded-xl p-4 mb-5">
+                <summary class="cursor-pointer font-bold text-gray-600">Show optional Arabic script</summary>
+                <p class="text-3xl font-bold text-chefchaouen mt-4 font-arabic text-center" dir="rtl">${escapeHtml(phrase.arabic)}</p>
+              </details>
+              ` : ''}
+
+              <div class="grid sm:grid-cols-2 gap-4 text-left">
+                <div class="bg-blue-50 border-l-4 border-chefchaouen p-4 rounded-r-xl">
+                  <p class="text-xs font-bold text-chefchaouen uppercase mb-1">Meaning</p>
+                  <p class="text-sm text-blue-900">${escapeHtml(phrase.meaning || phrase.english)}</p>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-xl">
+                  <p class="text-xs font-bold text-yellow-700 uppercase mb-1">Cultural Intent</p>
+                  <p class="text-sm text-yellow-900">${escapeHtml(phrase.intent || phrase.cultureNote)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-practice-column rounded-2xl bg-white border border-gray-100 p-5 text-left">
+            <div class="lesson-practice-column__intro mb-4">
+              <p class="text-xs font-bold text-terracotta uppercase tracking-widest mb-1">Watch & Repeat</p>
+              <p class="text-sm text-gray-500">Use the visual, then practice with your own voice.</p>
+            </div>
+            ${sceneVisualMarkup(phrase)}
             <div class="lesson-practice-block">
               ${nowYouSpeakMarkup(phrase)}
               ${imInMoroccoMarkup(phrase)}
               ${supportCardsMarkup(phrase)}
             </div>
-          </div>
-
-          <div class="lesson-say-card rounded-2xl border border-gray-100 p-6 text-center">
-            <div class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold mb-5">SAY THIS</div>
-            <p class="font-mono text-4xl md:text-5xl font-extrabold text-chefchaouen mb-3">${escapeHtml(phrase.friendlyLatin)}</p>
-            <p class="text-gray-400 text-sm mb-6">Friendly Latin Darija</p>
-
-            <div class="flex flex-wrap justify-center gap-4 mb-3">
-              <button data-audio-play data-speed="1" data-audio-url="${escapeHtml(phrase.audioNormal)}" class="flex items-center gap-2 bg-chefchaouen hover:bg-blue-700 text-white px-6 py-3 rounded-full font-bold transition">
-                <span>▶</span> Normal Speed
-              </button>
-              <button data-audio-play data-speed="0.5" data-audio-url="${escapeHtml(phrase.audioSlow)}" class="flex items-center gap-2 bg-white border-2 border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-full font-bold transition">
-                <span>🐌</span> Slow Speed
-              </button>
-            </div>
-            <p class="audio-recording-hint inline-block rounded-full px-4 py-2 text-xs font-bold mb-3">If audio is not recorded yet, the button will show the exact missing MP3 path.</p>
-            <p class="phrase-listen-tip" aria-label="Learning tip">🎧 Listen a few times. Then say it like you’re really in Morocco.</p>
-
-            ${phrase.arabic ? `
-            <details class="text-left bg-gray-50 rounded-xl p-4 mb-5">
-              <summary class="cursor-pointer font-bold text-gray-600">Show optional Arabic script</summary>
-              <p class="text-3xl font-bold text-chefchaouen mt-4 font-arabic text-center" dir="rtl">${escapeHtml(phrase.arabic)}</p>
-            </details>
-            ` : ''}
-
-            <div class="grid sm:grid-cols-2 gap-4 text-left">
-              <div class="bg-blue-50 border-l-4 border-chefchaouen p-4 rounded-r-xl">
-                <p class="text-xs font-bold text-chefchaouen uppercase mb-1">Meaning</p>
-                <p class="text-sm text-blue-900">${escapeHtml(phrase.meaning || phrase.english)}</p>
-              </div>
-              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-xl">
-                <p class="text-xs font-bold text-yellow-700 uppercase mb-1">Cultural Intent</p>
-                <p class="text-sm text-yellow-900">${escapeHtml(phrase.intent || phrase.cultureNote)}</p>
-              </div>
-            </div>
-            ${sceneVisualMarkup(phrase)}
           </div>
         </div>
 
