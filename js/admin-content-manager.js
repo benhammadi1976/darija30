@@ -156,8 +156,12 @@
           <button type="button" data-admin-record-stop class="admin-record-mp3-btn admin-record-mp3-btn--stop" disabled>■ Stop</button>
           <button type="button" data-admin-record-play class="admin-record-mp3-btn admin-record-mp3-btn--play" disabled>▶ Play</button>
           <button type="button" data-admin-record-download class="admin-record-mp3-btn admin-record-mp3-btn--download" disabled>⬇ Download</button>
+          <button type="button" data-admin-record-upload-supabase class="admin-record-mp3-btn admin-record-mp3-btn--supabase sm:col-span-2" disabled>☁ Save recording to Supabase</button>
+          <button type="button" data-admin-audio-choose class="admin-record-mp3-btn admin-record-mp3-btn--copy">Choose audio file</button>
+          <button type="button" data-admin-audio-upload-file class="admin-record-mp3-btn admin-record-mp3-btn--supabase" disabled>☁ Upload chosen file</button>
           <button type="button" data-admin-record-copy-path class="admin-record-mp3-btn admin-record-mp3-btn--copy sm:col-span-2">Copy final path</button>
         </div>
+        <input data-admin-audio-file type="file" accept="audio/*" class="hidden">
         <audio data-admin-record-audio class="hidden"></audio>
         <p data-admin-record-status class="admin-record-mp3-status">Ready. Record the teacher voice for this phrase.</p>
         <p class="admin-record-mp3-note">مهم: إذا كان المتصفح لا يدعم إخراج MP3 الحقيقي، سيتم تحميل ملف المصدر بصيغته الأصلية، ثم تحوّله إلى MP3 وتضعه في المسار أعلاه. لن نسمي ملفاً غير MP3 باسم MP3 كذباً.</p>
@@ -198,6 +202,58 @@
 
   function setAdminRecorderStatus(card, message, tone = '') {
     const status = card?.querySelector('[data-admin-record-status]');
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove('is-error', 'is-success', 'is-recording', 'is-warning');
+    if (tone) status.classList.add(tone);
+  }
+
+
+  function supabaseMediaAdminPanel() {
+    const media = window.DarijaSupabaseMedia;
+    const config = media?.readConfig?.() || { url: 'https://ueovreadkfmwsniksohn.supabase.co', publishableKey: '' };
+    const session = media?.readSession?.() || null;
+    const email = session?.user?.email || '';
+    const ready = Boolean(config.url && config.publishableKey && session?.access_token);
+    return `
+      <div class="admin-supabase-panel rounded-3xl bg-green-50/70 border border-green-100 p-5 mb-6" data-admin-supabase-panel>
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-green-700">Supabase Media Backend</p>
+            <h3 class="text-xl font-black text-gray-900">حفظ صوت المعلم في Supabase</h3>
+            <p class="text-sm text-green-900">الأدمن يسجل أو يختار ملفاً، ثم يحفظه في Bucket الصوت. المتعلم يسمعه من أي جهاز.</p>
+          </div>
+          ${badge(ready ? 'Connected + Admin login' : (config.publishableKey ? 'Key saved' : 'Needs key/login'), ready ? 'green' : 'yellow')}
+        </div>
+        <div class="grid lg:grid-cols-2 gap-4" dir="ltr">
+          <div class="rounded-2xl bg-white border border-green-100 p-4">
+            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-2">Project URL</label>
+            <input data-supabase-url class="admin-supabase-input" value="${escapeHtml(config.url || '')}" placeholder="https://...supabase.co">
+            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mt-3 mb-2">Publishable key</label>
+            <input data-supabase-key class="admin-supabase-input" type="password" placeholder="Paste sb_publishable_... here once">
+            <div class="flex flex-wrap gap-2 mt-3">
+              <button type="button" data-supabase-save-config class="admin-record-mp3-btn admin-record-mp3-btn--copy">Save media config</button>
+            </div>
+            <p class="admin-supabase-note mt-3">المفتاح publishable محفوظ محلياً في هذا المتصفح فقط. لا نستخدم Secret key داخل الموقع.</p>
+          </div>
+          <div class="rounded-2xl bg-white border border-green-100 p-4">
+            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-2">Admin email</label>
+            <input data-supabase-email class="admin-supabase-input" type="email" placeholder="admin email" value="${escapeHtml(email)}">
+            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mt-3 mb-2">Admin password</label>
+            <input data-supabase-password class="admin-supabase-input" type="password" placeholder="Supabase admin password">
+            <div class="flex flex-wrap gap-2 mt-3">
+              <button type="button" data-supabase-login class="admin-record-mp3-btn admin-record-mp3-btn--start">Login admin</button>
+              <button type="button" data-supabase-logout class="admin-record-mp3-btn admin-record-mp3-btn--stop">Logout</button>
+            </div>
+            <p data-supabase-status class="admin-record-mp3-status ${ready ? 'is-success' : ''}">${ready ? `Logged in as ${escapeHtml(email || 'admin')}` : 'Paste publishable key, save config, then login before uploading.'}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setSupabasePanelStatus(panel, message, tone = '') {
+    const status = panel?.querySelector('[data-supabase-status]');
     if (!status) return;
     status.textContent = message;
     status.classList.remove('is-error', 'is-success', 'is-recording', 'is-warning');
@@ -263,6 +319,7 @@
           downloadButton.disabled = false;
           downloadButton.textContent = isMp3Mime(actualMime) ? '⬇ Download MP3' : `⬇ Download ${audioExtensionForMime(actualMime).toUpperCase()} source`;
         }
+        if (supabaseUploadButton) supabaseUploadButton.disabled = false;
         const target = card.dataset.adminMp3Path || '';
         if (isMp3Mime(actualMime)) {
           setAdminRecorderStatus(card, `MP3 ready. Download it and place it at: ${target}`, 'is-success');
@@ -326,12 +383,69 @@
     }
   }
 
+
+  async function uploadAdminRecordingToSupabase(card) {
+    const session = adminRecorderSessions.get(card);
+    if (!session?.blob) {
+      setAdminRecorderStatus(card, 'Record first, then save to Supabase.', 'is-error');
+      return;
+    }
+    const media = window.DarijaSupabaseMedia;
+    if (!media?.uploadBlob) {
+      setAdminRecorderStatus(card, 'Supabase media helper is not loaded.', 'is-error');
+      return;
+    }
+    const extension = audioExtensionForMime(session.mimeType);
+    const target = media.assetPathToStorage(card.dataset.adminMp3Path || '', 'audio');
+    const uploadPath = media.replaceExtension(target.path, extension);
+    try {
+      setAdminRecorderStatus(card, 'Uploading recording to Supabase...', 'is-recording');
+      const result = await media.uploadBlob(target.bucket, uploadPath, session.blob, session.mimeType || session.blob.type || 'audio/webm');
+      const finalNote = extension === 'mp3'
+        ? 'Saved as MP3. Learner buttons can play it from any device.'
+        : `Saved as ${extension.toUpperCase()}. Learner buttons will try it from Supabase; replace with MP3 later if needed.`;
+      setAdminRecorderStatus(card, `${finalNote} Public URL: ${result.publicUrl}`, 'is-success');
+    } catch (error) {
+      setAdminRecorderStatus(card, error?.message || 'Supabase upload failed.', 'is-error');
+    }
+  }
+
+  async function uploadAdminChosenAudioFile(card) {
+    const input = card?.querySelector('[data-admin-audio-file]');
+    const file = input?.files?.[0];
+    if (!file) {
+      setAdminRecorderStatus(card, 'Choose an audio file first.', 'is-error');
+      return;
+    }
+    const media = window.DarijaSupabaseMedia;
+    if (!media?.uploadFileForAsset) {
+      setAdminRecorderStatus(card, 'Supabase media helper is not loaded.', 'is-error');
+      return;
+    }
+    try {
+      setAdminRecorderStatus(card, `Uploading ${file.name} to Supabase...`, 'is-recording');
+      const result = await media.uploadFileForAsset(card.dataset.adminMp3Path || '', file, 'audio');
+      setAdminRecorderStatus(card, `Audio saved. Learner public URL: ${result.publicUrl}`, 'is-success');
+    } catch (error) {
+      setAdminRecorderStatus(card, error?.message || 'Supabase upload failed.', 'is-error');
+    }
+  }
+
   function bindAdminAudioRecorders(root) {
     root.querySelectorAll('[data-admin-mp3-recorder]').forEach((card) => {
       card.querySelector('[data-admin-record-start]')?.addEventListener('click', () => startAdminAudioRecording(card));
       card.querySelector('[data-admin-record-stop]')?.addEventListener('click', () => stopAdminAudioRecording(card));
       card.querySelector('[data-admin-record-play]')?.addEventListener('click', () => playAdminAudioRecording(card));
       card.querySelector('[data-admin-record-download]')?.addEventListener('click', () => downloadAdminAudioRecording(card));
+      card.querySelector('[data-admin-record-upload-supabase]')?.addEventListener('click', () => uploadAdminRecordingToSupabase(card));
+      card.querySelector('[data-admin-audio-choose]')?.addEventListener('click', () => card.querySelector('[data-admin-audio-file]')?.click());
+      card.querySelector('[data-admin-audio-file]')?.addEventListener('change', () => {
+        const file = card.querySelector('[data-admin-audio-file]')?.files?.[0];
+        const uploadButton = card.querySelector('[data-admin-audio-upload-file]');
+        if (uploadButton) uploadButton.disabled = !file;
+        if (file) setAdminRecorderStatus(card, `Selected file: ${file.name}. Click Upload chosen file.`, 'is-warning');
+      });
+      card.querySelector('[data-admin-audio-upload-file]')?.addEventListener('click', () => uploadAdminChosenAudioFile(card));
       card.querySelector('[data-admin-record-copy-path]')?.addEventListener('click', async () => {
         const path = card.dataset.adminMp3Path || '';
         try {
@@ -739,6 +853,7 @@
           <div>${badge('video: ' + v.label, v.tone)}${pathBox('video target', phrase.sceneVideo)}</div>
           <div>${badge(phrase.sceneVisual ? 'visual mapped' : 'visual missing', phrase.sceneVisual ? 'green' : 'gray')}${pathBox('scene visual', phrase.sceneVisual)}</div>
         </div>
+        ${supabaseMediaAdminPanel()}
         <div class="admin-record-mp3-panel rounded-3xl bg-orange-50/60 border border-orange-100 p-5 mb-6">
           <div class="flex items-start gap-3 mb-4">
             <span class="w-11 h-11 rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-2xl">🎙️</span>
@@ -754,7 +869,7 @@
         </div>
         <div class="rounded-2xl bg-blue-50 border border-blue-100 p-5">
           <h3 class="font-extrabold text-blue-900 mb-2">كيف تستعملها الآن؟</h3>
-          <p class="text-sm text-blue-900 mb-3">عندما تسلمني الصوت أو الفيديو، أضعه في المسار الظاهر أعلاه. لاحقاً، في Admin الحقيقي، هذه الحقول ستصبح قابلة للحفظ في قاعدة البيانات.</p>
+          <p class="text-sm text-blue-900 mb-3">الآن يستطيع الأدمن تسجيل أو اختيار الصوت وحفظه في Supabase. المتعلم سيحاول تشغيل صوت Supabase أولاً، ثم يرجع لملف assets إذا لم يوجد.</p>
           <div class="flex flex-wrap gap-2" dir="ltr">
             <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Media Matrix</a>
             <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-800">Learner Preview</a>
@@ -857,6 +972,37 @@
     `;
   }
 
+
+  function bindSupabaseMediaControls(root) {
+    const panel = root.querySelector('[data-admin-supabase-panel]');
+    if (!panel) return;
+    panel.querySelector('[data-supabase-save-config]')?.addEventListener('click', () => {
+      const url = panel.querySelector('[data-supabase-url]')?.value || '';
+      const publishableKey = panel.querySelector('[data-supabase-key]')?.value || '';
+      try {
+        window.DarijaSupabaseMedia?.saveConfig?.({ url, publishableKey });
+        setSupabasePanelStatus(panel, 'Supabase media config saved locally in this browser.', 'is-success');
+      } catch (error) {
+        setSupabasePanelStatus(panel, 'Could not save config in this browser.', 'is-error');
+      }
+    });
+    panel.querySelector('[data-supabase-login]')?.addEventListener('click', async () => {
+      const email = panel.querySelector('[data-supabase-email]')?.value || '';
+      const password = panel.querySelector('[data-supabase-password]')?.value || '';
+      try {
+        setSupabasePanelStatus(panel, 'Logging in to Supabase...', 'is-recording');
+        await window.DarijaSupabaseMedia?.signIn?.(email, password);
+        setSupabasePanelStatus(panel, `Logged in as ${email}. You can upload media now.`, 'is-success');
+      } catch (error) {
+        setSupabasePanelStatus(panel, error?.message || 'Supabase login failed.', 'is-error');
+      }
+    });
+    panel.querySelector('[data-supabase-logout]')?.addEventListener('click', async () => {
+      await window.DarijaSupabaseMedia?.signOut?.();
+      setSupabasePanelStatus(panel, 'Logged out from Supabase media admin.', 'is-warning');
+    });
+  }
+
   function bindAdminControls(root) {
     root.querySelectorAll('[data-admin-select-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -928,6 +1074,7 @@
       writeAdminAudioOpenDays(new Set());
     });
 
+    bindSupabaseMediaControls(root);
     bindAdminAudioRecorders(root);
   }
 

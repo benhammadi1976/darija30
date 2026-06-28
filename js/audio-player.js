@@ -13,6 +13,22 @@
     return Number(speed) === 0.5 ? defaultAudio.slow : defaultAudio.normal;
   }
 
+  function uniqueValues(values) {
+    const seen = new Set();
+    return values.filter((value) => {
+      const clean = String(value || '').trim();
+      if (!clean || seen.has(clean)) return false;
+      seen.add(clean);
+      return true;
+    });
+  }
+
+  function getAudioCandidates(speed, button) {
+    const primary = getAudioUrl(speed, button);
+    const supabaseCandidates = window.DarijaSupabaseMedia?.audioCandidates?.(primary) || [];
+    return uniqueValues([...supabaseCandidates, primary]);
+  }
+
   function ensureNoticeRegion() {
     let region = document.getElementById('audioNotice');
     if (region) return region;
@@ -79,15 +95,15 @@
 
   function markAudioMissing(button, audioUrl) {
     setButtonState(button, '🎙️ Recording needed', 'audio-is-missing');
-    showNotice(`Audio not recorded yet: ${audioUrl}. Add the MP3 file in assets/audio, then reload.`, 'warning', 5200);
+    showNotice(`Audio is not available yet. Admin should record or upload it first. (${audioUrl})`, 'warning', 5200);
     window.setTimeout(() => resetButton(button), 1800);
   }
 
   function play(speed = 1, button = null) {
     const playbackRate = Number(speed) || 1;
-    const audioUrl = getAudioUrl(playbackRate, button);
+    const candidates = getAudioCandidates(playbackRate, button);
 
-    if (!audioUrl) {
+    if (!candidates.length) {
       markAudioMissing(button, 'missing audio path');
       return Promise.resolve(false);
     }
@@ -96,38 +112,47 @@
     stopCurrentAudio();
 
     currentButton = button;
-    const audio = new Audio(audioUrl);
-    currentAudio = audio;
-    audio.preload = 'auto';
-    audio.playbackRate = playbackRate;
-
     setButtonState(button, playbackRate === 0.5 ? '🐌 Loading slow...' : '🔊 Loading...', 'audio-is-playing');
 
-    const onPlaying = () => {
-      setButtonState(button, playbackRate === 0.5 ? '🐌 Slow playing...' : '🔊 Playing...', 'audio-is-playing');
+    const tryCandidate = (index) => {
+      const audioUrl = candidates[index];
+      if (!audioUrl) {
+        markAudioMissing(button, candidates[candidates.length - 1] || 'missing audio path');
+        return Promise.resolve(false);
+      }
+
+      const audio = new Audio(audioUrl);
+      currentAudio = audio;
+      audio.preload = 'auto';
+      audio.playbackRate = playbackRate;
+
+      const onPlaying = () => {
+        setButtonState(button, playbackRate === 0.5 ? '🐌 Slow playing...' : '🔊 Playing...', 'audio-is-playing');
+      };
+
+      const onEnded = () => {
+        resetButton(button);
+        if (currentAudio === audio) currentAudio = null;
+        if (currentButton === button) currentButton = null;
+      };
+
+      const onError = () => {
+        if (currentAudio === audio) currentAudio = null;
+        console.info('Darija30 audio candidate unavailable:', audioUrl);
+        tryCandidate(index + 1);
+      };
+
+      audio.addEventListener('playing', onPlaying, { once: true });
+      audio.addEventListener('ended', onEnded, { once: true });
+      audio.addEventListener('error', onError, { once: true });
+
+      return audio.play().catch((error) => {
+        console.info('Darija30 audio could not start:', audioUrl, error);
+        return tryCandidate(index + 1);
+      });
     };
 
-    const onEnded = () => {
-      resetButton(button);
-      if (currentAudio === audio) currentAudio = null;
-      if (currentButton === button) currentButton = null;
-    };
-
-    const onError = () => {
-      if (currentAudio === audio) currentAudio = null;
-      markAudioMissing(button, audioUrl);
-      console.info('Darija30 audio missing or unavailable:', audioUrl);
-    };
-
-    audio.addEventListener('playing', onPlaying, { once: true });
-    audio.addEventListener('ended', onEnded, { once: true });
-    audio.addEventListener('error', onError, { once: true });
-
-    return audio.play().catch((error) => {
-      console.info('Darija30 audio could not start:', audioUrl, error);
-      markAudioMissing(button, audioUrl);
-      return false;
-    });
+    return tryCandidate(0);
   }
 
   function bindAudioButtons(root = document) {
