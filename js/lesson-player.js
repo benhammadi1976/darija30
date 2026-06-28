@@ -447,22 +447,9 @@
         <div class="flex justify-end mb-4">
           ${favoriteButtonMarkup(lesson, phrase)}
         </div>
-        <div class="lesson-main-grid lesson-main-grid--teaching-first grid lg:grid-cols-[1.12fr_1fr] gap-6 items-start">
-          <div class="lesson-teaching-column lesson-left-column rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
-            <div class="lesson-context-block">
-              <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scenario</p>
-              <h3 class="text-xl font-bold text-medina mb-3">${escapeHtml(phrase.scenario || lesson.situation)}</h3>
-              <p class="text-gray-600 mb-5"><strong>Goal:</strong> ${escapeHtml(phrase.goal || lesson.method || 'Use this phrase in the right Moroccan situation.')}</p>
-              ${methodPill()}
-              ${phrase.moroccanChat ? `
-                <details class="mt-4 text-sm text-gray-500">
-                  <summary class="cursor-pointer font-bold">Show Moroccan chat spelling</summary>
-                  <p class="font-mono mt-2 text-gray-700">${escapeHtml(phrase.moroccanChat)}</p>
-                </details>
-              ` : ''}
-            </div>
-
-            <div class="lesson-say-card lesson-say-card--teaching mt-5 rounded-2xl border border-gray-100 p-6 text-center">
+        <div class="lesson-main-grid lesson-main-grid--balanced grid lg:grid-cols-2 gap-6 items-stretch">
+          <div class="lesson-learning-column rounded-2xl border border-gray-100 p-6 text-center">
+            <div class="lesson-say-card">
               <div class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold mb-5">SAY THIS</div>
               <p class="font-mono text-4xl md:text-5xl font-extrabold text-chefchaouen mb-3">${escapeHtml(phrase.friendlyLatin)}</p>
               <p class="text-gray-400 text-sm mb-6">Friendly Latin Darija</p>
@@ -496,15 +483,28 @@
                 </div>
               </div>
             </div>
+
+            <div class="lesson-watch-repeat mt-5 text-left">
+              <p class="text-xs font-bold text-terracotta uppercase tracking-widest mb-1">Watch & Repeat</p>
+              <p class="text-xs text-gray-500 mb-3">Use the visual, then practice with your own voice.</p>
+              ${sceneVisualMarkup(phrase)}
+            </div>
           </div>
 
-          <div class="lesson-practice-column rounded-2xl bg-white border border-gray-100 p-5 text-left">
-            <div class="lesson-practice-column__intro mb-4">
-              <p class="text-xs font-bold text-terracotta uppercase tracking-widest mb-1">Watch & Repeat</p>
-              <p class="text-sm text-gray-500">Use the visual, then practice with your own voice.</p>
+          <div class="lesson-practice-column rounded-2xl bg-gray-50 border border-gray-100 p-5 text-left">
+            <div class="lesson-scenario-card">
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scenario</p>
+              <h3 class="text-xl font-bold text-medina mb-3">${escapeHtml(phrase.scenario || lesson.situation)}</h3>
+              <p class="text-gray-600 mb-5"><strong>Goal:</strong> ${escapeHtml(phrase.goal || lesson.method || 'Use this phrase in the right Moroccan situation.')}</p>
+              ${methodPill()}
+              ${phrase.moroccanChat ? `
+                <details class="mt-4 text-sm text-gray-500">
+                  <summary class="cursor-pointer font-bold">Show Moroccan chat spelling</summary>
+                  <p class="font-mono mt-2 text-gray-700">${escapeHtml(phrase.moroccanChat)}</p>
+                </details>
+              ` : ''}
             </div>
-            ${sceneVisualMarkup(phrase)}
-            <div class="lesson-practice-block">
+            <div class="lesson-speaking-stack">
               ${nowYouSpeakMarkup(phrase)}
               ${imInMoroccoMarkup(phrase)}
               ${supportCardsMarkup(phrase)}
