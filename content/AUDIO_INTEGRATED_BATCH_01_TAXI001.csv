@@ -1,0 +1,3 @@
+batch,source_file,phrase,lesson,phrase_id,target_path,type,status
+Batch 01,Voix 260624_213807.m4a,bghit nmshi l'otel,Taxi Survival,taxi-001,assets/audio/day01/taxi-001-normal.mp3,normal,integrated
+Batch 01,Voix 260624_213807.m4a,bghit nmshi l'otel,Taxi Survival,taxi-001,assets/audio/day01/taxi-001-slow.mp3,slow,integrated

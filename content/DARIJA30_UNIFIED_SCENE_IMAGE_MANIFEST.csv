@@ -1,0 +1,151 @@
+day,lesson_title,phrase_number,phrase_id,friendly_latin,scene_image,visual_system,status
+1,Taxi Survival,1,taxi-001,bghit nmshi l-otel,assets/images/lesson-scenes/day01-taxi-001-bghit-nmshi-l-otel-scene.webp,scene-only-image-plus-ui-overlay,uploaded-scene
+1,Taxi Survival,2,taxi-002,weqef hna aafak,assets/images/lesson-scenes/day01-taxi-002-weqef-hna-aafak-scene.webp,scene-only-image-plus-ui-overlay,uploaded-scene
+1,Taxi Survival,3,taxi-003,sir nishan aafak,assets/images/lesson-scenes/day01-taxi-003-sir-nishan-aafak-scene.webp,scene-only-image-plus-ui-overlay,uploaded-scene
+1,Taxi Survival,4,taxi-004,dor l-limn aafak,assets/images/lesson-scenes/day01-taxi-004-dor-l-limn-aafak-scene.webp,scene-only-image-plus-ui-overlay,uploaded-scene
+1,Taxi Survival,5,taxi-005,hna mezian,assets/images/lesson-scenes/day01-taxi-005-hna-mezian-scene.webp,scene-only-image-plus-ui-overlay,uploaded-scene
+2,Cafe Culture,1,cafe-001,qahwa kahla aafak,assets/images/lesson-scenes/day02-qahwa-kahla-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+2,Cafe Culture,2,cafe-002,atay b naanaa aafak,assets/images/lesson-scenes/day02-qahwa-kahla-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+2,Cafe Culture,3,cafe-003,bla sokar aafak,assets/images/lesson-scenes/day02-qahwa-kahla-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+2,Cafe Culture,4,cafe-004,l-ma aafak,assets/images/lesson-scenes/day02-qahwa-kahla-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+2,Cafe Culture,5,cafe-005,l-hssab aafak,assets/images/lesson-scenes/day02-qahwa-kahla-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+3,Market Price,1,market-001,bsh-hal hada?,assets/images/lesson-scenes/day03-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+3,Market Price,2,market-002,ghali bzaf,assets/images/lesson-scenes/day03-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+3,Market Price,3,market-003,nqess shwiya aafak,assets/images/lesson-scenes/day03-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+3,Market Price,4,market-004,shno akher taman?,assets/images/lesson-scenes/day03-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+3,Market Price,5,market-005,bghit nshri hada,assets/images/lesson-scenes/day03-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+4,First Moroccan Greetings,1,day04-salam-001,salam,assets/images/lesson-scenes/day04-salam-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+4,First Moroccan Greetings,2,day04-labas-002,labas?,assets/images/lesson-scenes/day04-salam-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+4,First Moroccan Greetings,3,day04-bikhir-lhamdullah-003,"bikhir, lhamdullah",assets/images/lesson-scenes/day04-salam-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+4,First Moroccan Greetings,4,day04-shukran-004,shukran,assets/images/lesson-scenes/day04-salam-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+4,First Moroccan Greetings,5,day04-bslama-005,bslama,assets/images/lesson-scenes/day04-salam-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+5,Be Polite Without Sounding Formal,1,day05-aafak-001,aafak,assets/images/lesson-scenes/day05-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+5,Be Polite Without Sounding Formal,2,day05-smh-liya-002,smh liya,assets/images/lesson-scenes/day05-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+5,Be Polite Without Sounding Formal,3,day05-maashi-mushkil-003,maashi mushkil,assets/images/lesson-scenes/day05-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+5,Be Polite Without Sounding Formal,4,day05-wakha-004,wakha,assets/images/lesson-scenes/day05-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+5,Be Polite Without Sounding Formal,5,day05-la-shukran-005,la shukran,assets/images/lesson-scenes/day05-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+6,Introduce Yourself,1,day06-smiti-john-001,smiti John,assets/images/lesson-scenes/day06-smiti-john-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+6,Introduce Yourself,2,day06-ana-mn-002,ana mn...,assets/images/lesson-scenes/day06-smiti-john-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+6,Introduce Yourself,3,day06-ana-mn-mirikan-003,ana mn mirikan,assets/images/lesson-scenes/day06-smiti-john-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+6,Introduce Yourself,4,day06-msharfin-004,msharfin,assets/images/lesson-scenes/day06-smiti-john-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+6,Introduce Yourself,5,day06-ana-turist-005,ana turist,assets/images/lesson-scenes/day06-smiti-john-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+7,I Don’t Understand,1,day07-ma-fhemtsh-001,ma fhemtsh,assets/images/lesson-scenes/day07-ma-fhemtsh-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+7,I Don’t Understand,2,day07-bshwiya-aafak-002,bshwiya aafak,assets/images/lesson-scenes/day07-ma-fhemtsh-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+7,I Don’t Understand,3,day07-aawed-aafak-003,aawed aafak,assets/images/lesson-scenes/day07-ma-fhemtsh-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+7,I Don’t Understand,4,day07-wash-kat-hder-english-004,wash kat-hder English?,assets/images/lesson-scenes/day07-ma-fhemtsh-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+7,I Don’t Understand,5,day07-shnu-glti-005,shnu glti?,assets/images/lesson-scenes/day07-ma-fhemtsh-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+8,"Yes, No, Maybe, I Want",1,day08-iyeh-001,iyeh,assets/images/lesson-scenes/day08-iyeh-001-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+8,"Yes, No, Maybe, I Want",2,day08-0la-002,la,assets/images/lesson-scenes/day08-la-002-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+8,"Yes, No, Maybe, I Want",3,day08-momkin-003,momkin,assets/images/lesson-scenes/day08-momkin-003-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+8,"Yes, No, Maybe, I Want",4,day08-bghit-004,bghit...,assets/images/lesson-scenes/day08-bghit-004-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+8,"Yes, No, Maybe, I Want",5,day08-ma-bghitsh-005,ma bghitsh,assets/images/lesson-scenes/day08-ma-bghitsh-005-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+9,Taxi: Price and Meter,1,day09-bsh-hal-taman-001,bsh-hal taman?,assets/images/lesson-scenes/day09-taxi-price-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+9,Taxi: Price and Meter,2,day09-shaal-l-compteur-aafak-002,shaal l-compteur aafak,assets/images/lesson-scenes/day09-taxi-price-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+9,Taxi: Price and Meter,3,day09-ghali-bzaf-003,ghali bzaf,assets/images/lesson-scenes/day09-taxi-price-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+9,Taxi: Price and Meter,4,day09-la-shukran-004,"la, shukran",assets/images/lesson-scenes/day09-taxi-price-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+9,Taxi: Price and Meter,5,day09-wakha-005,wakha,assets/images/lesson-scenes/day09-taxi-price-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+10,Taxi: Stop and Directions,1,day10-wqef-hna-aafak-001,wqef hna aafak,assets/images/lesson-scenes/day10-wqef-hna-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+10,Taxi: Stop and Directions,2,day10-sir-nishan-002,sir nishan,assets/images/lesson-scenes/day10-wqef-hna-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+10,Taxi: Stop and Directions,3,day10-dur-l-limen-003,dur l-limen,assets/images/lesson-scenes/day10-wqef-hna-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+10,Taxi: Stop and Directions,4,day10-dur-l-lisar-004,dur l-lisar,assets/images/lesson-scenes/day10-wqef-hna-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+10,Taxi: Stop and Directions,5,day10-hna-mezian-005,hna mezian,assets/images/lesson-scenes/day10-wqef-hna-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+11,"Train, Bus, Airport",1,day11-fin-l-mahatta-001,fin l-mahatta?,assets/images/lesson-scenes/day11-fin-l-mahatta-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+11,"Train, Bus, Airport",2,day11-fin-l-mtar-002,fin l-mtar?,assets/images/lesson-scenes/day11-fin-l-mahatta-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+11,"Train, Bus, Airport",3,day11-bghit-ticket-l-003,bghit ticket l...,assets/images/lesson-scenes/day11-fin-l-mahatta-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+11,"Train, Bus, Airport",4,day11-shhal-f-saa-004,shhal f saa?,assets/images/lesson-scenes/day11-fin-l-mahatta-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+11,"Train, Bus, Airport",5,day11-wash-baqi-kayn-005,wash baqi kayn?,assets/images/lesson-scenes/day11-fin-l-mahatta-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+12,Lost in the Medina,1,day12-tliit-001,tliit,assets/images/lesson-scenes/day12-tliit-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+12,Lost in the Medina,2,day12-fin-kayn-002,fin kayn ...?,assets/images/lesson-scenes/day12-tliit-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+12,Lost in the Medina,3,day12-qreb-wla-b3id-003,qreb wla b3id?,assets/images/lesson-scenes/day12-tliit-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+12,Lost in the Medina,4,day12-aaweni-aafak-004,aaweni aafak,assets/images/lesson-scenes/day12-tliit-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+12,Lost in the Medina,5,day12-shukran-bzaf-005,shukran bzaf,assets/images/lesson-scenes/day12-tliit-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+13,"Sugar, Milk, Custom Orders",1,day13-bla-sokkar-001,bla sokkar,assets/images/lesson-scenes/day13-bla-sokkar-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+13,"Sugar, Milk, Custom Orders",2,day13-b-l-hlib-002,b l-hlib,assets/images/lesson-scenes/day13-bla-sokkar-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+13,"Sugar, Milk, Custom Orders",3,day13-messous-003,messous,assets/images/lesson-scenes/day13-bla-sokkar-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+13,"Sugar, Milk, Custom Orders",4,day13-shwiya-sokkar-004,shwiya sokkar,assets/images/lesson-scenes/day13-bla-sokkar-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+13,"Sugar, Milk, Custom Orders",5,day13-ma-bghitsh-sokkar-005,ma bghitsh sokkar,assets/images/lesson-scenes/day13-bla-sokkar-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+14,Restaurant Basics,1,day14-bghit-menu-001,bghit menu,assets/images/lesson-scenes/day14-bghit-menu-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+14,Restaurant Basics,2,day14-shnu-kayn-002,shnu kayn?,assets/images/lesson-scenes/day14-bghit-menu-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+14,Restaurant Basics,3,day14-bghit-tajine-003,bghit tajine,assets/images/lesson-scenes/day14-bghit-menu-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+14,Restaurant Basics,4,day14-bghit-couscous-004,bghit couscous,assets/images/lesson-scenes/day14-bghit-menu-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+14,Restaurant Basics,5,day14-hadshi-bnin-005,hadshi bnin,assets/images/lesson-scenes/day14-bghit-menu-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+15,The Bill and Payment,1,day15-l-hssab-aafak-001,l-hssab aafak,assets/images/lesson-scenes/day15-l-hssab-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+15,The Bill and Payment,2,day15-bsh-hal-002,bsh-hal?,assets/images/lesson-scenes/day15-l-hssab-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+15,The Bill and Payment,3,day15-nkhlles-b-carte-003,nkhlles b carte?,assets/images/lesson-scenes/day15-l-hssab-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+15,The Bill and Payment,4,day15-cash-004,cash?,assets/images/lesson-scenes/day15-l-hssab-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+15,The Bill and Payment,5,day15-safi-shukran-005,safi shukran,assets/images/lesson-scenes/day15-l-hssab-aafak-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+16,Dietary Needs,1,day16-ana-vegetariyan-001,ana vegetariyan,assets/images/lesson-scenes/day16-ana-vegetariyan-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+16,Dietary Needs,2,day16-ma-kan-akolsh-l-hm-002,ma kan-akolsh l-hm,assets/images/lesson-scenes/day16-ana-vegetariyan-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+16,Dietary Needs,3,day16-wash-fih-l-hlib-003,wash fih l-hlib?,assets/images/lesson-scenes/day16-ana-vegetariyan-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+16,Dietary Needs,4,day16-wash-fih-l-bid-004,wash fih l-bid?,assets/images/lesson-scenes/day16-ana-vegetariyan-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+16,Dietary Needs,5,day16-bla-aafak-005,bla ... aafak,assets/images/lesson-scenes/day16-ana-vegetariyan-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+17,Ask the Price,1,day17-bsh-hal-hada-001,bsh-hal hada?,assets/images/lesson-scenes/day17-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+17,Ask the Price,2,day17-bsh-hal-hadi-002,bsh-hal hadi?,assets/images/lesson-scenes/day17-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+17,Ask the Price,3,day17-shhal-taman-003,shhal taman?,assets/images/lesson-scenes/day17-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+17,Ask the Price,4,day17-hada-zwin-004,hada zwin,assets/images/lesson-scenes/day17-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+17,Ask the Price,5,day17-bghit-nshuf-005,bghit nshuf,assets/images/lesson-scenes/day17-bsh-hal-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+18,Bargain Politely,1,day18-ghali-bzaf-001,ghali bzaf,assets/images/lesson-scenes/day18-ghali-bzaf-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+18,Bargain Politely,2,day18-nqes-shwiya-aafak-002,nqes shwiya aafak,assets/images/lesson-scenes/day18-ghali-bzaf-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+18,Bargain Politely,3,day18-akher-taman-003,akher taman?,assets/images/lesson-scenes/day18-ghali-bzaf-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+18,Bargain Politely,4,day18-ma-bghitsh-004,ma bghitsh,assets/images/lesson-scenes/day18-ghali-bzaf-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+18,Bargain Politely,5,day18-wakha-005,wakha,assets/images/lesson-scenes/day18-ghali-bzaf-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+19,"Buy This, Not That",1,day19-bghit-hada-001,bghit hada,assets/images/lesson-scenes/day19-bghit-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+19,"Buy This, Not That",2,day19-ma-bghitsh-hadi-002,ma bghitsh hadi,assets/images/lesson-scenes/day19-bghit-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+19,"Buy This, Not That",3,day19-atini-hada-aafak-003,atini hada aafak,assets/images/lesson-scenes/day19-bghit-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+19,"Buy This, Not That",4,day19-kayna-shi-haja-khra-004,kayna shi haja khra?,assets/images/lesson-scenes/day19-bghit-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+19,"Buy This, Not That",5,day19-safi-005,safi,assets/images/lesson-scenes/day19-bghit-hada-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+20,Sizes and Colors,1,day20-kbir-001,kbir,assets/images/lesson-scenes/day20-kbir-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+20,Sizes and Colors,2,day20-sghir-002,sghir,assets/images/lesson-scenes/day20-kbir-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+20,Sizes and Colors,3,day20-khal-003,khal,assets/images/lesson-scenes/day20-kbir-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+20,Sizes and Colors,4,day20-byed-004,byed,assets/images/lesson-scenes/day20-kbir-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+20,Sizes and Colors,5,day20-zraq-005,zraq,assets/images/lesson-scenes/day20-kbir-scene.png,scene-only-image-plus-ui-overlay,uploaded-scene
+21,Numbers for Prices,1,day21-wahed-001,wahed,assets/images/lesson-visuals/day21-numbers-for-prices-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+21,Numbers for Prices,2,day21-jouj-002,jouj,assets/images/lesson-visuals/day21-numbers-for-prices-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+21,Numbers for Prices,3,day21-tlata-003,tlata,assets/images/lesson-visuals/day21-numbers-for-prices-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+21,Numbers for Prices,4,day21-ashra-004,ashra,assets/images/lesson-visuals/day21-numbers-for-prices-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+21,Numbers for Prices,5,day21-bsh-hal-b-drham-005,bsh-hal b drham?,assets/images/lesson-visuals/day21-numbers-for-prices-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+22,Hotel / Riad Check-in,1,day22-andi-reservation-001,andi reservation,assets/images/lesson-visuals/day22-hotel-riad-check-in-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+22,Hotel / Riad Check-in,2,day22-smiti-002,smiti...,assets/images/lesson-visuals/day22-hotel-riad-check-in-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+22,Hotel / Riad Check-in,3,day22-fin-l-bit-003,fin l-bit?,assets/images/lesson-visuals/day22-hotel-riad-check-in-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+22,Hotel / Riad Check-in,4,day22-bghit-l-mftah-004,bghit l-mftah,assets/images/lesson-visuals/day22-hotel-riad-check-in-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+22,Hotel / Riad Check-in,5,day22-shukran-005,shukran,assets/images/lesson-visuals/day22-hotel-riad-check-in-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+23,Hotel Problems,1,day23-ma-kaynsh-lma-skhun-001,ma kaynsh lma skhun,assets/images/lesson-visuals/day23-hotel-problems-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+23,Hotel Problems,2,day23-l-wifi-ma-khdamsh-002,l-wifi ma khdamsh,assets/images/lesson-visuals/day23-hotel-problems-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+23,Hotel Problems,3,day23-bghit-nbedel-l-bit-003,bghit nbedel l-bit,assets/images/lesson-visuals/day23-hotel-problems-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+23,Hotel Problems,4,day23-aaweni-aafak-004,aaweni aafak,assets/images/lesson-visuals/day23-hotel-problems-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+23,Hotel Problems,5,day23-maashi-mushkil-005,maashi mushkil,assets/images/lesson-visuals/day23-hotel-problems-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+24,Ask Where Things Are,1,day24-fin-kayn-001,fin kayn...?,assets/images/lesson-visuals/day24-ask-where-things-are-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+24,Ask Where Things Are,2,day24-fin-toilet-002,fin toilet?,assets/images/lesson-visuals/day24-ask-where-things-are-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+24,Ask Where Things Are,3,day24-fin-pharmacy-003,fin pharmacy?,assets/images/lesson-visuals/day24-ask-where-things-are-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+24,Ask Where Things Are,4,day24-fin-atm-004,fin ATM?,assets/images/lesson-visuals/day24-ask-where-things-are-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+24,Ask Where Things Are,5,day24-qreb-005,qreb?,assets/images/lesson-visuals/day24-ask-where-things-are-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+25,Need Help / Emergency Light,1,day25-aaweni-aafak-001,aaweni aafak,assets/images/lesson-visuals/day25-need-help-emergency-light-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+25,Need Help / Emergency Light,2,day25-bghit-doctor-002,bghit doctor,assets/images/lesson-visuals/day25-need-help-emergency-light-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+25,Need Help / Emergency Light,3,day25-ana-mrid-003,ana mrid,assets/images/lesson-visuals/day25-need-help-emergency-light-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+25,Need Help / Emergency Light,4,day25-mshat-li-l-portefeuille-004,mshat li l-portefeuille,assets/images/lesson-visuals/day25-need-help-emergency-light-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+25,Need Help / Emergency Light,5,day25-fin-police-005,fin police?,assets/images/lesson-visuals/day25-need-help-emergency-light-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+26,"Phone, SIM, Internet",1,day26-bghit-carte-sim-001,bghit carte SIM,assets/images/lesson-visuals/day26-phone-sim-internet-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+26,"Phone, SIM, Internet",2,day26-bghit-internet-002,bghit internet,assets/images/lesson-visuals/day26-phone-sim-internet-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+26,"Phone, SIM, Internet",3,day26-shhal-giga-003,shhal giga?,assets/images/lesson-visuals/day26-phone-sim-internet-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+26,"Phone, SIM, Internet",4,day26-ma-khdamsh-004,ma khdamsh,assets/images/lesson-visuals/day26-phone-sim-internet-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+26,"Phone, SIM, Internet",5,day26-aaweni-aafak-005,aaweni aafak,assets/images/lesson-visuals/day26-phone-sim-internet-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+27,Compliments and Warm Phrases,1,day27-bssaha-001,bssaha,assets/images/lesson-visuals/day27-compliments-and-warm-phrases-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+27,Compliments and Warm Phrases,2,day27-llah-ykhalik-002,llah ykhalik,assets/images/lesson-visuals/day27-compliments-and-warm-phrases-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+27,Compliments and Warm Phrases,3,day27-zwin-bzaf-003,zwin bzaf,assets/images/lesson-visuals/day27-compliments-and-warm-phrases-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+27,Compliments and Warm Phrases,4,day27-had-l-blad-zwina-004,had l-blad zwina,assets/images/lesson-visuals/day27-compliments-and-warm-phrases-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+27,Compliments and Warm Phrases,5,day27-shukran-bzaf-005,shukran bzaf,assets/images/lesson-visuals/day27-compliments-and-warm-phrases-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+28,Decline Politely,1,day28-la-shukran-001,la shukran,assets/images/lesson-visuals/day28-decline-politely-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+28,Decline Politely,2,day28-ma-bghitsh-002,ma bghitsh,assets/images/lesson-visuals/day28-decline-politely-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+28,Decline Politely,3,day28-ghir-kan-shuf-003,ghir kan-shuf,assets/images/lesson-visuals/day28-decline-politely-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+28,Decline Politely,4,day28-ma-andish-flus-daba-004,ma andish flus daba,assets/images/lesson-visuals/day28-decline-politely-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+28,Decline Politely,5,day28-safi-shukran-005,safi shukran,assets/images/lesson-visuals/day28-decline-politely-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+29,Full Travel Dialogue,1,day29-salam-001,salam,assets/images/lesson-visuals/day29-full-travel-dialogue-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+29,Full Travel Dialogue,2,day29-bghit-nmshi-l-otel-002,bghit nmshi l-otel,assets/images/lesson-visuals/day29-full-travel-dialogue-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+29,Full Travel Dialogue,3,day29-shaal-l-compteur-aafak-003,shaal l-compteur aafak,assets/images/lesson-visuals/day29-full-travel-dialogue-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+29,Full Travel Dialogue,4,day29-wqef-hna-aafak-004,wqef hna aafak,assets/images/lesson-visuals/day29-full-travel-dialogue-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+29,Full Travel Dialogue,5,day29-shukran-bzaf-005,shukran bzaf,assets/images/lesson-visuals/day29-full-travel-dialogue-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+30,Final Morocco Survival Test,1,day30-salam-001,salam,assets/images/lesson-visuals/day30-final-morocco-survival-test-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+30,Final Morocco Survival Test,2,day30-bghit-nmshi-l-otel-002,bghit nmshi l-otel,assets/images/lesson-visuals/day30-final-morocco-survival-test-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+30,Final Morocco Survival Test,3,day30-qahwa-kahla-aafak-003,qahwa kahla aafak,assets/images/lesson-visuals/day30-final-morocco-survival-test-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+30,Final Morocco Survival Test,4,day30-bsh-hal-hada-004,bsh-hal hada?,assets/images/lesson-visuals/day30-final-morocco-survival-test-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image
+30,Final Morocco Survival Test,5,day30-aaweni-aafak-005,aaweni aafak,assets/images/lesson-visuals/day30-final-morocco-survival-test-visual.svg,scene-only-image-plus-ui-overlay,pending-final-scene-image

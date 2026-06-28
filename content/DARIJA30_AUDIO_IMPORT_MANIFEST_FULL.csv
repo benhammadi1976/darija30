@@ -1,0 +1,151 @@
+day,phrase_id,friendly_latin,audio_normal_target,audio_slow_target
+1,taxi-001,bghit nmshi l-otel,assets/audio/day01/taxi-001-normal.mp3,assets/audio/day01/taxi-001-slow.mp3
+1,taxi-002,weqef hna aafak,assets/audio/day01/taxi-002-normal.mp3,assets/audio/day01/taxi-002-slow.mp3
+1,taxi-003,sir nishan aafak,assets/audio/day01/taxi-003-normal.mp3,assets/audio/day01/taxi-003-slow.mp3
+1,taxi-004,dor l-limn aafak,assets/audio/day01/taxi-004-normal.mp3,assets/audio/day01/taxi-004-slow.mp3
+1,taxi-005,hna mezian,assets/audio/day01/taxi-005-hna-mezian-normal.mp3,assets/audio/day01/taxi-005-hna-mezian-slow.mp3
+2,cafe-001,qahwa kahla aafak,assets/audio/day02/cafe-001-normal.mp3,assets/audio/day02/cafe-001-slow.mp3
+2,cafe-002,atay b naanaa aafak,assets/audio/day02/cafe-002-normal.mp3,assets/audio/day02/cafe-002-slow.mp3
+2,cafe-003,bla sokar aafak,assets/audio/day02/cafe-003-normal.mp3,assets/audio/day02/cafe-003-slow.mp3
+2,cafe-004,l-ma aafak,assets/audio/day02/cafe-004-normal.mp3,assets/audio/day02/cafe-004-slow.mp3
+2,cafe-005,l-hssab aafak,assets/audio/day02/cafe-005-normal.mp3,assets/audio/day02/cafe-005-slow.mp3
+3,market-001,bsh-hal hada?,assets/audio/day03/market-001-normal.mp3,assets/audio/day03/market-001-slow.mp3
+3,market-002,ghali bzaf,assets/audio/day03/market-002-normal.mp3,assets/audio/day03/market-002-slow.mp3
+3,market-003,nqess shwiya aafak,assets/audio/day03/market-003-normal.mp3,assets/audio/day03/market-003-slow.mp3
+3,market-004,shno akher taman?,assets/audio/day03/market-004-normal.mp3,assets/audio/day03/market-004-slow.mp3
+3,market-005,bghit nshri hada,assets/audio/day03/market-005-normal.mp3,assets/audio/day03/market-005-slow.mp3
+4,day04-salam-001,salam,assets/audio/day04/day04-salam-001-normal.mp3,assets/audio/day04/day04-salam-001-slow.mp3
+4,day04-labas-002,labas?,assets/audio/day04/day04-labas-002-normal.mp3,assets/audio/day04/day04-labas-002-slow.mp3
+4,day04-bikhir-lhamdullah-003,"bikhir, lhamdullah",assets/audio/day04/day04-bikhir-lhamdullah-003-normal.mp3,assets/audio/day04/day04-bikhir-lhamdullah-003-slow.mp3
+4,day04-shukran-004,shukran,assets/audio/day04/day04-shukran-004-normal.mp3,assets/audio/day04/day04-shukran-004-slow.mp3
+4,day04-bslama-005,bslama,assets/audio/day04/day04-bslama-005-normal.mp3,assets/audio/day04/day04-bslama-005-slow.mp3
+5,day05-aafak-001,aafak,assets/audio/day05/day05-aafak-001-normal.mp3,assets/audio/day05/day05-aafak-001-slow.mp3
+5,day05-smh-liya-002,smh liya,assets/audio/day05/day05-smh-liya-002-normal.mp3,assets/audio/day05/day05-smh-liya-002-slow.mp3
+5,day05-maashi-mushkil-003,maashi mushkil,assets/audio/day05/day05-maashi-mushkil-003-normal.mp3,assets/audio/day05/day05-maashi-mushkil-003-slow.mp3
+5,day05-wakha-004,wakha,assets/audio/day05/day05-wakha-004-normal.mp3,assets/audio/day05/day05-wakha-004-slow.mp3
+5,day05-la-shukran-005,la shukran,assets/audio/day05/day05-la-shukran-005-normal.mp3,assets/audio/day05/day05-la-shukran-005-slow.mp3
+6,day06-smiti-john-001,smiti John,assets/audio/day06/day06-smiti-john-001-normal.mp3,assets/audio/day06/day06-smiti-john-001-slow.mp3
+6,day06-ana-mn-002,ana mn...,assets/audio/day06/day06-ana-mn-002-normal.mp3,assets/audio/day06/day06-ana-mn-002-slow.mp3
+6,day06-ana-mn-mirikan-003,ana mn mirikan,assets/audio/day06/day06-ana-mn-mirikan-003-normal.mp3,assets/audio/day06/day06-ana-mn-mirikan-003-slow.mp3
+6,day06-msharfin-004,msharfin,assets/audio/day06/day06-msharfin-004-normal.mp3,assets/audio/day06/day06-msharfin-004-slow.mp3
+6,day06-ana-turist-005,ana turist,assets/audio/day06/day06-ana-turist-005-normal.mp3,assets/audio/day06/day06-ana-turist-005-slow.mp3
+7,day07-ma-fhemtsh-001,ma fhemtsh,assets/audio/day07/day07-ma-fhemtsh-001-normal.mp3,assets/audio/day07/day07-ma-fhemtsh-001-slow.mp3
+7,day07-bshwiya-aafak-002,bshwiya aafak,assets/audio/day07/day07-bshwiya-aafak-002-normal.mp3,assets/audio/day07/day07-bshwiya-aafak-002-slow.mp3
+7,day07-aawed-aafak-003,aawed aafak,assets/audio/day07/day07-aawed-aafak-003-normal.mp3,assets/audio/day07/day07-aawed-aafak-003-slow.mp3
+7,day07-wash-kat-hder-english-004,wash kat-hder English?,assets/audio/day07/day07-wash-kat-hder-english-004-normal.mp3,assets/audio/day07/day07-wash-kat-hder-english-004-slow.mp3
+7,day07-shnu-glti-005,shnu glti?,assets/audio/day07/day07-shnu-glti-005-normal.mp3,assets/audio/day07/day07-shnu-glti-005-slow.mp3
+8,day08-iyeh-001,iyeh,assets/audio/day08/day08-iyeh-001-normal.mp3,assets/audio/day08/day08-iyeh-001-slow.mp3
+8,day08-0la-002,la,assets/audio/day08/day08-0la-002-normal.mp3,assets/audio/day08/day08-0la-002-slow.mp3
+8,day08-momkin-003,momkin,assets/audio/day08/day08-momkin-003-normal.mp3,assets/audio/day08/day08-momkin-003-slow.mp3
+8,day08-bghit-004,bghit...,assets/audio/day08/day08-bghit-004-normal.mp3,assets/audio/day08/day08-bghit-004-slow.mp3
+8,day08-ma-bghitsh-005,ma bghitsh,assets/audio/day08/day08-ma-bghitsh-005-normal.mp3,assets/audio/day08/day08-ma-bghitsh-005-slow.mp3
+9,day09-bsh-hal-taman-001,bsh-hal taman?,assets/audio/day09/day09-bsh-hal-taman-001-normal.mp3,assets/audio/day09/day09-bsh-hal-taman-001-slow.mp3
+9,day09-shaal-l-compteur-aafak-002,shaal l-compteur aafak,assets/audio/day09/day09-shaal-l-compteur-aafak-002-normal.mp3,assets/audio/day09/day09-shaal-l-compteur-aafak-002-slow.mp3
+9,day09-ghali-bzaf-003,ghali bzaf,assets/audio/day09/day09-ghali-bzaf-003-normal.mp3,assets/audio/day09/day09-ghali-bzaf-003-slow.mp3
+9,day09-la-shukran-004,"la, shukran",assets/audio/day09/day09-la-shukran-004-normal.mp3,assets/audio/day09/day09-la-shukran-004-slow.mp3
+9,day09-wakha-005,wakha,assets/audio/day09/day09-wakha-005-normal.mp3,assets/audio/day09/day09-wakha-005-slow.mp3
+10,day10-wqef-hna-aafak-001,wqef hna aafak,assets/audio/day10/day10-wqef-hna-aafak-001-normal.mp3,assets/audio/day10/day10-wqef-hna-aafak-001-slow.mp3
+10,day10-sir-nishan-002,sir nishan,assets/audio/day10/day10-sir-nishan-002-normal.mp3,assets/audio/day10/day10-sir-nishan-002-slow.mp3
+10,day10-dur-l-limen-003,dur l-limen,assets/audio/day10/day10-dur-l-limen-003-normal.mp3,assets/audio/day10/day10-dur-l-limen-003-slow.mp3
+10,day10-dur-l-lisar-004,dur l-lisar,assets/audio/day10/day10-dur-l-lisar-004-normal.mp3,assets/audio/day10/day10-dur-l-lisar-004-slow.mp3
+10,day10-hna-mezian-005,hna mezian,assets/audio/day10/day10-hna-mezian-005-normal.mp3,assets/audio/day10/day10-hna-mezian-005-slow.mp3
+11,day11-fin-l-mahatta-001,fin l-mahatta?,assets/audio/day11/day11-fin-l-mahatta-001-normal.mp3,assets/audio/day11/day11-fin-l-mahatta-001-slow.mp3
+11,day11-fin-l-mtar-002,fin l-mtar?,assets/audio/day11/day11-fin-l-mtar-002-normal.mp3,assets/audio/day11/day11-fin-l-mtar-002-slow.mp3
+11,day11-bghit-ticket-l-003,bghit ticket l...,assets/audio/day11/day11-bghit-ticket-l-003-normal.mp3,assets/audio/day11/day11-bghit-ticket-l-003-slow.mp3
+11,day11-shhal-f-saa-004,shhal f saa?,assets/audio/day11/day11-shhal-f-saa-004-normal.mp3,assets/audio/day11/day11-shhal-f-saa-004-slow.mp3
+11,day11-wash-baqi-kayn-005,wash baqi kayn?,assets/audio/day11/day11-wash-baqi-kayn-005-normal.mp3,assets/audio/day11/day11-wash-baqi-kayn-005-slow.mp3
+12,day12-tliit-001,tliit,assets/audio/day12/day12-tliit-001-normal.mp3,assets/audio/day12/day12-tliit-001-slow.mp3
+12,day12-fin-kayn-002,fin kayn ...?,assets/audio/day12/day12-fin-kayn-002-normal.mp3,assets/audio/day12/day12-fin-kayn-002-slow.mp3
+12,day12-qreb-wla-b3id-003,qreb wla b3id?,assets/audio/day12/day12-qreb-wla-b3id-003-normal.mp3,assets/audio/day12/day12-qreb-wla-b3id-003-slow.mp3
+12,day12-aaweni-aafak-004,aaweni aafak,assets/audio/day12/day12-aaweni-aafak-004-normal.mp3,assets/audio/day12/day12-aaweni-aafak-004-slow.mp3
+12,day12-shukran-bzaf-005,shukran bzaf,assets/audio/day12/day12-shukran-bzaf-005-normal.mp3,assets/audio/day12/day12-shukran-bzaf-005-slow.mp3
+13,day13-bla-sokkar-001,bla sokkar,assets/audio/day13/day13-bla-sokkar-001-normal.mp3,assets/audio/day13/day13-bla-sokkar-001-slow.mp3
+13,day13-b-l-hlib-002,b l-hlib,assets/audio/day13/day13-b-l-hlib-002-normal.mp3,assets/audio/day13/day13-b-l-hlib-002-slow.mp3
+13,day13-messous-003,messous,assets/audio/day13/day13-messous-003-normal.mp3,assets/audio/day13/day13-messous-003-slow.mp3
+13,day13-shwiya-sokkar-004,shwiya sokkar,assets/audio/day13/day13-shwiya-sokkar-004-normal.mp3,assets/audio/day13/day13-shwiya-sokkar-004-slow.mp3
+13,day13-ma-bghitsh-sokkar-005,ma bghitsh sokkar,assets/audio/day13/day13-ma-bghitsh-sokkar-005-normal.mp3,assets/audio/day13/day13-ma-bghitsh-sokkar-005-slow.mp3
+14,day14-bghit-menu-001,bghit menu,assets/audio/day14/day14-bghit-menu-001-normal.mp3,assets/audio/day14/day14-bghit-menu-001-slow.mp3
+14,day14-shnu-kayn-002,shnu kayn?,assets/audio/day14/day14-shnu-kayn-002-normal.mp3,assets/audio/day14/day14-shnu-kayn-002-slow.mp3
+14,day14-bghit-tajine-003,bghit tajine,assets/audio/day14/day14-bghit-tajine-003-normal.mp3,assets/audio/day14/day14-bghit-tajine-003-slow.mp3
+14,day14-bghit-couscous-004,bghit couscous,assets/audio/day14/day14-bghit-couscous-004-normal.mp3,assets/audio/day14/day14-bghit-couscous-004-slow.mp3
+14,day14-hadshi-bnin-005,hadshi bnin,assets/audio/day14/day14-hadshi-bnin-005-normal.mp3,assets/audio/day14/day14-hadshi-bnin-005-slow.mp3
+15,day15-l-hssab-aafak-001,l-hssab aafak,assets/audio/day15/day15-l-hssab-aafak-001-normal.mp3,assets/audio/day15/day15-l-hssab-aafak-001-slow.mp3
+15,day15-bsh-hal-002,bsh-hal?,assets/audio/day15/day15-bsh-hal-002-normal.mp3,assets/audio/day15/day15-bsh-hal-002-slow.mp3
+15,day15-nkhlles-b-carte-003,nkhlles b carte?,assets/audio/day15/day15-nkhlles-b-carte-003-normal.mp3,assets/audio/day15/day15-nkhlles-b-carte-003-slow.mp3
+15,day15-cash-004,cash?,assets/audio/day15/day15-cash-004-normal.mp3,assets/audio/day15/day15-cash-004-slow.mp3
+15,day15-safi-shukran-005,safi shukran,assets/audio/day15/day15-safi-shukran-005-normal.mp3,assets/audio/day15/day15-safi-shukran-005-slow.mp3
+16,day16-ana-vegetariyan-001,ana vegetariyan,assets/audio/day16/day16-ana-vegetariyan-001-normal.mp3,assets/audio/day16/day16-ana-vegetariyan-001-slow.mp3
+16,day16-ma-kan-akolsh-l-hm-002,ma kan-akolsh l-hm,assets/audio/day16/day16-ma-kan-akolsh-l-hm-002-normal.mp3,assets/audio/day16/day16-ma-kan-akolsh-l-hm-002-slow.mp3
+16,day16-wash-fih-l-hlib-003,wash fih l-hlib?,assets/audio/day16/day16-wash-fih-l-hlib-003-normal.mp3,assets/audio/day16/day16-wash-fih-l-hlib-003-slow.mp3
+16,day16-wash-fih-l-bid-004,wash fih l-bid?,assets/audio/day16/day16-wash-fih-l-bid-004-normal.mp3,assets/audio/day16/day16-wash-fih-l-bid-004-slow.mp3
+16,day16-bla-aafak-005,bla ... aafak,assets/audio/day16/day16-bla-aafak-005-normal.mp3,assets/audio/day16/day16-bla-aafak-005-slow.mp3
+17,day17-bsh-hal-hada-001,bsh-hal hada?,assets/audio/day17/day17-bsh-hal-hada-001-normal.mp3,assets/audio/day17/day17-bsh-hal-hada-001-slow.mp3
+17,day17-bsh-hal-hadi-002,bsh-hal hadi?,assets/audio/day17/day17-bsh-hal-hadi-002-normal.mp3,assets/audio/day17/day17-bsh-hal-hadi-002-slow.mp3
+17,day17-shhal-taman-003,shhal taman?,assets/audio/day17/day17-shhal-taman-003-normal.mp3,assets/audio/day17/day17-shhal-taman-003-slow.mp3
+17,day17-hada-zwin-004,hada zwin,assets/audio/day17/day17-hada-zwin-004-normal.mp3,assets/audio/day17/day17-hada-zwin-004-slow.mp3
+17,day17-bghit-nshuf-005,bghit nshuf,assets/audio/day17/day17-bghit-nshuf-005-normal.mp3,assets/audio/day17/day17-bghit-nshuf-005-slow.mp3
+18,day18-ghali-bzaf-001,ghali bzaf,assets/audio/day18/day18-ghali-bzaf-001-normal.mp3,assets/audio/day18/day18-ghali-bzaf-001-slow.mp3
+18,day18-nqes-shwiya-aafak-002,nqes shwiya aafak,assets/audio/day18/day18-nqes-shwiya-aafak-002-normal.mp3,assets/audio/day18/day18-nqes-shwiya-aafak-002-slow.mp3
+18,day18-akher-taman-003,akher taman?,assets/audio/day18/day18-akher-taman-003-normal.mp3,assets/audio/day18/day18-akher-taman-003-slow.mp3
+18,day18-ma-bghitsh-004,ma bghitsh,assets/audio/day18/day18-ma-bghitsh-004-normal.mp3,assets/audio/day18/day18-ma-bghitsh-004-slow.mp3
+18,day18-wakha-005,wakha,assets/audio/day18/day18-wakha-005-normal.mp3,assets/audio/day18/day18-wakha-005-slow.mp3
+19,day19-bghit-hada-001,bghit hada,assets/audio/day19/day19-bghit-hada-001-normal.mp3,assets/audio/day19/day19-bghit-hada-001-slow.mp3
+19,day19-ma-bghitsh-hadi-002,ma bghitsh hadi,assets/audio/day19/day19-ma-bghitsh-hadi-002-normal.mp3,assets/audio/day19/day19-ma-bghitsh-hadi-002-slow.mp3
+19,day19-atini-hada-aafak-003,atini hada aafak,assets/audio/day19/day19-atini-hada-aafak-003-normal.mp3,assets/audio/day19/day19-atini-hada-aafak-003-slow.mp3
+19,day19-kayna-shi-haja-khra-004,kayna shi haja khra?,assets/audio/day19/day19-kayna-shi-haja-khra-004-normal.mp3,assets/audio/day19/day19-kayna-shi-haja-khra-004-slow.mp3
+19,day19-safi-005,safi,assets/audio/day19/day19-safi-005-normal.mp3,assets/audio/day19/day19-safi-005-slow.mp3
+20,day20-kbir-001,kbir,assets/audio/day20/day20-kbir-001-normal.mp3,assets/audio/day20/day20-kbir-001-slow.mp3
+20,day20-sghir-002,sghir,assets/audio/day20/day20-sghir-002-normal.mp3,assets/audio/day20/day20-sghir-002-slow.mp3
+20,day20-khal-003,khal,assets/audio/day20/day20-khal-003-normal.mp3,assets/audio/day20/day20-khal-003-slow.mp3
+20,day20-byed-004,byed,assets/audio/day20/day20-byed-004-normal.mp3,assets/audio/day20/day20-byed-004-slow.mp3
+20,day20-zraq-005,zraq,assets/audio/day20/day20-zraq-005-normal.mp3,assets/audio/day20/day20-zraq-005-slow.mp3
+21,day21-wahed-001,wahed,assets/audio/day21/day21-wahed-001-normal.mp3,assets/audio/day21/day21-wahed-001-slow.mp3
+21,day21-jouj-002,jouj,assets/audio/day21/day21-jouj-002-normal.mp3,assets/audio/day21/day21-jouj-002-slow.mp3
+21,day21-tlata-003,tlata,assets/audio/day21/day21-tlata-003-normal.mp3,assets/audio/day21/day21-tlata-003-slow.mp3
+21,day21-ashra-004,ashra,assets/audio/day21/day21-ashra-004-normal.mp3,assets/audio/day21/day21-ashra-004-slow.mp3
+21,day21-bsh-hal-b-drham-005,bsh-hal b drham?,assets/audio/day21/day21-bsh-hal-b-drham-005-normal.mp3,assets/audio/day21/day21-bsh-hal-b-drham-005-slow.mp3
+22,day22-andi-reservation-001,andi reservation,assets/audio/day22/day22-andi-reservation-001-normal.mp3,assets/audio/day22/day22-andi-reservation-001-slow.mp3
+22,day22-smiti-002,smiti...,assets/audio/day22/day22-smiti-002-normal.mp3,assets/audio/day22/day22-smiti-002-slow.mp3
+22,day22-fin-l-bit-003,fin l-bit?,assets/audio/day22/day22-fin-l-bit-003-normal.mp3,assets/audio/day22/day22-fin-l-bit-003-slow.mp3
+22,day22-bghit-l-mftah-004,bghit l-mftah,assets/audio/day22/day22-bghit-l-mftah-004-normal.mp3,assets/audio/day22/day22-bghit-l-mftah-004-slow.mp3
+22,day22-shukran-005,shukran,assets/audio/day22/day22-shukran-005-normal.mp3,assets/audio/day22/day22-shukran-005-slow.mp3
+23,day23-ma-kaynsh-lma-skhun-001,ma kaynsh lma skhun,assets/audio/day23/day23-ma-kaynsh-lma-skhun-001-normal.mp3,assets/audio/day23/day23-ma-kaynsh-lma-skhun-001-slow.mp3
+23,day23-l-wifi-ma-khdamsh-002,l-wifi ma khdamsh,assets/audio/day23/day23-l-wifi-ma-khdamsh-002-normal.mp3,assets/audio/day23/day23-l-wifi-ma-khdamsh-002-slow.mp3
+23,day23-bghit-nbedel-l-bit-003,bghit nbedel l-bit,assets/audio/day23/day23-bghit-nbedel-l-bit-003-normal.mp3,assets/audio/day23/day23-bghit-nbedel-l-bit-003-slow.mp3
+23,day23-aaweni-aafak-004,aaweni aafak,assets/audio/day23/day23-aaweni-aafak-004-normal.mp3,assets/audio/day23/day23-aaweni-aafak-004-slow.mp3
+23,day23-maashi-mushkil-005,maashi mushkil,assets/audio/day23/day23-maashi-mushkil-005-normal.mp3,assets/audio/day23/day23-maashi-mushkil-005-slow.mp3
+24,day24-fin-kayn-001,fin kayn...?,assets/audio/day24/day24-fin-kayn-001-normal.mp3,assets/audio/day24/day24-fin-kayn-001-slow.mp3
+24,day24-fin-toilet-002,fin toilet?,assets/audio/day24/day24-fin-toilet-002-normal.mp3,assets/audio/day24/day24-fin-toilet-002-slow.mp3
+24,day24-fin-pharmacy-003,fin pharmacy?,assets/audio/day24/day24-fin-pharmacy-003-normal.mp3,assets/audio/day24/day24-fin-pharmacy-003-slow.mp3
+24,day24-fin-atm-004,fin ATM?,assets/audio/day24/day24-fin-atm-004-normal.mp3,assets/audio/day24/day24-fin-atm-004-slow.mp3
+24,day24-qreb-005,qreb?,assets/audio/day24/day24-qreb-005-normal.mp3,assets/audio/day24/day24-qreb-005-slow.mp3
+25,day25-aaweni-aafak-001,aaweni aafak,assets/audio/day25/day25-aaweni-aafak-001-normal.mp3,assets/audio/day25/day25-aaweni-aafak-001-slow.mp3
+25,day25-bghit-doctor-002,bghit doctor,assets/audio/day25/day25-bghit-doctor-002-normal.mp3,assets/audio/day25/day25-bghit-doctor-002-slow.mp3
+25,day25-ana-mrid-003,ana mrid,assets/audio/day25/day25-ana-mrid-003-normal.mp3,assets/audio/day25/day25-ana-mrid-003-slow.mp3
+25,day25-mshat-li-l-portefeuille-004,mshat li l-portefeuille,assets/audio/day25/day25-mshat-li-l-portefeuille-004-normal.mp3,assets/audio/day25/day25-mshat-li-l-portefeuille-004-slow.mp3
+25,day25-fin-police-005,fin police?,assets/audio/day25/day25-fin-police-005-normal.mp3,assets/audio/day25/day25-fin-police-005-slow.mp3
+26,day26-bghit-carte-sim-001,bghit carte SIM,assets/audio/day26/day26-bghit-carte-sim-001-normal.mp3,assets/audio/day26/day26-bghit-carte-sim-001-slow.mp3
+26,day26-bghit-internet-002,bghit internet,assets/audio/day26/day26-bghit-internet-002-normal.mp3,assets/audio/day26/day26-bghit-internet-002-slow.mp3
+26,day26-shhal-giga-003,shhal giga?,assets/audio/day26/day26-shhal-giga-003-normal.mp3,assets/audio/day26/day26-shhal-giga-003-slow.mp3
+26,day26-ma-khdamsh-004,ma khdamsh,assets/audio/day26/day26-ma-khdamsh-004-normal.mp3,assets/audio/day26/day26-ma-khdamsh-004-slow.mp3
+26,day26-aaweni-aafak-005,aaweni aafak,assets/audio/day26/day26-aaweni-aafak-005-normal.mp3,assets/audio/day26/day26-aaweni-aafak-005-slow.mp3
+27,day27-bssaha-001,bssaha,assets/audio/day27/day27-bssaha-001-normal.mp3,assets/audio/day27/day27-bssaha-001-slow.mp3
+27,day27-llah-ykhalik-002,llah ykhalik,assets/audio/day27/day27-llah-ykhalik-002-normal.mp3,assets/audio/day27/day27-llah-ykhalik-002-slow.mp3
+27,day27-zwin-bzaf-003,zwin bzaf,assets/audio/day27/day27-zwin-bzaf-003-normal.mp3,assets/audio/day27/day27-zwin-bzaf-003-slow.mp3
+27,day27-had-l-blad-zwina-004,had l-blad zwina,assets/audio/day27/day27-had-l-blad-zwina-004-normal.mp3,assets/audio/day27/day27-had-l-blad-zwina-004-slow.mp3
+27,day27-shukran-bzaf-005,shukran bzaf,assets/audio/day27/day27-shukran-bzaf-005-normal.mp3,assets/audio/day27/day27-shukran-bzaf-005-slow.mp3
+28,day28-la-shukran-001,la shukran,assets/audio/day28/day28-la-shukran-001-normal.mp3,assets/audio/day28/day28-la-shukran-001-slow.mp3
+28,day28-ma-bghitsh-002,ma bghitsh,assets/audio/day28/day28-ma-bghitsh-002-normal.mp3,assets/audio/day28/day28-ma-bghitsh-002-slow.mp3
+28,day28-ghir-kan-shuf-003,ghir kan-shuf,assets/audio/day28/day28-ghir-kan-shuf-003-normal.mp3,assets/audio/day28/day28-ghir-kan-shuf-003-slow.mp3
+28,day28-ma-andish-flus-daba-004,ma andish flus daba,assets/audio/day28/day28-ma-andish-flus-daba-004-normal.mp3,assets/audio/day28/day28-ma-andish-flus-daba-004-slow.mp3
+28,day28-safi-shukran-005,safi shukran,assets/audio/day28/day28-safi-shukran-005-normal.mp3,assets/audio/day28/day28-safi-shukran-005-slow.mp3
+29,day29-salam-001,salam,assets/audio/day29/day29-salam-001-normal.mp3,assets/audio/day29/day29-salam-001-slow.mp3
+29,day29-bghit-nmshi-l-otel-002,bghit nmshi l-otel,assets/audio/day29/day29-bghit-nmshi-l-otel-002-normal.mp3,assets/audio/day29/day29-bghit-nmshi-l-otel-002-slow.mp3
+29,day29-shaal-l-compteur-aafak-003,shaal l-compteur aafak,assets/audio/day29/day29-shaal-l-compteur-aafak-003-normal.mp3,assets/audio/day29/day29-shaal-l-compteur-aafak-003-slow.mp3
+29,day29-wqef-hna-aafak-004,wqef hna aafak,assets/audio/day29/day29-wqef-hna-aafak-004-normal.mp3,assets/audio/day29/day29-wqef-hna-aafak-004-slow.mp3
+29,day29-shukran-bzaf-005,shukran bzaf,assets/audio/day29/day29-shukran-bzaf-005-normal.mp3,assets/audio/day29/day29-shukran-bzaf-005-slow.mp3
+30,day30-salam-001,salam,assets/audio/day30/day30-salam-001-normal.mp3,assets/audio/day30/day30-salam-001-slow.mp3
+30,day30-bghit-nmshi-l-otel-002,bghit nmshi l-otel,assets/audio/day30/day30-bghit-nmshi-l-otel-002-normal.mp3,assets/audio/day30/day30-bghit-nmshi-l-otel-002-slow.mp3
+30,day30-qahwa-kahla-aafak-003,qahwa kahla aafak,assets/audio/day30/day30-qahwa-kahla-aafak-003-normal.mp3,assets/audio/day30/day30-qahwa-kahla-aafak-003-slow.mp3
+30,day30-bsh-hal-hada-004,bsh-hal hada?,assets/audio/day30/day30-bsh-hal-hada-004-normal.mp3,assets/audio/day30/day30-bsh-hal-hada-004-slow.mp3
+30,day30-aaweni-aafak-005,aaweni aafak,assets/audio/day30/day30-aaweni-aafak-005-normal.mp3,assets/audio/day30/day30-aaweni-aafak-005-slow.mp3

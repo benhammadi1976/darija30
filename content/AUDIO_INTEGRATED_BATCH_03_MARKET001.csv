@@ -1,0 +1,4 @@
+batch,phrase,lesson,slot,source_file,destination_file,role,notes
+03,bsh7al hada?,Market Price,market-001,Voix 260624_215125.m4a,assets/audio/day03/market-001-normal.mp3,normal,Chosen as normal take because it is the shortest/direct take.
+03,bsh7al hada?,Market Price,market-001,Voix 260624_215154.m4a,assets/audio/day03/market-001-slow.mp3,slow,Chosen as slow take because it contains clearer separated speech chunks.
+03,bsh7al hada?,Market Price,market-001,Voix 260624_215141.m4a,content/audio-batches/batch03/market-001-extra-take-215141.mp3,extra,Kept as extra review take; not used by lesson player.
