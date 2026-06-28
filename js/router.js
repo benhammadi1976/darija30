@@ -25,8 +25,6 @@
 
   const adminRoutes = {
     '/admin': 'page-admin-dashboard',
-    '/admin/lessons': 'page-admin-lessons',
-    '/admin/phrases': 'page-admin-phrases',
     '/admin/audio': 'page-admin-audio',
     '/admin/users': 'page-admin-users',
     '/admin/payments': 'page-admin-payments',
@@ -66,6 +64,10 @@
 
   function handleRoute() {
     const path = currentPath();
+    if (path === '/admin/lessons' || path === '/admin/phrases') {
+      window.location.replace('#/admin/audio');
+      return;
+    }
     const isAppRoute = path.startsWith('/app/');
     const isAdminRoute = path.startsWith('/admin');
     const isAdminSessionActive = Boolean(window.DarijaAdminSession?.isActive?.());

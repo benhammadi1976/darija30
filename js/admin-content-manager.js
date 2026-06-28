@@ -98,9 +98,7 @@
   }
 
   function adminGate(path) {
-    const pageId = path === '/admin/lessons' ? 'page-admin-lessons'
-      : path === '/admin/phrases' ? 'page-admin-phrases'
-      : path === '/admin/audio' ? 'page-admin-audio'
+    const pageId = path === '/admin/audio' ? 'page-admin-audio'
       : path === '/admin/users' ? 'page-admin-users'
       : path === '/admin/payments' ? 'page-admin-payments'
       : 'page-admin-dashboard';
@@ -918,27 +916,6 @@
     `;
   }
 
-  function renderMergedAdminNotice(rootId, title) {
-    const root = document.getElementById(rootId);
-    if (!root) return;
-    root.innerHTML = `
-      <div class="max-w-4xl mx-auto px-4" dir="rtl">
-        ${adminHeader(title, 'تم دمج هذه الصفحة داخل مركز ملفات الدروس حتى لا تتكرر أدوات الإدارة.')}
-        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 text-center">
-          <div class="text-5xl mb-4">🧹</div>
-          <h2 class="text-2xl font-black text-gray-900 mb-3">هذه الصفحة أصبحت مدمجة</h2>
-          <p class="text-gray-600 mb-6">استعمل مركز ملفات الدروس لإدارة الجمل والملفات من مكان واحد: Level → Day → Phrase.</p>
-          <a href="#/admin/audio" class="inline-flex bg-terracotta hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
-        </div>
-      </div>
-    `;
-  }
-
-  function renderLessons() {
-    renderMergedAdminNotice('page-admin-lessons', 'إدارة الدروس — مدمجة في مركز ملفات الدروس');
-  }
-
-
   function lessonRows() {
     return lessons().filter((lesson) => {
       if (state.filter !== 'missing') return true;
@@ -1002,11 +979,6 @@
       </aside>
     `;
   }
-
-  function renderPhrases() {
-    renderMergedAdminNotice('page-admin-phrases', 'إدارة الجمل — مدمجة في مركز ملفات الدروس');
-  }
-
 
   function phraseEditorMock(lesson, phrase) {
     if (!lesson || !phrase) return '<div class="rounded-3xl bg-white border border-gray-200 p-6">No phrase selected.</div>';
@@ -1130,7 +1102,7 @@
         </div>
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
           <h2 class="text-xl font-extrabold text-gray-900">جدول الدرس المختار</h2>
-          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. لا توجد صفحة إدارة جمل منفصلة بعد D68B.</p>
+          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. تم حذف صفحات إدارة الدروس والجمل المنفصلة. مركز ملفات الدروس هو المكان الرسمي الآن.</p>
         </div>
         <div class="space-y-4">
           ${lessonContent}
@@ -1386,40 +1358,6 @@
       writeAdminAudioOpenDays(openDays);
       renderAudio();
     });
-    root.querySelectorAll('[data-admin-select-lesson]').forEach((button) => {
-      button.addEventListener('click', () => {
-        state.selectedDay = button.dataset.adminSelectLesson;
-        renderLessons();
-      });
-    });
-    root.querySelectorAll('[data-admin-filter]').forEach((button) => {
-      button.addEventListener('click', () => {
-        state.filter = button.dataset.adminFilter;
-        renderLessons();
-      });
-    });
-    root.querySelectorAll('[data-admin-lesson-select]').forEach((select) => {
-      select.addEventListener('change', () => {
-        state.selectedDay = select.value;
-        const lesson = findLesson(state.selectedDay);
-        state.selectedPhraseId = firstPhrase(lesson)?.id || null;
-        renderPhrases();
-      });
-    });
-    root.querySelectorAll('[data-admin-select-phrase]').forEach((button) => {
-      button.addEventListener('click', () => {
-        state.selectedPhraseId = button.dataset.adminSelectPhrase;
-        const found = findPhrase(state.selectedPhraseId);
-        if (found.lesson) state.selectedDay = found.lesson.day;
-        if (window.location.hash.includes('/admin/phrases')) renderPhrases();
-        else renderLessons();
-      });
-    });
-    root.querySelectorAll('[data-admin-go-phrases]').forEach((link) => {
-      link.addEventListener('click', () => {
-        state.selectedPhraseId = link.dataset.adminGoPhrases;
-      });
-    });
     root.querySelectorAll('[data-admin-audio-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
         const dayKey = String(button.dataset.adminAudioToggle);
@@ -1469,9 +1407,11 @@
       adminGate(path);
       return;
     }
+    if (path === '/admin/lessons' || path === '/admin/phrases') {
+      window.location.replace('#/admin/audio');
+      return;
+    }
     if (path === '/admin') renderDashboard();
-    else if (path === '/admin/lessons') renderLessons();
-    else if (path === '/admin/phrases') renderPhrases();
     else if (path === '/admin/audio') renderAudio();
     else if (path === '/admin/users') renderUsers();
     else if (path === '/admin/payments') renderPayments();
