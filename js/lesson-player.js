@@ -3,6 +3,7 @@
     phraseIndexByLesson: Object.create(null),
     practiceModeByLesson: Object.create(null),
     situationIndexByLesson: Object.create(null),
+    appliedRoutePhraseByLesson: Object.create(null),
     freeLessonId: 'lesson-001',
     reviewIndex: 0
   };
@@ -96,6 +97,38 @@
   function getRouteParams(path) {
     const query = String(path || '').split('?')[1] || '';
     return new URLSearchParams(query);
+  }
+
+  function routePhraseIndex(lesson, path) {
+    const phrases = Array.isArray(lesson?.phrases) ? lesson.phrases : [];
+    if (!phrases.length) return null;
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const rawId = params.get('phraseId') || params.get('phrase_id') || params.get('id');
+    if (rawId) {
+      const byId = phrases.findIndex((phrase) => String(phrase?.id || '') === String(rawId));
+      if (byId >= 0) return byId;
+    }
+    const rawIndex = params.get('phraseIndex') || params.get('phrase') || params.get('p');
+    if (rawIndex == null || rawIndex === '') return null;
+    const parsed = Number(rawIndex);
+    if (!Number.isFinite(parsed)) return null;
+    // Admin preview links use human phrase numbers (1..5). phraseIndex=0 still works for dev/debug links.
+    const zeroBased = parsed <= 0 ? 0 : parsed - 1;
+    return Math.min(Math.max(zeroBased, 0), phrases.length - 1);
+  }
+
+  function applyRoutePhraseTarget(lesson, path) {
+    if (!lesson?.id) return;
+    const params = getRouteParams(path || '');
+    const hasTarget = Boolean(params.get('phrase') || params.get('phraseIndex') || params.get('phraseId') || params.get('phrase_id') || params.get('p') || params.get('id'));
+    if (!hasTarget) return;
+    const routeKey = `${lesson.id}:${params.get('phraseId') || params.get('phrase_id') || params.get('id') || ''}:${params.get('phraseIndex') || params.get('phrase') || params.get('p') || ''}`;
+    if (state.appliedRoutePhraseByLesson[lesson.id] === routeKey) return;
+    const index = routePhraseIndex(lesson, path);
+    if (index == null) return;
+    state.phraseIndexByLesson[lesson.id] = index;
+    state.practiceModeByLesson[lesson.id] = false;
+    state.appliedRoutePhraseByLesson[lesson.id] = routeKey;
   }
 
   function isAdminActive() {
@@ -2039,7 +2072,7 @@
                 <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">✓</div>
                 <div><p class="font-bold font-mono">${escapeHtml(phrase.friendlyLatin)}</p><p class="text-xs text-gray-500">Day ${escapeHtml(lesson.day)} • ${escapeHtml(lesson.title)}</p></div>
               </div>
-              <a href="#/app/lesson/${escapeHtml(lesson.day)}" class="text-sm text-chefchaouen font-medium hover:underline">Review</a>
+              <a href="#/app/lesson/${escapeHtml(lesson.day)}?phraseId=${encodeURIComponent(String(phrase.id || ''))}" class="text-sm text-chefchaouen font-medium hover:underline">Review</a>
             </div>
           `).join('') : `
             <div class="bg-white p-6 rounded-xl border border-gray-100 text-gray-500">No learned phrases yet. Open a lesson and click “Mark Phrase Learned.”</div>
@@ -2060,6 +2093,7 @@
       window.DarijaAudio?.bindAudioButtons(root);
       return;
     }
+    applyRoutePhraseTarget(lesson, routePath);
     Store()?.markLessonVisited(lesson?.id);
     const index = currentPhraseIndex(lesson);
     const phrase = lesson?.phrases?.[index] || firstPhrase(lesson);

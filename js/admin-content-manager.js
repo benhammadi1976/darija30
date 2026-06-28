@@ -90,6 +90,20 @@
     return { lesson, phrase: firstPhrase(lesson), index: 0 };
   }
 
+  function learnerPhraseHref(lesson, phrase, index = 0, source = 'admin') {
+    const safeDay = encodeURIComponent(String(lesson?.day || 1));
+    const phraseIndex = Math.max(Number(index) || 0, 0) + 1;
+    const phraseId = phrase?.id ? `&phraseId=${encodeURIComponent(String(phrase.id))}` : '';
+    const from = source ? `&from=${encodeURIComponent(String(source))}` : '';
+    return `#/app/lesson/${safeDay}?admin=1&phrase=${phraseIndex}${phraseId}${from}`;
+  }
+
+  function learnerPhraseHrefFromPhrase(lesson, phrase, source = 'admin') {
+    const phrases = Array.isArray(lesson?.phrases) ? lesson.phrases : [];
+    const index = Math.max(phrases.findIndex((item) => item === phrase || item?.id === phrase?.id), 0);
+    return learnerPhraseHref(lesson, phrase, index, source);
+  }
+
   const MEDIA_UPLOAD_STATUS_STORAGE_KEY = 'darija30_admin_media_upload_status_v1';
 
   function readMediaUploadStatus() {
@@ -597,7 +611,7 @@
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'slow')}</td>
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'video')}</td>
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'visual')}</td>
-        <td class="p-3"><a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="text-blue-700 font-bold hover:underline">عرض</a></td>
+        <td class="p-3"><a href="${escapeHtml(learnerPhraseHref(lesson, phrase, index, 'media-center'))}" class="text-blue-700 font-bold hover:underline">عرض</a></td>
       </tr>
     `;
   }
@@ -922,7 +936,7 @@
             <h2 class="text-2xl font-black text-gray-900">Day ${escapeHtml(lesson.day)} — ${escapeHtml(lesson.title)}</h2>
             <p class="text-sm text-gray-600">هذا شكل الحقول التي سيدخلها الأدمين لاحقاً من لوحة حقيقية.</p>
           </div>
-          <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="bg-terracotta hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold text-sm transition">شاهد كمتعلم</a>
+          <a href="${escapeHtml(learnerPhraseHrefFromPhrase(lesson, phrase, 'phrase-editor'))}" class="bg-terracotta hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold text-sm transition">شاهد كمتعلم</a>
         </div>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           ${readOnlyField('English outcome', phrase.english)}
@@ -943,7 +957,7 @@
           <p class="text-sm text-blue-900 mb-3">كل حالة أعلاه زر مباشر: اضغط على “ينتظر التسجيل” أو “موجود” لرفع أو استبدال الملف من الحاسوب. لإدارة كل الجمل بسرعة افتح مركز ملفات الدروس.</p>
           <div class="flex flex-wrap gap-2" dir="ltr">
             <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Lesson Media Center</a>
-            <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-800">Learner Preview</a>
+            <a href="${escapeHtml(learnerPhraseHrefFromPhrase(lesson, phrase, 'phrase-editor'))}" class="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-800">Learner Preview</a>
           </div>
         </div>
       </div>
