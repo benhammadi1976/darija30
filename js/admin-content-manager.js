@@ -599,14 +599,78 @@
     return { total, normal, slow, videos, visuals, complete };
   }
 
+
+  function phraseContentButton(lesson, phrase) {
+    const dynamic = phrase?.__darija30DynamicOverride?.updatedAt;
+    return `
+      <button type="button" class="admin-phrase-title-btn" data-admin-edit-phrase="${escapeHtml(phrase?.id || '')}" title="اضغط لتعديل الجملة من نفس المركز">
+        <span class="admin-phrase-title-btn__latin" dir="ltr">${escapeHtml(phrase?.friendlyLatin || '—')}</span>
+        <span class="admin-phrase-title-btn__english">${escapeHtml(phrase?.english || phrase?.meaning || '—')}</span>
+        <span class="admin-phrase-title-btn__hint">تعديل الجملة</span>
+        ${dynamic ? `<span class="admin-phrase-title-btn__saved">محفوظ ديناميكياً</span>` : ''}
+      </button>
+    `;
+  }
+
+  function phraseEditModalMarkup() {
+    return `
+      <div class="admin-phrase-edit-backdrop hidden" data-admin-phrase-edit-modal aria-hidden="true">
+        <section class="admin-phrase-edit-card" role="dialog" aria-modal="true" aria-label="تعديل الجملة">
+          <div class="admin-phrase-edit-card__head">
+            <div>
+              <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Inline Phrase Editor</p>
+              <h3 class="text-xl font-black text-gray-900">تعديل الجملة من مركز الملفات</h3>
+              <p class="text-sm text-gray-500">عدّل النص ثم احفظ. تظهر التغييرات للمتعلمين من Supabase، مع الرجوع للنسخة الأصلية إذا لم يوجد حفظ.</p>
+            </div>
+            <button type="button" class="admin-phrase-edit-card__close" data-admin-phrase-edit-close aria-label="إغلاق">×</button>
+          </div>
+          <input type="hidden" data-phrase-edit-id>
+          <input type="hidden" data-phrase-edit-day>
+          <div class="admin-phrase-edit-grid">
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--ltr">
+              <span>Friendly Latin Darija</span>
+              <input data-phrase-edit-field="friendlyLatin" dir="ltr" class="admin-phrase-edit-input" placeholder="weqef hna aafak">
+            </label>
+            <label class="admin-phrase-edit-field">
+              <span>English meaning</span>
+              <input data-phrase-edit-field="english" class="admin-phrase-edit-input" placeholder="Stop here, please.">
+            </label>
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--wide">
+              <span>Scenario</span>
+              <textarea data-phrase-edit-field="scenario" class="admin-phrase-edit-textarea" rows="2"></textarea>
+            </label>
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--wide">
+              <span>Goal</span>
+              <textarea data-phrase-edit-field="goal" class="admin-phrase-edit-textarea" rows="2"></textarea>
+            </label>
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--wide">
+              <span>Cultural Intent</span>
+              <textarea data-phrase-edit-field="intent" class="admin-phrase-edit-textarea" rows="2"></textarea>
+            </label>
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--wide">
+              <span>Culture Note</span>
+              <textarea data-phrase-edit-field="cultureNote" class="admin-phrase-edit-textarea" rows="2"></textarea>
+            </label>
+            <label class="admin-phrase-edit-field admin-phrase-edit-field--wide">
+              <span>Memory Hook</span>
+              <textarea data-phrase-edit-field="memoryHook" class="admin-phrase-edit-textarea" rows="2"></textarea>
+            </label>
+          </div>
+          <p data-phrase-edit-status class="admin-record-mp3-status mt-3">احفظ بعد تسجيل دخول الأدمن في Supabase.</p>
+          <div class="admin-phrase-edit-card__actions">
+            <button type="button" class="admin-phrase-edit-cancel" data-admin-phrase-edit-close>إلغاء</button>
+            <button type="button" class="admin-phrase-edit-save" data-admin-phrase-edit-save>حفظ الجملة</button>
+          </div>
+        </section>
+      </div>
+    `;
+  }
+
   function renderAudioPhraseRow(lesson, phrase, index) {
     return `
       <tr class="hover:bg-gray-50 align-top">
         <td class="p-3 font-black text-terracotta">${index + 1}</td>
-        <td class="p-3 min-w-[220px]">
-          <p class="font-mono font-extrabold" dir="ltr">${escapeHtml(phrase.friendlyLatin)}</p>
-          <p class="text-xs text-gray-500">${escapeHtml(phrase.english)}</p>
-        </td>
+        <td class="p-3 min-w-[240px]">${phraseContentButton(lesson, phrase)}</td>
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'normal')}</td>
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'slow')}</td>
         <td class="p-3 min-w-[170px]">${mediaStatusButton(lesson, phrase, 'video')}</td>
@@ -1012,6 +1076,7 @@
         <div class="space-y-4">
           ${lessons().map((lesson) => renderAudioDayGroup(lesson, openDays)).join('')}
         </div>
+        ${phraseEditModalMarkup()}
       </div>
     `;
     bindAdminControls(root);
@@ -1119,6 +1184,102 @@
     });
   }
 
+
+  function setPhraseEditStatus(modal, message, tone = '') {
+    const status = modal?.querySelector('[data-phrase-edit-status]');
+    if (!status) return;
+    status.textContent = message || '';
+    status.classList.remove('is-error', 'is-success', 'is-recording', 'is-warning');
+    if (tone) status.classList.add(tone);
+  }
+
+  function fieldValue(modal, key, value) {
+    const field = modal?.querySelector(`[data-phrase-edit-field="${key}"]`);
+    if (!field) return '';
+    if (arguments.length >= 3) field.value = value ?? '';
+    return field.value || '';
+  }
+
+  function openPhraseEditModal(root, phraseId) {
+    const modal = root.querySelector('[data-admin-phrase-edit-modal]');
+    if (!modal) return;
+    const found = findPhrase(phraseId);
+    const lesson = found.lesson;
+    const phrase = found.phrase;
+    if (!lesson || !phrase) return;
+    modal.querySelector('[data-phrase-edit-id]').value = phrase.id || '';
+    modal.querySelector('[data-phrase-edit-day]').value = lesson.day || '';
+    fieldValue(modal, 'friendlyLatin', phrase.friendlyLatin || '');
+    fieldValue(modal, 'english', phrase.english || phrase.meaning || '');
+    fieldValue(modal, 'scenario', phrase.scenario || '');
+    fieldValue(modal, 'goal', phrase.goal || '');
+    fieldValue(modal, 'intent', phrase.intent || '');
+    fieldValue(modal, 'cultureNote', phrase.cultureNote || '');
+    fieldValue(modal, 'memoryHook', phrase.memoryHook || '');
+    setPhraseEditStatus(modal, phrase.__darija30DynamicOverride?.updatedAt ? 'هذه الجملة لها تعديل محفوظ ديناميكياً. يمكنك تحديثه.' : 'عدّل الحقول ثم اضغط حفظ.', phrase.__darija30DynamicOverride?.updatedAt ? 'is-success' : '');
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    setTimeout(() => modal.querySelector('[data-phrase-edit-field="friendlyLatin"]')?.focus(), 0);
+  }
+
+  function closePhraseEditModal(root) {
+    const modal = root.querySelector('[data-admin-phrase-edit-modal]');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  async function savePhraseEditModal(root) {
+    const modal = root.querySelector('[data-admin-phrase-edit-modal]');
+    if (!modal) return;
+    const phraseId = modal.querySelector('[data-phrase-edit-id]')?.value || '';
+    const found = findPhrase(phraseId);
+    if (!found.lesson || !found.phrase) return;
+    const fields = {
+      friendlyLatin: fieldValue(modal, 'friendlyLatin'),
+      english: fieldValue(modal, 'english'),
+      meaning: fieldValue(modal, 'english'),
+      scenario: fieldValue(modal, 'scenario'),
+      goal: fieldValue(modal, 'goal'),
+      intent: fieldValue(modal, 'intent'),
+      cultureNote: fieldValue(modal, 'cultureNote'),
+      memoryHook: fieldValue(modal, 'memoryHook')
+    };
+    if (!fields.friendlyLatin.trim() || !fields.english.trim()) {
+      setPhraseEditStatus(modal, 'الجملة و English meaning ضروريان.', 'is-error');
+      return;
+    }
+    const media = window.DarijaSupabaseMedia;
+    if (!media?.savePhraseOverride) {
+      setPhraseEditStatus(modal, 'Supabase phrase helper is not loaded.', 'is-error');
+      return;
+    }
+    try {
+      setPhraseEditStatus(modal, 'Saving phrase to Supabase...', 'is-recording');
+      await media.savePhraseOverride(found.lesson, found.phrase, fields);
+      setPhraseEditStatus(modal, 'تم حفظ الجملة بنجاح. ستظهر للمتعلمين من Supabase.', 'is-success');
+      setTimeout(() => {
+        closePhraseEditModal(root);
+        renderAudio();
+      }, 500);
+    } catch (error) {
+      setPhraseEditStatus(modal, error?.message || 'لم يتم حفظ الجملة. تأكد من Login admin.', 'is-error');
+    }
+  }
+
+  function bindPhraseInlineEditor(root) {
+    root.querySelectorAll('[data-admin-edit-phrase]').forEach((button) => {
+      button.addEventListener('click', () => openPhraseEditModal(root, button.dataset.adminEditPhrase));
+    });
+    root.querySelectorAll('[data-admin-phrase-edit-close]').forEach((button) => {
+      button.addEventListener('click', () => closePhraseEditModal(root));
+    });
+    root.querySelector('[data-admin-phrase-edit-modal]')?.addEventListener('click', (event) => {
+      if (event.target?.matches?.('[data-admin-phrase-edit-modal]')) closePhraseEditModal(root);
+    });
+    root.querySelector('[data-admin-phrase-edit-save]')?.addEventListener('click', () => savePhraseEditModal(root));
+  }
+
   function bindSupabaseMediaControls(root) {
     const panel = root.querySelector('[data-admin-supabase-panel]');
     if (!panel) return;
@@ -1220,6 +1381,7 @@
       writeAdminAudioOpenDays(new Set());
     });
 
+    bindPhraseInlineEditor(root);
     bindSupabaseMediaControls(root);
     bindAdminMediaUploadButtons(root);
     bindAdminAudioRecorders(root);

@@ -2,6 +2,10 @@
   const DEFAULT_SUPABASE_URL = 'https://ueovreadkfmwsniksohn.supabase.co';
   const CONFIG_STORAGE_KEY = 'darija30_supabase_media_config';
   const SESSION_STORAGE_KEY = 'darija30_supabase_media_session';
+  const PHRASE_OVERRIDES_STORAGE_KEY = 'darija30_phrase_overrides_cache_v1';
+  const PHRASE_OVERRIDES_BUCKET = 'images';
+  const PHRASE_OVERRIDES_PATH = 'admin/phrase-overrides.json';
+
 
   function trimSlash(value) {
     return String(value || '').replace(/\/+$/g, '');
@@ -13,6 +17,81 @@
     } catch (error) {
       return fallback;
     }
+  }
+
+
+  function normalizePhraseOverridePayload(payload) {
+    const clean = payload && typeof payload === 'object' ? payload : {};
+    const items = clean.items && typeof clean.items === 'object' ? clean.items : {};
+    return {
+      version: 1,
+      updatedAt: clean.updatedAt || '',
+      items
+    };
+  }
+
+  function readPhraseOverridesLocal() {
+    return normalizePhraseOverridePayload(safeJsonParse(localStorage.getItem(PHRASE_OVERRIDES_STORAGE_KEY), { version: 1, items: {} }));
+  }
+
+  function writePhraseOverridesLocal(payload) {
+    const clean = normalizePhraseOverridePayload(payload);
+    try {
+      localStorage.setItem(PHRASE_OVERRIDES_STORAGE_KEY, JSON.stringify(clean));
+    } catch (error) {
+      // Dynamic phrase overrides are helpful, but the app can still run on static data.
+    }
+    return clean;
+  }
+
+  function allowedPhraseOverrideFields() {
+    return [
+      'friendlyLatin',
+      'english',
+      'meaning',
+      'scenario',
+      'goal',
+      'intent',
+      'cultureNote',
+      'memoryHook',
+      'memoryBubble',
+      'moroccanChat',
+      'arabic'
+    ];
+  }
+
+  function cleanPhraseFields(fields) {
+    const clean = {};
+    allowedPhraseOverrideFields().forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(fields || {}, key)) {
+        clean[key] = String(fields[key] ?? '').trim();
+      }
+    });
+    if (clean.english && !clean.meaning) clean.meaning = clean.english;
+    if (clean.meaning && !clean.english) clean.english = clean.meaning;
+    return clean;
+  }
+
+  function applyPhraseOverridesToLessons(payload = readPhraseOverridesLocal()) {
+    const clean = normalizePhraseOverridePayload(payload);
+    const lessonList = Array.isArray(window.DARIJA30_LESSONS) ? window.DARIJA30_LESSONS : [];
+    if (!lessonList.length) return clean;
+    const items = clean.items || {};
+    lessonList.forEach((lesson) => {
+      (lesson.phrases || []).forEach((phrase) => {
+        const override = items[String(phrase?.id || '')];
+        if (!override || typeof override !== 'object') return;
+        const fields = cleanPhraseFields(override);
+        Object.keys(fields).forEach((key) => {
+          if (fields[key] !== '') phrase[key] = fields[key];
+        });
+        phrase.__darija30DynamicOverride = {
+          updatedAt: override.updatedAt || clean.updatedAt || '',
+          source: 'supabase-storage-json'
+        };
+      });
+    });
+    return clean;
   }
 
   function readConfig() {
@@ -155,6 +234,52 @@
     return publicUrl(target.bucket, target.path);
   }
 
+
+  function phraseOverridesPublicUrl() {
+    return publicUrl(PHRASE_OVERRIDES_BUCKET, PHRASE_OVERRIDES_PATH);
+  }
+
+  async function fetchPhraseOverrides(options = {}) {
+    const remoteUrl = phraseOverridesPublicUrl();
+    if (!remoteUrl) {
+      return applyPhraseOverridesToLessons(readPhraseOverridesLocal());
+    }
+    const url = options.force ? `${remoteUrl}?t=${Date.now()}` : remoteUrl;
+    try {
+      const response = await fetch(url, { cache: options.force ? 'no-store' : 'default' });
+      if (!response.ok) {
+        return applyPhraseOverridesToLessons(readPhraseOverridesLocal());
+      }
+      const payload = normalizePhraseOverridePayload(await response.json());
+      writePhraseOverridesLocal(payload);
+      return applyPhraseOverridesToLessons(payload);
+    } catch (error) {
+      return applyPhraseOverridesToLessons(readPhraseOverridesLocal());
+    }
+  }
+
+  async function savePhraseOverride(lesson, phrase, fields) {
+    if (!phrase?.id) throw new Error('Missing phrase id.');
+    const current = readPhraseOverridesLocal();
+    const items = current.items && typeof current.items === 'object' ? { ...current.items } : {};
+    const previous = items[String(phrase.id)] && typeof items[String(phrase.id)] === 'object' ? items[String(phrase.id)] : {};
+    const updatedAt = new Date().toISOString();
+    items[String(phrase.id)] = {
+      ...previous,
+      ...cleanPhraseFields(fields),
+      lessonId: lesson?.id || previous.lessonId || '',
+      lessonDay: lesson?.day || previous.lessonDay || '',
+      phraseId: phrase.id,
+      updatedAt
+    };
+    const nextPayload = normalizePhraseOverridePayload({ version: 1, updatedAt, items });
+    writePhraseOverridesLocal(nextPayload);
+    applyPhraseOverridesToLessons(nextPayload);
+    const body = JSON.stringify(nextPayload, null, 2);
+    await uploadBlob(PHRASE_OVERRIDES_BUCKET, PHRASE_OVERRIDES_PATH, new Blob([body], { type: 'application/json' }), 'application/json');
+    return nextPayload;
+  }
+
   function videoCandidates(assetPath) {
     const target = assetPathToStorage(assetPath, 'videos');
     if (target.bucket !== 'videos' || !target.path) return [];
@@ -223,6 +348,12 @@
     extensionFromFile,
     publicUrl,
     publicUrlForAsset,
+    phraseOverridesPublicUrl,
+    readPhraseOverridesLocal,
+    writePhraseOverridesLocal,
+    applyPhraseOverridesToLessons,
+    fetchPhraseOverrides,
+    savePhraseOverride,
     videoCandidates,
     imageCandidates,
     audioCandidates,
@@ -230,4 +361,18 @@
     uploadFileForAsset,
     isReadyForAdminUpload
   };
+
+  applyPhraseOverridesToLessons(readPhraseOverridesLocal());
+  function refreshPhraseOverridesAfterLoad() {
+    fetchPhraseOverrides({ force: true }).then(() => {
+      window.DarijaRouter?.handleRoute?.();
+    }).catch(() => {
+      // Static fallback remains available.
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refreshPhraseOverridesAfterLoad, { once: true });
+  } else {
+    refreshPhraseOverridesAfterLoad();
+  }
 })();
