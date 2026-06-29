@@ -1128,17 +1128,19 @@
     if (selectedLesson) openDays.add(lessonKey(selectedLesson));
     const lessonContent = selectedLesson ? renderAudioDayGroup(selectedLesson, openDays) : renderNoLevelLessonsMessage();
     root.innerHTML = `
-      <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('مركز ملفات الدروس', 'المركز الرئيسي لإدارة كل مستوى مستقل: اختر Level ثم Day، وعدّل الجملة أو ارفع Normal / Slow / Video / Visual من نفس الجدول.')}
-        ${renderLevelLessonControls(selectedLesson, selectedLessons)}
-        <div class="grid md:grid-cols-4 gap-4 mb-8">
+      <div class="admin-lesson-media-shell max-w-7xl mx-auto px-4" dir="rtl">
+        <header class="admin-lesson-media-title text-center mb-6">
+          <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-2">مركز ملفات الدروس</h1>
+          <p class="text-gray-600 max-w-3xl mx-auto">المركز الرئيسي لإدارة كل مستوى مستقل: اختر Level ثم Day، وعدّل الجملة أو ارفع Normal / Slow / Video / Visual من نفس الجدول.</p>
+        </header>
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
           ${statCard('Normal Ready', `${summary.normalReady}/${summary.total}`, 'MP3 normal', 'green')}
           ${statCard('Slow Ready', `${summary.slowReady}/${summary.total}`, 'MP3 slow', 'yellow')}
           ${statCard('Videos Ready', `${summary.videoReady}/${summary.total}`, 'MP4 scenes', 'red')}
           ${statCard('Visuals Ready', `${summary.visualReady}/${summary.total}`, 'images/SVG', 'blue')}
         </div>
         ${supabaseMediaAdminPanel()}
-        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 mb-8">
+        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 mb-6">
           <h2 class="text-xl font-extrabold text-gray-900 mb-3">قاعدة تسمية الملفات للمستويات 12</h2>
           <p class="text-sm text-gray-500 mb-4">المسارات الحالية لـ Level 1 تبقى كما هي إذا كانت موجودة في البيانات. المسارات الجديدة لاحقاً تستعمل levelXX حتى يبقى كل مستوى مستقلاً.</p>
           <div class="grid md:grid-cols-4 gap-4" dir="ltr">
@@ -1148,9 +1150,10 @@
             ${pathBox('visual image', 'assets/images/lesson-scenes/level01/day01-phrase-id-scene.webp')}
           </div>
         </div>
+        ${renderLevelLessonControls(selectedLesson, selectedLessons)}
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
           <h2 class="text-xl font-extrabold text-gray-900">جدول الدرس المختار</h2>
-          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. تم حذف صفحات إدارة الدروس والجمل المنفصلة. مركز ملفات الدروس هو المكان الرسمي الآن.</p>
+          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. مركز ملفات الدروس هو المكان الرسمي الآن.</p>
         </div>
         <div class="space-y-4">
           ${lessonContent}

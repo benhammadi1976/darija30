@@ -1,5 +1,25 @@
 /* Darija30 custom styles — extracted from the original single-file prototype. */
 
+/* D68DE-FIX: keep lesson-media content safely below the sticky admin bar. */
+#page-admin-audio.active {
+  padding-top: 5.5rem;
+}
+
+.admin-lesson-media-shell {
+  scroll-margin-top: 9rem;
+}
+
+.admin-lesson-media-title {
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  #page-admin-audio.active {
+    padding-top: 4.75rem;
+  }
+}
+
+
 .page-content,
 .admin-content {
   animation: fadeIn 0.35s ease-in-out;
