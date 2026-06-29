@@ -6167,3 +6167,40 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
     overflow: auto;
   }
 }
+
+/* === D69-FIX-12A: keep weekly prompt above the wheel === */
+.weekly-wheel-page--prompt-overlay .weekly-prompt-overlay {
+  position: fixed !important;
+  z-index: 80 !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: auto !important;
+}
+
+.weekly-wheel-page--prompt-overlay .weekly-wheel-big-stage--prompt,
+.weekly-wheel-page--prompt-overlay .weekly-wheel-memory-bg,
+.weekly-wheel-page--prompt-overlay .weekly-wheel-fullscreen-round,
+.weekly-wheel-page--prompt-overlay .weekly-wheel-fullscreen-size-rail--behind {
+  pointer-events: none !important;
+}
+
+.weekly-wheel-page--prompt-overlay .weekly-wheel-big-stage--prompt {
+  z-index: 20 !important;
+}
+
+.weekly-wheel-page--prompt-overlay .weekly-wheel-theme-switcher {
+  z-index: 30 !important;
+}
+
+.weekly-wheel-page--prompt-overlay .weekly-prompt-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  z-index: -1;
+  border-radius: 34px;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.34), transparent 70%);
+  pointer-events: none;
+}
