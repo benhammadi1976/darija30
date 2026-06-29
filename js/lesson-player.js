@@ -2234,10 +2234,10 @@
     const currentRound = current ? Math.min(score.total + 1, challengeSize || 1) : Math.min(score.total + 1, challengeSize || 1);
     const roundLabel = `${Math.min(score.total, challengeSize)} / ${challengeSize}`;
     const completed = score.total >= challengeSize && challengeSize > 0;
-    const showResultPopup = state.weeklyWheel.mode === 'result' && current;
+    const showWheelSelection = state.weeklyWheel.mode === 'result' && current;
     const showFinalScore = state.weeklyWheel.mode === 'complete' || completed;
     const showSituation = state.weeklyWheel.mode === 'situation' && current;
-    const revealWheelNumber = Boolean(current && (showResultPopup || showSituation));
+    const revealWheelNumber = Boolean(current && (showWheelSelection || showSituation));
     const activeWheelNumber = revealWheelNumber ? current.number : null;
     const centerWheelLabel = state.weeklyWheel.isSpinning ? 'Spinning' : revealWheelNumber ? 'Situation' : 'Ready';
     const centerWheelNumber = state.weeklyWheel.isSpinning ? '•••' : revealWheelNumber ? `#${current.number}` : 'Spin';
@@ -2311,7 +2311,7 @@
             `).join('')}
           </div>
 
-          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(bank.length || 1)};">
+          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--clickable" data-weekly-spin role="button" tabindex="${state.weeklyWheel.isSpinning || showWheelSelection ? '-1' : '0'}" aria-label="Spin the weekly situation wheel" aria-disabled="${state.weeklyWheel.isSpinning || showWheelSelection ? 'true' : 'false'}" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(bank.length || 1)};">
             ${weeklyWheelMemoryCards(bank, activeWheelNumber)}
             <div class="weekly-wheel-pointer weekly-wheel-pointer--large" aria-hidden="true"></div>
             <div class="weekly-wheel-number-ring" aria-hidden="true">
@@ -2326,25 +2326,13 @@
             </div>
           </div>
 
-          <div class="weekly-wheel-actions weekly-wheel-actions--bottom">
-            <button type="button" data-weekly-spin class="weekly-wheel-spin-btn weekly-wheel-spin-btn--large" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''}>${completed ? 'Play Again' : state.weeklyWheel.isSpinning ? 'Spinning...' : 'Spin the Wheel'}</button>
-            <button type="button" data-weekly-reset class="weekly-wheel-reset-btn" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''}>Reset Game</button>
+          <div class="weekly-wheel-actions weekly-wheel-actions--bottom weekly-wheel-actions--reset-only">
+            <button type="button" data-weekly-reset class="weekly-wheel-reset-btn" ${state.weeklyWheel.isSpinning || showWheelSelection ? 'disabled aria-disabled="true"' : ''}>Reset Game</button>
           </div>
 
           <p class="weekly-wheel-wheel-caption weekly-wheel-wheel-caption--bottom">
-            ${showFinalScore ? 'Challenge complete. Check your score, play again, or choose a bigger challenge.' : state.weeklyWheel.isSpinning ? 'The wheel is spinning. Wait until the pointer lands on a number.' : revealWheelNumber ? `Selected: Situation #${escapeHtml(current.number)}. Opening the situation screen.` : 'Press Spin. The pointer will choose one numbered situation from the bank.'}
+            ${showFinalScore ? 'Challenge complete. Check your score, play again, or choose a bigger challenge.' : state.weeklyWheel.isSpinning ? 'The wheel is spinning. Wait until the pointer lands on a number.' : revealWheelNumber ? `Selected: Situation #${escapeHtml(current.number)}. Opening the situation screen.` : 'Click the wheel itself. The pointer will choose one numbered situation from the bank.'}
           </p>
-
-          ${showResultPopup ? `
-            <div class="weekly-wheel-result-popup" role="status" aria-live="polite">
-              ${weeklyConfettiMarkup(28)}
-              <div class="weekly-wheel-result-popup__card">
-                <span>النتيجة</span>
-                <strong>Situation #${escapeHtml(current.number)}</strong>
-                <small>Opening the daily-style situation...</small>
-              </div>
-            </div>
-          ` : ''}
 
           ${showFinalScore ? `
             <div class="weekly-wheel-final-score ${score.passed ? 'is-passed' : 'is-practice'}" role="status" aria-live="polite">
@@ -2379,8 +2367,8 @@
       });
     });
 
-    root.querySelector('[data-weekly-spin]')?.addEventListener('click', () => {
-      if (state.weeklyWheel.isSpinning) return;
+    const startWeeklyWheelSpin = () => {
+      if (state.weeklyWheel.isSpinning || state.weeklyWheel.mode === 'result') return;
       if (completed || state.weeklyWheel.mode === 'complete') resetWeeklyWheelGame(plan.key);
       const choice = spinWeeklyWheel();
       if (!choice) return;
@@ -2396,8 +2384,17 @@
         state.weeklyWheel.resultTimer = window.setTimeout(() => {
           state.weeklyWheel.mode = 'situation';
           renderWeeklyWheel(options);
-        }, 1650);
+        }, 650);
       }, Number(state.weeklyWheel.spinDurationMs || 4200) + 120);
+    };
+
+    root.querySelectorAll('[data-weekly-spin]').forEach((spinTarget) => {
+      spinTarget.addEventListener('click', startWeeklyWheelSpin);
+      spinTarget.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        startWeeklyWheelSpin();
+      });
     });
 
     root.querySelector('[data-weekly-final-replay]')?.addEventListener('click', () => {

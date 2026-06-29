@@ -4650,6 +4650,32 @@ body.is-weekly-wheel-embedded #page-app-lesson {
   width: min(50rem, 94vw);
 }
 
+
+.weekly-wheel-big-stage--clickable {
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.weekly-wheel-big-stage--clickable:hover {
+  transform: translateY(-2px) scale(1.005);
+  filter: drop-shadow(0 22px 34px rgba(17, 24, 39, 0.12));
+}
+
+.weekly-wheel-big-stage--clickable:focus-visible {
+  box-shadow: 0 0 0 5px rgba(41, 128, 185, 0.22), 0 0 0 9px rgba(250, 204, 21, 0.18);
+}
+
+.weekly-wheel-big-stage--clickable[aria-disabled="true"] {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.weekly-wheel-actions--reset-only {
+  margin-top: -0.3rem;
+}
+
 .weekly-wheel-memory-cards {
   position: absolute;
   inset: 0;
