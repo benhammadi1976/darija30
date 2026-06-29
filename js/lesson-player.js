@@ -10,11 +10,13 @@
       planKey: 'week1',
       challengeSize: 5,
       usedIdsByPlan: Object.create(null),
+      resultsByPlan: Object.create(null),
       currentId: '',
       wheelRotation: 0,
       mode: 'wheel',
       isSpinning: false,
       openTimer: 0,
+      resultTimer: 0,
       returnRootId: '',
       returnEmbedded: false,
       returnPlanKey: 'week1'
@@ -695,7 +697,9 @@
           data-target-arabic="${escapeHtml(phrase.arabic || '')}"
           data-attempts="0"
           data-choice-attempts="0"
-          data-weekly-wheel-return="${isWeeklyWheel ? '1' : '0'}">
+          data-weekly-wheel-return="${isWeeklyWheel ? '1' : '0'}"
+          data-weekly-wheel-entry-id="${escapeHtml(renderOptions.weeklyEntryId || '')}"
+          data-weekly-wheel-entry-number="${escapeHtml(renderOptions.weeklyEntryNumber || '')}">
           <div class="situation-card__visual practice-slide__visual">
             ${visual ? `<img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" loading="lazy">` : `<div class="situation-card__placeholder"><span>🇲🇦</span><strong>${escapeHtml(lesson.title || 'Situation')}</strong><small>${escapeHtml(phrase.scenario || phrase.goal || '')}</small></div>`}
             <div class="practice-slide__topbar">
@@ -732,7 +736,9 @@
         data-target-arabic="${escapeHtml(phrase.arabic || '')}"
         data-attempts="0"
         data-choice-attempts="0"
-        data-weekly-wheel-return="${isWeeklyWheel ? '1' : '0'}">
+        data-weekly-wheel-return="${isWeeklyWheel ? '1' : '0'}"
+        data-weekly-wheel-entry-id="${escapeHtml(renderOptions.weeklyEntryId || '')}"
+        data-weekly-wheel-entry-number="${escapeHtml(renderOptions.weeklyEntryNumber || '')}">
         <div class="situation-card__visual">
           ${visual ? `<img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" loading="lazy">` : `<div class="situation-card__placeholder"><span>🇲🇦</span><strong>${escapeHtml(lesson.title || 'Situation')}</strong><small>${escapeHtml(phrase.scenario || phrase.goal || '')}</small></div>`}
           <div class="situation-card__bubble" data-situation-bubble>
@@ -841,6 +847,7 @@
   }
 
   function showSituationReturn(card) {
+    if (card?.dataset.weeklyWheelReturn === '1') card.dataset.weeklyMissed = '1';
     card.querySelector('[data-situation-return]')?.classList.remove('hidden');
     fillSituationBubble(card, 'Not yet — review this phrase.');
     setSituationStatus(card, 'Not yet. Review this phrase, then try again.', 'is-error');
@@ -935,22 +942,29 @@
     card.dataset.passed = '1';
     card.querySelector('[data-situation-choices]')?.classList.add('hidden');
     card.querySelectorAll('[data-situation-option]').forEach((button) => { button.disabled = true; });
+    const isWeekly = card.dataset.weeklyWheelReturn === '1';
     setSituationStatus(card, assisted ? 'Great! You remembered it.' : 'Great! You remembered it.', 'is-success');
     showMemoryCelebration(card);
-    launchGoldenBurst(card);
+    if (!isWeekly) launchGoldenBurst(card);
     playMemorySuccessSound();
-    if (card.dataset.weeklyWheelReturn === '1') {
+    if (isWeekly) {
+      const result = recordWeeklyWheelResult(card);
       window.clearTimeout(Number(card.dataset.weeklyReturnTimer || 0));
       const timer = window.setTimeout(() => {
-        state.weeklyWheel.mode = 'wheel';
+        const planKey = state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey;
+        const plan = weeklyWheelPlan(planKey);
+        const bank = weeklySituationBank(plan);
+        const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
+        const score = weeklyWheelScore(planKey, challengeSize);
+        state.weeklyWheel.mode = score.total >= challengeSize ? 'complete' : 'wheel';
         state.weeklyWheel.isSpinning = false;
         const returnRoot = document.getElementById(state.weeklyWheel.returnRootId || 'weeklyWheelRoot');
         renderWeeklyWheel({
           root: returnRoot || undefined,
-          planKey: state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey,
+          planKey,
           embedded: Boolean(state.weeklyWheel.returnEmbedded)
         });
-      }, 2300);
+      }, result?.correct ? 1700 : 1900);
       card.dataset.weeklyReturnTimer = String(timer);
     }
   }
@@ -1304,6 +1318,7 @@
             passSituationChallenge(card, true);
             return;
           }
+          if (card.dataset.weeklyWheelReturn === '1') card.dataset.weeklyMissed = '1';
           showSituationReturn(card);
         });
       });
@@ -2014,9 +2029,44 @@
     state.weeklyWheel.usedIdsByPlan[planKey] = Array.isArray(usedIds) ? usedIds : [];
   }
 
+  function readWeeklyResults(planKey) {
+    const results = state.weeklyWheel.resultsByPlan[planKey];
+    return Array.isArray(results) ? results : [];
+  }
+
+  function setWeeklyResults(planKey, results) {
+    state.weeklyWheel.resultsByPlan[planKey] = Array.isArray(results) ? results : [];
+  }
+
+  function recordWeeklyWheelResult(card) {
+    if (!card || card.dataset.weeklyWheelReturn !== '1') return null;
+    const planKey = state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey;
+    const entryId = card.dataset.weeklyWheelEntryId || state.weeklyWheel.currentId || '';
+    if (!entryId) return null;
+    const correct = card.dataset.weeklyMissed !== '1';
+    const entryNumber = Number(card.dataset.weeklyWheelEntryNumber || 0);
+    const results = readWeeklyResults(planKey).filter((item) => item && item.id !== entryId);
+    results.push({ id: entryId, correct, number: entryNumber, at: Date.now() });
+    setWeeklyResults(planKey, results);
+    return { entryId, correct, results };
+  }
+
+  function weeklyWheelScore(planKey, challengeSize) {
+    const results = readWeeklyResults(planKey).slice(0, Math.max(Number(challengeSize) || 0, 0));
+    const total = results.length;
+    const correct = results.filter((item) => item?.correct).length;
+    const percent = total ? Math.round((correct / total) * 100) : 0;
+    return { total, correct, percent, passed: percent >= 70 };
+  }
+
+  function weeklyConfettiMarkup(count = 34) {
+    return `<div class="weekly-wheel-confetti" aria-hidden="true">${Array.from({ length: count }, (_, index) => `<i style="--confetti-x:${Math.round((Math.random() * 2 - 1) * 220)}px; --confetti-delay:${(Math.random() * 0.36).toFixed(2)}s; --confetti-rot:${Math.round(Math.random() * 540)}deg;"></i>`).join('')}</div>`;
+  }
+
   function setWeeklyWheelPlan(planKey) {
     const plan = weeklyWheelPlan(planKey);
     window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+    window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
     state.weeklyWheel.planKey = plan.key;
     const sizes = plan.challengeSizes || [5];
     if (!sizes.includes(state.weeklyWheel.challengeSize)) state.weeklyWheel.challengeSize = sizes[0];
@@ -2030,16 +2080,20 @@
     const parsed = Number(size);
     const valid = (plan.challengeSizes || [5]).includes(parsed) ? parsed : (plan.challengeSizes || [5])[0];
     window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+    window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
     state.weeklyWheel.challengeSize = valid;
     state.weeklyWheel.currentId = '';
     state.weeklyWheel.mode = 'wheel';
     state.weeklyWheel.isSpinning = false;
     setWeeklyUsedIds(plan.key, []);
+    setWeeklyResults(plan.key, []);
   }
 
   function resetWeeklyWheelGame(planKey = state.weeklyWheel.planKey) {
     window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+    window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
     setWeeklyUsedIds(planKey, []);
+    setWeeklyResults(planKey, []);
     state.weeklyWheel.currentId = '';
     state.weeklyWheel.mode = 'wheel';
     state.weeklyWheel.isSpinning = false;
@@ -2050,8 +2104,12 @@
     const bank = weeklySituationBank(plan);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
     if (!bank.length || !challengeSize) return null;
+    const score = weeklyWheelScore(plan.key, challengeSize);
     let used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
-    if (used.length >= challengeSize) used = [];
+    if (score.total >= challengeSize || used.length >= challengeSize) {
+      used = [];
+      setWeeklyResults(plan.key, []);
+    }
     const available = bank.filter((entry) => !used.includes(entry.id));
     const choice = available[Math.floor(Math.random() * available.length)] || bank[0];
     used.push(choice.id);
@@ -2133,11 +2191,14 @@
     const used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
     if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
+    const score = weeklyWheelScore(plan.key, challengeSize);
     const current = currentWeeklyWheelEntry(plan);
     const currentBankIndex = current ? bank.findIndex((entry) => entry.id === current.id) : -1;
-    const currentRound = current ? Math.min(Math.max(used.length, 1), challengeSize || 1) : Math.min(used.length + 1, challengeSize || 1);
-    const roundLabel = `${Math.min(used.length, challengeSize)} / ${challengeSize}`;
-    const completed = used.length >= challengeSize && challengeSize > 0;
+    const currentRound = current ? Math.min(score.total + 1, challengeSize || 1) : Math.min(score.total + 1, challengeSize || 1);
+    const roundLabel = `${Math.min(score.total, challengeSize)} / ${challengeSize}`;
+    const completed = score.total >= challengeSize && challengeSize > 0;
+    const showResultPopup = state.weeklyWheel.mode === 'result' && current;
+    const showFinalScore = state.weeklyWheel.mode === 'complete' || completed;
     const showSituation = state.weeklyWheel.mode === 'situation' && current;
     const appNav = document.getElementById('app-nav');
 
@@ -2159,7 +2220,9 @@
             slide: true,
             weeklyWheel: true,
             displayIndex: currentRound - 1,
-            displayTotal: challengeSize
+            displayTotal: challengeSize,
+            weeklyEntryId: current.id,
+            weeklyEntryNumber: current.number
           })}
         </div>
       `;
@@ -2227,8 +2290,32 @@
           </div>
 
           <p class="weekly-wheel-wheel-caption weekly-wheel-wheel-caption--bottom">
-            ${completed ? 'Challenge complete. Play again or choose a bigger challenge.' : current ? `Last number: Situation #${escapeHtml(current.number)}. Spin again for the next situation.` : 'Press Spin. The pointer chooses one numbered situation from the bank.'}
+            ${showFinalScore ? 'Challenge complete. Check your score, play again, or choose a bigger challenge.' : current ? `Last number: Situation #${escapeHtml(current.number)}. Spin again for the next situation.` : 'Press Spin. The pointer chooses one numbered situation from the bank.'}
           </p>
+
+          ${showResultPopup ? `
+            <div class="weekly-wheel-result-popup" role="status" aria-live="polite">
+              ${weeklyConfettiMarkup(28)}
+              <div class="weekly-wheel-result-popup__card">
+                <span>النتيجة</span>
+                <strong>Situation #${escapeHtml(current.number)}</strong>
+                <small>Opening the daily-style situation...</small>
+              </div>
+            </div>
+          ` : ''}
+
+          ${showFinalScore ? `
+            <div class="weekly-wheel-final-score ${score.passed ? 'is-passed' : 'is-practice'}" role="status" aria-live="polite">
+              ${score.passed ? weeklyConfettiMarkup(48) : ''}
+              <div class="weekly-wheel-final-score__card">
+                <span>Final Score</span>
+                <strong>${escapeHtml(score.correct)} / ${escapeHtml(challengeSize)}</strong>
+                <b>${escapeHtml(score.percent)}%</b>
+                <p>${score.passed ? 'Ready for real Morocco 🎉' : 'Good practice — try the wheel again 🔁'}</p>
+                <button type="button" data-weekly-final-replay>${score.passed ? 'Play Again' : 'Try Again'}</button>
+              </div>
+            </div>
+          ` : ''}
         </section>
       </div>
     `;
@@ -2249,18 +2336,28 @@
     });
 
     root.querySelector('[data-weekly-spin]')?.addEventListener('click', () => {
-      if (completed) resetWeeklyWheelGame(plan.key);
+      if (completed || state.weeklyWheel.mode === 'complete') resetWeeklyWheelGame(plan.key);
       const choice = spinWeeklyWheel();
       if (!choice) return;
       state.weeklyWheel.mode = 'wheel';
       state.weeklyWheel.isSpinning = true;
       window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+      window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
       renderWeeklyWheel(options);
       state.weeklyWheel.openTimer = window.setTimeout(() => {
         state.weeklyWheel.isSpinning = false;
-        state.weeklyWheel.mode = 'situation';
+        state.weeklyWheel.mode = 'result';
         renderWeeklyWheel(options);
+        state.weeklyWheel.resultTimer = window.setTimeout(() => {
+          state.weeklyWheel.mode = 'situation';
+          renderWeeklyWheel(options);
+        }, 1500);
       }, 1250);
+    });
+
+    root.querySelector('[data-weekly-final-replay]')?.addEventListener('click', () => {
+      resetWeeklyWheelGame(plan.key);
+      renderWeeklyWheel(options);
     });
 
     root.querySelector('[data-weekly-reset]')?.addEventListener('click', () => {
