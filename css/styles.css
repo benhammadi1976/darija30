@@ -4512,10 +4512,87 @@ body.is-weekly-wheel-embedded #page-app-lesson {
   z-index: 1;
 }
 
+.weekly-wheel-memory-bg {
+  position: absolute !important;
+  inset: -1.5rem;
+  z-index: 0 !important;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.48;
+  filter: saturate(0.92);
+}
+
+.weekly-wheel-memory-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255,255,255,0.18), rgba(255,255,255,0.70) 34%, rgba(255,255,255,0.88) 58%, rgba(255,255,255,0.72)),
+    linear-gradient(90deg, rgba(255,255,255,0.58), rgba(255,255,255,0.20), rgba(255,255,255,0.58));
+}
+
+.weekly-wheel-memory-bg-card {
+  position: absolute;
+  width: clamp(4.4rem, 9vw, 7.7rem);
+  height: clamp(5.8rem, 12vw, 10.2rem);
+  border-radius: 1.1rem;
+  background-size: cover;
+  background-position: center;
+  transform: translate(-50%, -50%) rotate(var(--bg-rotate, 0deg));
+  box-shadow: 0 18px 38px rgba(17, 24, 39, 0.18), inset 0 0 0 2px rgba(255,255,255,0.82);
+  overflow: hidden;
+}
+
+.weekly-wheel-memory-bg-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.38));
+  backdrop-filter: blur(1px);
+}
+
+.weekly-wheel-memory-bg-card b {
+  position: absolute;
+  right: 0.45rem;
+  bottom: 0.4rem;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.85rem;
+  height: 1.55rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  color: #111827;
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.weekly-wheel-memory-bg-card.is-active {
+  opacity: 0.96;
+  box-shadow: 0 22px 42px rgba(250, 204, 21, 0.28), inset 0 0 0 3px rgba(250, 204, 21, 0.86);
+}
+
 .weekly-wheel-game-card.is-spinning .weekly-wheel-disc--large,
-.weekly-wheel-game-card.is-spinning .weekly-wheel-number-ring,
+.weekly-wheel-game-card.is-spinning .weekly-wheel-number-ring {
+  animation: weeklyWheelRealSpin var(--wheel-spin-duration, 4200ms) cubic-bezier(.11,.74,.13,1) both;
+  transition: none;
+}
+
 .weekly-wheel-game-card.is-spinning .weekly-wheel-disc__inner--large {
-  transition-duration: 1.15s;
+  animation: weeklyWheelCounterSpin var(--wheel-spin-duration, 4200ms) cubic-bezier(.11,.74,.13,1) both;
+  transition: none;
+}
+
+@keyframes weeklyWheelRealSpin {
+  0% { transform: rotate(var(--wheel-start-rotation, 0deg)); }
+  58% { filter: saturate(1.12) brightness(1.04); }
+  100% { transform: rotate(var(--wheel-rotation, 0deg)); filter: saturate(1) brightness(1); }
+}
+
+@keyframes weeklyWheelCounterSpin {
+  0% { transform: rotate(calc(-1 * var(--wheel-start-rotation, 0deg))); }
+  100% { transform: rotate(calc(-1 * var(--wheel-rotation, 0deg))); }
 }
 
 .weekly-wheel-game-top {
@@ -4570,7 +4647,7 @@ body.is-weekly-wheel-embedded #page-app-lesson {
 }
 
 .weekly-wheel-big-stage--memory {
-  width: min(47rem, 92vw);
+  width: min(50rem, 94vw);
 }
 
 .weekly-wheel-memory-cards {
@@ -4737,9 +4814,12 @@ body.is-weekly-wheel-embedded #page-app-lesson {
   font-size: 1rem;
 }
 
-.weekly-wheel-spin-btn--large:disabled {
+.weekly-wheel-spin-btn--large:disabled,
+.weekly-wheel-size:disabled,
+.weekly-wheel-reset-btn:disabled {
   opacity: 0.62;
   cursor: wait;
+  transform: none;
 }
 
 .weekly-wheel-wheel-caption--bottom {
