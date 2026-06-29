@@ -5,7 +5,14 @@
     situationIndexByLesson: Object.create(null),
     appliedRoutePhraseByLesson: Object.create(null),
     freeLessonId: 'lesson-001',
-    reviewIndex: 0
+    reviewIndex: 0,
+    weeklyWheel: {
+      planKey: 'week1',
+      challengeSize: 5,
+      usedIdsByPlan: Object.create(null),
+      currentId: '',
+      wheelRotation: 0
+    }
   };
 
   const userRecordingsByPhraseId = Object.create(null);
@@ -1865,6 +1872,276 @@
     return `<span class="text-sm ${lesson.isFree ? 'text-green-600 font-bold' : 'text-gray-400'}">${lesson.isFree ? 'Free' : '🔒'}</span>`;
   }
 
+
+
+  function weeklyWheelPlans() {
+    return [
+      {
+        key: 'week1',
+        label: 'Week 1',
+        title: 'Weekly Wheel 1',
+        days: 'Days 1–7',
+        endDay: 7,
+        bankSize: 35,
+        challengeSizes: [5, 10, 15, 20, 35],
+        description: 'Taxi, café, market, greetings, polite requests, introduction, and misunderstanding survival.'
+      },
+      {
+        key: 'week2',
+        label: 'Week 2',
+        title: 'Weekly Wheel 2',
+        days: 'Days 1–14',
+        endDay: 14,
+        bankSize: 70,
+        challengeSizes: [5, 10, 15, 20, 25, 70],
+        description: 'A cumulative wheel: Week 2 situations plus a light review of Week 1.'
+      },
+      {
+        key: 'week3',
+        label: 'Week 3',
+        title: 'Weekly Wheel 3',
+        days: 'Days 1–21',
+        endDay: 21,
+        bankSize: 105,
+        challengeSizes: [5, 10, 15, 20, 30, 105],
+        description: 'A bigger travel survival mix from the first three weeks.'
+      },
+      {
+        key: 'week4',
+        label: 'Week 4',
+        title: 'Weekly Wheel 4',
+        days: 'Days 1–28',
+        endDay: 28,
+        bankSize: 140,
+        challengeSizes: [5, 10, 15, 20, 35, 140],
+        description: 'The full four-week wheel before the two final survival days.'
+      },
+      {
+        key: 'final',
+        label: 'Final',
+        title: 'Final Survival Wheel',
+        days: 'Days 1–30',
+        endDay: 30,
+        bankSize: 150,
+        challengeSizes: [5, 10, 15, 20, 30, 150],
+        description: 'Day 29 is mixed real Morocco practice. Day 30 is the final survival challenge.'
+      }
+    ];
+  }
+
+  function weeklyWheelPlan(key) {
+    const plans = weeklyWheelPlans();
+    return plans.find((plan) => plan.key === key) || plans[0];
+  }
+
+  function getWeeklyWheelRoutePlanKey(path) {
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const raw = params.get('week') || params.get('plan') || params.get('wheel') || '';
+    return weeklyWheelPlans().some((plan) => plan.key === raw) ? raw : state.weeklyWheel.planKey;
+  }
+
+  function weeklySituationBank(plan) {
+    let number = 0;
+    return lessons()
+      .filter((lesson) => Number(lesson.day) >= 1 && Number(lesson.day) <= Number(plan.endDay))
+      .flatMap((lesson) => (lesson.phrases || []).map((phrase, phraseIndex) => {
+        number += 1;
+        return {
+          id: `${lesson.id || lesson.day}:${phrase.id || phraseIndex}`,
+          number,
+          lesson,
+          phrase,
+          phraseIndex
+        };
+      }));
+  }
+
+  function readWeeklyUsedIds(planKey) {
+    const used = state.weeklyWheel.usedIdsByPlan[planKey];
+    return Array.isArray(used) ? used : [];
+  }
+
+  function setWeeklyUsedIds(planKey, usedIds) {
+    state.weeklyWheel.usedIdsByPlan[planKey] = Array.isArray(usedIds) ? usedIds : [];
+  }
+
+  function setWeeklyWheelPlan(planKey) {
+    const plan = weeklyWheelPlan(planKey);
+    state.weeklyWheel.planKey = plan.key;
+    const sizes = plan.challengeSizes || [5];
+    if (!sizes.includes(state.weeklyWheel.challengeSize)) state.weeklyWheel.challengeSize = sizes[0];
+    state.weeklyWheel.currentId = '';
+  }
+
+  function setWeeklyWheelChallengeSize(size) {
+    const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
+    const parsed = Number(size);
+    const valid = (plan.challengeSizes || [5]).includes(parsed) ? parsed : (plan.challengeSizes || [5])[0];
+    state.weeklyWheel.challengeSize = valid;
+    state.weeklyWheel.currentId = '';
+    setWeeklyUsedIds(plan.key, []);
+  }
+
+  function resetWeeklyWheelGame(planKey = state.weeklyWheel.planKey) {
+    setWeeklyUsedIds(planKey, []);
+    state.weeklyWheel.currentId = '';
+  }
+
+  function spinWeeklyWheel() {
+    const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
+    const bank = weeklySituationBank(plan);
+    const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
+    if (!bank.length || !challengeSize) return null;
+    let used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
+    if (used.length >= challengeSize) used = [];
+    const available = bank.filter((entry) => !used.includes(entry.id));
+    const choice = available[Math.floor(Math.random() * available.length)] || bank[0];
+    used.push(choice.id);
+    setWeeklyUsedIds(plan.key, used);
+    state.weeklyWheel.currentId = choice.id;
+    const degreesPerSlice = 360 / Math.max(bank.length, 1);
+    const targetAtPointer = 360 - ((choice.number - 0.5) * degreesPerSlice);
+    state.weeklyWheel.wheelRotation += 720 + targetAtPointer;
+    return choice;
+  }
+
+  function currentWeeklyWheelEntry(plan) {
+    const bank = weeklySituationBank(plan);
+    return bank.find((entry) => entry.id === state.weeklyWheel.currentId) || null;
+  }
+
+  function weeklyChallengeSizeLabel(size, bankLength) {
+    const value = Number(size);
+    if (value >= bankLength) return `Full challenge • ${bankLength}`;
+    if (value === 5) return 'Light • 5';
+    if (value === 10) return 'Medium • 10';
+    if (value === 15) return 'Strong • 15';
+    if (value === 20) return 'Big • 20';
+    return `${value} situations`;
+  }
+
+  function renderWeeklyWheel() {
+    const root = document.getElementById('weeklyWheelRoot');
+    if (!root) return;
+    const routeKey = getWeeklyWheelRoutePlanKey(window.location.hash.replace(/^#/, ''));
+    if (routeKey !== state.weeklyWheel.planKey) setWeeklyWheelPlan(routeKey);
+    const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
+    const bank = weeklySituationBank(plan);
+    const used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
+    if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
+    const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
+    const current = currentWeeklyWheelEntry(plan);
+    const currentBankIndex = current ? bank.findIndex((entry) => entry.id === current.id) : -1;
+    const wheelLesson = current ? {
+      id: `weekly-wheel-${plan.key}`,
+      day: plan.label,
+      title: plan.title,
+      phrases: bank.map((entry) => entry.phrase)
+    } : null;
+    const completed = used.length >= challengeSize && challengeSize > 0;
+    const roundLabel = current ? `${Math.min(used.length, challengeSize)} / ${challengeSize}` : `0 / ${challengeSize}`;
+
+    root.innerHTML = `
+      <div class="weekly-wheel-page">
+        <div class="weekly-wheel-hero">
+          <span class="weekly-wheel-eyebrow">Weekly Situation Wheel</span>
+          <h1>Can you survive this week?</h1>
+          <p>The daily check stays as it is. This weekly game uses the same situation-answer feeling, but the wheel chooses the situation number randomly.</p>
+        </div>
+
+        <div class="weekly-wheel-tabs" aria-label="Choose weekly wheel">
+          ${weeklyWheelPlans().map((item) => `
+            <button type="button" data-weekly-plan="${escapeHtml(item.key)}" class="weekly-wheel-tab ${item.key === plan.key ? 'is-active' : ''}">
+              <strong>${escapeHtml(item.label)}</strong>
+              <span>${escapeHtml(item.days)}</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <div class="weekly-wheel-layout">
+          <section class="weekly-wheel-panel weekly-wheel-panel--controls">
+            <div class="weekly-wheel-stat-row">
+              <div><strong>${escapeHtml(String(bank.length))}</strong><span>situations in wheel</span></div>
+              <div><strong>${escapeHtml(roundLabel)}</strong><span>current game</span></div>
+            </div>
+            <h2>${escapeHtml(plan.title)}</h2>
+            <p>${escapeHtml(plan.description)}</p>
+            <p class="weekly-wheel-note">${escapeHtml(plan.days)} • ${escapeHtml(String(bank.length))} numbered situations. No repeated number inside the same game.</p>
+
+            <div class="weekly-wheel-size-list" aria-label="Choose challenge size">
+              ${(plan.challengeSizes || [5]).filter((size) => size <= Math.max(bank.length, 1)).map((size) => `
+                <button type="button" data-weekly-size="${escapeHtml(size)}" class="weekly-wheel-size ${Number(size) === challengeSize ? 'is-active' : ''}">${escapeHtml(weeklyChallengeSizeLabel(size, bank.length))}</button>
+              `).join('')}
+            </div>
+
+            <div class="weekly-wheel-actions">
+              <button type="button" data-weekly-spin class="weekly-wheel-spin-btn">${completed ? 'Play Again' : current ? 'Spin Next' : 'Spin the Wheel'}</button>
+              <button type="button" data-weekly-reset class="weekly-wheel-reset-btn">Reset Game</button>
+            </div>
+          </section>
+
+          <section class="weekly-wheel-panel weekly-wheel-panel--wheel" aria-live="polite">
+            <div class="weekly-wheel-pointer" aria-hidden="true"></div>
+            <div class="weekly-wheel-disc" style="--wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-slices:${escapeHtml(bank.length || 1)};">
+              <div class="weekly-wheel-disc__inner">
+                <span>Situation</span>
+                <strong>${current ? `#${escapeHtml(current.number)}` : '?'}</strong>
+                <small>${escapeHtml(plan.label)}</small>
+              </div>
+            </div>
+            <p class="weekly-wheel-wheel-caption">The pointer stops on a number. That number opens the situation.</p>
+          </section>
+        </div>
+
+        ${current ? `
+          <section class="weekly-wheel-result">
+            <div class="weekly-wheel-result__top">
+              <span>Round ${escapeHtml(roundLabel)}</span>
+              <strong>Wheel stopped on Situation #${escapeHtml(current.number)}</strong>
+              <a href="#/app/lesson/${escapeHtml(current.lesson.day)}?phraseId=${encodeURIComponent(String(current.phrase.id || ''))}" class="weekly-wheel-open-lesson">Open Day ${escapeHtml(current.lesson.day)}</a>
+            </div>
+            ${situationChallengeCardMarkup(wheelLesson, current.phrase, currentBankIndex >= 0 ? currentBankIndex : 0)}
+          </section>
+        ` : `
+          <section class="weekly-wheel-empty">
+            <strong>Ready?</strong>
+            <span>Choose the week and challenge size, then spin the wheel.</span>
+          </section>
+        `}
+      </div>
+    `;
+
+    root.querySelectorAll('[data-weekly-plan]').forEach((button) => {
+      button.addEventListener('click', () => {
+        setWeeklyWheelPlan(button.dataset.weeklyPlan);
+        window.location.hash = `#/app/weekly-wheel?week=${encodeURIComponent(state.weeklyWheel.planKey)}`;
+        renderWeeklyWheel();
+      });
+    });
+
+    root.querySelectorAll('[data-weekly-size]').forEach((button) => {
+      button.addEventListener('click', () => {
+        setWeeklyWheelChallengeSize(button.dataset.weeklySize);
+        renderWeeklyWheel();
+      });
+    });
+
+    root.querySelector('[data-weekly-spin]')?.addEventListener('click', () => {
+      spinWeeklyWheel();
+      renderWeeklyWheel();
+    });
+
+    root.querySelector('[data-weekly-reset]')?.addEventListener('click', () => {
+      resetWeeklyWheelGame(plan.key);
+      renderWeeklyWheel();
+    });
+
+    if (current && wheelLesson) {
+      bindSituationChallenges(root, wheelLesson, renderWeeklyWheel);
+    }
+  }
+
+
   function renderLessonsList() {
     const root = document.getElementById('lessonsListRoot');
     if (!root) return;
@@ -1897,12 +2174,12 @@
     const finishDate = lessonDate(30);
 
     const planSections = [
-      { start: 1, end: 5, title: 'Fast Survival Start', description: 'Taxi, café, market, greetings, and polite first contact.' },
-      { start: 6, end: 10, title: 'Core Confidence + Taxi', description: 'Introduce yourself, understand people, say yes/no, and manage taxi price/directions.' },
-      { start: 11, end: 15, title: 'Transport, Café & Restaurant', description: 'Station, medina, custom orders, restaurant basics, bill and payment.' },
-      { start: 16, end: 20, title: 'Food Needs & Shopping', description: 'Dietary needs, price questions, bargaining, choosing items, sizes and colors.' },
-      { start: 21, end: 25, title: 'Hotel & Practical Help', description: 'Numbers, check-in, hotel problems, where things are, and basic help.' },
-      { start: 26, end: 30, title: 'Culture & Final Survival', description: 'SIM/internet, warm phrases, polite refusal, small talk, and the final test.' }
+      { start: 1, end: 7, title: 'Week 1 Survival Wheel Bank', description: 'Seven daily lessons. The weekly wheel has 35 numbered situations.', wheelKey: 'week1' },
+      { start: 8, end: 14, title: 'Week 2 Cumulative Wheel Bank', description: 'The wheel grows to 70 situations and still reviews older moments.', wheelKey: 'week2' },
+      { start: 15, end: 21, title: 'Week 3 Cumulative Wheel Bank', description: 'The wheel grows to 105 situations across the first three weeks.', wheelKey: 'week3' },
+      { start: 22, end: 28, title: 'Week 4 Cumulative Wheel Bank', description: 'The four-week wheel reaches 140 situations before the final two days.', wheelKey: 'week4' },
+      { start: 29, end: 29, title: 'Day 29 — Real Morocco Mixed Situations', description: 'A normal daily lesson that mixes real travel moments before the final day.' },
+      { start: 30, end: 30, title: 'Day 30 — Final Survival Day', description: 'The last daily lesson plus the Final Survival Wheel from all 150 situations.', wheelKey: 'final' }
     ];
 
     const readSectionState = () => {
@@ -1957,11 +2234,12 @@
                   <div>
                     <h2 class="text-xl font-black text-medina">Days ${escapeHtml(section.start)}–${escapeHtml(section.end)} — ${escapeHtml(section.title)}</h2>
                     <p class="text-sm text-gray-500 mt-1">${escapeHtml(section.description)}</p>
+                    ${section.wheelKey ? `<span class="inline-flex mt-2 text-xs font-extrabold text-terracotta">Wheel: #/app/weekly-wheel?week=${escapeHtml(section.wheelKey)}</span>` : ''}
                   </div>
                 </div>
                 <div class="sm:text-right">
                   <span class="block text-xs font-bold text-gray-400">${escapeHtml(formatDate(lessonDate(section.start)))} → ${escapeHtml(formatDate(lessonDate(section.end)))}</span>
-                  <span class="block text-xs font-extrabold text-chefchaouen mt-1">5 lessons • 25 phrase pages</span>
+                  <span class="block text-xs font-extrabold text-chefchaouen mt-1">${escapeHtml(sectionLessons.length)} lesson${sectionLessons.length === 1 ? '' : 's'} • ${escapeHtml(sectionLessons.reduce((total, item) => total + ((item.phrases || []).length || 0), 0))} situations</span>
                 </div>
               </button>
               <div data-plan-section-body="${escapeHtml(sectionKey)}" class="border-t border-gray-100 p-4 ${open ? '' : 'hidden'}">
@@ -2062,6 +2340,14 @@
           <p class="text-gray-600 mb-4 md:mb-0">${escapeHtml(next?.situation || '')}</p>
         </div>
         <a href="#/app/lesson/${encodeURIComponent(String(next?.day || 1))}" class="shrink-0 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">Start Lesson ${escapeHtml(next?.day || 1)}</a>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="inline-block bg-red-50 text-terracotta text-xs font-bold px-3 py-1 rounded-full mb-2">WEEKLY GAME</span>
+          <h2 class="text-xl font-black text-medina">Spin the Weekly Situation Wheel</h2>
+          <p class="text-gray-600">Choose 5, 10, 15, or more situations. The wheel stops on a random number and opens the situation.</p>
+        </div>
+        <a href="#/app/weekly-wheel" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Open Wheel</a>
       </div>
       <div>
         <h3 class="text-xl font-bold mb-4">Recent Learned Phrases</h3>
@@ -2261,6 +2547,7 @@
     if (path === '/app/lessons') renderLessonsList();
     if (String(path).startsWith('/app/lesson/')) renderAppLesson(getRouteLessonId(path));
     if (path === '/app/review') renderReview();
+    if (String(path).split('?')[0] === '/app/weekly-wheel') renderWeeklyWheel();
     if (path === '/app/favorites') renderFavorites();
     if (path === '/app/certificate') renderCertificate();
   }
@@ -2271,6 +2558,7 @@
     renderDashboard,
     renderLessonsList,
     renderAppLesson,
+    renderWeeklyWheel,
     renderFavorites,
     renderReview,
     renderCertificate

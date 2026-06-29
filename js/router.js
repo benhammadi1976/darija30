@@ -19,6 +19,7 @@
     '/app/dashboard': 'page-app-dashboard',
     '/app/lessons': 'page-app-lessons',
     '/app/review': 'page-app-review',
+    '/app/weekly-wheel': 'page-app-weekly-wheel',
     '/app/favorites': 'page-app-favorites',
     '/app/certificate': 'page-app-certificate'
   };
@@ -36,6 +37,10 @@
     return (window.location.hash || '#/').replace(/^#/, '') || '/';
   }
 
+  function routeBase(path) {
+    return String(path || '').split('?')[0];
+  }
+
   function setDisplay(element, visible, display = 'block') {
     if (!element) return;
     element.style.display = visible ? display : 'none';
@@ -44,7 +49,7 @@
   function updateNavLinks(selector, path) {
     document.querySelectorAll(selector).forEach((link) => {
       const hrefPath = (link.getAttribute('href') || '').replace(/^#/, '');
-      const isActive = hrefPath === path;
+      const isActive = hrefPath === path || hrefPath === routeBase(path);
       link.classList.toggle('is-active', isActive);
       if (selector.includes('app-nav') || selector.includes('admin-nav')) {
         link.classList.toggle('opacity-100', isActive);
@@ -55,24 +60,26 @@
   }
 
   function resolveTargetPage(path) {
-    if (publicRoutes[path]) return publicRoutes[path];
-    if (appRoutes[path]) return appRoutes[path];
-    if (path.startsWith('/app/lesson/')) return 'page-app-lesson';
-    if (path.startsWith('/blog/')) return 'page-blog-article';
-    if (adminRoutes[path]) return adminRoutes[path];
+    const basePath = routeBase(path);
+    if (publicRoutes[basePath]) return publicRoutes[basePath];
+    if (appRoutes[basePath]) return appRoutes[basePath];
+    if (basePath.startsWith('/app/lesson/')) return 'page-app-lesson';
+    if (basePath.startsWith('/blog/')) return 'page-blog-article';
+    if (adminRoutes[basePath]) return adminRoutes[basePath];
     return 'page-home';
   }
 
   function handleRoute() {
     const path = currentPath();
-    if (path === '/admin/audio' || path === '/admin/lessons' || path === '/admin/phrases') {
+    const basePath = routeBase(path);
+    if (basePath === '/admin/audio' || basePath === '/admin/lessons' || basePath === '/admin/phrases') {
       window.location.replace('#/admin/lesson-media');
       return;
     }
-    const isAppRoute = path.startsWith('/app/');
-    const isAdminRoute = path.startsWith('/admin');
+    const isAppRoute = basePath.startsWith('/app/');
+    const isAdminRoute = basePath.startsWith('/admin');
     const isAdminSessionActive = Boolean(window.DarijaAdminSession?.isActive?.() && window.DarijaSupabaseMedia?.readSession?.()?.access_token);
-    const isLoginRoute = path === '/login';
+    const isLoginRoute = basePath === '/login';
     const targetPageId = resolveTargetPage(path);
 
     document.querySelectorAll('.page').forEach((page) => page.classList.remove('active'));
