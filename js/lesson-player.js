@@ -2047,23 +2047,53 @@
     const bank = weeklySituationBank(plan);
     const nextHref = weeklyPromptNextLessonHref(lesson);
     const next = nextLesson(lesson);
-    const nextLabel = next ? `تجاوز الآن إلى Day ${escapeHtml(next.day)}` : 'تجاوز الآن';
+    const nextLabel = next ? `Skip to Day ${escapeHtml(next.day)}` : 'Skip for now';
+    const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
+    const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
     return `
-      <div class="weekly-prompt-page" aria-label="Optional weekly wheel prompt">
-        <div class="weekly-prompt-bg" aria-hidden="true">
+      <div class="weekly-wheel-page weekly-wheel-page--spin weekly-wheel-page--embedded weekly-wheel-page--fullscreen-wheel weekly-wheel-page--prompt-overlay" data-weekly-theme="${escapeHtml(activeTheme)}" aria-label="Optional weekly review prompt">
+        <section class="weekly-wheel-game-card weekly-wheel-game-card--visual weekly-wheel-game-card--fullscreen weekly-wheel-game-card--prompt" aria-live="polite">
+          ${weeklyWheelThemePicker()}
           ${weeklyWheelMemoryBackground(bank, null)}
-        </div>
-        <section class="weekly-prompt-card" dir="rtl">
-          <span class="weekly-prompt-card__eyebrow">مراجعة اختيارية</span>
-          <h1>حان وقت الاختبار الأسبوعي إن رغبت</h1>
-          <p>لقد أنهيت الاختبار اليومي ليوم ${escapeHtml(lesson?.day || '')}. يمكنك الآن تجربة عجلة مواقف الأسبوع، أو تجاوزها والانتقال للدرس التالي.</p>
-          <div class="weekly-prompt-card__stats" dir="ltr">
-            <span>${escapeHtml(plan.label)}</span>
-            <strong>${escapeHtml(String(bank.length))} situations</strong>
+
+          <div class="weekly-wheel-fullscreen-size-rail weekly-wheel-fullscreen-size-rail--behind" aria-label="Challenge sizes preview">
+            ${(plan.challengeSizes || [5]).filter((size) => size <= Math.max(bank.length, 1)).map((size) => `
+              <span class="weekly-wheel-size weekly-wheel-size--circle ${Number(size) === challengeSize ? 'is-active' : ''}" aria-hidden="true">${escapeHtml(size >= bank.length ? bank.length : size)}</span>
+            `).join('')}
           </div>
-          <div class="weekly-prompt-card__actions">
-            <button type="button" class="weekly-prompt-card__primary" data-start-weekly-wheel>ابدأ الاختبار الأسبوعي</button>
-            <a class="weekly-prompt-card__secondary" href="${escapeHtml(nextHref)}">${nextLabel}</a>
+
+          <div class="weekly-wheel-fullscreen-round" aria-live="polite">
+            <span>${escapeHtml(plan.label)}</span>
+            <strong>0 / ${escapeHtml(String(challengeSize || bank.length || 0))}</strong>
+          </div>
+
+          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--fullscreen weekly-wheel-big-stage--prompt" aria-hidden="true" style="--wheel-start-rotation:0deg; --wheel-rotation:0deg; --wheel-spin-duration:4200ms; --wheel-slices:${escapeHtml(bank.length || 1)};">
+            ${weeklyWheelMemoryCards(bank, null)}
+            <div class="weekly-wheel-pointer weekly-wheel-pointer--large weekly-wheel-pointer--fullscreen" aria-hidden="true"></div>
+            <div class="weekly-wheel-number-ring" aria-hidden="true">
+              ${weeklyWheelNumberMarks(bank.length, null)}
+            </div>
+            <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen">
+              <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen">
+                <span>Ready</span>
+                <strong>Spin</strong>
+                <small>${escapeHtml(plan.label)}</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="weekly-prompt-overlay" role="dialog" aria-modal="false" aria-label="Weekly review is ready">
+            <span class="weekly-prompt-overlay__eyebrow">Optional weekly review</span>
+            <h1>Weekly Review is ready</h1>
+            <p>You finished today’s daily check. You can now play the ${escapeHtml(plan.label)} Situation Wheel, or skip and continue to the next lesson.</p>
+            <div class="weekly-prompt-overlay__stats" aria-label="Wheel bank size">
+              <span>${escapeHtml(plan.label)}</span>
+              <strong>${escapeHtml(String(bank.length))} situations</strong>
+            </div>
+            <div class="weekly-prompt-overlay__actions">
+              <button type="button" class="weekly-prompt-overlay__primary" data-start-weekly-wheel>Start Weekly Wheel</button>
+              <a class="weekly-prompt-overlay__secondary" href="${escapeHtml(nextHref)}">${nextLabel}</a>
+            </div>
           </div>
         </section>
       </div>
@@ -2859,13 +2889,20 @@
     if (weeklyPromptRequested) {
       setLessonPracticeOpen(lesson, false);
       document.body.classList.toggle('is-remember-standalone', false);
-      document.body.classList.toggle('is-weekly-wheel-embedded', false);
-      document.body.classList.toggle('is-weekly-wheel-fullscreen', false);
+      document.body.classList.toggle('is-weekly-wheel-embedded', true);
+      document.body.classList.toggle('is-weekly-wheel-fullscreen', true);
       const appNav = document.getElementById('app-nav');
-      if (appNav) appNav.style.display = 'block';
+      if (appNav) appNav.style.display = 'none';
       root.innerHTML = weeklyWheelPromptMarkup(lesson, weeklyPlanKey);
       root.querySelector('[data-start-weekly-wheel]')?.addEventListener('click', () => {
         window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=1`;
+      });
+      root.querySelectorAll('[data-weekly-theme]').forEach((button) => {
+        button.addEventListener('click', () => {
+          setWeeklyWheelTheme(button.dataset.weeklyTheme);
+          root.innerHTML = weeklyWheelPromptMarkup(lesson, weeklyPlanKey);
+          renderAppLesson(lesson.day);
+        });
       });
       return;
     }
