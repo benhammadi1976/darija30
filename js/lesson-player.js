@@ -158,7 +158,7 @@
             <p class="text-sm text-blue-900"><strong>القفل مفعل للمتعلم.</strong> أنت الآن داخل وضع الأدمين، لذلك ترى المحتوى الكامل للمراجعة وتجهيز الصوت والفيديو.</p>
           </div>
           <div class="flex flex-wrap gap-2" dir="ltr">
-            <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-100">Media center</a>
+            <a href="#/admin/lesson-media" class="bg-white border border-blue-200 text-blue-700 px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-100">Media center</a>
             <a href="#/app/lesson/${escapeHtml(lesson.day)}?view=learner" class="bg-blue-700 text-white px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-800">View as learner</a>
           </div>
         </div>

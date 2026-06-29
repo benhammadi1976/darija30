@@ -25,7 +25,8 @@
 
   const adminRoutes = {
     '/admin': 'page-admin-dashboard',
-    '/admin/audio': 'page-admin-audio',
+    '/admin/login': 'page-admin-login',
+    '/admin/lesson-media': 'page-admin-audio',
     '/admin/users': 'page-admin-users',
     '/admin/payments': 'page-admin-payments',
     '/admin/reset-password': 'page-admin-reset-password'
@@ -64,13 +65,13 @@
 
   function handleRoute() {
     const path = currentPath();
-    if (path === '/admin/lessons' || path === '/admin/phrases') {
-      window.location.replace('#/admin/audio');
+    if (path === '/admin/audio' || path === '/admin/lessons' || path === '/admin/phrases') {
+      window.location.replace('#/admin/lesson-media');
       return;
     }
     const isAppRoute = path.startsWith('/app/');
     const isAdminRoute = path.startsWith('/admin');
-    const isAdminSessionActive = Boolean(window.DarijaAdminSession?.isActive?.());
+    const isAdminSessionActive = Boolean(window.DarijaAdminSession?.isActive?.() && window.DarijaSupabaseMedia?.readSession?.()?.access_token);
     const isLoginRoute = path === '/login';
     const targetPageId = resolveTargetPage(path);
 

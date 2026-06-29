@@ -959,7 +959,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     لوحة الإدارة
                 </a>
-                <a href="#/admin/audio" class="admin-nav-link whitespace-nowrap text-sm font-medium opacity-70 hover:opacity-100 flex items-center gap-2">
+                <a href="#/admin/lesson-media" class="admin-nav-link whitespace-nowrap text-sm font-medium opacity-70 hover:opacity-100 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                     مركز ملفات الدروس
                 </a>
@@ -974,6 +974,24 @@
             </div>
         </div>
     </div>
+
+
+    <!-- ==========================================
+         ADMIN LOGIN GATEWAY (/admin/login)
+         ========================================== -->
+    <section id="page-admin-login" class="page admin-content bg-gray-50 py-16 min-h-screen" dir="ltr">
+        <div class="max-w-xl mx-auto px-4">
+            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+                <div class="text-center mb-8">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-red-50 text-terracotta flex items-center justify-center text-3xl mb-4">🔐</div>
+                    <p class="inline-flex rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200 px-4 py-1 text-xs font-extrabold uppercase tracking-wide mb-4">Admin Gateway</p>
+                    <h1 class="text-3xl font-black text-chefchaouen mb-2">Admin Gateway</h1>
+                    <p class="text-gray-500">Use your admin email and admin code to manage lesson media.</p>
+                </div>
+                <div id="adminLoginGatewayRoot"></div>
+            </div>
+        </div>
+    </section>
 
     <!-- ==========================================
          ADMIN HIDDEN PAGE: Reset Supabase Admin Password (/admin/reset-password)
@@ -1090,7 +1108,7 @@
     </section>
 
     <!-- ==========================================
-         ADMIN PAGE 4: Audio (/admin/audio)
+         ADMIN PAGE 4: Lesson Media Center (/admin/lesson-media)
          ========================================== -->
     <section id="page-admin-audio" class="page admin-content bg-gray-100 py-12 min-h-screen" dir="rtl">
         <div class="max-w-4xl mx-auto px-4">
@@ -1313,17 +1331,17 @@
 
     <script src="./js/data/lessons-data.js"></script>
     <script src="./js/data/blog-data.js"></script>
-    <script src="./js/supabase-media.js?v=d68b"></script>
+    <script src="./js/supabase-media.js?v=d68de"></script>
     <script src="./js/audio-player.js?v=d68b"></script>
     <script src="./js/progress-store.js"></script>
     <script src="./js/lesson-player.js?v=d68b"></script>
     <script src="./js/blog.js"></script>
     <script src="./js/launch-qa.js"></script>
     <script src="./js/audio-readiness.js"></script>
-    <script src="./js/admin-session.js"></script>
-    <script src="./js/admin-content-manager.js?v=d68b"></script>
-    <script src="./js/admin-reset-password.js?v=d68b"></script>
-    <script src="./js/router.js"></script>
+    <script src="./js/admin-session.js?v=d68de"></script>
+    <script src="./js/admin-content-manager.js?v=d68de"></script>
+    <script src="./js/admin-reset-password.js?v=d68de"></script>
+    <script src="./js/router.js?v=d68de"></script>
     <script src="./js/app.js"></script>
 </body>
 </html>

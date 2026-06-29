@@ -22,10 +22,15 @@
   }
 
   function login() {
-    setActive(true, { redirect: '#/admin' });
+    setActive(true, { redirect: '#/admin/lesson-media' });
   }
 
-  function logout() {
+  async function logout() {
+    try {
+      await window.DarijaSupabaseMedia?.signOut?.();
+    } catch (error) {
+      // Local logout should still work even if Supabase is unreachable.
+    }
     setActive(false, { redirect: '#/' });
   }
 

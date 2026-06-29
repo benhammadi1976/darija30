@@ -93,35 +93,18 @@
   }
 
 
-  function isAdminActive() {
-    return Boolean(window.DarijaAdminSession?.isActive?.());
+  function hasSupabaseAdminSession() {
+    return Boolean(window.DarijaSupabaseMedia?.readSession?.()?.access_token);
   }
 
-  function adminGate(path) {
-    const pageId = path === '/admin/audio' ? 'page-admin-audio'
-      : path === '/admin/users' ? 'page-admin-users'
-      : path === '/admin/payments' ? 'page-admin-payments'
-      : 'page-admin-dashboard';
-    const root = document.getElementById(pageId);
-    if (!root) return;
-    root.innerHTML = `
-      <div class="max-w-3xl mx-auto px-4 py-16" dir="rtl">
-        <div class="rounded-3xl bg-white border border-gray-200 shadow-xl p-8 text-center">
-          <div class="w-16 h-16 mx-auto rounded-2xl bg-red-50 text-terracotta flex items-center justify-center text-4xl mb-5">🔐</div>
-          <span class="inline-flex rounded-full bg-gray-100 text-gray-600 border border-gray-200 px-4 py-1 text-xs font-extrabold uppercase tracking-wide mb-4">Static Admin Preview</span>
-          <h1 class="text-3xl font-black text-gray-900 mb-3">دخول الأدمين التجريبي</h1>
-          <p class="text-gray-600 mb-6 max-w-xl mx-auto">قبل Backend وقاعدة البيانات، هذا زر تجريبي فقط لتفعيل رؤية الأدمين. عندما تخرج، يرجع الموقع إلى جهة المتعلم/الزائر وتعود الدروس المقفلة إلى Preview محدود.</p>
-          <div class="grid sm:grid-cols-2 gap-3 mb-6 text-sm text-right">
-            <div class="rounded-2xl bg-green-50 border border-green-100 p-4"><p class="font-extrabold text-green-800">داخل الأدمين</p><p class="text-green-900">ترى المحتوى الكامل + القفل واضح أنه مفعل للمتعلمين.</p></div>
-            <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4"><p class="font-extrabold text-blue-800">بعد الخروج</p><p class="text-blue-900">ترجع كزائر/متعلم، والدروس المدفوعة تظهر Preview فقط.</p></div>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <button type="button" data-admin-login-demo class="bg-terracotta hover:bg-red-700 text-white px-6 py-3 rounded-xl font-extrabold transition">دخول كأدمين تجريبي</button>
-            <a href="#/app/lessons" class="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-3 rounded-xl font-extrabold transition">الدخول كمتعلم</a>
-          </div>
-        </div>
-      </div>
-    `;
+  function isAdminActive() {
+    return Boolean(window.DarijaAdminSession?.isActive?.() && hasSupabaseAdminSession());
+  }
+
+  function adminGate() {
+    if ((window.location.hash || '').replace(/^#/, '') !== '/admin/login') {
+      window.location.replace('#/admin/login');
+    }
   }
 
   function allPhrases() {
@@ -388,40 +371,105 @@
     const email = session?.user?.email || '';
     const ready = Boolean(config.url && config.publishableKey && session?.access_token);
     return `
-      <div class="admin-supabase-panel rounded-3xl bg-green-50/70 border border-green-100 p-5 mb-6" data-admin-supabase-panel>
-        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+      <div class="admin-supabase-panel rounded-3xl ${ready ? 'bg-green-50/70 border-green-100' : 'bg-yellow-50/80 border-yellow-200'} border p-5 mb-6" data-admin-supabase-panel>
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
-            <p class="text-[11px] font-black uppercase tracking-wide text-green-700">Supabase Media Backend</p>
-            <h3 class="text-xl font-black text-gray-900">حفظ ملفات الدروس في Supabase</h3>
-            <p class="text-sm text-green-900">الأدمن يرفع MP3 / MP4 / صورة إلى Supabase. المتعلم يشغل الملفات من أي جهاز.</p>
+            <p class="text-[11px] font-black uppercase tracking-wide ${ready ? 'text-green-700' : 'text-yellow-800'}">Admin Gateway</p>
+            <h3 class="text-xl font-black text-gray-900">${ready ? 'الأدمن متصل بمركز ملفات الدروس' : 'دخول الأدمن مطلوب'}</h3>
+            <p class="text-sm ${ready ? 'text-green-900' : 'text-yellow-900'}">${ready ? `تم الدخول كـ ${escapeHtml(email || 'admin')}. يمكنك رفع الملفات وتعديل الجمل.` : 'سجّل الدخول من بوابة الأدمن بالبريد وكود الأدمن قبل رفع الملفات أو حفظ الجمل.'}</p>
           </div>
-          ${badge(ready ? 'Connected + Admin login' : (config.publishableKey ? 'Key saved' : 'Needs key/login'), ready ? 'green' : 'yellow')}
-        </div>
-        <div class="grid lg:grid-cols-2 gap-4" dir="ltr">
-          <div class="rounded-2xl bg-white border border-green-100 p-4">
-            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-2">Project URL</label>
-            <input data-supabase-url class="admin-supabase-input" value="${escapeHtml(config.url || '')}" placeholder="https://...supabase.co">
-            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mt-3 mb-2">Publishable key</label>
-            <input data-supabase-key class="admin-supabase-input" type="password" placeholder="Paste sb_publishable_... here once">
-            <div class="flex flex-wrap gap-2 mt-3">
-              <button type="button" data-supabase-save-config class="admin-record-mp3-btn admin-record-mp3-btn--copy">Save media config</button>
-            </div>
-            <p class="admin-supabase-note mt-3">المفتاح publishable محفوظ محلياً في هذا المتصفح فقط. لا نستخدم Secret key داخل الموقع.</p>
-          </div>
-          <div class="rounded-2xl bg-white border border-green-100 p-4">
-            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mb-2">Admin email</label>
-            <input data-supabase-email class="admin-supabase-input" type="email" placeholder="admin email" value="${escapeHtml(email)}">
-            <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400 mt-3 mb-2">Admin password</label>
-            <input data-supabase-password class="admin-supabase-input" type="password" placeholder="Supabase admin password">
-            <div class="flex flex-wrap gap-2 mt-3">
-              <button type="button" data-supabase-login class="admin-record-mp3-btn admin-record-mp3-btn--start">Login admin</button>
-              <button type="button" data-supabase-logout class="admin-record-mp3-btn admin-record-mp3-btn--stop">Logout</button>
-            </div>
-            <p data-supabase-status class="admin-record-mp3-status ${ready ? 'is-success' : ''}">${ready ? `Logged in as ${escapeHtml(email || 'admin')}` : 'Save media config, then login before uploading lesson media files.'}</p>
+          <div class="flex flex-wrap gap-2">
+            ${ready ? '<button type="button" data-supabase-logout class="admin-record-mp3-btn admin-record-mp3-btn--stop">خروج من بوابة الأدمن</button>' : '<a href="#/admin/login" class="admin-record-mp3-btn admin-record-mp3-btn--start text-center">دخول بوابة الأدمن</a>'}
           </div>
         </div>
+        <p data-supabase-status class="admin-record-mp3-status ${ready ? 'is-success' : 'is-warning'} mt-3">${ready ? `Logged in as ${escapeHtml(email || 'admin')}.` : 'Admin login is required before upload or phrase save.'}</p>
       </div>
     `;
+  }
+
+  function renderAdminLoginGateway() {
+    const root = document.getElementById('adminLoginGatewayRoot');
+    if (!root) return;
+    const media = window.DarijaSupabaseMedia;
+    const config = media?.readConfig?.() || { url: 'https://ueovreadkfmwsniksohn.supabase.co', publishableKey: '' };
+    const session = media?.readSession?.() || null;
+    const isReady = Boolean(config.url && config.publishableKey);
+    if (window.DarijaAdminSession?.isActive?.() && session?.access_token) {
+      root.innerHTML = `
+        <div class="rounded-2xl bg-green-50 border border-green-100 p-5 text-center" dir="rtl">
+          <p class="font-black text-green-800 mb-2">أنت داخل كأدمن</p>
+          <p class="text-sm text-green-900 mb-4">${escapeHtml(session?.user?.email || 'admin')}</p>
+          <a href="#/admin/lesson-media" class="inline-flex bg-terracotta hover:bg-red-700 text-white px-6 py-3 rounded-xl font-extrabold transition">افتح مركز ملفات الدروس</a>
+        </div>
+      `;
+      return;
+    }
+    root.innerHTML = `
+      <form data-admin-gateway-form class="space-y-5">
+        <div>
+          <label class="block text-sm font-extrabold text-medina mb-2">Admin Email</label>
+          <input data-admin-gateway-email type="email" autocomplete="username" class="w-full bg-blue-50/70 border border-gray-200 rounded-xl px-4 py-4 font-bold text-medina focus:outline-none focus:ring-2 focus:ring-chefchaouen/20 focus:border-chefchaouen" placeholder="admin@example.com" required>
+        </div>
+        <div>
+          <label class="block text-sm font-extrabold text-medina mb-2">Admin Code</label>
+          <input data-admin-gateway-password type="password" autocomplete="current-password" class="w-full bg-blue-50/70 border border-gray-200 rounded-xl px-4 py-4 font-bold text-medina focus:outline-none focus:ring-2 focus:ring-chefchaouen/20 focus:border-chefchaouen" placeholder="Admin password" required>
+          <p class="text-xs text-gray-500 mt-2">Admin Code هو كلمة سر Supabase الآمنة، وليست كودًا مكشوفًا داخل الموقع.</p>
+        </div>
+        <button type="submit" class="w-full bg-medina hover:bg-gray-900 text-white font-extrabold py-4 px-6 rounded-xl transition">دخول لوحة الأدمن</button>
+        <div data-admin-gateway-status class="hidden rounded-2xl border px-4 py-3 text-sm font-extrabold"></div>
+      </form>
+      <details class="mt-6 rounded-2xl bg-gray-50 border border-gray-200 p-4">
+        <summary class="cursor-pointer text-sm font-extrabold text-gray-600">إعداد تقني لأول مرة</summary>
+        <div class="mt-4 space-y-3" dir="ltr">
+          <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400">Project URL</label>
+          <input data-admin-gateway-url class="admin-supabase-input" value="${escapeHtml(config.url || '')}" placeholder="https://...supabase.co">
+          <label class="block text-[11px] font-extrabold uppercase tracking-wide text-gray-400">Publishable key</label>
+          <input data-admin-gateway-key class="admin-supabase-input" type="password" value="" placeholder="${isReady ? 'Saved in this browser' : 'Paste sb_publishable_... here once'}">
+          <button type="button" data-admin-gateway-save-config class="admin-record-mp3-btn admin-record-mp3-btn--copy">Save admin gateway config</button>
+          <p class="text-xs text-gray-500" dir="rtl">هذا الإعداد يُحفظ محليًا في المتصفح. لا نستخدم Secret key داخل الواجهة.</p>
+        </div>
+      </details>
+    `;
+    bindAdminLoginGateway(root);
+  }
+
+  function setAdminGatewayStatus(root, message, tone = '') {
+    const status = root?.querySelector('[data-admin-gateway-status]');
+    if (!status) return;
+    status.classList.remove('hidden', 'bg-red-50', 'text-red-800', 'border-red-200', 'bg-green-50', 'text-green-800', 'border-green-200', 'bg-blue-50', 'text-blue-800', 'border-blue-200');
+    const className = tone === 'error'
+      ? 'bg-red-50 text-red-800 border-red-200'
+      : tone === 'success'
+        ? 'bg-green-50 text-green-800 border-green-200'
+        : 'bg-blue-50 text-blue-800 border-blue-200';
+    status.className = `rounded-2xl border px-4 py-3 text-sm font-extrabold ${className}`;
+    status.textContent = message;
+  }
+
+  function bindAdminLoginGateway(root) {
+    root.querySelector('[data-admin-gateway-save-config]')?.addEventListener('click', () => {
+      const url = root.querySelector('[data-admin-gateway-url]')?.value || '';
+      const publishableKey = root.querySelector('[data-admin-gateway-key]')?.value || '';
+      try {
+        window.DarijaSupabaseMedia?.saveConfig?.({ url, publishableKey });
+        setAdminGatewayStatus(root, 'تم حفظ إعداد بوابة الأدمن في هذا المتصفح.', 'success');
+      } catch (error) {
+        setAdminGatewayStatus(root, 'تعذر حفظ إعداد بوابة الأدمن.', 'error');
+      }
+    });
+    root.querySelector('[data-admin-gateway-form]')?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = root.querySelector('[data-admin-gateway-email]')?.value || '';
+      const password = root.querySelector('[data-admin-gateway-password]')?.value || '';
+      try {
+        setAdminGatewayStatus(root, 'جاري الدخول إلى بوابة الأدمن...', 'info');
+        await window.DarijaSupabaseMedia?.signIn?.(email, password);
+        setAdminGatewayStatus(root, 'تم الدخول. سيتم فتح مركز ملفات الدروس الآن.', 'success');
+        window.DarijaAdminSession?.setActive?.(true, { redirect: '#/admin/lesson-media' });
+      } catch (error) {
+        setAdminGatewayStatus(root, error?.message || 'تعذر الدخول. تأكد من الإيميل وكود الأدمن.', 'error');
+      }
+    });
   }
 
   function setSupabasePanelStatus(panel, message, tone = '') {
@@ -841,7 +889,7 @@
               <p>✅ يعرف أين يضع الفيديو لكل جملة.</p>
               <p>✅ يدير المستوى واليوم والجملة والملفات من مكان واحد.</p>
             </div>
-            <a href="#/admin/audio" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
+            <a href="#/admin/lesson-media" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
           </div>
         </div>
 
@@ -954,7 +1002,7 @@
         </div>
         <div class="grid grid-cols-2 gap-3 mb-5">
           <a href="#/app/lesson/${escapeHtml(lesson.day)}?admin=1" class="text-center bg-terracotta hover:bg-red-700 text-white px-4 py-3 rounded-xl font-bold transition">افتح كمتعلم</a>
-          <a href="#/admin/audio" class="text-center bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-4 py-3 rounded-xl font-bold transition">مركز الملفات</a>
+          <a href="#/admin/lesson-media" class="text-center bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-4 py-3 rounded-xl font-bold transition">مركز الملفات</a>
         </div>
         <div class="space-y-3">
           ${(lesson.phrases || []).map((phrase, index) => {
@@ -1013,7 +1061,7 @@
           <h3 class="font-extrabold text-blue-900 mb-2">مركز ملفات الدروس</h3>
           <p class="text-sm text-blue-900 mb-3">كل حالة أعلاه زر مباشر: اضغط على “ينتظر التسجيل” أو “موجود” لرفع أو استبدال الملف من الحاسوب. لإدارة كل الجمل بسرعة افتح مركز ملفات الدروس.</p>
           <div class="flex flex-wrap gap-2" dir="ltr">
-            <a href="#/admin/audio" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Lesson Media Center</a>
+            <a href="#/admin/lesson-media" class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-100">Open Lesson Media Center</a>
             <a href="${escapeHtml(learnerPhraseHrefFromPhrase(lesson, phrase, 'phrase-editor'))}" class="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-blue-800">Learner Preview</a>
           </div>
         </div>
@@ -1338,6 +1386,7 @@
     panel.querySelector('[data-supabase-logout]')?.addEventListener('click', async () => {
       await window.DarijaSupabaseMedia?.signOut?.();
       setSupabasePanelStatus(panel, 'Logged out from Supabase media admin.', 'is-warning');
+      window.DarijaAdminSession?.setActive?.(false, { redirect: '#/admin/login' });
     });
   }
 
@@ -1403,16 +1452,20 @@
   function renderForPath(path) {
     if (!String(path || '').startsWith('/admin')) return;
     if (path === '/admin/reset-password') return;
+    if (path === '/admin/audio' || path === '/admin/lessons' || path === '/admin/phrases') {
+      window.location.replace('#/admin/lesson-media');
+      return;
+    }
+    if (path === '/admin/login') {
+      renderAdminLoginGateway();
+      return;
+    }
     if (!isAdminActive()) {
       adminGate(path);
       return;
     }
-    if (path === '/admin/lessons' || path === '/admin/phrases') {
-      window.location.replace('#/admin/audio');
-      return;
-    }
     if (path === '/admin') renderDashboard();
-    else if (path === '/admin/audio') renderAudio();
+    else if (path === '/admin/lesson-media') renderAudio();
     else if (path === '/admin/users') renderUsers();
     else if (path === '/admin/payments') renderPayments();
   }
