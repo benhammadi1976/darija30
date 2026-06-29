@@ -2184,26 +2184,76 @@
     }).join('');
   }
 
-  function weeklyWheelImageUrl(phrase) {
-    const raw = phrase?.sceneVisual || phrase?.scenePoster || '';
+  function normalizeWeeklyWheelImageCandidate(value) {
+    const raw = String(value || '').trim();
     if (!raw) return '';
-    return window.DarijaSupabaseMedia?.imageCandidates?.(raw)?.[0] || raw;
+    if (!/\.(png|jpe?g|webp|svg)(\?.*)?$/i.test(raw)) return '';
+    return raw;
+  }
+
+  function weeklyWheelImageCandidates(phrase) {
+    const rawValues = [
+      phrase?.sceneVisual,
+      phrase?.sceneImage,
+      phrase?.visual,
+      phrase?.visualImage,
+      phrase?.image,
+      phrase?.imageUrl,
+      phrase?.poster,
+      phrase?.scenePoster,
+      phrase?.sceneVisualPath,
+      phrase?.visualPath,
+      phrase?.media?.visual,
+      phrase?.media?.image
+    ];
+    const candidates = [];
+    const addCandidate = (value) => {
+      const clean = normalizeWeeklyWheelImageCandidate(value);
+      if (!clean || candidates.includes(clean)) return;
+      candidates.push(clean);
+    };
+    rawValues.forEach((value) => {
+      const clean = normalizeWeeklyWheelImageCandidate(value);
+      if (!clean) return;
+      // Prefer the local bundled asset first. Supabase candidates are useful fallback paths, but
+      // a remote public URL can fail when the file was not uploaded yet.
+      addCandidate(clean);
+      const remote = window.DarijaSupabaseMedia?.imageCandidates?.(clean)?.[0] || '';
+      addCandidate(remote);
+    });
+    return candidates;
+  }
+
+  function weeklyWheelImageUrl(phrase) {
+    return weeklyWheelImageCandidates(phrase)[0] || '';
+  }
+
+  function weeklyWheelImageTag(entry, className = '') {
+    const candidates = weeklyWheelImageCandidates(entry?.phrase);
+    const image = candidates[0] || '';
+    if (!image) return '';
+    const fallback = candidates.find((candidate) => candidate !== image) || '';
+    const alt = entry?.phrase?.sceneVisualAlt || entry?.phrase?.english || entry?.phrase?.friendlyLatin || `Situation ${entry?.number || ''}`;
+    const onError = fallback
+      ? `this.onerror=null;this.src='${escapeHtml(fallback)}';`
+      : `this.closest('.weekly-wheel-memory-bg-card,.weekly-wheel-memory-card')?.classList.add('is-image-missing');this.remove();`;
+    return `<img class="${escapeHtml(className)}" src="${escapeHtml(image)}" alt="${escapeHtml(alt)}" loading="lazy" onerror="${onError}">`;
   }
 
   function weeklyWheelMemoryCards(bank, currentNumber) {
     const items = (Array.isArray(bank) ? bank : [])
-      .filter((entry) => weeklyWheelImageUrl(entry.phrase))
+      .filter((entry) => weeklyWheelImageCandidates(entry.phrase).length)
       .slice(0, 18);
     if (!items.length) return '';
     const total = items.length;
     return `
       <div class="weekly-wheel-memory-cards" aria-hidden="true">
         ${items.map((entry, index) => {
-          const image = weeklyWheelImageUrl(entry.phrase);
           const angle = (360 * index) / Math.max(total, 1);
           const active = Number(currentNumber) === Number(entry.number);
           return `
-            <span class="weekly-wheel-memory-card ${active ? 'is-active' : ''}" style="--card-angle:${angle.toFixed(4)}deg; background-image:url('${escapeHtml(image)}');">
+            <span class="weekly-wheel-memory-card ${active ? 'is-active' : ''}" style="--card-angle:${angle.toFixed(4)}deg;">
+              ${weeklyWheelImageTag(entry, 'weekly-wheel-memory-card__img')}
               <b>#${escapeHtml(entry.number)}</b>
             </span>
           `;
@@ -2213,25 +2263,22 @@
   }
 
   function weeklyWheelBackgroundPool(bank) {
-    const source = (Array.isArray(bank) ? bank : []).filter((entry) => weeklyWheelImageUrl(entry.phrase));
-    if (source.length) return source;
-    const fallback = (Array.isArray(bank) ? bank : []).slice(0, 1);
-    return fallback.length ? fallback : [];
+    return (Array.isArray(bank) ? bank : []).filter((entry) => weeklyWheelImageCandidates(entry.phrase).length);
   }
 
   function weeklyWheelMemoryBackground(bank, currentNumber) {
     const source = weeklyWheelBackgroundPool(bank);
     if (!source.length) return '';
-    const total = Math.max(48, Math.min(84, source.length * 2));
+    const total = Math.max(42, Math.min(72, source.length * 2));
     return `
       <div class="weekly-wheel-memory-bg" aria-hidden="true">
         ${Array.from({ length: total }, (_, index) => {
           const entry = source[index % source.length];
-          const image = weeklyWheelImageUrl(entry.phrase);
           const active = Number(currentNumber) === Number(entry.number);
           const sizeClass = index % 7 === 0 ? 'is-large' : index % 5 === 0 ? 'is-medium' : 'is-small';
           return `
-            <span class="weekly-wheel-memory-bg-card ${active ? 'is-active' : ''} ${sizeClass}" style="--card-index:${index}; --bg-image:url('${escapeHtml(image)}'); background-image:url('${escapeHtml(image)}');">
+            <span class="weekly-wheel-memory-bg-card ${active ? 'is-active' : ''} ${sizeClass}" style="--card-index:${index};">
+              ${weeklyWheelImageTag(entry, 'weekly-wheel-memory-bg-card__img')}
               <b>#${escapeHtml(entry.number)}</b>
             </span>
           `;
