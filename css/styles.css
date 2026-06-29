@@ -5774,3 +5774,136 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
 .weekly-wheel-memory-bg-card { z-index: 1 !important; }
 .weekly-wheel-memory-bg::after { z-index: 2 !important; pointer-events: none !important; }
 .weekly-wheel-memory-bg-card__img { position: absolute; inset: 0; z-index: 0; }
+
+/* === D69-FIX-9: optional weekly wheel prompt after daily check === */
+.weekly-prompt-page {
+  position: relative;
+  min-height: calc(100vh - 112px);
+  display: grid;
+  place-items: center;
+  padding: 3rem 1rem;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(41, 128, 185, 0.10), transparent 34%), #07101d;
+}
+
+.weekly-prompt-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  filter: saturate(0.9) blur(0.5px);
+  pointer-events: none;
+}
+
+.weekly-prompt-bg .weekly-wheel-memory-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.weekly-prompt-card {
+  position: relative;
+  z-index: 2;
+  width: min(760px, 94vw);
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.weekly-prompt-card__eyebrow {
+  display: inline-flex;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #c0392b;
+  border: 1px solid #fed7aa;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.weekly-prompt-card h1 {
+  color: #0f172a;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.08;
+  font-weight: 950;
+  margin: 0 0 1rem;
+}
+
+.weekly-prompt-card p {
+  color: #475569;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  max-width: 620px;
+  margin: 0 auto 1.25rem;
+}
+
+.weekly-prompt-card__stats {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.weekly-prompt-card__stats span {
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.weekly-prompt-card__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.weekly-prompt-card__primary,
+.weekly-prompt-card__secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.35rem;
+  border-radius: 999px;
+  padding: 0.85rem 1.45rem;
+  font-weight: 950;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.weekly-prompt-card__primary {
+  background: #c0392b;
+  color: #fff;
+  box-shadow: 0 18px 32px rgba(192, 57, 43, 0.24);
+}
+
+.weekly-prompt-card__secondary {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.weekly-prompt-card__primary:hover,
+.weekly-prompt-card__secondary:hover,
+.weekly-prompt-card__primary:focus-visible,
+.weekly-prompt-card__secondary:focus-visible {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .weekly-prompt-card__actions {
+    flex-direction: column;
+  }
+  .weekly-prompt-card__primary,
+  .weekly-prompt-card__secondary {
+    width: 100%;
+  }
+}

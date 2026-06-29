@@ -964,6 +964,23 @@
     window.setTimeout(() => { burst.innerHTML = ''; }, 2200);
   }
 
+  function maybeOpenWeeklyPromptAfterDailyCheck(card) {
+    if (!card || card.dataset.weeklyWheelReturn === '1') return false;
+    const lesson = findLesson(card.dataset.lessonId || '');
+    const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson?.day);
+    if (!weeklyPlanKey) return false;
+    const total = Array.isArray(lesson?.phrases) ? lesson.phrases.length : 0;
+    const index = Number(card.dataset.phraseIndex || 0);
+    if (!total || index < total - 1) return false;
+    window.clearTimeout(Number(card.dataset.weeklyPromptTimer || 0));
+    const timer = window.setTimeout(() => {
+      setLessonPracticeOpen(lesson, false);
+      window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=prompt`;
+    }, 1900);
+    card.dataset.weeklyPromptTimer = String(timer);
+    return true;
+  }
+
   function passSituationChallenge(card, assisted = false) {
     fillSituationBubble(card, card.dataset.target || '');
     card.dataset.passed = '1';
@@ -993,6 +1010,8 @@
         });
       }, result?.correct ? 1700 : 1900);
       card.dataset.weeklyReturnTimer = String(timer);
+    } else {
+      maybeOpenWeeklyPromptAfterDailyCheck(card);
     }
   }
 
@@ -1001,17 +1020,15 @@
     const isLastPhrase = phrases.length && phraseIndex >= phrases.length - 1;
     if (!lesson || !isLastPhrase || !isLessonPracticeUnlocked(lesson)) return '';
     const next = nextLesson(lesson);
-    const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson.day);
-    const isWeeklyCheckpoint = Boolean(weeklyPlanKey);
     return `
       <div class="lesson-completion-choice mt-8">
         <div>
           <p class="lesson-completion-choice__eyebrow">Great, you finished today’s phrases</p>
-          <h3 class="lesson-completion-choice__title">${isWeeklyCheckpoint ? 'Spin the weekly situation wheel' : 'Do you remember what to say in Morocco?'}</h3>
-          <p class="lesson-completion-choice__copy">${isWeeklyCheckpoint ? 'This checkpoint uses the same Do you remember? screen, but the wheel chooses each situation first.' : 'Test yourself in a big slide-style practice screen, or continue to the next day.'}</p>
+          <h3 class="lesson-completion-choice__title">Do you remember what to say in Morocco?</h3>
+          <p class="lesson-completion-choice__copy">Test yourself in the daily big slide-style practice screen. On weekly checkpoint days, the optional weekly wheel appears after the daily check is complete.</p>
         </div>
         <div class="lesson-completion-choice__actions">
-          <button type="button" class="lesson-completion-choice__primary" data-open-situation-practice>${isWeeklyCheckpoint ? 'Start Weekly Wheel' : 'Do you remember?'}</button>
+          <button type="button" class="lesson-completion-choice__primary" data-open-situation-practice>Do you remember?</button>
           ${next ? `<a class="lesson-completion-choice__secondary" href="#/app/lesson/${escapeHtml(next.day)}">Continue to Day ${escapeHtml(next.day)}</a>` : `<a class="lesson-completion-choice__secondary" href="#/app/lessons">Back to the 30-day plan</a>`}
         </div>
       </div>
@@ -1845,12 +1862,6 @@
     root.querySelectorAll('[data-open-situation-practice]').forEach((button) => {
       button.addEventListener('click', () => {
         if (!isLessonPracticeUnlocked(lesson)) return;
-        const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson.day);
-        if (weeklyPlanKey) {
-          setLessonPracticeOpen(lesson, false);
-          window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=1`;
-          return;
-        }
         setLessonPracticeOpen(lesson, true);
         setSituationIndex(lesson, currentSituationIndex(lesson));
         rerender();
@@ -2023,6 +2034,40 @@
     if (value === 21) return 'week3';
     if (value === 28) return 'week4';
     return '';
+  }
+
+
+  function weeklyPromptNextLessonHref(lesson) {
+    const next = nextLesson(lesson);
+    return next ? `#/app/lesson/${encodeURIComponent(String(next.day))}` : '#/app/lessons';
+  }
+
+  function weeklyWheelPromptMarkup(lesson, planKey) {
+    const plan = weeklyWheelPlan(planKey);
+    const bank = weeklySituationBank(plan);
+    const nextHref = weeklyPromptNextLessonHref(lesson);
+    const next = nextLesson(lesson);
+    const nextLabel = next ? `تجاوز الآن إلى Day ${escapeHtml(next.day)}` : 'تجاوز الآن';
+    return `
+      <div class="weekly-prompt-page" aria-label="Optional weekly wheel prompt">
+        <div class="weekly-prompt-bg" aria-hidden="true">
+          ${weeklyWheelMemoryBackground(bank, null)}
+        </div>
+        <section class="weekly-prompt-card" dir="rtl">
+          <span class="weekly-prompt-card__eyebrow">مراجعة اختيارية</span>
+          <h1>حان وقت الاختبار الأسبوعي إن رغبت</h1>
+          <p>لقد أنهيت الاختبار اليومي ليوم ${escapeHtml(lesson?.day || '')}. يمكنك الآن تجربة عجلة مواقف الأسبوع، أو تجاوزها والانتقال للدرس التالي.</p>
+          <div class="weekly-prompt-card__stats" dir="ltr">
+            <span>${escapeHtml(plan.label)}</span>
+            <strong>${escapeHtml(String(bank.length))} situations</strong>
+          </div>
+          <div class="weekly-prompt-card__actions">
+            <button type="button" class="weekly-prompt-card__primary" data-start-weekly-wheel>ابدأ الاختبار الأسبوعي</button>
+            <a class="weekly-prompt-card__secondary" href="${escapeHtml(nextHref)}">${nextLabel}</a>
+          </div>
+        </section>
+      </div>
+    `;
   }
 
   function getWeeklyWheelRoutePlanKey(path) {
@@ -2807,7 +2852,23 @@
     const practiceOpen = isLessonPracticeOpen(lesson);
     const routeParams = getRouteParams(routePath);
     const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson?.day);
-    const weeklyRequested = Boolean(weeklyPlanKey && (routeParams.get('weekly') === '1' || routeParams.get('mode') === 'weekly'));
+    const weeklyValue = routeParams.get('weekly') || routeParams.get('mode') || '';
+    const weeklyPromptRequested = Boolean(weeklyPlanKey && weeklyValue === 'prompt');
+    const weeklyRequested = Boolean(weeklyPlanKey && (weeklyValue === '1' || weeklyValue === 'weekly'));
+
+    if (weeklyPromptRequested) {
+      setLessonPracticeOpen(lesson, false);
+      document.body.classList.toggle('is-remember-standalone', false);
+      document.body.classList.toggle('is-weekly-wheel-embedded', false);
+      document.body.classList.toggle('is-weekly-wheel-fullscreen', false);
+      const appNav = document.getElementById('app-nav');
+      if (appNav) appNav.style.display = 'block';
+      root.innerHTML = weeklyWheelPromptMarkup(lesson, weeklyPlanKey);
+      root.querySelector('[data-start-weekly-wheel]')?.addEventListener('click', () => {
+        window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=1`;
+      });
+      return;
+    }
 
     if (weeklyRequested) {
       setLessonPracticeOpen(lesson, false);
