@@ -15,6 +15,7 @@
       wheelRotation: 0,
       spinStartRotation: 0,
       spinDurationMs: 4200,
+      theme: (typeof localStorage !== 'undefined' && localStorage.getItem('darija30_weekly_wheel_theme')) || 'dark',
       mode: 'wheel',
       isSpinning: false,
       openTimer: 0,
@@ -40,6 +41,30 @@
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#039;');
+  }
+
+
+  function normalizeWeeklyWheelTheme(value) {
+    const allowed = ['dark', 'warm', 'light'];
+    return allowed.includes(value) ? value : 'dark';
+  }
+
+  function setWeeklyWheelTheme(theme) {
+    const nextTheme = normalizeWeeklyWheelTheme(theme);
+    state.weeklyWheel.theme = nextTheme;
+    try {
+      localStorage.setItem('darija30_weekly_wheel_theme', nextTheme);
+    } catch (error) {
+      /* ignore storage errors */
+    }
+  }
+
+  function weeklyWheelThemeOptions() {
+    return [
+      { key: 'dark', label: 'Dark', swatch: '#06070b' },
+      { key: 'warm', label: 'Warm', swatch: '#d9c0a0' },
+      { key: 'light', label: 'Light', swatch: '#dfe8f2' }
+    ];
   }
 
   function findLesson(identifier) {
@@ -2168,7 +2193,7 @@
   function weeklyWheelMemoryCards(bank, currentNumber) {
     const items = (Array.isArray(bank) ? bank : [])
       .filter((entry) => weeklyWheelImageUrl(entry.phrase))
-      .slice(0, 16);
+      .slice(0, 18);
     if (!items.length) return '';
     const total = items.length;
     return `
@@ -2187,28 +2212,44 @@
     `;
   }
 
+  function weeklyWheelBackgroundPool(bank) {
+    const source = (Array.isArray(bank) ? bank : []).filter((entry) => weeklyWheelImageUrl(entry.phrase));
+    if (source.length) return source;
+    const fallback = (Array.isArray(bank) ? bank : []).slice(0, 1);
+    return fallback.length ? fallback : [];
+  }
 
   function weeklyWheelMemoryBackground(bank, currentNumber) {
-    const items = (Array.isArray(bank) ? bank : [])
-      .filter((entry) => weeklyWheelImageUrl(entry.phrase))
-      .slice(0, 28);
-    if (!items.length) return '';
+    const source = weeklyWheelBackgroundPool(bank);
+    if (!source.length) return '';
+    const total = Math.max(48, Math.min(84, source.length * 2));
     return `
       <div class="weekly-wheel-memory-bg" aria-hidden="true">
-        ${items.map((entry, index) => {
+        ${Array.from({ length: total }, (_, index) => {
+          const entry = source[index % source.length];
           const image = weeklyWheelImageUrl(entry.phrase);
-          const col = index % 7;
-          const row = Math.floor(index / 7);
-          const left = 4 + (col * 15) + ((row % 2) * 5);
-          const top = 8 + (row * 20) + ((col % 2) * 4);
-          const rotate = ((index % 5) - 2) * 5;
           const active = Number(currentNumber) === Number(entry.number);
+          const sizeClass = index % 7 === 0 ? 'is-large' : index % 5 === 0 ? 'is-medium' : 'is-small';
           return `
-            <span class="weekly-wheel-memory-bg-card ${active ? 'is-active' : ''}" style="left:${left}%; top:${top}%; --bg-rotate:${rotate}deg; background-image:url('${escapeHtml(image)}');">
+            <span class="weekly-wheel-memory-bg-card ${active ? 'is-active' : ''} ${sizeClass}" style="--card-index:${index}; --bg-image:url('${escapeHtml(image)}'); background-image:url('${escapeHtml(image)}');">
               <b>#${escapeHtml(entry.number)}</b>
             </span>
           `;
         }).join('')}
+      </div>
+    `;
+  }
+
+  function weeklyWheelThemePicker() {
+    const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
+    return `
+      <div class="weekly-wheel-theme-switcher" aria-label="Choose wheel background theme">
+        ${weeklyWheelThemeOptions().map((option) => `
+          <button type="button" data-weekly-theme="${escapeHtml(option.key)}" class="weekly-wheel-theme-chip ${option.key === activeTheme ? 'is-active' : ''}" aria-label="${escapeHtml(option.label)} theme">
+            <span class="weekly-wheel-theme-chip__swatch" style="--theme-swatch:${escapeHtml(option.swatch)};"></span>
+            <span>${escapeHtml(option.label)}</span>
+          </button>
+        `).join('')}
       </div>
     `;
   }
@@ -2229,6 +2270,7 @@
     if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
     const score = weeklyWheelScore(plan.key, challengeSize);
+    const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
     const current = currentWeeklyWheelEntry(plan);
     const currentBankIndex = current ? bank.findIndex((entry) => entry.id === current.id) : -1;
     const currentRound = current ? Math.min(score.total + 1, challengeSize || 1) : Math.min(score.total + 1, challengeSize || 1);
@@ -2282,8 +2324,9 @@
 
     if (fullscreenWheel) {
       root.innerHTML = `
-        <div class="weekly-wheel-page weekly-wheel-page--spin weekly-wheel-page--embedded weekly-wheel-page--fullscreen-wheel" aria-label="${escapeHtml(plan.title)}">
+        <div class="weekly-wheel-page weekly-wheel-page--spin weekly-wheel-page--embedded weekly-wheel-page--fullscreen-wheel" data-weekly-theme="${escapeHtml(activeTheme)}" aria-label="${escapeHtml(plan.title)}">
           <section class="weekly-wheel-game-card weekly-wheel-game-card--visual weekly-wheel-game-card--fullscreen ${state.weeklyWheel.isSpinning ? 'is-spinning' : ''}" aria-live="polite">
+            ${weeklyWheelThemePicker()}
             ${weeklyWheelMemoryBackground(bank, activeWheelNumber)}
 
             <div class="weekly-wheel-fullscreen-size-rail" aria-label="Choose challenge size">
@@ -2331,7 +2374,7 @@
       `;
     } else {
       root.innerHTML = `
-        <div class="weekly-wheel-page weekly-wheel-page--spin ${embedded ? 'weekly-wheel-page--embedded' : ''}">
+        <div class="weekly-wheel-page weekly-wheel-page--spin ${embedded ? 'weekly-wheel-page--embedded' : ''}" data-weekly-theme="${escapeHtml(activeTheme)}">
           ${embedded ? '' : `
             <div class="weekly-wheel-tabs" aria-label="Choose weekly wheel">
               ${weeklyWheelPlans().map((item) => `
@@ -2344,6 +2387,7 @@
           `}
 
           <section class="weekly-wheel-game-card weekly-wheel-game-card--visual ${state.weeklyWheel.isSpinning ? 'is-spinning' : ''}" aria-live="polite">
+            ${weeklyWheelThemePicker()}
             ${weeklyWheelMemoryBackground(bank, activeWheelNumber)}
             <div class="weekly-wheel-game-top">
               <div>
@@ -2402,6 +2446,14 @@
         </div>
       `;
     }
+    root.querySelectorAll('[data-weekly-theme]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (state.weeklyWheel.isSpinning) return;
+        setWeeklyWheelTheme(button.dataset.weeklyTheme);
+        renderWeeklyWheel(options);
+      });
+    });
+
     root.querySelectorAll('[data-weekly-plan]').forEach((button) => {
       button.addEventListener('click', () => {
         if (state.weeklyWheel.isSpinning) return;
