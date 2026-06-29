@@ -4427,10 +4427,21 @@ body.is-remember-standalone #page-app-weekly-wheel {
   min-height: 100svh;
 }
 
-body.is-remember-standalone #weeklyWheelRoot {
+body.is-remember-standalone #weeklyWheelRoot,
+body.is-remember-standalone #lessonPlayerRoot {
   max-width: none !important;
   width: 100% !important;
   padding: 0 !important;
+}
+
+body.is-remember-standalone #page-app-lesson {
+  padding: 0 !important;
+  background: #07111f !important;
+  min-height: 100svh;
+}
+
+body.is-weekly-wheel-embedded #page-app-lesson {
+  background: #f8fafc !important;
 }
 
 .weekly-remember-page {
@@ -4457,6 +4468,12 @@ body.is-remember-standalone #weeklyWheelRoot {
 .weekly-wheel-page--spin {
   max-width: 72rem;
   margin: 0 auto;
+  padding-block: clamp(0.4rem, 1.5vw, 1rem);
+}
+
+.weekly-wheel-page--embedded {
+  max-width: 74rem;
+  padding: clamp(1rem, 2vw, 1.6rem) clamp(0.75rem, 2vw, 1.25rem) clamp(2rem, 4vw, 3rem);
 }
 
 .weekly-wheel-hero--compact {
@@ -4476,6 +4493,23 @@ body.is-remember-standalone #weeklyWheelRoot {
     radial-gradient(circle at 50% 42%, rgba(41,128,185,0.10), transparent 34%),
     #ffffff;
   box-shadow: 0 22px 70px rgba(17, 24, 39, 0.08);
+}
+
+.weekly-wheel-game-card--visual::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(41, 128, 185, 0.14), transparent 26%),
+    radial-gradient(circle at 82% 14%, rgba(192, 57, 43, 0.12), transparent 24%),
+    radial-gradient(circle at 55% 92%, rgba(250, 204, 21, 0.12), transparent 26%);
+  pointer-events: none;
+}
+
+.weekly-wheel-game-card--visual > * {
+  position: relative;
+  z-index: 1;
 }
 
 .weekly-wheel-game-card.is-spinning .weekly-wheel-disc--large,
@@ -4535,8 +4569,75 @@ body.is-remember-standalone #weeklyWheelRoot {
   isolation: isolate;
 }
 
+.weekly-wheel-big-stage--memory {
+  width: min(47rem, 92vw);
+}
+
+.weekly-wheel-memory-cards {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.weekly-wheel-memory-card {
+  --card-radius: min(21rem, 42vw);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(3.2rem, 8vw, 5.4rem);
+  height: clamp(4.1rem, 10vw, 6.7rem);
+  margin: calc(clamp(4.1rem, 10vw, 6.7rem) / -2) 0 0 calc(clamp(3.2rem, 8vw, 5.4rem) / -2);
+  border-radius: 0.9rem;
+  background-size: cover;
+  background-position: center;
+  transform:
+    rotate(var(--card-angle))
+    translateY(calc(-1 * var(--card-radius)))
+    rotate(calc(-1 * var(--card-angle)));
+  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.18), inset 0 0 0 2px rgba(255, 255, 255, 0.78);
+  opacity: 0.78;
+  overflow: hidden;
+}
+
+.weekly-wheel-memory-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.42));
+}
+
+.weekly-wheel-memory-card b {
+  position: absolute;
+  right: 0.35rem;
+  bottom: 0.3rem;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.55rem;
+  height: 1.35rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111827;
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+.weekly-wheel-memory-card.is-active {
+  opacity: 1;
+  transform:
+    rotate(var(--card-angle))
+    translateY(calc(-1 * var(--card-radius)))
+    rotate(calc(-1 * var(--card-angle)))
+    scale(1.12);
+  box-shadow: 0 18px 34px rgba(250, 204, 21, 0.36), inset 0 0 0 3px #facc15;
+}
+
 .weekly-wheel-disc--large {
-  width: min(32rem, 76vw);
+  z-index: 2;
+  width: min(32rem, 72vw);
   transform: rotate(var(--wheel-rotation, 0deg));
   background:
     repeating-conic-gradient(
@@ -4550,6 +4651,7 @@ body.is-remember-standalone #weeklyWheelRoot {
 }
 
 .weekly-wheel-disc__inner--large {
+  z-index: 5;
   width: min(12rem, 27vw);
   transform: rotate(calc(-1 * var(--wheel-rotation, 0deg)));
 }
@@ -4559,6 +4661,7 @@ body.is-remember-standalone #weeklyWheelRoot {
 }
 
 .weekly-wheel-pointer--large {
+  z-index: 8;
   top: clamp(0.2rem, 0.8vw, 0.8rem);
   border-left-width: clamp(0.95rem, 1.8vw, 1.35rem);
   border-right-width: clamp(0.95rem, 1.8vw, 1.35rem);
@@ -4678,5 +4781,24 @@ body.is-remember-standalone .practice-slide__exit-row--weekly {
 
   .weekly-wheel-disc__inner--large {
     width: min(9.4rem, 34vw);
+  }
+}
+
+
+/* D69-FIX-2 — Embedded weekly wheel and visual memory card wheel */
+@media (max-width: 760px) {
+  .weekly-wheel-game-top {
+    grid-template-columns: 1fr;
+  }
+
+  .weekly-wheel-big-stage--memory {
+    width: min(100%, 92vw);
+  }
+
+  .weekly-wheel-memory-card {
+    --card-radius: min(18rem, 39vw);
+    width: clamp(2.5rem, 8.5vw, 3.6rem);
+    height: clamp(3.1rem, 10.5vw, 4.5rem);
+    border-radius: 0.65rem;
   }
 }

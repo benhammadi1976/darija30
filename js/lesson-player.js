@@ -14,7 +14,10 @@
       wheelRotation: 0,
       mode: 'wheel',
       isSpinning: false,
-      openTimer: 0
+      openTimer: 0,
+      returnRootId: '',
+      returnEmbedded: false,
+      returnPlanKey: 'week1'
     }
   };
 
@@ -941,7 +944,12 @@
       const timer = window.setTimeout(() => {
         state.weeklyWheel.mode = 'wheel';
         state.weeklyWheel.isSpinning = false;
-        renderWeeklyWheel();
+        const returnRoot = document.getElementById(state.weeklyWheel.returnRootId || 'weeklyWheelRoot');
+        renderWeeklyWheel({
+          root: returnRoot || undefined,
+          planKey: state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey,
+          embedded: Boolean(state.weeklyWheel.returnEmbedded)
+        });
       }, 2300);
       card.dataset.weeklyReturnTimer = String(timer);
     }
@@ -952,15 +960,17 @@
     const isLastPhrase = phrases.length && phraseIndex >= phrases.length - 1;
     if (!lesson || !isLastPhrase || !isLessonPracticeUnlocked(lesson)) return '';
     const next = nextLesson(lesson);
+    const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson.day);
+    const isWeeklyCheckpoint = Boolean(weeklyPlanKey);
     return `
       <div class="lesson-completion-choice mt-8">
         <div>
           <p class="lesson-completion-choice__eyebrow">Great, you finished today’s phrases</p>
-          <h3 class="lesson-completion-choice__title">Do you remember what to say in Morocco?</h3>
-          <p class="lesson-completion-choice__copy">Test yourself in a big slide-style practice screen, or continue to the next day.</p>
+          <h3 class="lesson-completion-choice__title">${isWeeklyCheckpoint ? 'Spin the weekly situation wheel' : 'Do you remember what to say in Morocco?'}</h3>
+          <p class="lesson-completion-choice__copy">${isWeeklyCheckpoint ? 'This checkpoint uses the same Do you remember? screen, but the wheel chooses each situation first.' : 'Test yourself in a big slide-style practice screen, or continue to the next day.'}</p>
         </div>
         <div class="lesson-completion-choice__actions">
-          <button type="button" class="lesson-completion-choice__primary" data-open-situation-practice>Do you remember?</button>
+          <button type="button" class="lesson-completion-choice__primary" data-open-situation-practice>${isWeeklyCheckpoint ? 'Start Weekly Wheel' : 'Do you remember?'}</button>
           ${next ? `<a class="lesson-completion-choice__secondary" href="#/app/lesson/${escapeHtml(next.day)}">Continue to Day ${escapeHtml(next.day)}</a>` : `<a class="lesson-completion-choice__secondary" href="#/app/lessons">Back to the 30-day plan</a>`}
         </div>
       </div>
@@ -1793,6 +1803,12 @@
     root.querySelectorAll('[data-open-situation-practice]').forEach((button) => {
       button.addEventListener('click', () => {
         if (!isLessonPracticeUnlocked(lesson)) return;
+        const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson.day);
+        if (weeklyPlanKey) {
+          setLessonPracticeOpen(lesson, false);
+          window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=1`;
+          return;
+        }
         setLessonPracticeOpen(lesson, true);
         setSituationIndex(lesson, currentSituationIndex(lesson));
         rerender();
@@ -1958,6 +1974,15 @@
     return plans.find((plan) => plan.key === key) || plans[0];
   }
 
+  function weeklyPlanKeyForCheckpointDay(day) {
+    const value = Number(day);
+    if (value === 7) return 'week1';
+    if (value === 14) return 'week2';
+    if (value === 21) return 'week3';
+    if (value === 28) return 'week4';
+    return '';
+  }
+
   function getWeeklyWheelRoutePlanKey(path) {
     const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
     const raw = params.get('week') || params.get('plan') || params.get('wheel') || '';
@@ -2065,12 +2090,45 @@
     }).join('');
   }
 
-  function renderWeeklyWheel() {
-    const root = document.getElementById('weeklyWheelRoot');
+  function weeklyWheelImageUrl(phrase) {
+    const raw = phrase?.sceneVisual || phrase?.scenePoster || '';
+    if (!raw) return '';
+    return window.DarijaSupabaseMedia?.imageCandidates?.(raw)?.[0] || raw;
+  }
+
+  function weeklyWheelMemoryCards(bank, currentNumber) {
+    const items = (Array.isArray(bank) ? bank : [])
+      .filter((entry) => weeklyWheelImageUrl(entry.phrase))
+      .slice(0, 16);
+    if (!items.length) return '';
+    const total = items.length;
+    return `
+      <div class="weekly-wheel-memory-cards" aria-hidden="true">
+        ${items.map((entry, index) => {
+          const image = weeklyWheelImageUrl(entry.phrase);
+          const angle = (360 * index) / Math.max(total, 1);
+          const active = Number(currentNumber) === Number(entry.number);
+          return `
+            <span class="weekly-wheel-memory-card ${active ? 'is-active' : ''}" style="--card-angle:${angle.toFixed(4)}deg; background-image:url('${escapeHtml(image)}');">
+              <b>#${escapeHtml(entry.number)}</b>
+            </span>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  function renderWeeklyWheel(options = {}) {
+    const root = options.root || document.getElementById('weeklyWheelRoot');
     if (!root) return;
-    const routeKey = getWeeklyWheelRoutePlanKey(window.location.hash.replace(/^#/, ''));
+    const embedded = Boolean(options.embedded);
+    const fixedPlanKey = options.planKey || '';
+    const routeKey = fixedPlanKey || getWeeklyWheelRoutePlanKey(window.location.hash.replace(/^#/, ''));
     if (routeKey !== state.weeklyWheel.planKey) setWeeklyWheelPlan(routeKey);
     const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
+    state.weeklyWheel.returnRootId = root.id || '';
+    state.weeklyWheel.returnEmbedded = embedded;
+    state.weeklyWheel.returnPlanKey = plan.key;
     const bank = weeklySituationBank(plan);
     const used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
     if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
@@ -2084,6 +2142,7 @@
     const appNav = document.getElementById('app-nav');
 
     document.body.classList.toggle('is-remember-standalone', Boolean(showSituation));
+    document.body.classList.toggle('is-weekly-wheel-embedded', Boolean(embedded && !showSituation));
     if (appNav) appNav.style.display = showSituation ? 'none' : 'block';
 
     if (showSituation) {
@@ -2104,40 +2163,36 @@
           })}
         </div>
       `;
-      bindSituationChallenges(root, wheelLesson, renderWeeklyWheel);
+      bindSituationChallenges(root, wheelLesson, () => renderWeeklyWheel(options));
       root.querySelectorAll('[data-weekly-back-to-wheel]').forEach((button) => {
         button.addEventListener('click', () => {
           state.weeklyWheel.mode = 'wheel';
           state.weeklyWheel.isSpinning = false;
-          renderWeeklyWheel();
+          renderWeeklyWheel(options);
         });
       });
       return;
     }
 
     root.innerHTML = `
-      <div class="weekly-wheel-page weekly-wheel-page--spin">
-        <div class="weekly-wheel-hero weekly-wheel-hero--compact">
-          <span class="weekly-wheel-eyebrow">Weekly Situation Wheel</span>
-          <h1>Can you survive this week?</h1>
-          <p>Choose the week and challenge size. Spin the big wheel. When the pointer stops, the situation opens like the daily “Do you remember?” screen.</p>
-        </div>
+      <div class="weekly-wheel-page weekly-wheel-page--spin ${embedded ? 'weekly-wheel-page--embedded' : ''}">
+        ${embedded ? '' : `
+          <div class="weekly-wheel-tabs" aria-label="Choose weekly wheel">
+            ${weeklyWheelPlans().map((item) => `
+              <button type="button" data-weekly-plan="${escapeHtml(item.key)}" class="weekly-wheel-tab ${item.key === plan.key ? 'is-active' : ''}">
+                <strong>${escapeHtml(item.label)}</strong>
+                <span>${escapeHtml(item.days)}</span>
+              </button>
+            `).join('')}
+          </div>
+        `}
 
-        <div class="weekly-wheel-tabs" aria-label="Choose weekly wheel">
-          ${weeklyWheelPlans().map((item) => `
-            <button type="button" data-weekly-plan="${escapeHtml(item.key)}" class="weekly-wheel-tab ${item.key === plan.key ? 'is-active' : ''}">
-              <strong>${escapeHtml(item.label)}</strong>
-              <span>${escapeHtml(item.days)}</span>
-            </button>
-          `).join('')}
-        </div>
-
-        <section class="weekly-wheel-game-card ${state.weeklyWheel.isSpinning ? 'is-spinning' : ''}" aria-live="polite">
+        <section class="weekly-wheel-game-card weekly-wheel-game-card--visual ${state.weeklyWheel.isSpinning ? 'is-spinning' : ''}" aria-live="polite">
           <div class="weekly-wheel-game-top">
             <div>
-              <span class="weekly-wheel-eyebrow weekly-wheel-eyebrow--small">${escapeHtml(plan.days)}</span>
+              <span class="weekly-wheel-eyebrow weekly-wheel-eyebrow--small">Weekly checkpoint • ${escapeHtml(plan.days)}</span>
               <h2>${escapeHtml(plan.title)}</h2>
-              <p>${escapeHtml(plan.description)}</p>
+              <p>Choose the challenge size, spin, then answer the selected situation in the same daily practice screen.</p>
             </div>
             <div class="weekly-wheel-stat-row weekly-wheel-stat-row--compact">
               <div><strong>${escapeHtml(String(bank.length))}</strong><span>situations</span></div>
@@ -2151,7 +2206,8 @@
             `).join('')}
           </div>
 
-          <div class="weekly-wheel-big-stage" style="--wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-slices:${escapeHtml(bank.length || 1)};">
+          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory" style="--wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-slices:${escapeHtml(bank.length || 1)};">
+            ${weeklyWheelMemoryCards(bank, current?.number)}
             <div class="weekly-wheel-pointer weekly-wheel-pointer--large" aria-hidden="true"></div>
             <div class="weekly-wheel-number-ring" aria-hidden="true">
               ${weeklyWheelNumberMarks(bank.length, current?.number)}
@@ -2181,14 +2237,14 @@
       button.addEventListener('click', () => {
         setWeeklyWheelPlan(button.dataset.weeklyPlan);
         window.location.hash = `#/app/weekly-wheel?week=${encodeURIComponent(state.weeklyWheel.planKey)}`;
-        renderWeeklyWheel();
+        renderWeeklyWheel(options);
       });
     });
 
     root.querySelectorAll('[data-weekly-size]').forEach((button) => {
       button.addEventListener('click', () => {
         setWeeklyWheelChallengeSize(button.dataset.weeklySize);
-        renderWeeklyWheel();
+        renderWeeklyWheel(options);
       });
     });
 
@@ -2199,17 +2255,17 @@
       state.weeklyWheel.mode = 'wheel';
       state.weeklyWheel.isSpinning = true;
       window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
-      renderWeeklyWheel();
+      renderWeeklyWheel(options);
       state.weeklyWheel.openTimer = window.setTimeout(() => {
         state.weeklyWheel.isSpinning = false;
         state.weeklyWheel.mode = 'situation';
-        renderWeeklyWheel();
+        renderWeeklyWheel(options);
       }, 1250);
     });
 
     root.querySelector('[data-weekly-reset]')?.addEventListener('click', () => {
       resetWeeklyWheelGame(plan.key);
-      renderWeeklyWheel();
+      renderWeeklyWheel(options);
     });
   }
 
@@ -2416,11 +2472,11 @@
       </div>
       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <span class="inline-block bg-red-50 text-terracotta text-xs font-bold px-3 py-1 rounded-full mb-2">WEEKLY GAME</span>
-          <h2 class="text-xl font-black text-medina">Spin the Weekly Situation Wheel</h2>
-          <p class="text-gray-600">Choose 5, 10, 15, or more situations. The wheel stops on a random number and opens the situation.</p>
+          <span class="inline-block bg-red-50 text-terracotta text-xs font-bold px-3 py-1 rounded-full mb-2">WEEKLY CHECKPOINT</span>
+          <h2 class="text-xl font-black text-medina">Weekly wheel appears inside Day 7, 14, 21, and 28</h2>
+          <p class="text-gray-600">Finish the checkpoint day, then start the weekly wheel instead of the normal daily practice.</p>
         </div>
-        <a href="#/app/weekly-wheel" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Open Wheel</a>
+        <a href="#/app/lesson/7?weekly=1" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Preview Day 7 Wheel</a>
       </div>
       <div>
         <h3 class="text-xl font-bold mb-4">Recent Learned Phrases</h3>
@@ -2458,7 +2514,17 @@
     const phrase = lesson?.phrases?.[index] || firstPhrase(lesson);
     const progress = Store()?.lessonProgress(lesson);
     const practiceOpen = isLessonPracticeOpen(lesson);
+    const routeParams = getRouteParams(routePath);
+    const weeklyPlanKey = weeklyPlanKeyForCheckpointDay(lesson?.day);
+    const weeklyRequested = Boolean(weeklyPlanKey && (routeParams.get('weekly') === '1' || routeParams.get('mode') === 'weekly'));
 
+    if (weeklyRequested) {
+      setLessonPracticeOpen(lesson, false);
+      renderWeeklyWheel({ root, planKey: weeklyPlanKey, embedded: true });
+      return;
+    }
+
+    document.body.classList.toggle('is-weekly-wheel-embedded', false);
     document.body.classList.toggle('is-remember-standalone', Boolean(practiceOpen));
     const appNav = document.getElementById('app-nav');
     if (appNav) appNav.style.display = practiceOpen ? 'none' : 'block';
@@ -2614,6 +2680,7 @@
   function renderForPath(path) {
     if (!String(path).startsWith('/app/lesson/')) {
       document.body.classList.remove('is-remember-standalone');
+      document.body.classList.remove('is-weekly-wheel-embedded');
     }
     if (path === '/free-lesson') renderFreeLesson();
     if (path === '/app/dashboard') renderDashboard();
