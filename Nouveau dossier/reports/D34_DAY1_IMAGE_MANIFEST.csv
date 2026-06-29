@@ -1,0 +1,6 @@
+phrase_number,phrase_id,friendly_latin,meaning,image_path,dimensions,size_bytes,sha256_prefix,status
+1,taxi-001,bghit nmshi l-otel,I want to go to the hotel.,assets/images/lesson-scenes/day01-taxi-001-bghit-nmshi-l-otel-scene.webp,1600x900,146746,7bf027a7fd2f51ed,active
+2,taxi-002,weqef hna aafak,Please stop here.,assets/images/lesson-scenes/day01-taxi-002-weqef-hna-aafak-scene.webp,1600x900,141962,764de06916f15ae3,active
+3,taxi-003,sir nishan aafak,Please go straight.,assets/images/lesson-scenes/day01-taxi-003-sir-nishan-aafak-scene.webp,1600x900,125560,84f077cdeafa0258,active
+4,taxi-004,dor l-limn aafak,Please turn right.,assets/images/lesson-scenes/day01-taxi-004-dor-l-limn-aafak-scene.webp,1600x900,126620,4c9f10de3c5e0deb,active
+5,taxi-005,hna mezian,Here is good.,assets/images/lesson-scenes/day01-taxi-005-hna-mezian-scene.webp,1600x900,155230,bfea24f39a3e080e,active
