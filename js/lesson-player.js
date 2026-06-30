@@ -2246,7 +2246,7 @@
     if (isSourcePhase) {
       return '<div class="weekly-wheel-two-step-status weekly-wheel-two-step-status--source"><span>Step 1 of 2</span><strong>Spin to choose memory week</strong><small>Each color is one memory week.</small></div>';
     }
-    return '<div class="weekly-wheel-two-step-status"><span>Step 2 of 2</span><strong>Spin to choose situation</strong><small>Memory source: ' + escapeHtml(selectedSource?.label || 'Selected memory week') + '</small></div>';
+    return '';
   }
 
   function readWeeklyUsedIds(planKey) {
