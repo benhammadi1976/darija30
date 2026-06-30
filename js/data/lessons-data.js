@@ -54,7 +54,7 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are close to your destination.",
         "goal": "Ask the driver to stop here.",
         "english": "Stop here, please.",
-        "friendlyLatin": "weqef hna aafak",
+        "friendlyLatin": "wqef hna aafak",
         "moroccanChat": "w9ef hna 3afak",
         "arabic": "وقف هنا عافاك",
         "showArabicByDefault": false,
@@ -62,7 +62,7 @@ window.DARIJA30_LESSONS = [
         "meaning": "Please stop here.",
         "intent": "Polite and clear. Useful in taxis and buses.",
         "cultureNote": "“aafak” softens direct commands. English speakers should use it often because it makes requests feel respectful.",
-        "memoryHook": "“hna” = here. It appears in many survival phrases.",
+        "memoryHook": "“hna” = here. Use it when you want the taxi to stop at this exact place.",
         "audioNormal": "assets/audio/day01/taxi-002-normal.mp3",
         "audioSlow": "assets/audio/day01/taxi-002-slow.mp3",
         "sceneVideo": "assets/video/day01/taxi-002-scene.mp4",
@@ -70,7 +70,7 @@ window.DARIJA30_LESSONS = [
         "dialogueLines": [
           {
             "speaker": "Traveler",
-            "friendlyLatin": "weqef hna aafak",
+            "friendlyLatin": "wqef hna aafak",
             "english": "Stop here, please.",
             "isCore": true
           }
@@ -120,15 +120,15 @@ window.DARIJA30_LESSONS = [
         "scenario": "You need the driver to turn right.",
         "goal": "Give a simple right-turn instruction.",
         "english": "Turn right, please.",
-        "friendlyLatin": "dor l-limn aafak",
-        "moroccanChat": "dor l-limn 3afak",
+        "friendlyLatin": "dur l-limen aafak",
+        "moroccanChat": "dur l-limen 3afak",
         "arabic": "دور لليمن عافاك",
         "showArabicByDefault": false,
         "literal": "Turn to the right please.",
         "meaning": "Please turn right.",
         "intent": "A direct navigation phrase. Use it when the driver is close to your destination.",
         "cultureNote": "Moroccans often combine words with gestures. Pointing right while saying this makes it clearer.",
-        "memoryHook": "“limn” = right. Later you will learn “liser” = left.",
+        "memoryHook": "“limen” = right. Later you will use the same pattern with left: dur l-liser.",
         "audioNormal": "assets/audio/day01/taxi-004-normal.mp3",
         "audioSlow": "assets/audio/day01/taxi-004-slow.mp3",
         "sceneVideo": "assets/video/day01/taxi-004-scene.mp4",
@@ -200,7 +200,7 @@ window.DARIJA30_LESSONS = [
     ],
     "bonusPhrases": [
       {
-        "friendlyLatin": "hna qreb?",
+        "friendlyLatin": "hna wash qreb?",
         "meaning": "Is it near?"
       },
       {
@@ -223,7 +223,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 2,
-        "friendlyLatin": "weqef hna aafak",
+        "friendlyLatin": "wqef hna aafak",
         "meaning": "Please stop here.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -235,7 +235,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 4,
-        "friendlyLatin": "dor l-limn aafak",
+        "friendlyLatin": "dur l-limen aafak",
         "meaning": "Please turn right.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -317,15 +317,15 @@ window.DARIJA30_LESSONS = [
         "scenario": "You do not want sugar in your drink.",
         "goal": "Customize your order.",
         "english": "Without sugar, please.",
-        "friendlyLatin": "bla sokar aafak",
-        "moroccanChat": "bla sokar 3afak",
+        "friendlyLatin": "bla sokkar aafak",
+        "moroccanChat": "bla sokkar 3afak",
         "arabic": "بلا سكر عافاك",
         "showArabicByDefault": false,
         "literal": "Without sugar please.",
         "meaning": "No sugar, please.",
         "intent": "Useful because tea and coffee can be served sweet.",
         "cultureNote": "Moroccan mint tea is often very sweet. This phrase protects your preference without sounding rude.",
-        "memoryHook": "“bla” = without. Use it for many things: bla sokar, bla l-hlib.",
+        "memoryHook": "“bla” = without. “sokkar” = sugar. Use the same pattern for other custom orders.",
         "audioNormal": "assets/audio/day02/cafe-003-normal.mp3",
         "audioSlow": "assets/audio/day02/cafe-003-slow.mp3"
       },
@@ -402,7 +402,7 @@ window.DARIJA30_LESSONS = [
         "meaning": "With milk?"
       },
       {
-        "friendlyLatin": "bsh-hal l-hsab?",
+        "friendlyLatin": "bshhal l-hsab?",
         "meaning": "How much is the bill?"
       },
       {
@@ -427,7 +427,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "bla sokar aafak",
+        "friendlyLatin": "bla sokkar aafak",
         "meaning": "No sugar, please.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -460,7 +460,7 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are pointing at something in a market.",
         "goal": "Ask how much it costs.",
         "english": "How much is this?",
-        "friendlyLatin": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
         "moroccanChat": "bsh7al hada?",
         "arabic": "بشحال هادا؟",
         "showArabicByDefault": false,
@@ -468,7 +468,7 @@ window.DARIJA30_LESSONS = [
         "meaning": "How much is this?",
         "intent": "The normal first question before buying in a shop or souk.",
         "cultureNote": "Asking the price is expected. In many souks, bargaining can be part of the interaction, but stay friendly.",
-        "memoryHook": "“hada” = this. Point and say “bsh-hal hada?”",
+        "memoryHook": "“hada” = this. Point and say “bshhal hada?”",
         "sceneVideo": "assets/video/day03/market-001-scene.mp4",
         "scenePoster": "assets/images/video-posters/market-001-scene.jpg",
         "audioNormal": "assets/audio/day03/market-001-normal.mp3",
@@ -476,7 +476,7 @@ window.DARIJA30_LESSONS = [
         "dialogueLines": [
           {
             "speaker": "Traveler",
-            "friendlyLatin": "bsh-hal hada?",
+            "friendlyLatin": "bshhal hada?",
             "english": "How much is this?",
             "isCore": true
           },
@@ -515,15 +515,15 @@ window.DARIJA30_LESSONS = [
         "scenario": "You want a small discount.",
         "goal": "Ask the seller to lower the price politely.",
         "english": "Lower it a little, please.",
-        "friendlyLatin": "nqess shwiya aafak",
-        "moroccanChat": "n9ess shwiya 3afak",
+        "friendlyLatin": "nqes shwiya aafak",
+        "moroccanChat": "n9es shwiya 3afak",
         "arabic": "نقص شوية عافاك",
         "showArabicByDefault": false,
         "literal": "Reduce a little please.",
         "meaning": "Can you lower the price a bit, please?",
         "intent": "A soft bargaining phrase, not aggressive.",
         "cultureNote": "Friendly bargaining works better than confrontation. Smile and keep the tone light.",
-        "memoryHook": "“nqess” = reduce/lower. “shwiya” = a little.",
+        "memoryHook": "“nqes” = reduce/lower. “shwiya” = a little.",
         "audioNormal": "assets/audio/day03/market-003-normal.mp3",
         "audioSlow": "assets/audio/day03/market-003-slow.mp3"
       },
@@ -532,15 +532,15 @@ window.DARIJA30_LESSONS = [
         "scenario": "You want to know the final price.",
         "goal": "Ask for the last price.",
         "english": "What is the last price?",
-        "friendlyLatin": "shno akher taman?",
-        "moroccanChat": "shno akher taman?",
+        "friendlyLatin": "shnu akher taman?",
+        "moroccanChat": "shnu akher taman?",
         "arabic": "شنو آخر ثمن؟",
         "showArabicByDefault": false,
         "literal": "What last price?",
         "meaning": "What is your final price?",
         "intent": "A common bargaining question when you are interested but want a better deal.",
         "cultureNote": "Use this after showing interest. It signals you may buy if the price feels fair.",
-        "memoryHook": "“akher” = last/final. “taman” = price.",
+        "memoryHook": "“shnu” = what. “akher taman” = final price.",
         "audioNormal": "assets/audio/day03/market-004-normal.mp3",
         "audioSlow": "assets/audio/day03/market-004-slow.mp3"
       },
@@ -565,7 +565,7 @@ window.DARIJA30_LESSONS = [
     "quiz": [
       {
         "id": "market-q1",
-        "question": "Where would you use “bsh-hal hada?”",
+        "question": "Where would you use “bshhal hada?”",
         "options": [
           "Market/shop",
           "Airport security",
@@ -613,7 +613,7 @@ window.DARIJA30_LESSONS = [
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
         "meaning": "How much is this?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -625,13 +625,13 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "nqess shwiya aafak",
+        "friendlyLatin": "nqes shwiya aafak",
         "meaning": "Can you lower the price a bit, please?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 4,
-        "friendlyLatin": "shno akher taman?",
+        "friendlyLatin": "shnu akher taman?",
         "meaning": "What is your final price?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -869,18 +869,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a be polite without sounding formal situation in Morocco.",
         "goal": "Respond warmly when someone apologizes or helps you.",
         "english": "No problem.",
-        "friendlyLatin": "maashi mushkil",
-        "moroccanChat": "maashi mushkil",
+        "friendlyLatin": "mashi mushkil",
+        "moroccanChat": "mashi mushkil",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "No problem.",
         "meaning": "No problem.",
         "intent": "Use this phrase in the be polite without sounding formal context to keep the interaction simple and natural.",
         "cultureNote": "First Contact & Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “maashi mushkil”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “mashi mushkil”. It means “no problem.”",
         "audioNormal": "assets/audio/day05/day05-maashi-mushkil-003-normal.mp3",
         "audioSlow": "assets/audio/day05/day05-maashi-mushkil-003-slow.mp3",
-        "memoryBubble": "maashi mushkil"
+        "memoryBubble": "mashi mushkil"
       },
       {
         "id": "day05-wakha-004",
@@ -934,7 +934,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "maashi mushkil",
+        "friendlyLatin": "mashi mushkil",
         "meaning": "No problem.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -968,7 +968,7 @@ window.DARIJA30_LESSONS = [
         "options": [
           "aafak",
           "smh liya",
-          "maashi mushkil"
+          "mashi mushkil"
         ],
         "answer": "smh liya"
       }
@@ -990,18 +990,18 @@ window.DARIJA30_LESSONS = [
     "phrases": [
       {
         "id": "day06-smiti-john-001",
-        "scenario": "You are in a introduce yourself situation in Morocco.",
-        "goal": "Say your name when meeting someone.",
-        "english": "My name is John.",
-        "friendlyLatin": "smiti John",
-        "moroccanChat": "smiti John",
+        "scenario": "You meet someone in Morocco and want to introduce yourself simply.",
+        "goal": "Say your name using a placeholder you can replace.",
+        "english": "My name is...",
+        "friendlyLatin": "smiti ...",
+        "moroccanChat": "smiti ...",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "My name is John.",
-        "meaning": "My name is John.",
-        "intent": "Use this phrase in the introduce yourself context to keep the interaction simple and natural.",
+        "literal": "My name is...",
+        "meaning": "My name is...",
+        "intent": "Use this phrase to introduce yourself without forcing a fixed nationality or name.",
         "cultureNote": "First Contact & Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “smiti John”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a pattern: “smiti ...”. Replace the dots with your own name.",
         "audioNormal": "assets/audio/day06/day06-smiti-john-001-normal.mp3",
         "audioSlow": "assets/audio/day06/day06-smiti-john-001-slow.mp3",
         "memoryBubble": "",
@@ -1031,21 +1031,21 @@ window.DARIJA30_LESSONS = [
       },
       {
         "id": "day06-ana-mn-mirikan-003",
-        "scenario": "You are in a introduce yourself situation in Morocco.",
-        "goal": "Give a country example you can replace with your own.",
-        "english": "I am from America.",
-        "friendlyLatin": "ana mn mirikan",
-        "moroccanChat": "ana mn mirikan",
+        "scenario": "You meet someone in Morocco and need to make communication easier.",
+        "goal": "Explain that you speak a little English when communication is difficult.",
+        "english": "I speak a little English.",
+        "friendlyLatin": "kanhder English shwiya",
+        "moroccanChat": "kanhder English shwiya",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "I am from America.",
-        "meaning": "I am from America.",
-        "intent": "Use this phrase in the introduce yourself context to keep the interaction simple and natural.",
+        "literal": "I speak English a little.",
+        "meaning": "I speak a little English.",
+        "intent": "A globally useful first-contact phrase for English-speaking learners of any nationality.",
         "cultureNote": "First Contact & Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “ana mn mirikan”. Repetition matters more than spelling.",
+        "memoryHook": "“kanhder” = I speak. “shwiya” = a little.",
         "audioNormal": "assets/audio/day06/day06-ana-mn-mirikan-003-normal.mp3",
         "audioSlow": "assets/audio/day06/day06-ana-mn-mirikan-003-slow.mp3",
-        "memoryBubble": "ana mn mirikan"
+        "memoryBubble": "kanhder English shwiya"
       },
       {
         "id": "day06-msharfin-004",
@@ -1087,8 +1087,8 @@ window.DARIJA30_LESSONS = [
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "smiti John",
-        "meaning": "My name is John.",
+        "friendlyLatin": "smiti ...",
+        "meaning": "My name is...",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
@@ -1099,8 +1099,8 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "ana mn mirikan",
-        "meaning": "I am from America.",
+        "friendlyLatin": "kanhder English shwiya",
+        "meaning": "I speak a little English.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
@@ -1119,23 +1119,23 @@ window.DARIJA30_LESSONS = [
     "quiz": [
       {
         "id": "lesson-006-q1",
-        "question": "What does “smiti John” mean?",
+        "question": "What does “smiti ...” mean?",
         "options": [
-          "My name is John.",
+          "My name is...",
           "I am from...",
-          "I am from America."
+          "I speak a little English."
         ],
-        "answer": "My name is John."
+        "answer": "My name is..."
       },
       {
         "id": "lesson-006-q2",
-        "question": "Which phrase would you use to say “I am from...”?",
+        "question": "Which phrase means “I speak a little English”?",
         "options": [
-          "smiti John",
+          "smiti ...",
           "ana mn...",
-          "ana mn mirikan"
+          "kanhder English shwiya"
         ],
-        "answer": "ana mn..."
+        "answer": "kanhder English shwiya"
       }
     ]
   },
@@ -1484,15 +1484,15 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a taxi: price and meter situation in Morocco.",
         "goal": "Ask the taxi price clearly.",
         "english": "How much is the fare?",
-        "friendlyLatin": "bsh-hal taman?",
-        "moroccanChat": "bsh-hal taman?",
+        "friendlyLatin": "bshhal taman?",
+        "moroccanChat": "bshhal taman?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much is the fare?",
         "meaning": "How much is the fare?",
         "intent": "Use this phrase in the taxi: price and meter context to keep the interaction simple and natural.",
         "cultureNote": "Move Around Morocco: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal taman?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal taman?”. Use it before agreeing on a taxi fare.",
         "audioNormal": "assets/audio/day09/day09-bsh-hal-taman-001-normal.mp3",
         "audioSlow": "assets/audio/day09/day09-bsh-hal-taman-001-slow.mp3",
         "memoryBubble": "",
@@ -1507,18 +1507,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a taxi: price and meter situation in Morocco.",
         "goal": "Ask the driver to use the meter.",
         "english": "Turn on the meter, please.",
-        "friendlyLatin": "shaal l-compteur aafak",
-        "moroccanChat": "shaal l-compteur aafak",
+        "friendlyLatin": "shael l-compteur aafak",
+        "moroccanChat": "shael l-compteur aafak",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "Turn on the meter, please.",
         "meaning": "Turn on the meter, please.",
         "intent": "Use this phrase in the taxi: price and meter context to keep the interaction simple and natural.",
         "cultureNote": "Move Around Morocco: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “shaal l-compteur aafak”. Repetition matters more than spelling.",
+        "memoryHook": "“compteur” = taxi meter. This phrase asks the driver to turn it on politely.",
         "audioNormal": "assets/audio/day09/day09-shaal-l-compteur-aafak-002-normal.mp3",
         "audioSlow": "assets/audio/day09/day09-shaal-l-compteur-aafak-002-slow.mp3",
-        "memoryBubble": "shaal l-compteur aafak"
+        "memoryBubble": "shael l-compteur aafak"
       },
       {
         "id": "day09-ghali-bzaf-003",
@@ -1578,13 +1578,13 @@ window.DARIJA30_LESSONS = [
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "bsh-hal taman?",
+        "friendlyLatin": "bshhal taman?",
         "meaning": "How much is the fare?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 2,
-        "friendlyLatin": "shaal l-compteur aafak",
+        "friendlyLatin": "shael l-compteur aafak",
         "meaning": "Turn on the meter, please.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -1610,7 +1610,7 @@ window.DARIJA30_LESSONS = [
     "quiz": [
       {
         "id": "lesson-009-q1",
-        "question": "What does “bsh-hal taman?” mean?",
+        "question": "What does “bshhal taman?” mean?",
         "options": [
           "How much is the fare?",
           "Turn on the meter, please.",
@@ -1622,11 +1622,11 @@ window.DARIJA30_LESSONS = [
         "id": "lesson-009-q2",
         "question": "Which phrase would you use to say “Turn on the meter, please.”?",
         "options": [
-          "bsh-hal taman?",
-          "shaal l-compteur aafak",
+          "bshhal taman?",
+          "shael l-compteur aafak",
           "ghali bzaf"
         ],
-        "answer": "shaal l-compteur aafak"
+        "answer": "shael l-compteur aafak"
       }
     ]
   },
@@ -2010,18 +2010,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a lost in the medina situation in Morocco.",
         "goal": "Check the distance.",
         "english": "Is it near or far?",
-        "friendlyLatin": "qreb wla b3id?",
-        "moroccanChat": "qreb wla b3id?",
+        "friendlyLatin": "qreb wla b'id?",
+        "moroccanChat": "qreb wla b'id?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "Is it near or far?",
         "meaning": "Is it near or far?",
         "intent": "Use this phrase in the lost in the medina context to keep the interaction simple and natural.",
         "cultureNote": "Move Around Morocco: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “qreb wla b3id?”. Repetition matters more than spelling.",
+        "memoryHook": "“qreb” = near. “b'id” = far. Use this when asking if a place is walkable.",
         "audioNormal": "assets/audio/day12/day12-qreb-wla-b3id-003-normal.mp3",
         "audioSlow": "assets/audio/day12/day12-qreb-wla-b3id-003-slow.mp3",
-        "memoryBubble": "qreb wla b3id?"
+        "memoryBubble": "qreb wla b'id?"
       },
       {
         "id": "day12-aaweni-aafak-004",
@@ -2075,7 +2075,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "qreb wla b3id?",
+        "friendlyLatin": "qreb wla b'id?",
         "meaning": "Is it near or far?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -2109,7 +2109,7 @@ window.DARIJA30_LESSONS = [
         "options": [
           "tliit",
           "fin kayn ...?",
-          "qreb wla b3id?"
+          "qreb wla b'id?"
         ],
         "answer": "fin kayn ...?"
       }
@@ -2472,18 +2472,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a the bill and payment situation in Morocco.",
         "goal": "Confirm the amount.",
         "english": "How much is it?",
-        "friendlyLatin": "bsh-hal?",
-        "moroccanChat": "bsh-hal?",
+        "friendlyLatin": "bshhal?",
+        "moroccanChat": "bshhal?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much is it?",
         "meaning": "How much is it?",
         "intent": "Use this phrase in the the bill and payment context to keep the interaction simple and natural.",
         "cultureNote": "Café, Restaurant & Food: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal?”. It is the shortest way to ask the amount.",
         "audioNormal": "assets/audio/day15/day15-bsh-hal-002-normal.mp3",
         "audioSlow": "assets/audio/day15/day15-bsh-hal-002-slow.mp3",
-        "memoryBubble": "bsh-hal?"
+        "memoryBubble": "bshhal?"
       },
       {
         "id": "day15-nkhlles-b-carte-003",
@@ -2505,21 +2505,21 @@ window.DARIJA30_LESSONS = [
       },
       {
         "id": "day15-cash-004",
-        "scenario": "You are in a the bill and payment situation in Morocco.",
-        "goal": "Check or confirm cash payment.",
-        "english": "Cash?",
-        "friendlyLatin": "cash?",
-        "moroccanChat": "cash?",
+        "scenario": "You are paying in a café, shop, or taxi and want to confirm cash payment.",
+        "goal": "Ask whether you can pay in cash.",
+        "english": "Can I pay nkhlles cash?",
+        "friendlyLatin": "nkhlles nkhlles cash?",
+        "moroccanChat": "nkhlles nkhlles cash?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Cash?",
-        "meaning": "Cash?",
-        "intent": "Use this phrase in the the bill and payment context to keep the interaction simple and natural.",
+        "literal": "I pay nkhlles cash?",
+        "meaning": "Can I pay nkhlles cash?",
+        "intent": "A full payment sentence, clearer than saying only “nkhlles cash?”.",
         "cultureNote": "Café, Restaurant & Food: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “cash?”. Repetition matters more than spelling.",
+        "memoryHook": "“nkhlles” = I pay. Add the payment method after it.",
         "audioNormal": "assets/audio/day15/day15-cash-004-normal.mp3",
         "audioSlow": "assets/audio/day15/day15-cash-004-slow.mp3",
-        "memoryBubble": "cash?"
+        "memoryBubble": "nkhlles nkhlles cash?"
       },
       {
         "id": "day15-safi-shukran-005",
@@ -2549,7 +2549,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 2,
-        "friendlyLatin": "bsh-hal?",
+        "friendlyLatin": "bshhal?",
         "meaning": "How much is it?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -2561,8 +2561,8 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 4,
-        "friendlyLatin": "cash?",
-        "meaning": "Cash?",
+        "friendlyLatin": "nkhlles nkhlles cash?",
+        "meaning": "Can I pay nkhlles cash?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
@@ -2588,10 +2588,10 @@ window.DARIJA30_LESSONS = [
         "question": "Which phrase would you use to say “How much is it?”?",
         "options": [
           "l-hssab aafak",
-          "bsh-hal?",
+          "bshhal?",
           "nkhlles b carte?"
         ],
-        "answer": "bsh-hal?"
+        "answer": "bshhal?"
       }
     ]
   },
@@ -2774,36 +2774,36 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a ask the price situation in Morocco.",
         "goal": "Ask the price of a masculine item.",
         "english": "How much is this?",
-        "friendlyLatin": "bsh-hal hada?",
-        "moroccanChat": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
+        "moroccanChat": "bshhal hada?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much is this?",
         "meaning": "How much is this?",
         "intent": "Use this phrase in the ask the price context to keep the interaction simple and natural.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal hada?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal hada?”. Point to a masculine item.",
         "audioNormal": "assets/audio/day17/day17-bsh-hal-hada-001-normal.mp3",
         "audioSlow": "assets/audio/day17/day17-bsh-hal-hada-001-slow.mp3",
-        "memoryBubble": "bsh-hal hada?"
+        "memoryBubble": "bshhal hada?"
       },
       {
         "id": "day17-bsh-hal-hadi-002",
         "scenario": "You are in a ask the price situation in Morocco.",
         "goal": "Ask the price of a feminine item.",
         "english": "How much is this?",
-        "friendlyLatin": "bsh-hal hadi?",
-        "moroccanChat": "bsh-hal hadi?",
+        "friendlyLatin": "bshhal hadi?",
+        "moroccanChat": "bshhal hadi?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much is this?",
         "meaning": "How much is this?",
         "intent": "Use this phrase in the ask the price context to keep the interaction simple and natural.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal hadi?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal hadi?”. Point to a feminine item.",
         "audioNormal": "assets/audio/day17/day17-bsh-hal-hadi-002-normal.mp3",
         "audioSlow": "assets/audio/day17/day17-bsh-hal-hadi-002-slow.mp3",
-        "memoryBubble": "bsh-hal hadi?"
+        "memoryBubble": "bshhal hadi?"
       },
       {
         "id": "day17-shhal-taman-003",
@@ -2863,13 +2863,13 @@ window.DARIJA30_LESSONS = [
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
         "meaning": "How much is this?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 2,
-        "friendlyLatin": "bsh-hal hadi?",
+        "friendlyLatin": "bshhal hadi?",
         "meaning": "How much is this?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -2895,7 +2895,7 @@ window.DARIJA30_LESSONS = [
     "quiz": [
       {
         "id": "lesson-017-q1",
-        "question": "What does “bsh-hal hada?” mean?",
+        "question": "What does “bshhal hada?” mean?",
         "options": [
           "How much is this?",
           "How much is this?",
@@ -2907,11 +2907,11 @@ window.DARIJA30_LESSONS = [
         "id": "lesson-017-q2",
         "question": "Which phrase would you use to say “How much is this?”?",
         "options": [
-          "bsh-hal hada?",
-          "bsh-hal hadi?",
+          "bshhal hada?",
+          "bshhal hadi?",
           "shhal taman?"
         ],
-        "answer": "bsh-hal hadi?"
+        "answer": "bshhal hadi?"
       }
     ]
   },
@@ -3251,124 +3251,124 @@ window.DARIJA30_LESSONS = [
     "phrases": [
       {
         "id": "day20-kbir-001",
-        "scenario": "You are in a sizes and colors situation in Morocco.",
-        "goal": "Describe a large item.",
-        "english": "Big.",
-        "friendlyLatin": "kbir",
-        "moroccanChat": "kbir",
+        "scenario": "You are choosing between two sizes in a Moroccan shop or market.",
+        "goal": "Ask for the larger option in a shop or market.",
+        "english": "I want the big one.",
+        "friendlyLatin": "bghit l-kbir",
+        "moroccanChat": "bghit l-kbir",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Big.",
-        "meaning": "Big.",
-        "intent": "Use this phrase in the sizes and colors context to keep the interaction simple and natural.",
+        "literal": "I want the big one.",
+        "meaning": "I want the big one.",
+        "intent": "Turns a single adjective into a useful shopping sentence.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “kbir”. Repetition matters more than spelling.",
+        "memoryHook": "“kbir” = big. Add “bghit l-...” to make it a real request.",
         "audioNormal": "assets/audio/day20/day20-kbir-001-normal.mp3",
         "audioSlow": "assets/audio/day20/day20-kbir-001-slow.mp3",
-        "memoryBubble": "kbir"
+        "memoryBubble": "bghit l-kbir"
       },
       {
         "id": "day20-sghir-002",
-        "scenario": "You are in a sizes and colors situation in Morocco.",
-        "goal": "Describe a small item.",
-        "english": "Small.",
-        "friendlyLatin": "sghir",
-        "moroccanChat": "sghir",
+        "scenario": "You are choosing between two sizes in a Moroccan shop or market.",
+        "goal": "Ask for the smaller option in a shop or market.",
+        "english": "I want the small one.",
+        "friendlyLatin": "bghit l-sghir",
+        "moroccanChat": "bghit l-sghir",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Small.",
-        "meaning": "Small.",
-        "intent": "Use this phrase in the sizes and colors context to keep the interaction simple and natural.",
+        "literal": "I want the small one.",
+        "meaning": "I want the small one.",
+        "intent": "Turns a single adjective into a useful shopping sentence.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “sghir”. Repetition matters more than spelling.",
+        "memoryHook": "“sghir” = small. Add “bghit l-...” to make it a real request.",
         "audioNormal": "assets/audio/day20/day20-sghir-002-normal.mp3",
         "audioSlow": "assets/audio/day20/day20-sghir-002-slow.mp3",
-        "memoryBubble": "sghir"
+        "memoryBubble": "bghit l-sghir"
       },
       {
         "id": "day20-khal-003",
-        "scenario": "You are in a sizes and colors situation in Morocco.",
-        "goal": "Ask for or describe black color.",
-        "english": "Black.",
-        "friendlyLatin": "khal",
-        "moroccanChat": "khal",
+        "scenario": "You are choosing a color in a Moroccan shop or market.",
+        "goal": "Ask for the black option.",
+        "english": "I want the black one.",
+        "friendlyLatin": "bghit l-khal",
+        "moroccanChat": "bghit l-khal",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Black.",
-        "meaning": "Black.",
-        "intent": "Use this phrase in the sizes and colors context to keep the interaction simple and natural.",
+        "literal": "I want the black one.",
+        "meaning": "I want the black one.",
+        "intent": "Turns a color word into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “khal”. Repetition matters more than spelling.",
+        "memoryHook": "“khal” = black. Use it after “bghit l-...” when choosing a color.",
         "audioNormal": "assets/audio/day20/day20-khal-003-normal.mp3",
         "audioSlow": "assets/audio/day20/day20-khal-003-slow.mp3",
-        "memoryBubble": "khal"
+        "memoryBubble": "bghit l-khal"
       },
       {
         "id": "day20-byed-004",
-        "scenario": "You are in a sizes and colors situation in Morocco.",
-        "goal": "Ask for or describe white color.",
-        "english": "White.",
-        "friendlyLatin": "byed",
-        "moroccanChat": "byed",
+        "scenario": "You are choosing a color in a Moroccan shop or market.",
+        "goal": "Ask for the white option.",
+        "english": "I want the white one.",
+        "friendlyLatin": "bghit l-byed",
+        "moroccanChat": "bghit l-byed",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "White.",
-        "meaning": "White.",
-        "intent": "Use this phrase in the sizes and colors context to keep the interaction simple and natural.",
+        "literal": "I want the white one.",
+        "meaning": "I want the white one.",
+        "intent": "Turns a color word into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “byed”. Repetition matters more than spelling.",
+        "memoryHook": "“byed” = white. Use it after “bghit l-...” when choosing a color.",
         "audioNormal": "assets/audio/day20/day20-byed-004-normal.mp3",
         "audioSlow": "assets/audio/day20/day20-byed-004-slow.mp3",
-        "memoryBubble": "byed"
+        "memoryBubble": "bghit l-byed"
       },
       {
         "id": "day20-zraq-005",
-        "scenario": "You are in a sizes and colors situation in Morocco.",
-        "goal": "Ask for or describe blue color.",
-        "english": "Blue.",
-        "friendlyLatin": "zraq",
-        "moroccanChat": "zraq",
+        "scenario": "You are choosing a color in a Moroccan shop or market.",
+        "goal": "Ask for the blue option.",
+        "english": "I want the blue one.",
+        "friendlyLatin": "bghit l-zraq",
+        "moroccanChat": "bghit l-zraq",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Blue.",
-        "meaning": "Blue.",
-        "intent": "Use this phrase in the sizes and colors context to keep the interaction simple and natural.",
+        "literal": "I want the blue one.",
+        "meaning": "I want the blue one.",
+        "intent": "Turns a color word into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “zraq”. Repetition matters more than spelling.",
+        "memoryHook": "“zraq” = blue. Use it after “bghit l-...” when choosing a color.",
         "audioNormal": "assets/audio/day20/day20-zraq-005-normal.mp3",
         "audioSlow": "assets/audio/day20/day20-zraq-005-slow.mp3",
-        "memoryBubble": "zraq"
+        "memoryBubble": "bghit l-zraq"
       }
     ],
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "kbir",
-        "meaning": "Big.",
+        "friendlyLatin": "bghit l-kbir",
+        "meaning": "I want the big one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 2,
-        "friendlyLatin": "sghir",
-        "meaning": "Small.",
+        "friendlyLatin": "bghit l-sghir",
+        "meaning": "I want the small one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 3,
-        "friendlyLatin": "khal",
-        "meaning": "Black.",
+        "friendlyLatin": "bghit l-khal",
+        "meaning": "I want the black one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 4,
-        "friendlyLatin": "byed",
-        "meaning": "White.",
+        "friendlyLatin": "bghit l-byed",
+        "meaning": "I want the white one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 5,
-        "friendlyLatin": "zraq",
-        "meaning": "Blue.",
+        "friendlyLatin": "bghit l-zraq",
+        "meaning": "I want the blue one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
     ],
@@ -3411,78 +3411,78 @@ window.DARIJA30_LESSONS = [
     "phrases": [
       {
         "id": "day21-wahed-001",
-        "scenario": "You are in a numbers for prices situation in Morocco.",
-        "goal": "Use or hear the number one.",
-        "english": "One.",
-        "friendlyLatin": "wahed",
-        "moroccanChat": "wahed",
+        "scenario": "You are buying something and want one item.",
+        "goal": "Ask for one item.",
+        "english": "I want one.",
+        "friendlyLatin": "bghit wahed",
+        "moroccanChat": "bghit wahed",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "One.",
-        "meaning": "One.",
-        "intent": "Use this phrase in the numbers for prices context to keep the interaction simple and natural.",
+        "literal": "I want one.",
+        "meaning": "I want one.",
+        "intent": "Turns a number into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “wahed”. Repetition matters more than spelling.",
+        "memoryHook": "“wahed” = one. Use it after “bghit” when buying.",
         "audioNormal": "assets/audio/day21/day21-wahed-001-normal.mp3",
         "audioSlow": "assets/audio/day21/day21-wahed-001-slow.mp3",
-        "memoryBubble": "wahed",
+        "memoryBubble": "bghit wahed",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day21-jouj-002",
-        "scenario": "You are in a numbers for prices situation in Morocco.",
-        "goal": "Use or hear the number two.",
-        "english": "Two.",
-        "friendlyLatin": "jouj",
-        "moroccanChat": "jouj",
+        "scenario": "You are buying something and want two items.",
+        "goal": "Ask for two items.",
+        "english": "I want two.",
+        "friendlyLatin": "bghit jouj",
+        "moroccanChat": "bghit jouj",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Two.",
-        "meaning": "Two.",
-        "intent": "Use this phrase in the numbers for prices context to keep the interaction simple and natural.",
+        "literal": "I want two.",
+        "meaning": "I want two.",
+        "intent": "Turns a number into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “jouj”. Repetition matters more than spelling.",
+        "memoryHook": "“jouj” = two. Use it after “bghit” when buying.",
         "audioNormal": "assets/audio/day21/day21-jouj-002-normal.mp3",
         "audioSlow": "assets/audio/day21/day21-jouj-002-slow.mp3",
-        "memoryBubble": "jouj",
+        "memoryBubble": "bghit jouj",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day21-tlata-003",
-        "scenario": "You are in a numbers for prices situation in Morocco.",
-        "goal": "Use or hear the number three.",
-        "english": "Three.",
-        "friendlyLatin": "tlata",
-        "moroccanChat": "tlata",
+        "scenario": "You are buying something and want three items.",
+        "goal": "Ask for three items.",
+        "english": "I want three.",
+        "friendlyLatin": "bghit tlata",
+        "moroccanChat": "bghit tlata",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Three.",
-        "meaning": "Three.",
-        "intent": "Use this phrase in the numbers for prices context to keep the interaction simple and natural.",
+        "literal": "I want three.",
+        "meaning": "I want three.",
+        "intent": "Turns a number into a usable buying phrase.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “tlata”. Repetition matters more than spelling.",
+        "memoryHook": "“tlata” = three. Use it after “bghit” when buying.",
         "audioNormal": "assets/audio/day21/day21-tlata-003-normal.mp3",
         "audioSlow": "assets/audio/day21/day21-tlata-003-slow.mp3",
-        "memoryBubble": "tlata",
+        "memoryBubble": "bghit tlata",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day21-ashra-004",
-        "scenario": "You are in a numbers for prices situation in Morocco.",
-        "goal": "Use or hear the number ten.",
-        "english": "Ten.",
-        "friendlyLatin": "ashra",
-        "moroccanChat": "ashra",
+        "scenario": "You are hearing or confirming a simple price in dirhams.",
+        "goal": "Recognize or say a simple price.",
+        "english": "Ten dirhams.",
+        "friendlyLatin": "ashra drham",
+        "moroccanChat": "ashra drham",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Ten.",
-        "meaning": "Ten.",
-        "intent": "Use this phrase in the numbers for prices context to keep the interaction simple and natural.",
+        "literal": "Ten dirhams.",
+        "meaning": "Ten dirhams.",
+        "intent": "Makes the number useful inside a price situation.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “ashra”. Repetition matters more than spelling.",
+        "memoryHook": "“ashra” = ten. “drham” = dirham.",
         "audioNormal": "assets/audio/day21/day21-ashra-004-normal.mp3",
         "audioSlow": "assets/audio/day21/day21-ashra-004-slow.mp3",
-        "memoryBubble": "ashra",
+        "memoryBubble": "ashra drham",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
@@ -3490,49 +3490,49 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a numbers for prices situation in Morocco.",
         "goal": "Ask the price in dirhams.",
         "english": "How much in dirhams?",
-        "friendlyLatin": "bsh-hal b drham?",
-        "moroccanChat": "bsh-hal b drham?",
+        "friendlyLatin": "bshhal b drham?",
+        "moroccanChat": "bshhal b drham?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much in dirhams?",
         "meaning": "How much in dirhams?",
         "intent": "Use this phrase in the numbers for prices context to keep the interaction simple and natural.",
         "cultureNote": "Markets & Money: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal b drham?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal b drham?”. Use it to confirm the price in dirhams.",
         "audioNormal": "assets/audio/day21/day21-bsh-hal-b-drham-005-normal.mp3",
         "audioSlow": "assets/audio/day21/day21-bsh-hal-b-drham-005-slow.mp3",
-        "memoryBubble": "bsh-hal b drham?",
+        "memoryBubble": "bshhal b drham?",
         "sceneVisualStatus": "pending-final-scene-image"
       }
     ],
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "wahed",
-        "meaning": "One.",
+        "friendlyLatin": "bghit wahed",
+        "meaning": "I want one.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 2,
-        "friendlyLatin": "jouj",
-        "meaning": "Two.",
+        "friendlyLatin": "bghit jouj",
+        "meaning": "I want two.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 3,
-        "friendlyLatin": "tlata",
-        "meaning": "Three.",
+        "friendlyLatin": "bghit tlata",
+        "meaning": "I want three.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 4,
-        "friendlyLatin": "ashra",
-        "meaning": "Ten.",
+        "friendlyLatin": "ashra drham",
+        "meaning": "Ten dirhams.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 5,
-        "friendlyLatin": "bsh-hal b drham?",
+        "friendlyLatin": "bshhal b drham?",
         "meaning": "How much in dirhams?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
@@ -3820,18 +3820,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a hotel problems situation in Morocco.",
         "goal": "Respond calmly if the issue is solved.",
         "english": "No problem.",
-        "friendlyLatin": "maashi mushkil",
-        "moroccanChat": "maashi mushkil",
+        "friendlyLatin": "mashi mushkil",
+        "moroccanChat": "mashi mushkil",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "No problem.",
         "meaning": "No problem.",
         "intent": "Use this phrase in the hotel problems context to keep the interaction simple and natural.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “maashi mushkil”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “mashi mushkil”. It helps you stay polite and calm.",
         "audioNormal": "assets/audio/day23/day23-maashi-mushkil-005-normal.mp3",
         "audioSlow": "assets/audio/day23/day23-maashi-mushkil-005-slow.mp3",
-        "memoryBubble": "maashi mushkil",
+        "memoryBubble": "mashi mushkil",
         "sceneVisualStatus": "pending-final-scene-image"
       }
     ],
@@ -3862,7 +3862,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 5,
-        "friendlyLatin": "maashi mushkil",
+        "friendlyLatin": "mashi mushkil",
         "meaning": "No problem.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
@@ -3925,78 +3925,78 @@ window.DARIJA30_LESSONS = [
       },
       {
         "id": "day24-fin-toilet-002",
-        "scenario": "You are in a ask where things are situation in Morocco.",
-        "goal": "Find the toilet.",
+        "scenario": "You are in a café, restaurant, station, or public place and need the toilet.",
+        "goal": "Ask where the toilet is using a full place question.",
         "english": "Where is the toilet?",
-        "friendlyLatin": "fin toilet?",
-        "moroccanChat": "fin toilet?",
+        "friendlyLatin": "fin kayn toilet?",
+        "moroccanChat": "fin kayn toilet?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Where is the toilet?",
+        "literal": "Where is there a toilet?",
         "meaning": "Where is the toilet?",
-        "intent": "Use this phrase in the ask where things are context to keep the interaction simple and natural.",
+        "intent": "A fuller and more natural place question than only “fin kayn toilet?”.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “fin toilet?”. Repetition matters more than spelling.",
+        "memoryHook": "“fin kayn...?” = where is there...? Use it for places and services.",
         "audioNormal": "assets/audio/day24/day24-fin-toilet-002-normal.mp3",
         "audioSlow": "assets/audio/day24/day24-fin-toilet-002-slow.mp3",
-        "memoryBubble": "fin toilet?",
+        "memoryBubble": "fin kayn toilet?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day24-fin-pharmacy-003",
-        "scenario": "You are in a ask where things are situation in Morocco.",
-        "goal": "Find a pharmacy.",
+        "scenario": "You need a pharmacy in Morocco and ask someone nearby.",
+        "goal": "Ask where the pharmacy is using a full place question.",
         "english": "Where is the pharmacy?",
-        "friendlyLatin": "fin pharmacy?",
-        "moroccanChat": "fin pharmacy?",
+        "friendlyLatin": "fin kayna pharmacie?",
+        "moroccanChat": "fin kayna pharmacie?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Where is the pharmacy?",
+        "literal": "Where is there a pharmacy?",
         "meaning": "Where is the pharmacy?",
-        "intent": "Use this phrase in the ask where things are context to keep the interaction simple and natural.",
+        "intent": "Uses the Morocco-common French loanword “pharmacie” in a natural question.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “fin pharmacy?”. Repetition matters more than spelling.",
+        "memoryHook": "“fin kayna...?” is the feminine form of “where is there...?”",
         "audioNormal": "assets/audio/day24/day24-fin-pharmacy-003-normal.mp3",
         "audioSlow": "assets/audio/day24/day24-fin-pharmacy-003-slow.mp3",
-        "memoryBubble": "fin pharmacy?",
+        "memoryBubble": "fin kayna pharmacie?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day24-fin-atm-004",
-        "scenario": "You are in a ask where things are situation in Morocco.",
-        "goal": "Find an ATM.",
+        "scenario": "You need cash and ask where to find an ATM.",
+        "goal": "Ask where an ATM is using a full place question.",
         "english": "Where is an ATM?",
-        "friendlyLatin": "fin ATM?",
-        "moroccanChat": "fin ATM?",
+        "friendlyLatin": "fin kayn ATM?",
+        "moroccanChat": "fin kayn ATM?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Where is an ATM?",
+        "literal": "Where is there an ATM?",
         "meaning": "Where is an ATM?",
-        "intent": "Use this phrase in the ask where things are context to keep the interaction simple and natural.",
+        "intent": "A practical travel question for finding money withdrawal.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “fin ATM?”. Repetition matters more than spelling.",
+        "memoryHook": "“fin kayn...?” works with many public services: toilet, ATM, parking.",
         "audioNormal": "assets/audio/day24/day24-fin-atm-004-normal.mp3",
         "audioSlow": "assets/audio/day24/day24-fin-atm-004-slow.mp3",
-        "memoryBubble": "fin ATM?",
+        "memoryBubble": "fin kayn ATM?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day24-qreb-005",
-        "scenario": "You are in a ask where things are situation in Morocco.",
-        "goal": "Check whether the place is close.",
+        "scenario": "You are asking for directions and want to know if the place is nearby.",
+        "goal": "Ask whether the place is close.",
         "english": "Is it near?",
-        "friendlyLatin": "qreb?",
-        "moroccanChat": "qreb?",
+        "friendlyLatin": "wash wash qreb?",
+        "moroccanChat": "wash wash qreb?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "Is it near?",
         "meaning": "Is it near?",
-        "intent": "Use this phrase in the ask where things are context to keep the interaction simple and natural.",
+        "intent": "Turns a one-word fragment into a full yes/no question.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “qreb?”. Repetition matters more than spelling.",
+        "memoryHook": "“wash” starts many yes/no questions. “qreb” = near.",
         "audioNormal": "assets/audio/day24/day24-qreb-005-normal.mp3",
         "audioSlow": "assets/audio/day24/day24-qreb-005-slow.mp3",
-        "memoryBubble": "qreb?",
+        "memoryBubble": "wash wash qreb?",
         "sceneVisualStatus": "pending-final-scene-image"
       }
     ],
@@ -4009,25 +4009,25 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 2,
-        "friendlyLatin": "fin toilet?",
+        "friendlyLatin": "fin kayn toilet?",
         "meaning": "Where is the toilet?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 3,
-        "friendlyLatin": "fin pharmacy?",
+        "friendlyLatin": "fin kayna pharmacie?",
         "meaning": "Where is the pharmacy?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 4,
-        "friendlyLatin": "fin ATM?",
+        "friendlyLatin": "fin kayn ATM?",
         "meaning": "Where is an ATM?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 5,
-        "friendlyLatin": "qreb?",
+        "friendlyLatin": "wash wash qreb?",
         "meaning": "Is it near?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
@@ -4048,10 +4048,10 @@ window.DARIJA30_LESSONS = [
         "question": "Which phrase would you use to say “Where is the toilet?”?",
         "options": [
           "fin kayn...?",
-          "fin toilet?",
-          "fin pharmacy?"
+          "fin kayn toilet?",
+          "fin kayna pharmacie?"
         ],
-        "answer": "fin toilet?"
+        "answer": "fin kayn toilet?"
       }
     ]
   },
@@ -4093,18 +4093,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a need help / emergency light situation in Morocco.",
         "goal": "Ask for a doctor.",
         "english": "I need a doctor.",
-        "friendlyLatin": "bghit doctor",
-        "moroccanChat": "bghit doctor",
+        "friendlyLatin": "bghit tbib",
+        "moroccanChat": "bghit tbib",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "I need a doctor.",
         "meaning": "I need a doctor.",
         "intent": "Use this phrase in the need help / emergency light context to keep the interaction simple and natural.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bghit doctor”. Repetition matters more than spelling.",
+        "memoryHook": "“tbib” = doctor. This is more Darija than saying only “doctor”.",
         "audioNormal": "assets/audio/day25/day25-bghit-doctor-002-normal.mp3",
         "audioSlow": "assets/audio/day25/day25-bghit-doctor-002-slow.mp3",
-        "memoryBubble": "bghit doctor",
+        "memoryBubble": "bghit tbib",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
@@ -4147,21 +4147,21 @@ window.DARIJA30_LESSONS = [
       },
       {
         "id": "day25-fin-police-005",
-        "scenario": "You are in a need help / emergency light situation in Morocco.",
+        "scenario": "You need police help or need to find a police officer/station.",
         "goal": "Ask where the police are.",
         "english": "Where are the police?",
-        "friendlyLatin": "fin police?",
-        "moroccanChat": "fin police?",
+        "friendlyLatin": "fin l-police?",
+        "moroccanChat": "fin l-police?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "Where are the police?",
         "meaning": "Where are the police?",
-        "intent": "Use this phrase in the need help / emergency light context to keep the interaction simple and natural.",
+        "intent": "A clearer emergency-light question than only “fin l-police?”.",
         "cultureNote": "Hotel, Help & Practical Needs: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “fin police?”. Repetition matters more than spelling.",
+        "memoryHook": "“fin” = where. “l-police” is commonly understood in Morocco.",
         "audioNormal": "assets/audio/day25/day25-fin-police-005-normal.mp3",
         "audioSlow": "assets/audio/day25/day25-fin-police-005-slow.mp3",
-        "memoryBubble": "fin police?",
+        "memoryBubble": "fin l-police?",
         "sceneVisualStatus": "pending-final-scene-image"
       }
     ],
@@ -4174,7 +4174,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 2,
-        "friendlyLatin": "bghit doctor",
+        "friendlyLatin": "bghit tbib",
         "meaning": "I need a doctor.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
@@ -4192,7 +4192,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 5,
-        "friendlyLatin": "fin police?",
+        "friendlyLatin": "fin l-police?",
         "meaning": "Where are the police?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
@@ -4213,10 +4213,10 @@ window.DARIJA30_LESSONS = [
         "question": "Which phrase would you use to say “I need a doctor.”?",
         "options": [
           "aaweni aafak",
-          "bghit doctor",
+          "bghit tbib",
           "ana mrid"
         ],
-        "answer": "bghit doctor"
+        "answer": "bghit tbib"
       }
     ]
   },
@@ -4719,10 +4719,10 @@ window.DARIJA30_LESSONS = [
     "id": "lesson-029",
     "day": 29,
     "week": 4,
-    "title": "Full Travel Dialogue",
-    "situation": "Chain survival phrases into one travel flow.",
-    "method": "Full Darija30 lesson data prepared. Audio and video can be dropped into the mapped folders later.",
-    "module": "Cultural Confidence",
+    "title": "Real Morocco Mixed Situations",
+    "situation": "Review real Morocco survival phrases across taxi, café, market, and help situations.",
+    "method": "Move through mixed real-life situations and say the phrase that solves each moment.",
+    "module": "Mixed Morocco Survival Review",
     "isFree": false,
     "isLocked": true,
     "phrasePageCount": 5,
@@ -4731,27 +4731,27 @@ window.DARIJA30_LESSONS = [
     "phrases": [
       {
         "id": "day29-salam-001",
-        "scenario": "You are in a full travel dialogue situation in Morocco.",
-        "goal": "Open the interaction.",
-        "english": "Hello.",
-        "friendlyLatin": "salam",
-        "moroccanChat": "salam",
+        "scenario": "You begin a mixed real-life interaction in Morocco.",
+        "goal": "Open a real Moroccan interaction warmly.",
+        "english": "Hello, how are you?",
+        "friendlyLatin": "salam, labas?",
+        "moroccanChat": "salam, labas?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Hello.",
-        "meaning": "Hello.",
-        "intent": "Use this phrase in the full travel dialogue context to keep the interaction simple and natural.",
+        "literal": "Hello, all good?",
+        "meaning": "Hello, how are you?",
+        "intent": "Day 29 becomes a mixed survival review, starting with a natural greeting.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “salam”. Repetition matters more than spelling.",
+        "memoryHook": "“labas?” is a warm Moroccan check-in after “salam”.",
         "audioNormal": "assets/audio/day29/day29-salam-001-normal.mp3",
         "audioSlow": "assets/audio/day29/day29-salam-001-slow.mp3",
-        "memoryBubble": "salam",
+        "memoryBubble": "salam, labas?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day29-bghit-nmshi-l-otel-002",
-        "scenario": "You are in a full travel dialogue situation in Morocco.",
-        "goal": "State your destination.",
+        "scenario": "You are in a taxi and need to state your destination.",
+        "goal": "Use a taxi destination phrase in a mixed review.",
         "english": "I want to go to the hotel.",
         "friendlyLatin": "bghit nmshi l-otel",
         "moroccanChat": "bghit nmshi l-otel",
@@ -4759,9 +4759,9 @@ window.DARIJA30_LESSONS = [
         "showArabicByDefault": false,
         "literal": "I want to go to the hotel.",
         "meaning": "I want to go to the hotel.",
-        "intent": "Use this phrase in the full travel dialogue context to keep the interaction simple and natural.",
+        "intent": "Keeps one strong taxi survival line inside Day 29 mixed situations.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bghit nmshi l-otel”. Repetition matters more than spelling.",
+        "memoryHook": "“bghit nmshi...” = I want to go. Reuse it with many places.",
         "audioNormal": "assets/audio/day29/day29-bghit-nmshi-l-otel-002-normal.mp3",
         "audioSlow": "assets/audio/day29/day29-bghit-nmshi-l-otel-002-slow.mp3",
         "memoryBubble": "bghit nmshi l-otel",
@@ -4769,67 +4769,67 @@ window.DARIJA30_LESSONS = [
       },
       {
         "id": "day29-shaal-l-compteur-aafak-003",
-        "scenario": "You are in a full travel dialogue situation in Morocco.",
-        "goal": "Protect the taxi ride.",
-        "english": "Turn on the meter, please.",
-        "friendlyLatin": "shaal l-compteur aafak",
-        "moroccanChat": "shaal l-compteur aafak",
+        "scenario": "You are in a Moroccan café during a mixed real-life review.",
+        "goal": "Order a black coffee in a café.",
+        "english": "Black coffee, please.",
+        "friendlyLatin": "qahwa kahla aafak",
+        "moroccanChat": "qahwa kahla 3afak",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Turn on the meter, please.",
-        "meaning": "Turn on the meter, please.",
-        "intent": "Use this phrase in the full travel dialogue context to keep the interaction simple and natural.",
+        "literal": "Black coffee please.",
+        "meaning": "Black coffee, please.",
+        "intent": "Replaces a repeated taxi meter line with a café order to make Day 29 more mixed.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “shaal l-compteur aafak”. Repetition matters more than spelling.",
+        "memoryHook": "“qahwa” = coffee. “kahla” = black.",
         "audioNormal": "assets/audio/day29/day29-shaal-l-compteur-aafak-003-normal.mp3",
         "audioSlow": "assets/audio/day29/day29-shaal-l-compteur-aafak-003-slow.mp3",
-        "memoryBubble": "shaal l-compteur aafak",
+        "memoryBubble": "qahwa kahla aafak",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day29-wqef-hna-aafak-004",
-        "scenario": "You are in a full travel dialogue situation in Morocco.",
-        "goal": "End the ride at the right place.",
-        "english": "Stop here, please.",
-        "friendlyLatin": "wqef hna aafak",
-        "moroccanChat": "wqef hna aafak",
+        "scenario": "You are in a souk or small shop during a mixed real-life review.",
+        "goal": "Ask the price in a shop or market.",
+        "english": "How much is this?",
+        "friendlyLatin": "bshhal hada?",
+        "moroccanChat": "bsh7al hada?",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Stop here, please.",
-        "meaning": "Stop here, please.",
-        "intent": "Use this phrase in the full travel dialogue context to keep the interaction simple and natural.",
+        "literal": "How much is this?",
+        "meaning": "How much is this?",
+        "intent": "Replaces a repeated taxi stop line with a market price question.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “wqef hna aafak”. Repetition matters more than spelling.",
+        "memoryHook": "Point to the item and say: “bshhal hada?”",
         "audioNormal": "assets/audio/day29/day29-wqef-hna-aafak-004-normal.mp3",
         "audioSlow": "assets/audio/day29/day29-wqef-hna-aafak-004-slow.mp3",
-        "memoryBubble": "wqef hna aafak",
+        "memoryBubble": "bshhal hada?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
         "id": "day29-shukran-bzaf-005",
-        "scenario": "You are in a full travel dialogue situation in Morocco.",
-        "goal": "Close the exchange warmly.",
-        "english": "Thank you very much.",
-        "friendlyLatin": "shukran bzaf",
-        "moroccanChat": "shukran bzaf",
+        "scenario": "You need help in a street, hotel, station, or shop.",
+        "goal": "Ask for help in a simple survival situation.",
+        "english": "Please help me.",
+        "friendlyLatin": "aaweni aafak",
+        "moroccanChat": "3aweni 3afak",
         "arabic": "",
         "showArabicByDefault": false,
-        "literal": "Thank you very much.",
-        "meaning": "Thank you very much.",
-        "intent": "Use this phrase in the full travel dialogue context to keep the interaction simple and natural.",
+        "literal": "Help me please.",
+        "meaning": "Please help me.",
+        "intent": "Replaces a thanks-only closing line with a high-value survival phrase.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “shukran bzaf”. Repetition matters more than spelling.",
+        "memoryHook": "“aaweni” = help me. Add “aafak” to keep it polite.",
         "audioNormal": "assets/audio/day29/day29-shukran-bzaf-005-normal.mp3",
         "audioSlow": "assets/audio/day29/day29-shukran-bzaf-005-slow.mp3",
-        "memoryBubble": "shukran bzaf",
+        "memoryBubble": "aaweni aafak",
         "sceneVisualStatus": "pending-final-scene-image"
       }
     ],
     "previewPhrases": [
       {
         "page": 1,
-        "friendlyLatin": "salam",
-        "meaning": "Hello.",
+        "friendlyLatin": "salam, labas?",
+        "meaning": "Hello, how are you?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
@@ -4840,43 +4840,43 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 3,
-        "friendlyLatin": "shaal l-compteur aafak",
-        "meaning": "Turn on the meter, please.",
+        "friendlyLatin": "qahwa kahla aafak",
+        "meaning": "Black coffee, please.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 4,
-        "friendlyLatin": "wqef hna aafak",
-        "meaning": "Stop here, please.",
+        "friendlyLatin": "bshhal hada?",
+        "meaning": "How much is this?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
       {
         "page": 5,
-        "friendlyLatin": "shukran bzaf",
-        "meaning": "Thank you very much.",
+        "friendlyLatin": "aaweni aafak",
+        "meaning": "Please help me.",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       }
     ],
     "quiz": [
       {
         "id": "lesson-029-q1",
-        "question": "What does “salam” mean?",
+        "question": "Which phrase would you use to order black coffee?",
         "options": [
-          "Hello.",
-          "I want to go to the hotel.",
-          "Turn on the meter, please."
+          "qahwa kahla aafak",
+          "bghit nmshi l-otel",
+          "aaweni aafak"
         ],
-        "answer": "Hello."
+        "answer": "qahwa kahla aafak"
       },
       {
         "id": "lesson-029-q2",
-        "question": "Which phrase would you use to say “I want to go to the hotel.”?",
+        "question": "What does “aaweni aafak” mean?",
         "options": [
-          "salam",
-          "bghit nmshi l-otel",
-          "shaal l-compteur aafak"
+          "Please help me.",
+          "How much is this?",
+          "Black coffee, please."
         ],
-        "answer": "bghit nmshi l-otel"
+        "answer": "Please help me."
       }
     ]
   },
@@ -4956,18 +4956,18 @@ window.DARIJA30_LESSONS = [
         "scenario": "You are in a final morocco survival test situation in Morocco.",
         "goal": "Ask the price in a market.",
         "english": "How much is this?",
-        "friendlyLatin": "bsh-hal hada?",
-        "moroccanChat": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
+        "moroccanChat": "bshhal hada?",
         "arabic": "",
         "showArabicByDefault": false,
         "literal": "How much is this?",
         "meaning": "How much is this?",
         "intent": "Use this phrase in the final morocco survival test context to keep the interaction simple and natural.",
         "cultureNote": "Cultural Confidence: Moroccan interactions usually work best with short direct phrases plus a warm tone. Add “aafak” or a smile when appropriate.",
-        "memoryHook": "Keep this phrase as a sound pattern: “bsh-hal hada?”. Repetition matters more than spelling.",
+        "memoryHook": "Keep this phrase as a sound pattern: “bshhal hada?”. It is a final survival phrase for the market.",
         "audioNormal": "assets/audio/day30/day30-bsh-hal-hada-004-normal.mp3",
         "audioSlow": "assets/audio/day30/day30-bsh-hal-hada-004-slow.mp3",
-        "memoryBubble": "bsh-hal hada?",
+        "memoryBubble": "bshhal hada?",
         "sceneVisualStatus": "pending-final-scene-image"
       },
       {
@@ -5011,7 +5011,7 @@ window.DARIJA30_LESSONS = [
       },
       {
         "page": 4,
-        "friendlyLatin": "bsh-hal hada?",
+        "friendlyLatin": "bshhal hada?",
         "meaning": "How much is this?",
         "pageModel": "One phrase page with scenario, audio, meaning, intent, memory hook, and quick check."
       },
