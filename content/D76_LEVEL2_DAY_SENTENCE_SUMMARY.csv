@@ -1,0 +1,31 @@
+﻿level,day,dayTheme,phraseCount,samplePhrases,qaStatus
+2,1,الدخول إلى الرياض أول مرة,5,"salam aalikom, ana wasel daba | bghit ndkhol l-riad aafak",150 total draft phrases; requires Moroccan native QA before media.
+2,2,تأكيد الحجز والاستقبال,5,aandi reservation b smiya dyali | smiti ...,150 total draft phrases; requires Moroccan native QA before media.
+2,3,الغرفة والمفتاح والحقائب,5,fin l-bit dyali aafak? | fin l-kle dyal l-bit?,150 total draft phrases; requires Moroccan native QA before media.
+2,4,السؤال عن Wi‑Fi والمرافق,5,kayn wifi? | shno l-code dyal l-wifi?,150 total draft phrases; requires Moroccan native QA before media.
+2,5,الفطور المغربي في الرياض,5,imta l-ftor? | wash l-ftor dakhel f l-hsab?,150 total draft phrases; requires Moroccan native QA before media.
+2,6,طلب الشاي والماء بأدب,5,nqder nakhod atay? | bghit kas dyal l-ma aafak,150 total draft phrases; requires Moroccan native QA before media.
+2,7,مراجعة أسبوع 1: الضيافة الأساسية,5,"salam, aandi reservation | shno l-code dyal l-wifi?",150 total draft phrases; requires Moroccan native QA before media.
+2,8,الاستئذان قبل الدخول أو الجلوس,5,nqder ndkhol? | nqder njles hna?,150 total draft phrases; requires Moroccan native QA before media.
+2,9,التعامل مع عاملة/عامل الرياض,5,"salam, smhliya | nqder nsawl shwiya?",150 total draft phrases; requires Moroccan native QA before media.
+2,10,طلب منشفة أو صابون أو غطاء,5,bghit manshfa okhra | bghit sabon aafak,150 total draft phrases; requires Moroccan native QA before media.
+2,11,مشكلة بسيطة في الغرفة,5,l-daw ma khdamsh | l-ma ma skhonsh,150 total draft phrases; requires Moroccan native QA before media.
+2,12,الهدوء والنوم والضجيج,5,kayn shwiya dyal sda | bghit n3es bakri,150 total draft phrases; requires Moroccan native QA before media.
+2,13,التكييف/التدفئة والنافذة,5,l-klimatizor ma khdamsh | nqder nhell l-shrjem?,150 total draft phrases; requires Moroccan native QA before media.
+2,14,طلب نصيحة من المضيف,5,fin nakol mzyan qrib? | ash katsahliya nshuf hna?,150 total draft phrases; requires Moroccan native QA before media.
+2,15,الدفع أو تمديد ليلة,5,bghit nkhalles daba | wash nqder nzid lila?,150 total draft phrases; requires Moroccan native QA before media.
+2,16,الخروج من الرياض والعودة إليه,5,ghadi nkhroj daba | ghadi nrjea b-lil,150 total draft phrases; requires Moroccan native QA before media.
+2,17,الحديث القصير مع صاحب المكان,5,labas aalik? | l-riad zwin bzaf,150 total draft phrases; requires Moroccan native QA before media.
+2,18,قبول دعوة شاي,5,"shukran, nshrbo atay | l-atay kayban bnin",150 total draft phrases; requires Moroccan native QA before media.
+2,19,رفض شيء بأدب,5,"la shukran, shbaat | ghir shwiya aafak",150 total draft phrases; requires Moroccan native QA before media.
+2,20,مدح الأكل أو الديكور,5,l-makla bnina bzaf | l-riad zwin mashallah,150 total draft phrases; requires Moroccan native QA before media.
+2,21,طلب اتجاه من داخل الرياض,5,fin l-kharja aafak? | fin triq l-medina?,150 total draft phrases; requires Moroccan native QA before media.
+2,22,تسليم المفتاح والخروج,5,bghit nselm l-kle | imta check-out?,150 total draft phrases; requires Moroccan native QA before media.
+2,23,مراجعة أسبوع 3: ضيافة + خدمة,5,l-wifi ma khdamsh | bghit manshfa okhra,150 total draft phrases; requires Moroccan native QA before media.
+2,24,موقف سوء فهم مع المضيف,5,"ma fhemtsh, smeh lia | aawed aafak",150 total draft phrases; requires Moroccan native QA before media.
+2,25,التعامل مع تأخر الفطور أو التنظيف,5,l-ftor mazal ma jash | wash l-ftor qrib?,150 total draft phrases; requires Moroccan native QA before media.
+2,26,طلب خصوصية باحترام,5,bghit shwiya dyal l-khousousiya | ma bghitsh tdkhlo daba aafak,150 total draft phrases; requires Moroccan native QA before media.
+2,27,دعوة لزيارة بيت مغربي,5,shukran ala d-daawa | nqder nji m3akom?,150 total draft phrases; requires Moroccan native QA before media.
+2,28,مغادرة المكان مع شكر,5,ghadi nmshi daba | shukran ala diyafa,150 total draft phrases; requires Moroccan native QA before media.
+2,29,مراجعة مختلطة للضيافة,5,"aandi reservation, smiti ... | shno l-code dyal l-wifi?",150 total draft phrases; requires Moroccan native QA before media.
+2,30,اختبار Level 2: ضيف محترم,5,"salam, ana wasel daba | bghit l-bit dyali aafak",150 total draft phrases; requires Moroccan native QA before media.

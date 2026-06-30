@@ -1,0 +1,9 @@
+﻿check,value,status
+rows_total,150,OK
+unique_phrase_ids,150,OK
+days,30,OK
+phrases_per_day,all days have 5,OK
+audio_files_created,0,EXPECTED_NOT_STARTED
+image_files_created,0,EXPECTED_NOT_STARTED
+video_files_created,0,EXPECTED_NOT_STARTED
+native_darija_qa,required before media,PENDING
