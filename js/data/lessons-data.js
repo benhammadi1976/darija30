@@ -1,5 +1,5 @@
-// Darija30 lesson data — Phase D25 First 10 Scene Images Only.
-// Rule: only the first 10 core phrase pages include independent scene images. All remaining phrase pages are visually clean with no scene image slot.
+// Darija30 lesson data — D73-A media cleanup baseline.
+// Rule: keep only approved/referenced situational media assets in runtime. Missing audio/image/video slots remain placeholders for the next production phases.
 window.DARIJA30_LESSONS = [
   {
     "id": "lesson-001",
