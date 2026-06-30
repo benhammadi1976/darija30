@@ -1974,6 +1974,7 @@
         label: 'Week 1',
         title: 'Weekly Wheel 1',
         days: 'Days 1–7',
+        checkpointDay: 7,
         endDay: 7,
         bankSize: 35,
         challengeSizes: [5, 10, 15, 20, 35],
@@ -1984,6 +1985,7 @@
         label: 'Week 2',
         title: 'Weekly Wheel 2',
         days: 'Days 1–14',
+        checkpointDay: 14,
         endDay: 14,
         bankSize: 70,
         challengeSizes: [5, 10, 15, 20, 25, 70],
@@ -1994,6 +1996,7 @@
         label: 'Week 3',
         title: 'Weekly Wheel 3',
         days: 'Days 1–21',
+        checkpointDay: 21,
         endDay: 21,
         bankSize: 105,
         challengeSizes: [5, 10, 15, 20, 30, 105],
@@ -2004,6 +2007,7 @@
         label: 'Week 4',
         title: 'Weekly Wheel 4',
         days: 'Days 1–28',
+        checkpointDay: 28,
         endDay: 28,
         bankSize: 140,
         challengeSizes: [5, 10, 15, 20, 35, 140],
@@ -2014,6 +2018,7 @@
         label: 'Final',
         title: 'Final Survival Wheel',
         days: 'Days 1–30',
+        checkpointDay: 30,
         endDay: 30,
         bankSize: 150,
         challengeSizes: [5, 10, 15, 20, 30, 150],
@@ -2034,6 +2039,26 @@
     if (value === 21) return 'week3';
     if (value === 28) return 'week4';
     return '';
+  }
+
+  function weeklyPlanCheckpointHref(plan, mode = 'prompt') {
+    const checkpointDay = Number(plan?.checkpointDay || plan?.endDay || 7);
+    const safeMode = mode === 'wheel' ? '1' : 'prompt';
+    return `#/app/lesson/${encodeURIComponent(String(checkpointDay))}?weekly=${safeMode}`;
+  }
+
+  function weeklyPlanDirectWheelHref(plan) {
+    return `#/app/weekly-wheel?week=${encodeURIComponent(String(plan?.key || 'week1'))}`;
+  }
+
+  function weeklyPlanCheckpointSummary(plan) {
+    const bankSize = Number(plan?.bankSize || 0);
+    const checkpointDay = Number(plan?.checkpointDay || plan?.endDay || 0);
+    return `Day ${checkpointDay} • ${bankSize} situations`;
+  }
+
+  function levelOneWeeklyCheckpointPlans() {
+    return weeklyWheelPlans().filter((plan) => ['week1', 'week2', 'week3', 'week4'].includes(plan.key));
   }
 
 
@@ -2723,7 +2748,13 @@
                   <div>
                     <h2 class="text-xl font-black text-medina">Days ${escapeHtml(section.start)}–${escapeHtml(section.end)} — ${escapeHtml(section.title)}</h2>
                     <p class="text-sm text-gray-500 mt-1">${escapeHtml(section.description)}</p>
-                    ${section.wheelKey ? `<span class="inline-flex mt-2 text-xs font-extrabold text-terracotta">Wheel: #/app/weekly-wheel?week=${escapeHtml(section.wheelKey)}</span>` : ''}
+                    ${section.wheelKey ? `
+                      <span class="inline-flex flex-wrap items-center gap-2 mt-2 text-xs font-extrabold">
+                        <a class="text-terracotta hover:text-red-700 underline decoration-red-200" href="#/app/weekly-wheel?week=${escapeHtml(section.wheelKey)}">Open ${escapeHtml(weeklyWheelPlan(section.wheelKey).label)} Wheel</a>
+                        <span class="text-gray-300">•</span>
+                        <a class="text-chefchaouen hover:text-blue-700 underline decoration-blue-200" href="${escapeHtml(weeklyPlanCheckpointHref(weeklyWheelPlan(section.wheelKey), 'prompt'))}">Optional prompt</a>
+                      </span>
+                    ` : ''}
                   </div>
                 </div>
                 <div class="sm:text-right">
@@ -2830,13 +2861,28 @@
         </div>
         <a href="#/app/lesson/${encodeURIComponent(String(next?.day || 1))}" class="shrink-0 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">Start Lesson ${escapeHtml(next?.day || 1)}</a>
       </div>
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>
-          <span class="inline-block bg-red-50 text-terracotta text-xs font-bold px-3 py-1 rounded-full mb-2">WEEKLY CHECKPOINT</span>
-          <h2 class="text-xl font-black text-medina">Weekly wheel appears inside Day 7, 14, 21, and 28</h2>
-          <p class="text-gray-600">Finish the checkpoint day, then start the weekly wheel instead of the normal daily practice.</p>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-block bg-red-50 text-terracotta text-xs font-bold px-3 py-1 rounded-full mb-2">WEEKLY CHECKPOINTS</span>
+            <h2 class="text-xl font-black text-medina">Level 1 has four cumulative situation wheels</h2>
+            <p class="text-gray-600">Day 7, 14, 21, and 28 keep the normal daily check first. After that, the optional weekly wheel opens.</p>
+          </div>
+          <a href="#/app/weekly-wheel?week=week1" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Preview Week 1 Wheel</a>
         </div>
-        <a href="#/app/lesson/7?weekly=1" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Preview Day 7 Wheel</a>
+        <div class="grid md:grid-cols-4 gap-3">
+          ${levelOneWeeklyCheckpointPlans().map((plan) => `
+            <div class="rounded-2xl border border-gray-100 bg-cream/40 p-4">
+              <span class="block text-xs font-black uppercase tracking-wide text-terracotta mb-1">${escapeHtml(plan.label)}</span>
+              <strong class="block text-medina text-lg">${escapeHtml(String(plan.bankSize))} situations</strong>
+              <p class="text-sm text-gray-600 mt-1 mb-3">${escapeHtml(weeklyPlanCheckpointSummary(plan))}</p>
+              <div class="flex flex-wrap gap-2 text-xs font-bold">
+                <a class="bg-medina text-white px-3 py-2 rounded-full hover:bg-slate-800" href="${escapeHtml(weeklyPlanCheckpointHref(plan, 'prompt'))}">Prompt</a>
+                <a class="bg-white text-chefchaouen border border-blue-100 px-3 py-2 rounded-full hover:border-blue-300" href="${escapeHtml(weeklyPlanDirectWheelHref(plan))}">Wheel</a>
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </div>
       <div>
         <h3 class="text-xl font-bold mb-4">Recent Learned Phrases</h3>
