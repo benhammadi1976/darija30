@@ -2072,6 +2072,7 @@
     const bank = weeklySituationBank(plan);
     const promptEntries = weeklyRequiresSourceSpin(plan) ? weeklyMemorySourceEntries(plan) : bank;
     const promptNumberEntries = weeklyRequiresSourceSpin(plan) ? weeklySourcePhaseNumberBank(plan) : bank;
+    const promptCenterBrandColor = weeklyRequiresSourceSpin(plan) ? '#111827' : weeklySourceColor(1);
     const nextHref = weeklyPromptNextLessonHref(lesson);
     const next = nextLesson(lesson);
     const nextLabel = next ? `Skip to Day ${escapeHtml(next.day)}` : 'Skip for now';
@@ -2094,14 +2095,14 @@
             <strong>0 / ${escapeHtml(String(challengeSize || bank.length || 0))}</strong>
           </div>
 
-          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--fullscreen weekly-wheel-big-stage--prompt ${weeklyRequiresSourceSpin(plan) ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${weeklyRequiresSourceSpin(plan) ? 'source' : 'situation'}" aria-hidden="true" style="--wheel-start-rotation:0deg; --wheel-rotation:0deg; --wheel-spin-duration:4200ms; --wheel-slices:${escapeHtml(promptEntries.length || 1)}; --source-gradient:${weeklyRequiresSourceSpin(plan) ? weeklySourceWheelGradient(promptEntries) : 'none'}; --situation-color:${weeklySourceColor(1)};">
+          <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--fullscreen weekly-wheel-big-stage--prompt ${weeklyRequiresSourceSpin(plan) ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${weeklyRequiresSourceSpin(plan) ? 'source' : 'situation'}" aria-hidden="true" style="--wheel-start-rotation:0deg; --wheel-rotation:0deg; --wheel-spin-duration:4200ms; --wheel-slices:${escapeHtml(promptEntries.length || 1)}; --source-gradient:${weeklyRequiresSourceSpin(plan) ? weeklySourceWheelGradient(promptEntries) : 'none'}; --situation-color:${weeklySourceColor(1)}; --center-brand-color:${escapeHtml(promptCenterBrandColor)};">
             ${weeklyRequiresSourceSpin(plan) ? '' : weeklyWheelMemoryCards(bank, null)}
             <div class="weekly-wheel-pointer weekly-wheel-pointer--large weekly-wheel-pointer--fullscreen" aria-hidden="true"></div>
             <div class="weekly-wheel-number-ring" aria-hidden="true">
               ${weeklyWheelNumberMarks(promptNumberEntries, null, '')}
             </div>
             <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${weeklyRequiresSourceSpin(plan) ? 'weekly-wheel-disc--source-week-wheel' : ''}">
-              <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="system-only"></div>
+              <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="brand"><span class="weekly-wheel-center-brand">darija30</span></div>
             </div>
           </div>
 
@@ -2584,6 +2585,7 @@
     const revealWheelNumber = Boolean(current && (showWheelSelection || showSituation));
     const activeWheelNumber = revealWheelNumber ? current.number : null;
     const situationWheelColor = weeklySituationWheelColor(plan, selectedSource);
+    const centerBrandColor = selectedSource ? weeklySourceColor(selectedSource.number) : (isSourcePhase ? '#111827' : situationWheelColor);
     const situationWheelClass = isSourcePhase ? '' : 'weekly-wheel-disc--situation-week-wheel';
     const appNav = document.getElementById('app-nav');
 
@@ -2644,14 +2646,14 @@
               <strong>${escapeHtml(roundLabel)}</strong>
             </div>
 
-            <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--fullscreen weekly-wheel-big-stage--clickable ${isSourcePhase ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${isSourcePhase ? 'source' : 'situation'}" data-weekly-spin role="button" tabindex="${state.weeklyWheel.isSpinning || showWheelSelection ? '-1' : '0'}" aria-label="Spin the weekly situation wheel" aria-disabled="${state.weeklyWheel.isSpinning || showWheelSelection ? 'true' : 'false'}" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(visualEntries.length || 1)}; --source-gradient:${isSourcePhase ? weeklySourceWheelGradient(visualEntries) : 'none'}; --situation-color:${escapeHtml(situationWheelColor)};">
+            <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--fullscreen weekly-wheel-big-stage--clickable ${isSourcePhase ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${isSourcePhase ? 'source' : 'situation'}" data-weekly-spin role="button" tabindex="${state.weeklyWheel.isSpinning || showWheelSelection ? '-1' : '0'}" aria-label="Spin the weekly situation wheel" aria-disabled="${state.weeklyWheel.isSpinning || showWheelSelection ? 'true' : 'false'}" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(visualEntries.length || 1)}; --source-gradient:${isSourcePhase ? weeklySourceWheelGradient(visualEntries) : 'none'}; --situation-color:${escapeHtml(situationWheelColor)}; --center-brand-color:${escapeHtml(centerBrandColor)};">
               ${isSourcePhase ? '' : weeklyWheelMemoryCards(targetBank, activeWheelNumber)}
               <div class="weekly-wheel-pointer weekly-wheel-pointer--large weekly-wheel-pointer--fullscreen" aria-hidden="true"></div>
               <div class="weekly-wheel-number-ring" aria-hidden="true">
                 ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
-                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="system-only"></div>
+                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="brand"><span class="weekly-wheel-center-brand">darija30</span></div>
               </div>
             </div>
 
@@ -2707,14 +2709,14 @@
               `).join('')}
             </div>
 
-            <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--clickable ${isSourcePhase ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${isSourcePhase ? 'source' : 'situation'}" data-weekly-spin role="button" tabindex="${state.weeklyWheel.isSpinning || showWheelSelection ? '-1' : '0'}" aria-label="Spin the weekly situation wheel" aria-disabled="${state.weeklyWheel.isSpinning || showWheelSelection ? 'true' : 'false'}" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(visualEntries.length || 1)}; --source-gradient:${isSourcePhase ? weeklySourceWheelGradient(visualEntries) : 'none'}; --situation-color:${escapeHtml(situationWheelColor)};">
+            <div class="weekly-wheel-big-stage weekly-wheel-big-stage--memory weekly-wheel-big-stage--clickable ${isSourcePhase ? 'weekly-wheel-big-stage--source-wheel' : ''}" data-two-step-phase="${isSourcePhase ? 'source' : 'situation'}" data-weekly-spin role="button" tabindex="${state.weeklyWheel.isSpinning || showWheelSelection ? '-1' : '0'}" aria-label="Spin the weekly situation wheel" aria-disabled="${state.weeklyWheel.isSpinning || showWheelSelection ? 'true' : 'false'}" style="--wheel-start-rotation:${escapeHtml(state.weeklyWheel.spinStartRotation || 0)}deg; --wheel-rotation:${escapeHtml(state.weeklyWheel.wheelRotation)}deg; --wheel-spin-duration:${escapeHtml(state.weeklyWheel.spinDurationMs || 4200)}ms; --wheel-slices:${escapeHtml(visualEntries.length || 1)}; --source-gradient:${isSourcePhase ? weeklySourceWheelGradient(visualEntries) : 'none'}; --situation-color:${escapeHtml(situationWheelColor)}; --center-brand-color:${escapeHtml(centerBrandColor)};">
               ${isSourcePhase ? '' : weeklyWheelMemoryCards(targetBank, activeWheelNumber)}
               <div class="weekly-wheel-pointer weekly-wheel-pointer--large" aria-hidden="true"></div>
               <div class="weekly-wheel-number-ring" aria-hidden="true">
                 ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
-                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large" aria-hidden="true" data-wheel-state="system-only"></div>
+                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large" aria-hidden="true" data-wheel-state="brand"><span class="weekly-wheel-center-brand">darija30</span></div>
               </div>
             </div>
 

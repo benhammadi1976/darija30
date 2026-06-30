@@ -6601,3 +6601,28 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
   color: #111827 !important;
   box-shadow: 0 5px 14px rgba(17,24,39,.12);
 }
+
+
+/* === D70-FIX-5I: center brand text follows selected memory-week color === */
+.weekly-wheel-disc__inner[data-wheel-state="brand"] {
+  overflow: hidden;
+}
+
+.weekly-wheel-center-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--center-brand-color, #111827) !important;
+  font-size: clamp(1.15rem, 3.25vw, 2.55rem) !important;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;
+  text-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
+  transform: none !important;
+  user-select: none;
+}
+
+.weekly-wheel-disc__inner--fullscreen .weekly-wheel-center-brand {
+  font-size: clamp(1.25rem, 3.5vw, 2.8rem) !important;
+}
