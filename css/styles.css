@@ -6414,3 +6414,95 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
     font-size: .82rem;
   }
 }
+
+
+/* === D70-FIX-5B: colored memory-source wheel === */
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc--source-week-wheel {
+  background: var(--source-gradient, conic-gradient(from -90deg, #f97316 0deg 360deg)) !important;
+  box-shadow:
+    inset 0 0 0 clamp(0.7rem, 1.4vw, 1.1rem) #ffffff,
+    inset 0 0 0 clamp(1.15rem, 2.1vw, 1.75rem) rgba(255,255,255,.28),
+    0 30px 90px rgba(17, 24, 39, 0.22) !important;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc--source-week-wheel::after {
+  inset: clamp(1.25rem, 2.6vw, 2.15rem);
+  border: 2px solid rgba(255,255,255,.72);
+  box-shadow: inset 0 0 45px rgba(255,255,255,.16);
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc__inner--large strong {
+  font-size: clamp(2.05rem, 4.55vw, 4rem);
+  line-height: .88;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc__inner--large span {
+  color: #334155;
+  letter-spacing: .055em;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-number-ring {
+  z-index: 7;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark {
+  --source-marker-size: clamp(4.2rem, 7.8vw, 6.15rem);
+  min-width: var(--source-marker-size) !important;
+  width: var(--source-marker-size) !important;
+  height: var(--source-marker-size) !important;
+  padding: .25rem;
+  background: var(--source-color, #f97316) !important;
+  color: #fff !important;
+  border: 4px solid rgba(255,255,255,.94);
+  box-shadow: 0 17px 30px rgba(0,0,0,.22), inset 0 0 0 2px rgba(255,255,255,.18);
+  text-shadow: 0 2px 8px rgba(0,0,0,.22);
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark b {
+  color: #fff !important;
+  font-size: clamp(.92rem, 1.5vw, 1.18rem) !important;
+  line-height: 1;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark small {
+  color: rgba(255,255,255,.9) !important;
+  font-size: clamp(.48rem, .82vw, .6rem) !important;
+  letter-spacing: .08em;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark.is-active {
+  background: var(--source-color, #facc15) !important;
+  box-shadow: 0 0 0 7px rgba(255,255,255,.22), 0 20px 40px rgba(250, 204, 21, .26), inset 0 0 0 2px rgba(255,255,255,.28);
+  transform:
+    rotate(var(--mark-angle))
+    translateY(calc(var(--mark-radius, 16rem) * -1))
+    rotate(calc(var(--mark-angle) * -1))
+    rotate(calc(-1 * var(--wheel-rotation, 0deg)))
+    scale(1.08);
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-number-mark.is-active b,
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark.is-active b {
+  color: #fff !important;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-memory-bg-card,
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-memory-card {
+  opacity: .42;
+}
+
+.weekly-wheel-two-step-status--source small::after {
+  content: "  Orange=Week 1 · Green=Week 2 · Yellow=Week 3 · Black=Week 4";
+  display: block;
+  margin-top: .12rem;
+  color: rgba(255,255,255,.86);
+}
+
+@media (max-width: 900px) {
+  .weekly-wheel-big-stage--source-wheel .weekly-wheel-source-mark {
+    --source-marker-size: 3.55rem;
+  }
+  .weekly-wheel-two-step-status--source small::after {
+    content: "  Color = memory week";
+  }
+}
