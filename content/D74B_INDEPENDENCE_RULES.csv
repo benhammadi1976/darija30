@@ -1,0 +1,5 @@
+﻿axis,independent_parts,shared_parts,rule
+language_independence,home/onboarding/UI/meaning/culture/pricing/support/legal/SEO/marketing copy,"lesson IDs, Darija Latin, Moroccan audio, image/video references, progress logic",Each locale feels like its own site but uses the shared Darija core.
+level_independence,"level goal, days, situations, phrases, media set, progress, review, future access/pricing","global app shell, language packs, core data schema",Each level is a separate learning product and must not depend on Level 1 hard-coding.
+media_dependency,audio/images/videos are produced per validated phrase and level,media fields follow shared schema,Media serves the sentence/situation; it does not define the lesson.
+production_order,level map -> sentence content -> cleanup -> audio -> images -> videos -> QA,same IDs across language layers,No media production before sentence/situation approval.

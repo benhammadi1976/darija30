@@ -1,6 +1,6 @@
 {
-  "version": "D74",
-  "principle": "Level -> Day -> Situation -> Sentence first; media serves validated situations.",
+  "version": "D74-B",
+  "principle": "Dual independence: each language feels like its own site; each level is an independent learning product; shared Darija core remains stable by IDs. Media serves validated level situations.",
   "levels": [
     {
       "level": 1,
@@ -688,5 +688,71 @@
       "block": "Final Morocco simulation",
       "goal": "دمج ومراجعة نهائية للمستوى، مع اختبار/محاكاة قصيرة"
     }
-  ]
+  ],
+  "independence": {
+    "language": {
+      "rule": "Each locale is a complete localized site layer.",
+      "routes": [
+        "/en",
+        "/fr",
+        "/ar",
+        "/es",
+        "/tr",
+        "/vi",
+        "/zh",
+        "/ko",
+        "/ja"
+      ],
+      "independent": [
+        "home",
+        "onboarding",
+        "UI labels",
+        "meaning",
+        "culture notes",
+        "usage tips",
+        "pricing",
+        "trust",
+        "support",
+        "legal",
+        "SEO",
+        "marketing copy"
+      ],
+      "shared": [
+        "lessonId",
+        "phraseId",
+        "Darija Latin canonical",
+        "Moroccan audio",
+        "mental image",
+        "video",
+        "progress logic",
+        "review wheel logic"
+      ]
+    },
+    "levels": {
+      "rule": "Each level has its own educational promise, days, situations, phrases, media, progress, review, and future access/pricing if needed.",
+      "levels": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "L7",
+        "L8",
+        "L9",
+        "L10",
+        "L11",
+        "L12"
+      ],
+      "production_order": [
+        "level map",
+        "sentence/situation content",
+        "cleanup",
+        "audio normal/slow",
+        "mental images",
+        "videos",
+        "QA media check"
+      ]
+    }
+  }
 }
