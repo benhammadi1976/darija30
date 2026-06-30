@@ -6532,3 +6532,72 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
   color: #111827;
   box-shadow: 0 0 0 7px rgba(255,255,255,.24), 0 18px 34px rgba(250, 204, 21, .32);
 }
+
+/* === D70-FIX-5D: outer white ring is the week-source ring ===
+   Parking numbers stay visible in source phase, but they do not rotate.
+   The external white ring near the numbers carries week colors. After a week
+   is selected, the same ring becomes one solid color for that selected week. */
+.weekly-wheel-big-stage--memory {
+  --week-ring-width: clamp(0.78rem, 1.45vw, 1.18rem);
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc--source-week-wheel,
+.weekly-wheel-disc--situation-week-wheel {
+  box-sizing: border-box;
+  border: var(--week-ring-width) solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc--source-week-wheel {
+  background:
+    repeating-conic-gradient(
+      from -90deg,
+      #2980b9 0deg 4deg,
+      #c0392b 4deg 8deg,
+      #f7fbff 8deg 9deg
+    ) padding-box,
+    var(--source-gradient, conic-gradient(from -90deg, #f97316 0deg 360deg)) border-box !important;
+  box-shadow: 0 30px 90px rgba(17, 24, 39, 0.22) !important;
+}
+
+.weekly-wheel-disc--situation-week-wheel {
+  background:
+    repeating-conic-gradient(
+      from -90deg,
+      #2980b9 0deg 4deg,
+      #c0392b 4deg 8deg,
+      #f7fbff 8deg 9deg
+    ) padding-box,
+    conic-gradient(from -90deg, var(--situation-color, #f97316) 0deg 360deg) border-box !important;
+  box-shadow: 0 30px 90px rgba(17, 24, 39, 0.22) !important;
+}
+
+.weekly-wheel-big-stage--source-wheel .weekly-wheel-disc--source-week-wheel::after,
+.weekly-wheel-disc--situation-week-wheel::after {
+  inset: clamp(1.05rem, 2.25vw, 1.85rem);
+  border: 2px solid rgba(255,255,255,.58);
+  box-shadow: inset 0 0 45px rgba(255,255,255,.12);
+}
+
+.weekly-wheel-big-stage--memory[data-two-step-phase="source"] .weekly-wheel-number-ring {
+  transform: none !important;
+  transition: none !important;
+  z-index: 7;
+}
+
+.weekly-wheel-big-stage--memory[data-two-step-phase="source"] .weekly-wheel-number-mark {
+  transform:
+    rotate(var(--mark-angle))
+    translateY(calc(-1 * var(--mark-radius)))
+    rotate(calc(-1 * var(--mark-angle))) !important;
+  background: rgba(255,255,255,.94) !important;
+  color: #111827 !important;
+  border: 2px solid rgba(255,255,255,.92);
+}
+
+.weekly-wheel-big-stage--memory[data-two-step-phase="source"] .weekly-wheel-number-mark.is-active {
+  background: rgba(255,255,255,.94) !important;
+  color: #111827 !important;
+  box-shadow: 0 5px 14px rgba(17,24,39,.12);
+}

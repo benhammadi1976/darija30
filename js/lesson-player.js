@@ -2071,6 +2071,7 @@
     const plan = weeklyWheelPlan(planKey);
     const bank = weeklySituationBank(plan);
     const promptEntries = weeklyRequiresSourceSpin(plan) ? weeklyMemorySourceEntries(plan) : bank;
+    const promptNumberEntries = weeklyRequiresSourceSpin(plan) ? weeklySourcePhaseNumberBank(plan) : bank;
     const nextHref = weeklyPromptNextLessonHref(lesson);
     const next = nextLesson(lesson);
     const nextLabel = next ? `Skip to Day ${escapeHtml(next.day)}` : 'Skip for now';
@@ -2097,7 +2098,7 @@
             ${weeklyRequiresSourceSpin(plan) ? '' : weeklyWheelMemoryCards(bank, null)}
             <div class="weekly-wheel-pointer weekly-wheel-pointer--large weekly-wheel-pointer--fullscreen" aria-hidden="true"></div>
             <div class="weekly-wheel-number-ring" aria-hidden="true">
-              ${weeklyWheelNumberMarks(promptEntries, null, '')}
+              ${weeklyWheelNumberMarks(promptNumberEntries, null, '')}
             </div>
             <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${weeklyRequiresSourceSpin(plan) ? 'weekly-wheel-disc--source-week-wheel' : ''}">
               <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen">
@@ -2203,10 +2204,24 @@
   function weeklySourceSituationBank(plan, sourceKey) {
     const source = weeklySourceEntryForKey(plan, sourceKey);
     if (!source) return weeklySituationBank(plan);
-    return weeklySituationBank(plan).filter((entry) => {
-      const day = Number(entry?.lesson?.day || 0);
-      return day >= Number(source.startDay) && day <= Number(source.endDay);
-    });
+    return weeklySituationBank(plan)
+      .filter((entry) => {
+        const day = Number(entry?.lesson?.day || 0);
+        return day >= Number(source.startDay) && day <= Number(source.endDay);
+      })
+      .map((entry, index) => ({
+        ...entry,
+        globalNumber: entry.number,
+        number: index + 1,
+        sourceWeekNumber: source.number,
+        sourceWeekKey: source.key
+      }));
+  }
+
+  function weeklySourcePhaseNumberBank(plan) {
+    const firstSource = weeklySourceEntryForKey(plan, 'source-week1');
+    const firstWeekBank = firstSource ? weeklySourceSituationBank(plan, firstSource.key) : [];
+    return firstWeekBank.length ? firstWeekBank : weeklySituationBank(plan).slice(0, 35).map((entry, index) => ({ ...entry, number: index + 1 }));
   }
 
   function weeklySituationWheelColor(plan, selectedSource) {
@@ -2384,8 +2399,8 @@
     return choice;
   }
 
-  function currentWeeklyWheelEntry(plan) {
-    const bank = weeklySituationBank(plan);
+  function currentWeeklyWheelEntry(plan, activeBank = null) {
+    const bank = Array.isArray(activeBank) && activeBank.length ? activeBank : weeklySituationBank(plan);
     return bank.find((entry) => entry.id === state.weeklyWheel.currentId) || null;
   }
 
@@ -2562,12 +2577,13 @@
     const selectedSource = weeklySourceEntryForKey(plan, state.weeklyWheel.memorySourceKey);
     const targetBank = weeklyActiveSituationBank(plan);
     const visualEntries = isSourcePhase ? weeklyMemorySourceEntries(plan) : targetBank;
+    const numberRingEntries = isSourcePhase ? weeklySourcePhaseNumberBank(plan) : targetBank;
     const used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
     if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
     const score = weeklyWheelScore(plan.key, challengeSize);
     const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
-    const current = currentWeeklyWheelEntry(plan);
+    const current = currentWeeklyWheelEntry(plan, targetBank);
     const currentBankIndex = current ? targetBank.findIndex((entry) => entry.id === current.id) : -1;
     const currentRound = current ? Math.min(score.total + 1, challengeSize || 1) : Math.min(score.total + 1, challengeSize || 1);
     const roundLabel = `${Math.min(score.total, challengeSize)} / ${challengeSize}`;
@@ -2644,7 +2660,7 @@
               ${isSourcePhase ? '' : weeklyWheelMemoryCards(targetBank, activeWheelNumber)}
               <div class="weekly-wheel-pointer weekly-wheel-pointer--large weekly-wheel-pointer--fullscreen" aria-hidden="true"></div>
               <div class="weekly-wheel-number-ring" aria-hidden="true">
-                ${weeklyWheelNumberMarks(visualEntries, activeWheelNumber, state.weeklyWheel.currentSourceKey || state.weeklyWheel.memorySourceKey || '')}
+                ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
                 <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen">
@@ -2711,7 +2727,7 @@
               ${isSourcePhase ? '' : weeklyWheelMemoryCards(targetBank, activeWheelNumber)}
               <div class="weekly-wheel-pointer weekly-wheel-pointer--large" aria-hidden="true"></div>
               <div class="weekly-wheel-number-ring" aria-hidden="true">
-                ${weeklyWheelNumberMarks(visualEntries, activeWheelNumber, state.weeklyWheel.currentSourceKey || state.weeklyWheel.memorySourceKey || '')}
+                ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
                 <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large">
@@ -2778,6 +2794,8 @@
           state.weeklyWheel.isSpinning = false;
           state.weeklyWheel.memoryStep = 'situation';
           state.weeklyWheel.mode = 'wheel';
+          state.weeklyWheel.spinStartRotation = 0;
+          state.weeklyWheel.wheelRotation = 0;
           renderWeeklyWheel(options);
         }, Number(state.weeklyWheel.spinDurationMs || 3200) + 120);
         return;
