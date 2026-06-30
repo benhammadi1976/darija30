@@ -2585,7 +2585,7 @@
     const revealWheelNumber = Boolean(current && (showWheelSelection || showSituation));
     const activeWheelNumber = revealWheelNumber ? current.number : null;
     const situationWheelColor = weeklySituationWheelColor(plan, selectedSource);
-    const centerBrandColor = selectedSource ? weeklySourceColor(selectedSource.number) : (isSourcePhase ? '#111827' : situationWheelColor);
+    const centerBrandColor = isSourcePhase ? '#111827' : (selectedSource ? weeklySourceColor(selectedSource.number) : situationWheelColor);
     const situationWheelClass = isSourcePhase ? '' : 'weekly-wheel-disc--situation-week-wheel';
     const appNav = document.getElementById('app-nav');
 
