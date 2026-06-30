@@ -2240,12 +2240,6 @@
   }
 
   function weeklyTwoStepStatusMarkup(plan, isSourcePhase, selectedSource) {
-    if (!weeklyRequiresSourceSpin(plan)) {
-      return '<div class="weekly-wheel-two-step-status"><span>One-step wheel</span><strong>Spin to choose a situation</strong><small>Week 1 has one memory bank.</small></div>';
-    }
-    if (isSourcePhase) {
-      return '<div class="weekly-wheel-two-step-status weekly-wheel-two-step-status--source"><span>Step 1 of 2</span><strong>Spin to choose memory week</strong><small>Each color is one memory week.</small></div>';
-    }
     return '';
   }
 
