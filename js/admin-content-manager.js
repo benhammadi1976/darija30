@@ -114,6 +114,44 @@
     `;
   }
 
+
+  function levelPublicFallbackVisibility(level) {
+    const cleanLevel = levelNumber(level);
+    return cleanLevel === 2 ? 'collaborators' : 'admin';
+  }
+
+  function renderLevelPublicCheckboxes() {
+    const rows = Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => {
+      const value = index + 1;
+      const available = lessons().some((lesson) => getLessonLevel(lesson) === value);
+      const visibility = window.DarijaLevelAccess?.getVisibility?.(value) || (value === 1 ? 'public' : levelPublicFallbackVisibility(value));
+      const isPublic = visibility === 'public';
+      const current = value === levelNumber(state.selectedLevel);
+      const status = isPublic ? 'ظاهر للعموم' : (visibility === 'collaborators' ? 'للمتعاونين' : 'أدمن فقط');
+      return `
+        <label class="flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-extrabold transition ${current ? 'border-chefchaouen bg-blue-50' : 'border-gray-200 bg-white'} ${available ? 'hover:border-chefchaouen cursor-pointer' : 'opacity-60 cursor-not-allowed'}">
+          <input type="checkbox" data-admin-level-public-toggle="${value}" class="h-4 w-4 rounded border-gray-300 accent-emerald-600" ${isPublic ? 'checked' : ''} ${available ? '' : 'disabled'} aria-label="تفعيل Level ${String(value).padStart(2, '0')} للعموم">
+          <span class="text-gray-900">Level ${String(value).padStart(2, '0')}</span>
+          <span class="text-[10px] ${isPublic ? 'text-emerald-700' : 'text-gray-500'}">${escapeHtml(status)}</span>
+        </label>
+      `;
+    }).join('');
+    return `
+      <div class="mt-4 rounded-2xl bg-white border border-gray-200 p-4">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-emerald-700">تفعيل سريع للعموم</p>
+            <p class="text-xs text-gray-600">ضع علامة في المربع بجانب المستوى لكي يظهر للمتعلمين في الواجهة العامة. إزالة العلامة تعيده إلى حالته غير العامة.</p>
+          </div>
+          <span class="rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-[11px] font-black">✓ Public toggle</span>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2" dir="ltr">
+          ${rows}
+        </div>
+      </div>
+    `;
+  }
+
   function lessonsForLevel(level = state.selectedLevel) {
     const selected = levelNumber(level);
     return lessons().filter((lesson) => getLessonLevel(lesson) === selected);
@@ -1144,6 +1182,7 @@
               ${levelOptionsMarkup(state.selectedLevel)}
             </select>
             <p class="text-xs text-gray-500 mt-2">كل مستوى مستقل: دروسه، جمله، ملفاته، تقدمه، ومراجعته لاحقاً.</p>
+            ${renderLevelPublicCheckboxes()}
           </div>
           <div class="flex-1">
             <label class="block text-xs font-extrabold uppercase tracking-wide text-gray-400 mb-2">اليوم / الدرس</label>
@@ -1468,6 +1507,14 @@
       button.addEventListener('click', () => {
         const nextVisibility = button.dataset.adminLevelVisibility || 'admin';
         window.DarijaLevelAccess?.setVisibility?.(state.selectedLevel, nextVisibility);
+        renderAudio();
+      });
+    });
+    root.querySelectorAll('[data-admin-level-public-toggle]').forEach((input) => {
+      input.addEventListener('change', () => {
+        const level = levelNumber(input.dataset.adminLevelPublicToggle);
+        const nextVisibility = input.checked ? 'public' : levelPublicFallbackVisibility(level);
+        window.DarijaLevelAccess?.setVisibility?.(level, nextVisibility);
         renderAudio();
       });
     });
