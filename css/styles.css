@@ -6506,3 +6506,29 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
     content: "  Color = memory week";
   }
 }
+
+
+/* === D70-FIX-5C: one-shape two-role weekly wheel ===
+   Situation phase uses the same circle as source phase. Week 1 is a single orange wheel.
+   Week 2+ first spin is only week/color selection; parking numbers appear and spin only in situation phase. */
+.weekly-wheel-disc--situation-week-wheel {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.26) 0 20%, rgba(255,255,255,0) 21%),
+    conic-gradient(from -90deg, var(--situation-color, #f97316) 0deg 360deg) !important;
+  box-shadow:
+    inset 0 0 0 clamp(0.7rem, 1.4vw, 1.1rem) #ffffff,
+    inset 0 0 0 clamp(1.15rem, 2.1vw, 1.75rem) rgba(255,255,255,.22),
+    0 30px 90px rgba(17, 24, 39, 0.22) !important;
+}
+
+.weekly-wheel-big-stage--memory[data-two-step-phase="situation"] .weekly-wheel-number-mark {
+  background: rgba(255,255,255,.94);
+  color: #111827;
+  border: 2px solid rgba(255,255,255,.92);
+}
+
+.weekly-wheel-big-stage--memory[data-two-step-phase="situation"] .weekly-wheel-number-mark.is-active {
+  background: #facc15;
+  color: #111827;
+  box-shadow: 0 0 0 7px rgba(255,255,255,.24), 0 18px 34px rgba(250, 204, 21, .32);
+}
