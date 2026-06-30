@@ -34,6 +34,30 @@
     return Array.isArray(window.DARIJA30_LESSONS) ? window.DARIJA30_LESSONS : [];
   }
 
+  function lessonLevel(lesson) {
+    return window.DarijaLevelAccess?.lessonLevel?.(lesson) || Math.max(1, Math.round(Number(lesson?.level || lesson?.levelNumber || lesson?.levelId || 1) || 1));
+  }
+
+  function requestedLevel(path) {
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const parsed = Number(params.get('level') || params.get('lvl') || 1);
+    return window.DarijaLevelAccess?.normalizeLevel?.(parsed) || Math.max(1, Math.round(parsed || 1));
+  }
+
+  function canSeeLesson(lesson, path) {
+    return window.DarijaLevelAccess?.canSeeLesson?.(lesson, path || window.location.hash.replace(/^#/, '')) ?? (lessonLevel(lesson) === 1);
+  }
+
+  function isLevelCollaboratorOpen(lesson, path) {
+    const access = window.DarijaLevelAccess;
+    if (!lesson || !access) return false;
+    const level = lessonLevel(lesson);
+    const visibility = access.getVisibility(level);
+    if (level <= 1) return false;
+    if (visibility === 'public') return true;
+    return visibility === 'collaborators' && access.isCollaboratorPreview(path || window.location.hash.replace(/^#/, ''));
+  }
+
   function escapeHtml(value) {
     return String(value ?? '')
       .replaceAll('&', '&amp;')
@@ -69,14 +93,17 @@
 
   function findLesson(identifier) {
     const all = lessons();
-    if (!identifier) return all[0] || null;
+    const routePath = window.location.hash.replace(/^#/, '');
+    const level = requestedLevel(routePath);
+    if (!identifier) return all.find((lesson) => lessonLevel(lesson) === level) || all[0] || null;
     const clean = String(identifier).trim();
     const asNumber = Number(clean);
-    return all.find((lesson) => (
+    const sameLevel = all.filter((lesson) => lessonLevel(lesson) === level);
+    return sameLevel.find((lesson) => (
       lesson.id === clean ||
       String(lesson.day) === clean ||
       (!Number.isNaN(asNumber) && Number(lesson.day) === asNumber)
-    )) || all[0] || null;
+    )) || all.find((lesson) => lesson.id === clean) || sameLevel[0] || all[0] || null;
   }
 
   function firstPhrase(lesson) {
@@ -201,7 +228,7 @@
           </div>
           <div class="flex flex-wrap gap-2" dir="ltr">
             <a href="#/admin/lesson-media" class="bg-white border border-blue-200 text-blue-700 px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-100">Media center</a>
-            <a href="#/app/lesson/${escapeHtml(lesson.day)}?view=learner" class="bg-blue-700 text-white px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-800">View as learner</a>
+            <a href="#/app/lesson/${escapeHtml(lesson.day)}?level=${lessonLevel(lesson)}&view=learner" class="bg-blue-700 text-white px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-800">View as learner</a>
           </div>
         </div>
       </div>
@@ -431,7 +458,12 @@
 
 
   function isLockedLesson(lesson, path = window.location.hash.replace(/^#/, '')) {
-    return isLearnerLockedLesson(lesson) && !adminCanOpenLockedLesson(path);
+    const routePath = path || window.location.hash.replace(/^#/, '');
+    if (!lesson) return false;
+    if (isAdminActive() && !learnerPreviewForced(routePath)) return false;
+    if (!canSeeLesson(lesson, routePath)) return true;
+    if (isLevelCollaboratorOpen(lesson, routePath)) return false;
+    return Boolean(lesson && !lesson.isFree && lesson.isLocked);
   }
 
   function slugifyAudioKey(value) {
@@ -1958,11 +1990,16 @@
 
   function statusBadge(lesson) {
     const progress = Store()?.lessonProgress(lesson);
+    const level = lessonLevel(lesson);
+    const access = window.DarijaLevelAccess;
+    const visibility = access?.getVisibility?.(level) || (level === 1 ? 'public' : 'admin');
+    if (level > 1 && visibility === 'collaborators') return '<span class="text-sm text-blue-700 font-bold">🤝 Collaborators</span>';
+    if (level > 1 && visibility === 'admin') return '<span class="text-sm text-gray-500 font-bold">🔒 Admin only</span>';
     if (isLearnerLockedLesson(lesson) && isAdminActive()) return '<span class="text-sm text-blue-700 font-bold">🔓 Admin • 🔒 learner</span>';
     if (isLearnerLockedLesson(lesson)) return '<span class="text-sm text-terracotta font-bold">🔒 Preview</span>';
     if (progress?.complete) return '<span class="text-green-600 font-bold">Done ✓</span>';
     if (progress?.started) return `<span class="text-chefchaouen font-bold">${progress.percent}%</span>`;
-    return `<span class="text-sm ${lesson.isFree ? 'text-green-600 font-bold' : 'text-gray-400'}">${lesson.isFree ? 'Free' : '🔒'}</span>`;
+    return `<span class="text-sm ${lesson.isFree ? 'text-green-600 font-bold' : 'text-gray-400'}">${lesson.isFree ? 'Free' : 'Open'}</span>`;
   }
 
 
@@ -2837,8 +2874,17 @@
     const root = document.getElementById('lessonsListRoot');
     if (!root) return;
 
-    const allLessons = lessons();
-    const planStartKey = 'darija30_plan_start_date';
+    const routePath = window.location.hash.replace(/^#/, '');
+    const allRuntimeLessons = lessons();
+    const visibleLevels = Array.from(new Set(allRuntimeLessons
+      .filter((lesson) => canSeeLesson(lesson, routePath))
+      .map((lesson) => lessonLevel(lesson))))
+      .sort((a, b) => a - b);
+    const routeLevel = requestedLevel(routePath);
+    const selectedLevel = visibleLevels.includes(routeLevel) ? routeLevel : (visibleLevels[0] || 1);
+    const allLessons = allRuntimeLessons.filter((lesson) => lessonLevel(lesson) === selectedLevel && canSeeLesson(lesson, routePath));
+    const collabParam = window.DarijaLevelAccess?.isCollaboratorPreview?.(routePath) ? '&collab=1' : '';
+    const planStartKey = `darija30_plan_start_date_level${selectedLevel}`;
     const sectionStateKey = 'darija30_plan_section_state_v1';
     const defaultStartDate = '2026-06-27';
     const savedStartDate = localStorage.getItem(planStartKey) || defaultStartDate;
@@ -2892,11 +2938,24 @@
     };
 
     root.innerHTML = `
+      ${visibleLevels.length > 1 ? `
+        <div class="bg-white rounded-3xl border border-blue-100 shadow-sm p-5 mb-6">
+          <p class="text-xs font-extrabold text-chefchaouen uppercase tracking-wide mb-3">Level access</p>
+          <div class="flex flex-wrap gap-2">
+            ${visibleLevels.map((level) => {
+              const active = level === selectedLevel;
+              const meta = window.DarijaLevelAccess?.levelMeta?.(level) || { label: 'Public' };
+              const href = `#/app/lessons?level=${level}${collabParam}`;
+              return `<a href="${href}" class="rounded-xl border px-4 py-2 text-sm font-extrabold ${active ? 'bg-chefchaouen text-white border-chefchaouen' : 'bg-white text-gray-700 border-gray-200 hover:border-chefchaouen'}">Level ${String(level).padStart(2, '0')} <span class="opacity-70">${escapeHtml(meta.label || '')}</span></a>`;
+            }).join('')}
+          </div>
+        </div>
+      ` : ''}
       <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 mb-8">
         <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
           <div>
-            <span class="inline-flex items-center gap-2 bg-blue-50 text-chefchaouen px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wide mb-3">📅 30-DAY TIMELINE</span>
-            <h2 class="text-2xl font-black text-medina mb-2">One day. One lesson. Fast Morocco readiness.</h2>
+            <span class="inline-flex items-center gap-2 bg-blue-50 text-chefchaouen px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wide mb-3">📅 LEVEL ${escapeHtml(String(selectedLevel).padStart(2, '0'))} • 30-DAY TIMELINE</span>
+            <h2 class="text-2xl font-black text-medina mb-2">One day. One lesson. Real Morocco readiness.</h2>
             <p class="text-gray-600 max-w-2xl">This is not a slow “week course”. The learner gets a clear 30-day path from the subscription date. After purchase, all lessons should be accessible immediately; the dates are guidance, not a lock.</p>
           </div>
           <div class="bg-cream rounded-2xl border border-yellow-100 p-4 min-w-[260px]">
@@ -2925,7 +2984,7 @@
                   <div>
                     <h2 class="text-xl font-black text-medina">Days ${escapeHtml(section.start)}–${escapeHtml(section.end)} — ${escapeHtml(section.title)}</h2>
                     <p class="text-sm text-gray-500 mt-1">${escapeHtml(section.description)}</p>
-                    ${section.wheelKey ? `
+                    ${section.wheelKey && selectedLevel === 1 ? `
                       <span class="inline-flex flex-wrap items-center gap-2 mt-2 text-xs font-extrabold">
                         <a class="text-terracotta hover:text-red-700 underline decoration-red-200" href="#/app/weekly-wheel?week=${escapeHtml(section.wheelKey)}">Open ${escapeHtml(weeklyWheelPlan(section.wheelKey).label)} Wheel</a>
                         <span class="text-gray-300">•</span>
@@ -2947,7 +3006,7 @@
                     const progress = Store()?.lessonProgress(lesson);
                     const dayDate = formatDate(lessonDate(lesson.day));
                     return `
-                      <a href="#/app/lesson/${encodeURIComponent(String(lesson.day || lesson.id))}${isAdminActive() && isLearnerLockedLesson(lesson) ? '?admin=1' : ''}" class="block bg-white p-4 rounded-xl shadow-sm border ${progress?.complete ? 'border-green-300' : isFree ? 'border-green-200 hover:border-green-400' : isLearnerLockedLesson(lesson) ? 'border-red-100 hover:border-terracotta' : 'border-gray-200'} transition flex items-center justify-between gap-4 group">
+                      <a href="#/app/lesson/${encodeURIComponent(String(lesson.day || lesson.id))}?level=${lessonLevel(lesson)}${collabParam}${isAdminActive() && isLearnerLockedLesson(lesson) ? '&admin=1' : ''}" class="block bg-white p-4 rounded-xl shadow-sm border ${progress?.complete ? 'border-green-300' : isFree ? 'border-green-200 hover:border-green-400' : isLearnerLockedLesson(lesson) ? 'border-red-100 hover:border-terracotta' : 'border-gray-200'} transition flex items-center justify-between gap-4 group">
                         <div class="flex items-center gap-4 min-w-0">
                           <div class="w-12 h-12 rounded-2xl ${progress?.complete ? 'bg-green-600 text-white' : isFree ? 'bg-green-100 text-green-700' : isLearnerLockedLesson(lesson) ? 'bg-red-50 text-terracotta' : 'bg-gray-200 text-gray-500'} flex flex-col items-center justify-center font-black text-xs leading-none">
                             <span>DAY</span>
@@ -3070,7 +3129,7 @@
                 <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">✓</div>
                 <div><p class="font-bold font-mono">${escapeHtml(phrase.friendlyLatin)}</p><p class="text-xs text-gray-500">Day ${escapeHtml(lesson.day)} • ${escapeHtml(lesson.title)}</p></div>
               </div>
-              <a href="#/app/lesson/${escapeHtml(lesson.day)}?phraseId=${encodeURIComponent(String(phrase.id || ''))}" class="text-sm text-chefchaouen font-medium hover:underline">Review</a>
+              <a href="#/app/lesson/${escapeHtml(lesson.day)}?level=${lessonLevel(lesson)}&phraseId=${encodeURIComponent(String(phrase.id || ''))}" class="text-sm text-chefchaouen font-medium hover:underline">Review</a>
             </div>
           `).join('') : `
             <div class="bg-white p-6 rounded-xl border border-gray-100 text-gray-500">No learned phrases yet. Open a lesson and click “Mark Phrase Learned.”</div>

@@ -57,9 +57,61 @@
     return Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => {
       const value = index + 1;
       const available = lessons().some((lesson) => getLessonLevel(lesson) === value);
-      const label = `Level ${String(value).padStart(2, '0')}${available ? '' : ' — مستقل لاحقاً'}`;
+      const visibility = window.DarijaLevelAccess?.getVisibility?.(value) || (value === 1 ? 'public' : (value === 2 ? 'collaborators' : 'admin'));
+      const visibilityLabel = window.DarijaLevelAccess?.meta?.(visibility)?.shortLabel || visibility;
+      const label = `Level ${String(value).padStart(2, '0')}${available ? '' : ' — مستقل لاحقاً'} • ${visibilityLabel}`;
       return `<option value="${value}" ${value === levelNumber(selectedLevel) ? 'selected' : ''}>${escapeHtml(label)}</option>`;
     }).join('');
+  }
+
+  function levelVisibility() {
+    return window.DarijaLevelAccess?.getVisibility?.(state.selectedLevel) || (state.selectedLevel === 1 ? 'public' : (state.selectedLevel === 2 ? 'collaborators' : 'admin'));
+  }
+
+  function levelVisibilityMeta() {
+    const access = window.DarijaLevelAccess;
+    return access?.meta?.(levelVisibility()) || { label: 'أدمن فقط', tone: 'gray', description: 'المستوى للأدمن فقط.' };
+  }
+
+  function levelVisibilityBadgeMarkup(level = state.selectedLevel) {
+    const access = window.DarijaLevelAccess;
+    const visibility = access?.getVisibility?.(level) || (level === 1 ? 'public' : (level === 2 ? 'collaborators' : 'admin'));
+    const meta = access?.meta?.(visibility) || { label: visibility, tone: 'gray' };
+    return badge(meta.label || visibility, meta.tone || 'gray');
+  }
+
+  function renderLevelVisibilityControl() {
+    const meta = levelVisibilityMeta();
+    const visibility = levelVisibility();
+    const collabLink = window.DarijaLevelAccess?.collaboratorLink?.(state.selectedLevel) || `#/app/lessons?collab=1&level=${state.selectedLevel}`;
+    const options = [
+      { key: 'admin', label: 'أدمن فقط', icon: '🔒' },
+      { key: 'collaborators', label: 'للمتعاونين', icon: '🤝' },
+      { key: 'public', label: 'للعموم', icon: '👁️' }
+    ];
+    return `
+      <div class="rounded-2xl bg-gray-50 border border-gray-200 p-4 text-sm lg:max-w-md">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-gray-400">صلاحية ظهور المستوى</p>
+            <p class="font-extrabold text-gray-900">Level ${escapeHtml(String(state.selectedLevel).padStart(2, '0'))} — ${escapeHtml(meta.label)}</p>
+          </div>
+          ${levelVisibilityBadgeMarkup(state.selectedLevel)}
+        </div>
+        <p class="text-xs text-gray-600 mb-3">${escapeHtml(meta.description || '')}</p>
+        <div class="grid grid-cols-3 gap-2 mb-3">
+          ${options.map((option) => `
+            <button type="button" data-admin-level-visibility="${escapeHtml(option.key)}" class="rounded-xl border px-2 py-2 text-xs font-extrabold transition ${visibility === option.key ? 'bg-chefchaouen text-white border-chefchaouen' : 'bg-white text-gray-700 border-gray-200 hover:border-chefchaouen'}">
+              <span class="block text-base">${option.icon}</span>${escapeHtml(option.label)}
+            </button>
+          `).join('')}
+        </div>
+        <div class="flex flex-wrap gap-2" dir="ltr">
+          <a href="${escapeHtml(collabLink)}" class="bg-white border border-blue-200 text-blue-700 px-3 py-2 rounded-xl text-xs font-black hover:bg-blue-50">Collaborator preview</a>
+          <button type="button" data-admin-copy-collab-link="${escapeHtml(collabLink)}" class="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-xl text-xs font-black hover:bg-gray-50">Copy link</button>
+        </div>
+      </div>
+    `;
   }
 
   function lessonsForLevel(level = state.selectedLevel) {
@@ -812,6 +864,7 @@
               ${badge(`${stats.slow}/${stats.total} Slow`, stats.slow === stats.total ? 'green' : 'yellow')}
               ${badge(`${stats.videos}/${stats.total} Video`, stats.videos ? 'green' : 'gray')}
               ${badge(`${stats.visuals}/${stats.total} Visual`, stats.visuals ? 'blue' : 'gray')}
+              ${levelVisibilityBadgeMarkup(getLessonLevel(lesson))}
               ${badge(statusText, statusTone)}
             </div>
           </div>
@@ -1099,6 +1152,7 @@
             </select>
             <p class="text-xs text-gray-500 mt-2">اعمل على درس واحد في كل مرة لتفادي التكرار والفوضى.</p>
           </div>
+          ${renderLevelVisibilityControl()}
           <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-blue-900 lg:max-w-sm">
             <p class="font-extrabold mb-1">قاعدة D68B</p>
             <p>مركز ملفات الدروس هو المكان الرئيسي: الجملة تفتح التعديل، والحالات ترفع Normal / Slow / Video / Visual.</p>
@@ -1409,6 +1463,23 @@
       if (lesson) openDays.add(lessonKey(lesson));
       writeAdminAudioOpenDays(openDays);
       renderAudio();
+    });
+    root.querySelectorAll('[data-admin-level-visibility]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const nextVisibility = button.dataset.adminLevelVisibility || 'admin';
+        window.DarijaLevelAccess?.setVisibility?.(state.selectedLevel, nextVisibility);
+        renderAudio();
+      });
+    });
+    root.querySelector('[data-admin-copy-collab-link]')?.addEventListener('click', async (event) => {
+      const link = event.currentTarget.dataset.adminCopyCollabLink || '';
+      const absolute = `${window.location.origin}${window.location.pathname}${link}`;
+      try {
+        await navigator.clipboard?.writeText?.(absolute);
+        event.currentTarget.textContent = 'Copied';
+      } catch (error) {
+        window.prompt('Copy collaborator link:', absolute);
+      }
     });
     root.querySelectorAll('[data-admin-audio-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
