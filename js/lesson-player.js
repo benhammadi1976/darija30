@@ -2058,7 +2058,7 @@
 
           <div class="weekly-wheel-fullscreen-size-rail weekly-wheel-fullscreen-size-rail--behind" aria-label="Challenge sizes preview">
             ${(plan.challengeSizes || [5]).filter((size) => size <= Math.max(bank.length, 1)).map((size) => `
-              <span class="weekly-wheel-size weekly-wheel-size--circle ${Number(size) === challengeSize ? 'is-active' : ''}" aria-hidden="true">${escapeHtml(size >= bank.length ? bank.length : size)}</span>
+              <span class="weekly-wheel-size weekly-wheel-size--circle ${Number(size) === challengeSize ? 'is-active' : ''}" data-weekly-size-tip="${escapeHtml(weeklyChallengeSizeTooltip(size, bank.length))}" aria-hidden="true">${escapeHtml(size >= bank.length ? bank.length : size)}</span>
             `).join('')}
           </div>
 
@@ -2248,6 +2248,18 @@
   }
 
 
+  function weeklyChallengeSizeTooltip(size, bankLength) {
+    const value = Math.min(Number(size) || 5, Number(bankLength) || Number(size) || 5);
+    const bankValue = Number(bankLength) || value;
+    if (value >= bankValue) return `Full weekly challenge — answer all ${value} situations. These numbers choose how many situations you answer, not the wheel result.`;
+    if (value === 5) return 'Light review — answer 5 random situations. Choose this for a quick weekly practice.';
+    if (value === 10) return 'Medium review — answer 10 random situations. A balanced weekly challenge.';
+    if (value === 15) return 'Strong review — answer 15 random situations. More practice from the week bank.';
+    if (value === 20) return 'Big review — answer 20 random situations. A deeper weekly challenge before the full wheel.';
+    return `${value} situations — choose how many random situations you want to answer from this wheel bank.`;
+  }
+
+
   function weeklyWheelNumberMarks(total, currentNumber) {
     const count = Math.max(Number(total) || 0, 0);
     return Array.from({ length: count }, (_, index) => {
@@ -2363,17 +2375,7 @@
   }
 
   function weeklyWheelThemePicker() {
-    const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
-    return `
-      <div class="weekly-wheel-theme-switcher" aria-label="Choose wheel background theme">
-        ${weeklyWheelThemeOptions().map((option) => `
-          <button type="button" data-weekly-theme="${escapeHtml(option.key)}" class="weekly-wheel-theme-chip ${option.key === activeTheme ? 'is-active' : ''}" aria-label="${escapeHtml(option.label)} theme">
-            <span class="weekly-wheel-theme-chip__swatch" style="--theme-swatch:${escapeHtml(option.swatch)};"></span>
-            <span>${escapeHtml(option.label)}</span>
-          </button>
-        `).join('')}
-      </div>
-    `;
+    return '';
   }
 
   function renderWeeklyWheel(options = {}) {
@@ -2453,7 +2455,7 @@
 
             <div class="weekly-wheel-fullscreen-size-rail" aria-label="Choose challenge size">
               ${(plan.challengeSizes || [5]).filter((size) => size <= Math.max(bank.length, 1)).map((size) => `
-                <button type="button" data-weekly-size="${escapeHtml(size)}" class="weekly-wheel-size weekly-wheel-size--circle ${Number(size) === challengeSize ? 'is-active' : ''}" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''} aria-label="${escapeHtml(weeklyChallengeSizeLabel(size, bank.length))}">${escapeHtml(size >= bank.length ? bank.length : size)}</button>
+                <button type="button" data-weekly-size="${escapeHtml(size)}" data-weekly-size-tip="${escapeHtml(weeklyChallengeSizeTooltip(size, bank.length))}" class="weekly-wheel-size weekly-wheel-size--circle ${Number(size) === challengeSize ? 'is-active' : ''}" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''} aria-label="${escapeHtml(weeklyChallengeSizeLabel(size, bank.length))}">${escapeHtml(size >= bank.length ? bank.length : size)}</button>
               `).join('')}
             </div>
 
@@ -2525,7 +2527,7 @@
 
             <div class="weekly-wheel-size-list weekly-wheel-size-list--center" aria-label="Choose challenge size">
               ${(plan.challengeSizes || [5]).filter((size) => size <= Math.max(bank.length, 1)).map((size) => `
-                <button type="button" data-weekly-size="${escapeHtml(size)}" class="weekly-wheel-size ${Number(size) === challengeSize ? 'is-active' : ''}" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''}>${escapeHtml(weeklyChallengeSizeLabel(size, bank.length))}</button>
+                <button type="button" data-weekly-size="${escapeHtml(size)}" data-weekly-size-tip="${escapeHtml(weeklyChallengeSizeTooltip(size, bank.length))}" title="${escapeHtml(weeklyChallengeSizeTooltip(size, bank.length))}" class="weekly-wheel-size ${Number(size) === challengeSize ? 'is-active' : ''}" ${state.weeklyWheel.isSpinning ? 'disabled aria-disabled="true"' : ''}>${escapeHtml(weeklyChallengeSizeLabel(size, bank.length))}</button>
               `).join('')}
             </div>
 
@@ -2568,14 +2570,6 @@
         </div>
       `;
     }
-    root.querySelectorAll('[data-weekly-theme]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (state.weeklyWheel.isSpinning) return;
-        setWeeklyWheelTheme(button.dataset.weeklyTheme);
-        renderWeeklyWheel(options);
-      });
-    });
-
     root.querySelectorAll('[data-weekly-plan]').forEach((button) => {
       button.addEventListener('click', () => {
         if (state.weeklyWheel.isSpinning) return;
