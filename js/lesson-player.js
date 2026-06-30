@@ -2101,11 +2101,7 @@
               ${weeklyWheelNumberMarks(promptNumberEntries, null, '')}
             </div>
             <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${weeklyRequiresSourceSpin(plan) ? 'weekly-wheel-disc--source-week-wheel' : ''}">
-              <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen">
-                <span>Ready</span>
-                <strong>Spin</strong>
-                <small>${escapeHtml(plan.label)}</small>
-              </div>
+              <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="system-only"></div>
             </div>
           </div>
 
@@ -2589,8 +2585,6 @@
     const activeWheelNumber = revealWheelNumber ? current.number : null;
     const situationWheelColor = weeklySituationWheelColor(plan, selectedSource);
     const situationWheelClass = isSourcePhase ? '' : 'weekly-wheel-disc--situation-week-wheel';
-    const centerWheelLabel = state.weeklyWheel.isSpinning ? 'Spinning' : isSourcePhase ? 'Memory Source' : revealWheelNumber ? 'Situation' : 'Ready';
-    const centerWheelNumber = state.weeklyWheel.isSpinning ? '•••' : isSourcePhase ? 'Spin Week' : revealWheelNumber ? `#${current.number}` : 'Spin';
     const appNav = document.getElementById('app-nav');
 
     const fullscreenWheel = Boolean(embedded && !showSituation);
@@ -2657,11 +2651,7 @@
                 ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large weekly-wheel-disc--fullscreen ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
-                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen">
-                  <span>${escapeHtml(centerWheelLabel)}</span>
-                  <strong>${escapeHtml(centerWheelNumber)}</strong>
-                  <small>${escapeHtml(plan.label)}</small>
-                </div>
+                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large weekly-wheel-disc__inner--fullscreen" aria-hidden="true" data-wheel-state="system-only"></div>
               </div>
             </div>
 
@@ -2724,11 +2714,7 @@
                 ${weeklyWheelNumberMarks(numberRingEntries, activeWheelNumber, '')}
               </div>
               <div class="weekly-wheel-disc weekly-wheel-disc--large ${isSourcePhase ? 'weekly-wheel-disc--source-week-wheel' : situationWheelClass}">
-                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large">
-                  <span>${escapeHtml(centerWheelLabel)}</span>
-                  <strong>${escapeHtml(centerWheelNumber)}</strong>
-                  <small>${escapeHtml(plan.label)}</small>
-                </div>
+                <div class="weekly-wheel-disc__inner weekly-wheel-disc__inner--large" aria-hidden="true" data-wheel-state="system-only"></div>
               </div>
             </div>
 
