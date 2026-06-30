@@ -2773,6 +2773,26 @@
       });
     });
 
+    const startWeeklySituationSpin = () => {
+      const choice = spinWeeklyWheel();
+      if (!choice) return false;
+      state.weeklyWheel.mode = 'wheel';
+      state.weeklyWheel.isSpinning = true;
+      window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+      window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
+      renderWeeklyWheel(options);
+      state.weeklyWheel.openTimer = window.setTimeout(() => {
+        state.weeklyWheel.isSpinning = false;
+        state.weeklyWheel.mode = 'result';
+        renderWeeklyWheel(options);
+        state.weeklyWheel.resultTimer = window.setTimeout(() => {
+          state.weeklyWheel.mode = 'situation';
+          renderWeeklyWheel(options);
+        }, 650);
+      }, Number(state.weeklyWheel.spinDurationMs || 4200) + 120);
+      return true;
+    };
+
     const startWeeklyWheelSpin = () => {
       if (state.weeklyWheel.isSpinning || state.weeklyWheel.mode === 'result') return;
       if (completed || state.weeklyWheel.mode === 'complete') resetWeeklyWheelGame(plan.key);
@@ -2791,25 +2811,15 @@
           state.weeklyWheel.spinStartRotation = 0;
           state.weeklyWheel.wheelRotation = 0;
           renderWeeklyWheel(options);
+          window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
+          state.weeklyWheel.openTimer = window.setTimeout(() => {
+            if (state.weeklyWheel.isSpinning || state.weeklyWheel.mode === 'result') return;
+            startWeeklySituationSpin();
+          }, 220);
         }, Number(state.weeklyWheel.spinDurationMs || 3200) + 120);
         return;
       }
-      const choice = spinWeeklyWheel();
-      if (!choice) return;
-      state.weeklyWheel.mode = 'wheel';
-      state.weeklyWheel.isSpinning = true;
-      window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
-      window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
-      renderWeeklyWheel(options);
-      state.weeklyWheel.openTimer = window.setTimeout(() => {
-        state.weeklyWheel.isSpinning = false;
-        state.weeklyWheel.mode = 'result';
-        renderWeeklyWheel(options);
-        state.weeklyWheel.resultTimer = window.setTimeout(() => {
-          state.weeklyWheel.mode = 'situation';
-          renderWeeklyWheel(options);
-        }, 650);
-      }, Number(state.weeklyWheel.spinDurationMs || 4200) + 120);
+      startWeeklySituationSpin();
     };
 
     root.querySelectorAll('[data-weekly-spin]').forEach((spinTarget) => {
