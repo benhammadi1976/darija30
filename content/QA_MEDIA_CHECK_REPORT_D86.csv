@@ -1,0 +1,1351 @@
+day,lessonTitle,phraseId,friendlyLatin,audioNormal,audioSlow,sceneVideo,scenePoster,sceneVisual
+1,Taxi Survival,taxi-001,bghit nmshi l-otel,OK,OK,OK,OK,OK
+1,Taxi Survival,taxi-002,wqef hna aafak,MISSING,MISSING,OK,OK,OK
+1,Taxi Survival,taxi-003,sir nishan aafak,MISSING,MISSING,OK,OK,OK
+1,Taxi Survival,taxi-004,dur l-limen aafak,MISSING,MISSING,OK,OK,OK
+1,Taxi Survival,taxi-005,hna mezian,MISSING,MISSING,OK,OK,OK
+2,Cafe Culture,cafe-001,qahwa kahla aafak,OK,OK,OK,OK,OK
+2,Cafe Culture,cafe-002,atay b naanaa aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,Cafe Culture,cafe-003,bla sokkar aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,Cafe Culture,cafe-004,l-ma aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,Cafe Culture,cafe-005,l-hssab aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,Market Price,market-001,bshhal hada?,OK,OK,OK,OK,OK
+3,Market Price,market-002,ghali bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,Market Price,market-003,nqes shwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,Market Price,market-004,shnu akher taman?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,Market Price,market-005,bghit nshri hada,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,First Moroccan Greetings,day04-salam-001,salam,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+4,First Moroccan Greetings,day04-labas-002,labas?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,First Moroccan Greetings,day04-bikhir-lhamdullah-003,"bikhir, lhamdullah",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,First Moroccan Greetings,day04-shukran-004,shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,First Moroccan Greetings,day04-bslama-005,bslama,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,Be Polite Without Sounding Formal,day05-aafak-001,aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+5,Be Polite Without Sounding Formal,day05-smh-liya-002,smh liya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,Be Polite Without Sounding Formal,day05-maashi-mushkil-003,mashi mushkil,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,Be Polite Without Sounding Formal,day05-wakha-004,wakha,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,Be Polite Without Sounding Formal,day05-la-shukran-005,la shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,Introduce Yourself,day06-smiti-john-001,smiti ...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+6,Introduce Yourself,day06-ana-mn-002,ana mn...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,Introduce Yourself,day06-ana-mn-mirikan-003,kanhder English shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,Introduce Yourself,day06-msharfin-004,msharfin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,Introduce Yourself,day06-ana-turist-005,ana turist,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,I Don’t Understand,day07-ma-fhemtsh-001,ma fhemtsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+7,I Don’t Understand,day07-bshwiya-aafak-002,bshwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,I Don’t Understand,day07-aawed-aafak-003,aawed aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,I Don’t Understand,day07-wash-kat-hder-english-004,wash kat-hder English?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,I Don’t Understand,day07-shnu-glti-005,shnu glti?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,"Yes, No, Maybe, I Want",day08-iyeh-001,iyeh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+8,"Yes, No, Maybe, I Want",day08-0la-002,la,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,"Yes, No, Maybe, I Want",day08-momkin-003,momkin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,"Yes, No, Maybe, I Want",day08-bghit-004,bghit...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,"Yes, No, Maybe, I Want",day08-ma-bghitsh-005,ma bghitsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,Taxi: Price and Meter,day09-bsh-hal-taman-001,bshhal taman?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+9,Taxi: Price and Meter,day09-shaal-l-compteur-aafak-002,shael l-compteur aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,Taxi: Price and Meter,day09-ghali-bzaf-003,ghali bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,Taxi: Price and Meter,day09-la-shukran-004,"la, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,Taxi: Price and Meter,day09-wakha-005,wakha,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,Taxi: Stop and Directions,day10-wqef-hna-aafak-001,wqef hna aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,OK
+10,Taxi: Stop and Directions,day10-sir-nishan-002,sir nishan,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,Taxi: Stop and Directions,day10-dur-l-limen-003,dur l-limen,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,Taxi: Stop and Directions,day10-dur-l-lisar-004,dur l-lisar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,Taxi: Stop and Directions,day10-hna-mezian-005,hna mezian,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,"Train, Bus, Airport",day11-fin-l-mahatta-001,fin l-mahatta?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,"Train, Bus, Airport",day11-fin-l-mtar-002,fin l-mtar?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,"Train, Bus, Airport",day11-bghit-ticket-l-003,bghit ticket l...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,"Train, Bus, Airport",day11-shhal-f-saa-004,shhal f saa?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,"Train, Bus, Airport",day11-wash-baqi-kayn-005,wash baqi kayn?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,Lost in the Medina,day12-tliit-001,tliit,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,Lost in the Medina,day12-fin-kayn-002,fin kayn ...?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,Lost in the Medina,day12-qreb-wla-b3id-003,qreb wla b'id?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,Lost in the Medina,day12-aaweni-aafak-004,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,Lost in the Medina,day12-shukran-bzaf-005,shukran bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,"Sugar, Milk, Custom Orders",day13-bla-sokkar-001,bla sokkar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,"Sugar, Milk, Custom Orders",day13-b-l-hlib-002,b l-hlib,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,"Sugar, Milk, Custom Orders",day13-messous-003,messous,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,"Sugar, Milk, Custom Orders",day13-shwiya-sokkar-004,shwiya sokkar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,"Sugar, Milk, Custom Orders",day13-ma-bghitsh-sokkar-005,ma bghitsh sokkar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,Restaurant Basics,day14-bghit-menu-001,bghit menu,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,Restaurant Basics,day14-shnu-kayn-002,shnu kayn?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,Restaurant Basics,day14-bghit-tajine-003,bghit tajine,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,Restaurant Basics,day14-bghit-couscous-004,bghit couscous,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,Restaurant Basics,day14-hadshi-bnin-005,hadshi bnin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,The Bill and Payment,day15-l-hssab-aafak-001,l-hssab aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,The Bill and Payment,day15-bsh-hal-002,bshhal?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,The Bill and Payment,day15-nkhlles-b-carte-003,nkhlles b carte?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,The Bill and Payment,day15-cash-004,nkhlles nkhlles cash?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,The Bill and Payment,day15-safi-shukran-005,safi shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,Dietary Needs,day16-ana-vegetariyan-001,ana vegetariyan,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,Dietary Needs,day16-ma-kan-akolsh-l-hm-002,ma kan-akolsh l-hm,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,Dietary Needs,day16-wash-fih-l-hlib-003,wash fih l-hlib?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,Dietary Needs,day16-wash-fih-l-bid-004,wash fih l-bid?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,Dietary Needs,day16-bla-aafak-005,bla ... aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,Ask the Price,day17-bsh-hal-hada-001,bshhal hada?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,Ask the Price,day17-bsh-hal-hadi-002,bshhal hadi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,Ask the Price,day17-shhal-taman-003,shhal taman?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,Ask the Price,day17-hada-zwin-004,hada zwin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,Ask the Price,day17-bghit-nshuf-005,bghit nshuf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,Bargain Politely,day18-ghali-bzaf-001,ghali bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,Bargain Politely,day18-nqes-shwiya-aafak-002,nqes shwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,Bargain Politely,day18-akher-taman-003,akher taman?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,Bargain Politely,day18-ma-bghitsh-004,ma bghitsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,Bargain Politely,day18-wakha-005,wakha,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,"Buy This, Not That",day19-bghit-hada-001,bghit hada,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,"Buy This, Not That",day19-ma-bghitsh-hadi-002,ma bghitsh hadi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,"Buy This, Not That",day19-atini-hada-aafak-003,atini hada aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,"Buy This, Not That",day19-kayna-shi-haja-khra-004,kayna shi haja khra?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,"Buy This, Not That",day19-safi-005,safi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,Sizes and Colors,day20-kbir-001,bghit l-kbir,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,Sizes and Colors,day20-sghir-002,bghit l-sghir,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,Sizes and Colors,day20-khal-003,bghit l-khal,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,Sizes and Colors,day20-byed-004,bghit l-byed,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,Sizes and Colors,day20-zraq-005,bghit l-zraq,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,Numbers for Prices,day21-wahed-001,bghit wahed,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,Numbers for Prices,day21-jouj-002,bghit jouj,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,Numbers for Prices,day21-tlata-003,bghit tlata,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,Numbers for Prices,day21-ashra-004,ashra drham,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,Numbers for Prices,day21-bsh-hal-b-drham-005,bshhal b drham?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,Hotel / Riad Check-in,day22-andi-reservation-001,andi reservation,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,Hotel / Riad Check-in,day22-smiti-002,smiti...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,Hotel / Riad Check-in,day22-fin-l-bit-003,fin l-bit?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,Hotel / Riad Check-in,day22-bghit-l-mftah-004,bghit l-mftah,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,Hotel / Riad Check-in,day22-shukran-005,shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,Hotel Problems,day23-ma-kaynsh-lma-skhun-001,ma kaynsh lma skhun,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,Hotel Problems,day23-l-wifi-ma-khdamsh-002,l-wifi ma khdamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,Hotel Problems,day23-bghit-nbedel-l-bit-003,bghit nbedel l-bit,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,Hotel Problems,day23-aaweni-aafak-004,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,Hotel Problems,day23-maashi-mushkil-005,mashi mushkil,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,Ask Where Things Are,day24-fin-kayn-001,fin kayn...?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,Ask Where Things Are,day24-fin-toilet-002,fin kayn toilet?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,Ask Where Things Are,day24-fin-pharmacy-003,fin kayna pharmacie?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,Ask Where Things Are,day24-fin-atm-004,fin kayn ATM?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,Ask Where Things Are,day24-qreb-005,wash wash qreb?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,Need Help / Emergency Light,day25-aaweni-aafak-001,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,Need Help / Emergency Light,day25-bghit-doctor-002,bghit tbib,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,Need Help / Emergency Light,day25-ana-mrid-003,ana mrid,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,Need Help / Emergency Light,day25-mshat-li-l-portefeuille-004,mshat li l-portefeuille,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,Need Help / Emergency Light,day25-fin-police-005,fin l-police?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,"Phone, SIM, Internet",day26-bghit-carte-sim-001,bghit carte SIM,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,"Phone, SIM, Internet",day26-bghit-internet-002,bghit internet,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,"Phone, SIM, Internet",day26-shhal-giga-003,shhal giga?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,"Phone, SIM, Internet",day26-ma-khdamsh-004,ma khdamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,"Phone, SIM, Internet",day26-aaweni-aafak-005,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,Compliments and Warm Phrases,day27-bssaha-001,bssaha,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,Compliments and Warm Phrases,day27-llah-ykhalik-002,llah ykhalik,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,Compliments and Warm Phrases,day27-zwin-bzaf-003,zwin bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,Compliments and Warm Phrases,day27-had-l-blad-zwina-004,had l-blad zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,Compliments and Warm Phrases,day27-shukran-bzaf-005,shukran bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,Decline Politely,day28-la-shukran-001,la shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,Decline Politely,day28-ma-bghitsh-002,ma bghitsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,Decline Politely,day28-ghir-kan-shuf-003,ghir kan-shuf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,Decline Politely,day28-ma-andish-flus-daba-004,ma andish flus daba,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,Decline Politely,day28-safi-shukran-005,safi shukran,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,Real Morocco Mixed Situations,day29-salam-001,"salam, labas?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,Real Morocco Mixed Situations,day29-bghit-nmshi-l-otel-002,bghit nmshi l-otel,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,Real Morocco Mixed Situations,day29-shaal-l-compteur-aafak-003,qahwa kahla aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,Real Morocco Mixed Situations,day29-wqef-hna-aafak-004,bshhal hada?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,Real Morocco Mixed Situations,day29-shukran-bzaf-005,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,Final Morocco Survival Test,day30-salam-001,salam,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,Final Morocco Survival Test,day30-bghit-nmshi-l-otel-002,bghit nmshi l-otel,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,Final Morocco Survival Test,day30-qahwa-kahla-aafak-003,qahwa kahla aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,Final Morocco Survival Test,day30-bsh-hal-hada-004,bshhal hada?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,Final Morocco Survival Test,day30-aaweni-aafak-005,aaweni aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى الرياض أول مرة,L02-D01-P01,"salam aalikom, ana wasel daba",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى الرياض أول مرة,L02-D01-P02,bghit ndkhol l-riad aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى الرياض أول مرة,L02-D01-P03,wash hna reception?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى الرياض أول مرة,L02-D01-P04,ana guest hna lila,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى الرياض أول مرة,L02-D01-P05,"shukran, l-blasa zwina",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,تأكيد الحجز والاستقبال,L02-D02-P01,aandi reservation b smiya dyali,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,تأكيد الحجز والاستقبال,L02-D02-P02,smiti ...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,تأكيد الحجز والاستقبال,L02-D02-P03,wash l-bit wajed?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,تأكيد الحجز والاستقبال,L02-D02-P04,nqder nshuf l-bit?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,تأكيد الحجز والاستقبال,L02-D02-P05,"wakha, ghadi ntsenna hna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الغرفة والمفتاح والحقائب,L02-D03-P01,fin l-bit dyali aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الغرفة والمفتاح والحقائب,L02-D03-P02,fin l-kle dyal l-bit?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الغرفة والمفتاح والحقائب,L02-D03-P03,had shnati tqila shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الغرفة والمفتاح والحقائب,L02-D03-P04,nqder nkhli shnati hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الغرفة والمفتاح والحقائب,L02-D03-P05,shukran ala l-musaada,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,السؤال عن Wi‑Fi والمرافق,L02-D04-P01,kayn wifi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,السؤال عن Wi‑Fi والمرافق,L02-D04-P02,shno l-code dyal l-wifi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,السؤال عن Wi‑Fi والمرافق,L02-D04-P03,fin l-hmam aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,السؤال عن Wi‑Fi والمرافق,L02-D04-P04,fin stah?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,السؤال عن Wi‑Fi والمرافق,L02-D04-P05,wash kayn l-ma skhon?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الفطور المغربي في الرياض,L02-D05-P01,imta l-ftor?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الفطور المغربي في الرياض,L02-D05-P02,wash l-ftor dakhel f l-hsab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الفطور المغربي في الرياض,L02-D05-P03,fin nakol l-ftor?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الفطور المغربي في الرياض,L02-D05-P04,bghit atay bla sokar aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الفطور المغربي في الرياض,L02-D05-P05,"l-ftor bnin, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,طلب الشاي والماء بأدب,L02-D06-P01,nqder nakhod atay?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,طلب الشاي والماء بأدب,L02-D06-P02,bghit kas dyal l-ma aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,طلب الشاي والماء بأدب,L02-D06-P03,l-atay bnin bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,طلب الشاي والماء بأدب,L02-D06-P04,shwiya sokar aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,طلب الشاي والماء بأدب,L02-D06-P05,baraka allah fik,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: الضيافة الأساسية,L02-D07-P01,"salam, aandi reservation",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: الضيافة الأساسية,L02-D07-P02,shno l-code dyal l-wifi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: الضيافة الأساسية,L02-D07-P03,imta l-ftor?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: الضيافة الأساسية,L02-D07-P04,fin l-bit dyali?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: الضيافة الأساسية,L02-D07-P05,shukran ala kolshi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الاستئذان قبل الدخول أو الجلوس,L02-D08-P01,nqder ndkhol?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الاستئذان قبل الدخول أو الجلوس,L02-D08-P02,nqder njles hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الاستئذان قبل الدخول أو الجلوس,L02-D08-P03,nqder nhell l-shrjem?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الاستئذان قبل الدخول أو الجلوس,L02-D08-P04,"smehli, wach nqder ndouz?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الاستئذان قبل الدخول أو الجلوس,L02-D08-P05,"la bas, ghadi ntsenna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,التعامل مع عاملة/عامل الرياض,L02-D09-P01,"salam, smhliya",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,التعامل مع عاملة/عامل الرياض,L02-D09-P02,nqder nsawl shwiya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,التعامل مع عاملة/عامل الرياض,L02-D09-P03,bghit tbdel l-manshfa aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,التعامل مع عاملة/عامل الرياض,L02-D09-P04,wach tqdri tnqyi l-bit mn b3d?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,التعامل مع عاملة/عامل الرياض,L02-D09-P05,"shukran bzaf, lah ykhalik",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,طلب منشفة أو صابون أو غطاء,L02-D10-P01,bghit manshfa okhra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,طلب منشفة أو صابون أو غطاء,L02-D10-P02,bghit sabon aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,طلب منشفة أو صابون أو غطاء,L02-D10-P03,bghit manta okhra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,طلب منشفة أو صابون أو غطاء,L02-D10-P04,fin l-manshaf?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,طلب منشفة أو صابون أو غطاء,L02-D10-P05,"had l-manta mzyana, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,مشكلة بسيطة في الغرفة,L02-D11-P01,l-daw ma khdamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,مشكلة بسيطة في الغرفة,L02-D11-P02,l-ma ma skhonsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,مشكلة بسيطة في الغرفة,L02-D11-P03,l-bab ma kaytsedsh mzyan,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,مشكلة بسيطة في الغرفة,L02-D11-P04,nqder nbdel l-bit?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,مشكلة بسيطة في الغرفة,L02-D11-P05,shukran ila tsawbtoha,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,الهدوء والنوم والضجيج,L02-D12-P01,kayn shwiya dyal sda,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,الهدوء والنوم والضجيج,L02-D12-P02,bghit n3es bakri,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,الهدوء والنوم والضجيج,L02-D12-P03,nqder nsed l-bab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,الهدوء والنوم والضجيج,L02-D12-P04,shwiya dyal l-hdu aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,الهدوء والنوم والضجيج,L02-D12-P05,"daba mzyan, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,التكييف/التدفئة والنافذة,L02-D13-P01,l-klimatizor ma khdamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,التكييف/التدفئة والنافذة,L02-D13-P02,nqder nhell l-shrjem?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,التكييف/التدفئة والنافذة,L02-D13-P03,l-bit bared shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,التكييف/التدفئة والنافذة,L02-D13-P04,l-bit skhon shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,التكييف/التدفئة والنافذة,L02-D13-P05,wash kayn chauffage?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,طلب نصيحة من المضيف,L02-D14-P01,fin nakol mzyan qrib?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,طلب نصيحة من المضيف,L02-D14-P02,ash katsahliya nshuf hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,طلب نصيحة من المضيف,L02-D14-P03,fin kayn souq qrib?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,طلب نصيحة من المضيف,L02-D14-P04,wash had blasa amna b-lil?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,طلب نصيحة من المضيف,L02-D14-P05,shno ahsan tariq l-medina?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,الدفع أو تمديد ليلة,L02-D15-P01,bghit nkhalles daba,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,الدفع أو تمديد ليلة,L02-D15-P02,wash nqder nzid lila?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,الدفع أو تمديد ليلة,L02-D15-P03,shhal baki f l-hsab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,الدفع أو تمديد ليلة,L02-D15-P04,wash tqblo carte?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,الدفع أو تمديد ليلة,L02-D15-P05,"hak l-flous, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الخروج من الرياض والعودة إليه,L02-D16-P01,ghadi nkhroj daba,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الخروج من الرياض والعودة إليه,L02-D16-P02,ghadi nrjea b-lil,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الخروج من الرياض والعودة إليه,L02-D16-P03,wash l-bab kaybqa maftoh?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الخروج من الرياض والعودة إليه,L02-D16-P04,nqder nakhod l-kle m3aya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الخروج من الرياض والعودة إليه,L02-D16-P05,"ila tkhrtt, ghadi ntsel",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث القصير مع صاحب المكان,L02-D17-P01,labas aalik?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث القصير مع صاحب المكان,L02-D17-P02,l-riad zwin bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث القصير مع صاحب المكان,L02-D17-P03,ana awel mara f l-mghrib,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث القصير مع صاحب المكان,L02-D17-P04,l-mdina aajbatni,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث القصير مع صاحب المكان,L02-D17-P05,shukran ala l-istiQbal,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,قبول دعوة شاي,L02-D18-P01,"shukran, nshrbo atay",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,قبول دعوة شاي,L02-D18-P02,l-atay kayban bnin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,قبول دعوة شاي,L02-D18-P03,nqder nkhod ghir shwiya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,قبول دعوة شاي,L02-D18-P04,"saha, baraka allah fik",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,قبول دعوة شاي,L02-D18-P05,l-atay dyalkom zwin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,رفض شيء بأدب,L02-D19-P01,"la shukran, shbaat",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,رفض شيء بأدب,L02-D19-P02,ghir shwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,رفض شيء بأدب,L02-D19-P03,"ma nqdersh daba, smeh lia",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,رفض شيء بأدب,L02-D19-P04,l-atay zwin walakin kafi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,رفض شيء بأدب,L02-D19-P05,"baraka, allah ykhalik",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,مدح الأكل أو الديكور,L02-D20-P01,l-makla bnina bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,مدح الأكل أو الديكور,L02-D20-P02,l-riad zwin mashallah,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,مدح الأكل أو الديكور,L02-D20-P03,had zliij kayhammaq,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,مدح الأكل أو الديكور,L02-D20-P04,l-bit nqiya bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,مدح الأكل أو الديكور,L02-D20-P05,shukran ala had l-istiQbal,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,طلب اتجاه من داخل الرياض,L02-D21-P01,fin l-kharja aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,طلب اتجاه من داخل الرياض,L02-D21-P02,fin triq l-medina?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,طلب اتجاه من داخل الرياض,L02-D21-P03,wash l-taxi qrib mn hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,طلب اتجاه من داخل الرياض,L02-D21-P04,nqder nmshi b rjli?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,طلب اتجاه من داخل الرياض,L02-D21-P05,rsem lia tariq aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,تسليم المفتاح والخروج,L02-D22-P01,bghit nselm l-kle,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,تسليم المفتاح والخروج,L02-D22-P02,imta check-out?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,تسليم المفتاح والخروج,L02-D22-P03,nqder nkhli shnati hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,تسليم المفتاح والخروج,L02-D22-P04,wash l-hsab sali?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,تسليم المفتاح والخروج,L02-D22-P05,"shukran, kanet iqama zwina",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,مراجعة أسبوع 3: ضيافة + خدمة,L02-D23-P01,l-wifi ma khdamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,مراجعة أسبوع 3: ضيافة + خدمة,L02-D23-P02,bghit manshfa okhra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,مراجعة أسبوع 3: ضيافة + خدمة,L02-D23-P03,l-makla bnina bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,مراجعة أسبوع 3: ضيافة + خدمة,L02-D23-P04,nqder nzid lila?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,مراجعة أسبوع 3: ضيافة + خدمة,L02-D23-P05,fin l-medina aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,موقف سوء فهم مع المضيف,L02-D24-P01,"ma fhemtsh, smeh lia",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,موقف سوء فهم مع المضيف,L02-D24-P02,aawed aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,موقف سوء فهم مع المضيف,L02-D24-P03,hder b-shwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,موقف سوء فهم مع المضيف,L02-D24-P04,wash t3ni daba?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,موقف سوء فهم مع المضيف,L02-D24-P05,"wakha, daba fhemt",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,التعامل مع تأخر الفطور أو التنظيف,L02-D25-P01,l-ftor mazal ma jash,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,التعامل مع تأخر الفطور أو التنظيف,L02-D25-P02,wash l-ftor qrib?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,التعامل مع تأخر الفطور أو التنظيف,L02-D25-P03,l-bit mazal ma tnqash,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,التعامل مع تأخر الفطور أو التنظيف,L02-D25-P04,imta tji l-khdama?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,التعامل مع تأخر الفطور أو التنظيف,L02-D25-P05,"la mushkil, ghadi ntsenna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب خصوصية باحترام,L02-D26-P01,bghit shwiya dyal l-khousousiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب خصوصية باحترام,L02-D26-P02,ma bghitsh tdkhlo daba aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب خصوصية باحترام,L02-D26-P03,nqder nrtah shwiya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب خصوصية باحترام,L02-D26-P04,"ila mumkin, mn b3d",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب خصوصية باحترام,L02-D26-P05,shukran ala tfahom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,دعوة لزيارة بيت مغربي,L02-D27-P01,shukran ala d-daawa,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,دعوة لزيارة بيت مغربي,L02-D27-P02,nqder nji m3akom?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,دعوة لزيارة بيت مغربي,L02-D27-P03,shno njib m3aya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,دعوة لزيارة بيت مغربي,L02-D27-P04,nqder njib halwa?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,دعوة لزيارة بيت مغربي,L02-D27-P05,tsharrafna bikom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,مغادرة المكان مع شكر,L02-D28-P01,ghadi nmshi daba,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,مغادرة المكان مع شكر,L02-D28-P02,shukran ala diyafa,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,مغادرة المكان مع شكر,L02-D28-P03,kolshi kan zwin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,مغادرة المكان مع شكر,L02-D28-P04,"ila rjeat, ghadi nji hna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,مغادرة المكان مع شكر,L02-D28-P05,"bslama, thalla f rask",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة للضيافة,L02-D29-P01,"aandi reservation, smiti ...",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة للضيافة,L02-D29-P02,shno l-code dyal l-wifi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة للضيافة,L02-D29-P03,nqder nshuf l-bit?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة للضيافة,L02-D29-P04,wash l-ftor dakhel f l-hsab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة للضيافة,L02-D29-P05,shukran ala diyafa,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 2: ضيف محترم,L02-D30-P01,"salam, ana wasel daba",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 2: ضيف محترم,L02-D30-P02,bghit l-bit dyali aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 2: ضيف محترم,L02-D30-P03,kayn mushkil f l-ma skhon,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 2: ضيف محترم,L02-D30-P04,nqder nkhli shnati hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 2: ضيف محترم,L02-D30-P05,"shukran, kanet iqama mzyana",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى مقهى مغربي,L03-D01-P01,"salam, wash kayna blasa?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى مقهى مغربي,L03-D01-P02,nqdr njles hna aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى مقهى مغربي,L03-D01-P03,wash had table khawi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى مقهى مغربي,L03-D01-P04,fin nqdr njles?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,الدخول إلى مقهى مغربي,L03-D01-P05,"shukran, ghadi njles hna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,اختيار القهوة أو أتاي أو عصير,L03-D02-P01,bghit wahed atay aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,اختيار القهوة أو أتاي أو عصير,L03-D02-P02,bghit qahwa kahla,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,اختيار القهوة أو أتاي أو عصير,L03-D02-P03,bghit nass nass aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,اختيار القهوة أو أتاي أو عصير,L03-D02-P04,bghit asir limon,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+2,اختيار القهوة أو أتاي أو عصير,L03-D02-P05,shno kayn lshreb?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الجلوس والطلب من النادل,L03-D03-P01,jib liya lmenu aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الجلوس والطلب من النادل,L03-D03-P02,"aafak, bghit ntaleb",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الجلوس والطلب من النادل,L03-D03-P03,shno kayn lyom?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الجلوس والطلب من النادل,L03-D03-P04,bghit hadi aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+3,الجلوس والطلب من النادل,L03-D03-P05,"safi, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,الانتظار والاستفسار بأدب,L03-D04-P01,"smah liya, mazal ma ja talab",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,الانتظار والاستفسار بأدب,L03-D04-P02,wash ghadi ytawwel?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,الانتظار والاستفسار بأدب,L03-D04-P03,"mashi moshkil, nstna shwiya",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,الانتظار والاستفسار بأدب,L03-D04-P04,"ila mumkin, jibo daba",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+4,الانتظار والاستفسار بأدب,L03-D04-P05,shukran ala s-sbar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الحساب والبقشيش,L03-D05-P01,aafak l-hsab,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الحساب والبقشيش,L03-D05-P02,fin nخلص aafak?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الحساب والبقشيش,L03-D05-P03,wash nqdr nخلص b carte?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الحساب والبقشيش,L03-D05-P04,khalli l-baqi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+5,الحساب والبقشيش,L03-D05-P05,"shukran, nhark mabrouk",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,كيف الحال والردود اليومية,L03-D06-P01,kidayr?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,كيف الحال والردود اليومية,L03-D06-P02,"ana bikhir, hamdullah",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,كيف الحال والردود اليومية,L03-D06-P03,nta kidayr?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,كيف الحال والردود اليومية,L03-D06-P04,kolshi bikhir,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+6,كيف الحال والردود اليومية,L03-D06-P05,llah ykhalik,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: مقهى سريع,L03-D07-P01,"salam, kayna blasa?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: مقهى سريع,L03-D07-P02,bghit wahed atay,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: مقهى سريع,L03-D07-P03,"mashi moshkil, nstna",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: مقهى سريع,L03-D07-P04,aafak l-hsab,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+7,مراجعة أسبوع 1: مقهى سريع,L03-D07-P05,"shukran, bslama",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الطقس والحرارة والبرد,L03-D08-P01,l-jaw zwin lyom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الطقس والحرارة والبرد,L03-D08-P02,kayn s-skhana bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الطقس والحرارة والبرد,L03-D08-P03,kayn l-berd shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الطقس والحرارة والبرد,L03-D08-P04,wash ghadi tshte?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+8,الطقس والحرارة والبرد,L03-D08-P05,bghit blasa f d-dell,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,الوقت والانتظار والمواعيد,L03-D09-P01,shhal f saa daba?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,الوقت والانتظار والمواعيد,L03-D09-P02,ghadi nstna hna,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,الوقت والانتظار والمواعيد,L03-D09-P03,shhal khasni nstna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,الوقت والانتظار والمواعيد,L03-D09-P04,ana mstaajel shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+9,الوقت والانتظار والمواعيد,L03-D09-P05,"ila late, ma kayn moshkil",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,حديث قصير مع شخص بجانبك,L03-D10-P01,wash nta mn had l-mdina?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,حديث قصير مع شخص بجانبك,L03-D10-P02,ana jdid hna,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,حديث قصير مع شخص بجانبك,L03-D10-P03,had l-qahwa zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,حديث قصير مع شخص بجانبك,L03-D10-P04,bghit nhder shwiya b darija,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+10,حديث قصير مع شخص بجانبك,L03-D10-P05,"ila glt shi haja ghalta, smeh liya",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,طلب كرسي أو طاولة,L03-D11-P01,wash had l-korsi khawi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,طلب كرسي أو طاولة,L03-D11-P02,nqdr nakhd had l-korsi?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,طلب كرسي أو طاولة,L03-D11-P03,bghina table l-jouj,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,طلب كرسي أو طاولة,L03-D11-P04,bghit table hda sh-shbaak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+11,طلب كرسي أو طاولة,L03-D11-P05,had blasa meziana,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,طلب السكر أو بدون سكر,L03-D12-P01,bla sokkar aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,طلب السكر أو بدون سكر,L03-D12-P02,shwiya dyal sokkar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,طلب السكر أو بدون سكر,L03-D12-P03,zid l-hlib shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,طلب السكر أو بدون سكر,L03-D12-P04,ma bghitsh hlib,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+12,طلب السكر أو بدون سكر,L03-D12-P05,hadi meziana haka,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,مقهى مزدحم أو لا يوجد مكان,L03-D13-P01,wash kayna blasa khawya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,مقهى مزدحم أو لا يوجد مكان,L03-D13-P02,wash m3mer hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,مقهى مزدحم أو لا يوجد مكان,L03-D13-P03,nqdr nstna shwiya?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,مقهى مزدحم أو لا يوجد مكان,L03-D13-P04,"ila khwat shi table, aayet liya",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+13,مقهى مزدحم أو لا يوجد مكان,L03-D13-P05,"safi, nrja men baad",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,إلغاء طلب أو تغييره,L03-D14-P01,bghit nbeddel talab aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,إلغاء طلب أو تغييره,L03-D14-P02,ma bqitsh bghit hadshi,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,إلغاء طلب أو تغييره,L03-D14-P03,dir liya atay bla qahwa,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,إلغاء طلب أو تغييره,L03-D14-P04,"smah liya, ghalt f talab",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+14,إلغاء طلب أو تغييره,L03-D14-P05,shukran ala tfahom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,مدح المكان أو المشروب,L03-D15-P01,l-atay bnin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,مدح المكان أو المشروب,L03-D15-P02,l-qahwa meziana,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,مدح المكان أو المشروب,L03-D15-P03,l-blasa haniya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,مدح المكان أو المشروب,L03-D15-P04,l-musika zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+15,مدح المكان أو المشروب,L03-D15-P05,ghadi nrja inshaallah,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الحديث عن المدينة,L03-D16-P01,had l-mdina zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الحديث عن المدينة,L03-D16-P02,fin kayna l-mdina l-qadima?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الحديث عن المدينة,L03-D16-P03,wash qriba men hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الحديث عن المدينة,L03-D16-P04,shno khasni nshouf hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+16,الحديث عن المدينة,L03-D16-P05,ghadi nmshi l-mdina men baad,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث عن السفر بشكل بسيط,L03-D17-P01,ana ghadi l-fes ghdda,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث عن السفر بشكل بسيط,L03-D17-P02,jit mn casa,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث عن السفر بشكل بسيط,L03-D17-P03,ghadi nbqa hna nharayn,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث عن السفر بشكل بسيط,L03-D17-P04,bghit nshouf l-blad shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+17,الحديث عن السفر بشكل بسيط,L03-D17-P05,safar f lmaghrib zwin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,سؤال عن مكان جميل قريب,L03-D18-P01,fin kayna blasa zwina qriba?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,سؤال عن مكان جميل قريب,L03-D18-P02,kayn shi jardin qrib?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,سؤال عن مكان جميل قريب,L03-D18-P03,fin nqdr nmshi daba?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,سؤال عن مكان جميل قريب,L03-D18-P04,wash kayna vue zwina hna?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+18,سؤال عن مكان جميل قريب,L03-D18-P05,"shukran, ghadi nshoufha",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,تجنب كلام لا تفهمه,L03-D19-P01,ma fhemtsh mezian,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,تجنب كلام لا تفهمه,L03-D19-P02,aawed aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,تجنب كلام لا تفهمه,L03-D19-P03,hder bshwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,تجنب كلام لا تفهمه,L03-D19-P04,ana baqi kan-t3ellem,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+19,تجنب كلام لا تفهمه,L03-D19-P05,ktb liya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,الضحك والمجاملة الخفيفة,L03-D20-P01,darijti mazala sghira,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,الضحك والمجاملة الخفيفة,L03-D20-P02,ghadi n-hawel,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,الضحك والمجاملة الخفيفة,L03-D20-P03,nta kat3awenni bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,الضحك والمجاملة الخفيفة,L03-D20-P04,dahaktini,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+20,الضحك والمجاملة الخفيفة,L03-D20-P05,hadra dyalk zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,مراجعة أسبوع 3: كلام اجتماعي,L03-D21-P01,kidayr lyom?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,مراجعة أسبوع 3: كلام اجتماعي,L03-D21-P02,l-jaw zwin lyom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,مراجعة أسبوع 3: كلام اجتماعي,L03-D21-P03,fin kayna blasa zwina?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,مراجعة أسبوع 3: كلام اجتماعي,L03-D21-P04,ana kan-t3ellem darija,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+21,مراجعة أسبوع 3: كلام اجتماعي,L03-D21-P05,shukran ala l-hadra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,الرد على دعوة صغيرة,L03-D22-P01,"wakha, ghi qlil",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,الرد على دعوة صغيرة,L03-D22-P02,"ma nqdrsh daba, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,الرد على دعوة صغيرة,L03-D22-P03,mra okhra inshaallah,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,الرد على دعوة صغيرة,L03-D22-P04,"wakha, ghi shwiya",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+22,الرد على دعوة صغيرة,L03-D22-P05,shukran ala l-aarda,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,إنهاء حديث بأدب,L03-D23-P01,khllini nmshi daba,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,إنهاء حديث بأدب,L03-D23-P02,tlaqi m3ak kan zwin,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,إنهاء حديث بأدب,L03-D23-P03,nshufk men baad,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,إنهاء حديث بأدب,L03-D23-P04,"bslama, nhark said",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+23,إنهاء حديث بأدب,L03-D23-P05,shukran ala l-hadra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,مقهى مع صديق مغربي,L03-D24-P01,fin ghadi njلسo?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,مقهى مع صديق مغربي,L03-D24-P02,shno katshreb nta?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,مقهى مع صديق مغربي,L03-D24-P03,ana ghadi nakhd nass nass,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,مقهى مع صديق مغربي,L03-D24-P04,nqsmu l-hsab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+24,مقهى مع صديق مغربي,L03-D24-P05,yallah nmshiw,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,موقف سوء فهم في الحساب,L03-D25-P01,"smah liya, l-hsab shwiya kbir",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,موقف سوء فهم في الحساب,L03-D25-P02,wash hadshi dyali kamel?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,موقف سوء فهم في الحساب,L03-D25-P03,ana talabt ghi wahed,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,موقف سوء فهم في الحساب,L03-D25-P04,mumkin tshouf l-hsab?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+25,موقف سوء فهم في الحساب,L03-D25-P05,"daba fhemt, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب مساعدة من النادل,L03-D26-P01,"aafak, mumkin t3awenni?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب مساعدة من النادل,L03-D26-P02,l-wifi ma khddamsh,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب مساعدة من النادل,L03-D26-P03,bghit chargeur ila kayn,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب مساعدة من النادل,L03-D26-P04,fin kayn l-hmam?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+26,طلب مساعدة من النادل,L03-D26-P05,aayet l-serveur aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,شرح أنك تتعلم الدارجة,L03-D27-P01,ana kan-t3ellem darija,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,شرح أنك تتعلم الدارجة,L03-D27-P02,hder m3aya bshwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,شرح أنك تتعلم الدارجة,L03-D27-P03,sahh liya ila ghalt,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,شرح أنك تتعلم الدارجة,L03-D27-P04,bghit nhder bhal lmgharba shwiya,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+27,شرح أنك تتعلم الدارجة,L03-D27-P05,darija saiba walakin zwina,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,أول محادثة دقيقتين,L03-D28-P01,"salam, kidayr?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,أول محادثة دقيقتين,L03-D28-P02,"ana mzyan, hamdullah",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,أول محادثة دقيقتين,L03-D28-P03,ana jay men ...,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,أول محادثة دقيقتين,L03-D28-P04,l-jaw zwin lyom,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+28,أول محادثة دقيقتين,L03-D28-P05,shukran ala l-hadra,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة يومية,L03-D29-P01,wash kayna blasa?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة يومية,L03-D29-P02,bghit nass nass aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة يومية,L03-D29-P03,hder bshwiya aafak,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة يومية,L03-D29-P04,fin kayna blasa zwina qriba?,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+29,مراجعة مختلطة يومية,L03-D29-P05,"bslama, nhark said",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 3: جلسة مقهى كاملة,L03-D30-P01,"salam, nqdr njles hna?",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 3: جلسة مقهى كاملة,L03-D30-P02,bghit atay bla sokkar,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 3: جلسة مقهى كاملة,L03-D30-P03,had l-qahwa zwina bzaf,MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 3: جلسة مقهى كاملة,L03-D30-P04,"smah liya, ma fhemtsh mezian",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+30,اختبار Level 3: جلسة مقهى كاملة,L03-D30-P05,"aafak l-hsab, shukran",MISSING,MISSING,NOT_DEFINED,NOT_DEFINED,NOT_DEFINED
+1,أساسيات السؤال على الثمن,L04-D01-P01,bshhal hada?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أساسيات السؤال على الثمن,L04-D01-P02,bshhal hadi?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أساسيات السؤال على الثمن,L04-D01-P03,bghit nchouf hada aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أساسيات السؤال على الثمن,L04-D01-P04,wach taman thabet?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أساسيات السؤال على الثمن,L04-D01-P05,"shukran, ghadi nfker shwiya",MISSING,MISSING,MISSING,MISSING,MISSING
+2,أول تفاوض بأدب,L04-D02-P01,ghali bzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+2,أول تفاوض بأدب,L04-D02-P02,nqes shwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+2,أول تفاوض بأدب,L04-D02-P03,shno akhir taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,أول تفاوض بأدب,L04-D02-P04,"ana tourist, bghit taman mzyan",MISSING,MISSING,MISSING,MISSING,MISSING
+2,أول تفاوض بأدب,L04-D02-P05,nakhdo b miya dirham?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,لعبة العرض والرد,L04-D03-P01,andi ghir tmanin dirham,MISSING,MISSING,MISSING,MISSING,MISSING
+3,لعبة العرض والرد,L04-D03-P02,wach mumkin miya w khamsin?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,لعبة العرض والرد,L04-D03-P03,hada akhir taman dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+3,لعبة العرض والرد,L04-D03-P04,mahal akhor 3tani nqes,MISSING,MISSING,MISSING,MISSING,MISSING
+3,لعبة العرض والرد,L04-D03-P05,"wakha, ghadi nakhdo",MISSING,MISSING,MISSING,MISSING,MISSING
+4,الألوان والشكل,L04-D04-P01,wach kayn lwn akhor?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الألوان والشكل,L04-D04-P02,bghit l-khel,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الألوان والشكل,L04-D04-P03,wach 3ndk byed?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الألوان والشكل,L04-D04-P04,bghit shi haja basita,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الألوان والشكل,L04-D04-P05,had l-lwn zwin,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المقاس والتجريب,L04-D05-P01,wach kayn kber?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المقاس والتجريب,L04-D05-P02,wach kayn sgher?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المقاس والتجريب,L04-D05-P03,nqdr njerreb?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المقاس والتجريب,L04-D05-P04,dayq 3liya,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المقاس والتجريب,L04-D05-P05,ja mzyan 3liya,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الجودة والمادة,L04-D06-P01,wach l-jawda mzyana?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الجودة والمادة,L04-D06-P02,wach masno3 b l-yed?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الجودة والمادة,L04-D06-P03,shno had l-madda?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الجودة والمادة,L04-D06-P04,wach l-lwn ghadi ytelq?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الجودة والمادة,L04-D06-P05,warini ahsan jawda aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع 1: تفاوض ذكي,L04-D07-P01,bshhal hada?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع 1: تفاوض ذكي,L04-D07-P02,ghali bzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع 1: تفاوض ذكي,L04-D07-P03,shno akhir taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع 1: تفاوض ذكي,L04-D07-P04,wach kayn kber?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع 1: تفاوض ذكي,L04-D07-P05,"wakha, ghadi nakhdo",MISSING,MISSING,MISSING,MISSING,MISSING
+8,الخضر والشراء اليومي,L04-D08-P01,bghit kilo dyal btata,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الخضر والشراء اليومي,L04-D08-P02,3tini nos kilo aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الخضر والشراء اليومي,L04-D08-P03,wach triya?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الخضر والشراء اليومي,L04-D08-P04,zid shwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الخضر والشراء اليومي,L04-D08-P05,bshhal kolshi?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الفواكه والميزان,L04-D09-P01,3tini limon mzyan aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الفواكه والميزان,L04-D09-P02,wach kayn banan tayeb?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الفواكه والميزان,L04-D09-P03,ma ykounsh tayeb bzaf aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الفواكه والميزان,L04-D09-P04,nqdr nختار?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الفواكه والميزان,L04-D09-P05,wzenha aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+10,العطرية والزيتون والمكسرات,L04-D10-P01,bghit l-3triya l-mghribiya,MISSING,MISSING,MISSING,MISSING,MISSING
+10,العطرية والزيتون والمكسرات,L04-D10-P02,nqdr nshmha?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,العطرية والزيتون والمكسرات,L04-D10-P03,3tini shwiya sghira,MISSING,MISSING,MISSING,MISSING,MISSING
+10,العطرية والزيتون والمكسرات,L04-D10-P04,wach harra?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,العطرية والزيتون والمكسرات,L04-D10-P05,bghit zitoun mkhalet,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الحانوت والحاجات اليومية,L04-D11-P01,bghit qar3a dyal l-ma,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الحانوت والحاجات اليومية,L04-D11-P02,wach 3ndk mouchoirs?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الحانوت والحاجات اليومية,L04-D11-P03,bghit ta3biya dyal telephone,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الحانوت والحاجات اليومية,L04-D11-P04,wach 3ndk srf?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الحانوت والحاجات اليومية,L04-D11-P05,khlli l-baqi,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الهدايا والتذكارات,L04-D12-P01,hadi hadiya,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الهدايا والتذكارات,L04-D12-P02,bghit shi haja mghribiya,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الهدايا والتذكارات,L04-D12-P03,bghit hadiya sghira,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الهدايا والتذكارات,L04-D12-P04,bshhal jouj?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الهدايا والتذكارات,L04-D12-P05,3tini sak aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+13,قارن قبل الشراء,L04-D13-P01,bghit nchouf mazal lwel,MISSING,MISSING,MISSING,MISSING,MISSING
+13,قارن قبل الشراء,L04-D13-P02,wach kayn shi haja rkhisa?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,قارن قبل الشراء,L04-D13-P03,wach kayn shi haja hsen?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,قارن قبل الشراء,L04-D13-P04,ghadi nchouf w nrje3,MISSING,MISSING,MISSING,MISSING,MISSING
+13,قارن قبل الشراء,L04-D13-P05,shno smit l-mahal?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع 2: شراء السوق,L04-D14-P01,bghit kilo dyal btata,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع 2: شراء السوق,L04-D14-P02,wach triya?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع 2: شراء السوق,L04-D14-P03,nqdr nshmha?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع 2: شراء السوق,L04-D14-P04,hadi hadiya,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع 2: شراء السوق,L04-D14-P05,ghadi nchouf w nrje3,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الجلد والبلاغي,L04-D15-P01,wach hada jeld s7i7?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الجلد والبلاغي,L04-D15-P02,wach jeld mzyan?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الجلد والبلاغي,L04-D15-P03,wach 3ndk pointura 42?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الجلد والبلاغي,L04-D15-P04,wach mriha?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الجلد والبلاغي,L04-D15-P05,bghit sak fih fermeture,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الزربية والنسيج,L04-D16-P01,hellha aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الزربية والنسيج,L04-D16-P02,mnin hadi?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الزربية والنسيج,L04-D16-P03,wach sof?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الزربية والنسيج,L04-D16-P04,kbira bzaf 3liya,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الزربية والنسيج,L04-D16-P05,twiha mzyan aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الفخار والحاجات القابلة للكسر,L04-D17-P01,wach kattkser b s-hola?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الفخار والحاجات القابلة للكسر,L04-D17-P02,ghlefha mzyan aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الفخار والحاجات القابلة للكسر,L04-D17-P03,bghit setta dyal lkisan,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الفخار والحاجات القابلة للكسر,L04-D17-P04,nqdr nغسلha f machine?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الفخار والحاجات القابلة للكسر,L04-D17-P05,wach 3ndk kartona qwiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الثمن الثابت والبوتيك,L04-D18-P01,wash l-athmana thabtin?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الثمن الثابت والبوتيك,L04-D18-P02,"wakha, fhemt",MISSING,MISSING,MISSING,MISSING,MISSING
+18,الثمن الثابت والبوتيك,L04-D18-P03,wach kayn remise?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الثمن الثابت والبوتيك,L04-D18-P04,wach hada taman dyal sold?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الثمن الثابت والبوتيك,L04-D18-P05,"wakha, ghadi nkhles had taman",MISSING,MISSING,MISSING,MISSING,MISSING
+19,اختيارات أخرى والمخزون,L04-D19-P01,wach 3ndk model akhor?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,اختيارات أخرى والمخزون,L04-D19-P02,wach kayna wahda jdida l-dakhel?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,اختيارات أخرى والمخزون,L04-D19-P03,wach kaynin ikhtiyarat akhrin?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,اختيارات أخرى والمخزون,L04-D19-P04,shno katnsehni?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,اختيارات أخرى والمخزون,L04-D19-P05,bghit shi haja ma shi touristiya,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الدفع والصرف,L04-D20-P01,nqdr nkhles b la carte?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الدفع والصرف,L04-D20-P02,ghadi nkhles cash,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الدفع والصرف,L04-D20-P03,wach 3ndk srf dyal miyaine?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الدفع والصرف,L04-D20-P04,nqdr nakhod ticket?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الدفع والصرف,L04-D20-P05,يعني kolshi miya w tmanin?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع 3: ثقة في السلعة,L04-D21-P01,wach hada jeld s7i7?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع 3: ثقة في السلعة,L04-D21-P02,mnin hadi?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع 3: ثقة في السلعة,L04-D21-P03,ghlefha mzyan aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع 3: ثقة في السلعة,L04-D21-P04,wash l-athmana thabtin?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع 3: ثقة في السلعة,L04-D21-P05,nqdr nkhles b la carte?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الإرجاع والمشاكل,L04-D22-P01,kayn moshkil f hadi,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الإرجاع والمشاكل,L04-D22-P02,mكسora,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الإرجاع والمشاكل,L04-D22-P03,nqdr nبدlha?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الإرجاع والمشاكل,L04-D22-P04,wach mumkin ترجع liya flous?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الإرجاع والمشاكل,L04-D22-P05,shriتها lyoum,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التغليف والسفر,L04-D23-P01,ghlefha l-safar aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التغليف والسفر,L04-D23-P02,wach ghadi tdokhol f valiza?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التغليف والسفر,L04-D23-P03,sgher l-paquet aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التغليف والسفر,L04-D23-P04,hyed l-kartona zayda aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التغليف والسفر,L04-D23-P05,hmiha mzyan aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+24,قول لا بلا ضغط,L04-D24-P01,la shukran,MISSING,MISSING,MISSING,MISSING,MISSING
+24,قول لا بلا ضغط,L04-D24-P02,ma shi lyoum,MISSING,MISSING,MISSING,MISSING,MISSING
+24,قول لا بلا ضغط,L04-D24-P03,ma محتاجهاش,MISSING,MISSING,MISSING,MISSING,MISSING
+24,قول لا بلا ضغط,L04-D24-P04,ghir kanchouf,MISSING,MISSING,MISSING,MISSING,MISSING
+24,قول لا بلا ضغط,L04-D24-P05,يمكن من بعد,MISSING,MISSING,MISSING,MISSING,MISSING
+25,نصيحة محلية وثمن عادل,L04-D25-P01,wach had taman mzyan?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,نصيحة محلية وثمن عادل,L04-D25-P02,shno taman l-3adi?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,نصيحة محلية وثمن عادل,L04-D25-P03,wash nshriha?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,نصيحة محلية وثمن عادل,L04-D25-P04,wach l-jawda mzyana?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,نصيحة محلية وثمن عادل,L04-D25-P05,wach katstahel?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,هدايا للعائلة,L04-D26-P01,hadi l-walida dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+26,هدايا للعائلة,L04-D26-P02,hadi l-saheb dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+26,هدايا للعائلة,L04-D26-P03,bghit shi haja taqlidiya,MISSING,MISSING,MISSING,MISSING,MISSING
+26,هدايا للعائلة,L04-D26-P04,bghit shi haja khfifa,MISSING,MISSING,MISSING,MISSING,MISSING
+26,هدايا للعائلة,L04-D26-P05,ghlefha bhal hadiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+27,سلسلة التفاوض النهائية,L04-D27-P01,bshhal hada?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,سلسلة التفاوض النهائية,L04-D27-P02,ghali bzaf 3liya,MISSING,MISSING,MISSING,MISSING,MISSING
+27,سلسلة التفاوض النهائية,L04-D27-P03,nqdr nkhles miya,MISSING,MISSING,MISSING,MISSING,MISSING
+27,سلسلة التفاوض النهائية,L04-D27-P04,zid lia hadi sghira?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,سلسلة التفاوض النهائية,L04-D27-P05,"wakha, tfaqna. shukran",MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع 4: مشتري واثق,L04-D28-P01,kayn moshkil f hadi,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع 4: مشتري واثق,L04-D28-P02,ghlefha l-safar aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع 4: مشتري واثق,L04-D28-P03,ghir kanchouf,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع 4: مشتري واثق,L04-D28-P04,wach katstahel?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع 4: مشتري واثق,L04-D28-P05,"wakha, tfaqna. shukran",MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف سوق مختلطة,L04-D29-P01,bshhal had s-sak?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف سوق مختلطة,L04-D29-P02,3tini taman hsen aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف سوق مختلطة,L04-D29-P03,wach kayn b l-khel?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف سوق مختلطة,L04-D29-P04,"la shukran, ghir kanchouf",MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف سوق مختلطة,L04-D29-P05,"wakha, ghadi nakhdo. ghlefha mzyan",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التسوق النهائي,L04-D30-P01,"salam, bshhal hada?",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التسوق النهائي,L04-D30-P02,nqes shwiya aafak?,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التسوق النهائي,L04-D30-P03,wach l-jawda mzyana?,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التسوق النهائي,L04-D30-P04,"kolshi miya w 3shrin, sa7?",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التسوق النهائي,L04-D30-P05,"shukran, nhar zwin",MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار وسيلة النقل المناسبة,L05-D01-P01,shno l-wsila l-ahsan lhad lblasa?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار وسيلة النقل المناسبة,L05-D01-P02,wach nmsi b-tram wla b-taksi?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار وسيلة النقل المناسبة,L05-D01-P03,shhal ghadi yakhod l-waqt?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار وسيلة النقل المناسبة,L05-D01-P04,wach kayn tariq sahla?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار وسيلة النقل المناسبة,L05-D01-P05,"safi, ghadi nmsi b-hadi",MISSING,MISSING,MISSING,MISSING,MISSING
+2,تاكسي صغير داخل المدينة,L05-D02-P01,taksi sghir l-mdina afak,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تاكسي صغير داخل المدينة,L05-D02-P02,bghit nmsi l-blasa hadi,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تاكسي صغير داخل المدينة,L05-D02-P03,wach l-compteur khdam?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تاكسي صغير داخل المدينة,L05-D02-P04,qrebna?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تاكسي صغير داخل المدينة,L05-D02-P05,"hna mezian, shukran",MISSING,MISSING,MISSING,MISSING,MISSING
+3,طاكسي كبير بين المدن القريبة,L05-D03-P01,fin kayn taksi kbir?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,طاكسي كبير بين المدن القريبة,L05-D03-P02,wach ghadi l-mdina hadik?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,طاكسي كبير بين المدن القريبة,L05-D03-P03,bshhal l-blasa?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,طاكسي كبير بين المدن القريبة,L05-D03-P04,wach khasni ntsenna 3la l-kamal?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,طاكسي كبير بين المدن القريبة,L05-D03-P05,"mzyan, hadi blasti",MISSING,MISSING,MISSING,MISSING,MISSING
+4,محطة القطار,L05-D04-P01,fin kayna l-gar?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,محطة القطار,L05-D04-P02,fin kayn l-bureau dyal tickets?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,محطة القطار,L05-D04-P03,bghit nshoof les horaires,MISSING,MISSING,MISSING,MISSING,MISSING
+4,محطة القطار,L05-D04-P04,fin kayn l-quai?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,محطة القطار,L05-D04-P05,"shukran, ghadi ntbe3 l-3alamat",MISSING,MISSING,MISSING,MISSING,MISSING
+5,شراء تذكرة القطار,L05-D05-P01,bghit ticket l-rbat afak,MISSING,MISSING,MISSING,MISSING,MISSING
+5,شراء تذكرة القطار,L05-D05-P02,l-yom wla ghdda?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,شراء تذكرة القطار,L05-D05-P03,bghit ticket l-yom m3a l-3shiya,MISSING,MISSING,MISSING,MISSING,MISSING
+5,شراء تذكرة القطار,L05-D05-P04,wach kayna blasa?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,شراء تذكرة القطار,L05-D05-P05,"khdit ticket, shukran",MISSING,MISSING,MISSING,MISSING,MISSING
+6,المنصة ووقت الانطلاق,L05-D06-P01,f ash mn quai l-tren?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,المنصة ووقت الانطلاق,L05-D06-P02,wach hada tren dyal casa?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,المنصة ووقت الانطلاق,L05-D06-P03,shhal bqa l-depart?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,المنصة ووقت الانطلاق,L05-D06-P04,fin blasti f-tren?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,المنصة ووقت الانطلاق,L05-D06-P05,"hadi blasti, sa7?",MISSING,MISSING,MISSING,MISSING,MISSING
+7,تأخر القطار أو تغيير الرحلة,L05-D07-P01,wach l-tren t2akher?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,تأخر القطار أو تغيير الرحلة,L05-D07-P02,shhal ghadi ybqa?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,تأخر القطار أو تغيير الرحلة,L05-D07-P03,wach tbeddel l-quai?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,تأخر القطار أو تغيير الرحلة,L05-D07-P04,khasni nbeddel ticket?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,تأخر القطار أو تغيير الرحلة,L05-D07-P05,"safi, ghadi ntsenna hna",MISSING,MISSING,MISSING,MISSING,MISSING
+8,محطة الكار / CTM,L05-D08-P01,fin kayna mahatta dyal l-kar?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,محطة الكار / CTM,L05-D08-P02,wach hadi CTM?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,محطة الكار / CTM,L05-D08-P03,bghit ticket l-agadir,MISSING,MISSING,MISSING,MISSING,MISSING
+8,محطة الكار / CTM,L05-D08-P04,f ash mn l-waqt kayn l-kar?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,محطة الكار / CTM,L05-D08-P05,fin ghadi nrkeb?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,شراء تذكرة الكار,L05-D09-P01,bghit blasa qddam ila momkin,MISSING,MISSING,MISSING,MISSING,MISSING
+9,شراء تذكرة الكار,L05-D09-P02,wach l-bagage mdkhol f-taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,شراء تذكرة الكار,L05-D09-P03,bghit ticket aller simple,MISSING,MISSING,MISSING,MISSING,MISSING
+9,شراء تذكرة الكار,L05-D09-P04,wach n9der nbeddel l-waqt?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,شراء تذكرة الكار,L05-D09-P05,3tini l-ticket afak,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الأمتعة في الكار,L05-D10-P01,fin nhet l-bagage?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الأمتعة في الكار,L05-D10-P02,hadi shniti,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الأمتعة في الكار,L05-D10-P03,wach khasni ticket dyal l-bagage?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الأمتعة في الكار,L05-D10-P04,nzel l-bagage hna afak,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الأمتعة في الكار,L05-D10-P05,"shukran, hadi dyali",MISSING,MISSING,MISSING,MISSING,MISSING
+11,الترام داخل المدينة,L05-D11-P01,fin kayna station dyal tram?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الترام داخل المدينة,L05-D11-P02,wach hadi direction l-centre?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الترام داخل المدينة,L05-D11-P03,fin n9ta3 ticket?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الترام داخل المدينة,L05-D11-P04,khasni nvalidi ticket?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الترام داخل المدينة,L05-D11-P05,fin nhbet?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,المطار والتحويل للمدينة,L05-D12-P01,fin kayn transport l-centre?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,المطار والتحويل للمدينة,L05-D12-P02,wach kayn tren mn l-mtar?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,المطار والتحويل للمدينة,L05-D12-P03,bshhal taxi l-centre?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,المطار والتحويل للمدينة,L05-D12-P04,bghit nmshi l-hotel mn l-mtar,MISSING,MISSING,MISSING,MISSING,MISSING
+12,المطار والتحويل للمدينة,L05-D12-P05,"safi, nkhdo taxi",MISSING,MISSING,MISSING,MISSING,MISSING
+13,من المحطة إلى الرياض,L05-D13-P01,bghit nmsi mn l-gar l-riad,MISSING,MISSING,MISSING,MISSING,MISSING
+13,من المحطة إلى الرياض,L05-D13-P02,wach qreb men hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,من المحطة إلى الرياض,L05-D13-P03,wach n9der nmsi 3la rjli?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,من المحطة إلى الرياض,L05-D13-P04,"3ndi bagage, shno l-ahsan?",MISSING,MISSING,MISSING,MISSING,MISSING
+13,من المحطة إلى الرياض,L05-D13-P05,wasalni l-bab dyal riad afak,MISSING,MISSING,MISSING,MISSING,MISSING
+14,السؤال عن الطريق قرب المحطة,L05-D14-P01,fin kayn l-bab lkbir?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,السؤال عن الطريق قرب المحطة,L05-D14-P02,fin kayn l-parking?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,السؤال عن الطريق قرب المحطة,L05-D14-P03,wach kayn distributeur qrb?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,السؤال عن الطريق قرب المحطة,L05-D14-P04,"3afak, 3awd lia bshwiya",MISSING,MISSING,MISSING,MISSING,MISSING
+14,السؤال عن الطريق قرب المحطة,L05-D14-P05,"fhemt, shukran bzaf",MISSING,MISSING,MISSING,MISSING,MISSING
+15,ربط القطار بالطاكسي,L05-D15-P01,"mn b3d l-tren, khasni taxi",MISSING,MISSING,MISSING,MISSING,MISSING
+15,ربط القطار بالطاكسي,L05-D15-P02,wach taxis kaynin f-lkharij?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,ربط القطار بالطاكسي,L05-D15-P03,bghit nmshi l-medina l-qadima,MISSING,MISSING,MISSING,MISSING,MISSING
+15,ربط القطار بالطاكسي,L05-D15-P04,nzelni 3nd bab l-medina,MISSING,MISSING,MISSING,MISSING,MISSING
+15,ربط القطار بالطاكسي,L05-D15-P05,men hna ghadi nmsi 3la rjli,MISSING,MISSING,MISSING,MISSING,MISSING
+16,تخطيط رحلة بين مدينتين,L05-D16-P01,bghit nmsi mn marrakech l-fes,MISSING,MISSING,MISSING,MISSING,MISSING
+16,تخطيط رحلة بين مدينتين,L05-D16-P02,"shno l-ahsan, tren wla kar?",MISSING,MISSING,MISSING,MISSING,MISSING
+16,تخطيط رحلة بين مدينتين,L05-D16-P03,shhal dyal l-waqt?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,تخطيط رحلة بين مدينتين,L05-D16-P04,wach khasni reservation?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,تخطيط رحلة بين مدينتين,L05-D16-P05,khir ndirha daba,MISSING,MISSING,MISSING,MISSING,MISSING
+17,آداب الطاكسي المشترك,L05-D17-P01,wach hadi blasa khawya?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,آداب الطاكسي المشترك,L05-D17-P02,nqder njles hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,آداب الطاكسي المشترك,L05-D17-P03,"3afak, shwiya l-janb",MISSING,MISSING,MISSING,MISSING,MISSING
+17,آداب الطاكسي المشترك,L05-D17-P04,ma bghitsh nz3jkom,MISSING,MISSING,MISSING,MISSING,MISSING
+17,آداب الطاكسي المشترك,L05-D17-P05,baraka 3lia hna,MISSING,MISSING,MISSING,MISSING,MISSING
+18,تأكيد الوجهة مع السائق,L05-D18-P01,"sma7 lia, wach fhemt lblasa?",MISSING,MISSING,MISSING,MISSING,MISSING
+18,تأكيد الوجهة مع السائق,L05-D18-P02,nwrik f-telephone,MISSING,MISSING,MISSING,MISSING,MISSING
+18,تأكيد الوجهة مع السائق,L05-D18-P03,hadi hiya l-address,MISSING,MISSING,MISSING,MISSING,MISSING
+18,تأكيد الوجهة مع السائق,L05-D18-P04,"ila kant mushkil, gol lia",MISSING,MISSING,MISSING,MISSING,MISSING
+18,تأكيد الوجهة مع السائق,L05-D18-P05,"safi, tawkelna 3la lah",MISSING,MISSING,MISSING,MISSING,MISSING
+19,الطريق الغلط أو النزول الغلط,L05-D19-P01,ban lia machi hadi tariq,MISSING,MISSING,MISSING,MISSING,MISSING
+19,الطريق الغلط أو النزول الغلط,L05-D19-P02,"sma7 lia, kan khasni nhbet qbel",MISSING,MISSING,MISSING,MISSING,MISSING
+19,الطريق الغلط أو النزول الغلط,L05-D19-P03,wach n9der nrje3 mn hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,الطريق الغلط أو النزول الغلط,L05-D19-P04,fin aqrab stop?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,الطريق الغلط أو النزول الغلط,L05-D19-P05,"mashi mushkil, shukran",MISSING,MISSING,MISSING,MISSING,MISSING
+20,السفر مع الأمتعة,L05-D20-P01,3ndi shnita kbira,MISSING,MISSING,MISSING,MISSING,MISSING
+20,السفر مع الأمتعة,L05-D20-P02,wach kayn blasa l-shnita?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,السفر مع الأمتعة,L05-D20-P03,3awnni ntle3ha afak,MISSING,MISSING,MISSING,MISSING,MISSING
+20,السفر مع الأمتعة,L05-D20-P04,khlliha hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,السفر مع الأمتعة,L05-D20-P05,radd balk 3la shniti afak,MISSING,MISSING,MISSING,MISSING,MISSING
+21,التنقل ليلًا بأمان,L05-D21-P01,wach had tariq amn b-llil?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,التنقل ليلًا بأمان,L05-D21-P02,bghit taxi mdamn,MISSING,MISSING,MISSING,MISSING,MISSING
+21,التنقل ليلًا بأمان,L05-D21-P03,ma bghitsh nmsi 3la rjli b-llil,MISSING,MISSING,MISSING,MISSING,MISSING
+21,التنقل ليلًا بأمان,L05-D21-P04,3yt lia taxi afak,MISSING,MISSING,MISSING,MISSING,MISSING
+21,التنقل ليلًا بأمان,L05-D21-P05,ghadi ntsenna hna,MISSING,MISSING,MISSING,MISSING,MISSING
+22,السفر مع صديق أو العائلة,L05-D22-P01,hna jouj,MISSING,MISSING,MISSING,MISSING,MISSING
+22,السفر مع صديق أو العائلة,L05-D22-P02,bghina blays hda b3diyatna,MISSING,MISSING,MISSING,MISSING,MISSING
+22,السفر مع صديق أو العائلة,L05-D22-P03,3ndna walid sghir,MISSING,MISSING,MISSING,MISSING,MISSING
+22,السفر مع صديق أو العائلة,L05-D22-P04,nqdero nrkbo kamlin?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,السفر مع صديق أو العائلة,L05-D22-P05,khllina m3a b3diyatna afak,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التوقف والاستراحة في الطريق,L05-D23-P01,wach ghadi nوقفو f-tariq?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التوقف والاستراحة في الطريق,L05-D23-P02,fin kayna l-wqfa?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التوقف والاستراحة في الطريق,L05-D23-P03,shhal ghadi nوقفو?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التوقف والاستراحة في الطريق,L05-D23-P04,bghit nmshi l-toilet b-sur3a,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التوقف والاستراحة في الطريق,L05-D23-P05,ma tmshiwsh bla bia afak,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الدفع والصرف في النقل,L05-D24-P01,bshhal l-taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الدفع والصرف في النقل,L05-D24-P02,3ndi ghir miya,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الدفع والصرف في النقل,L05-D24-P03,wach 3ndk sarf?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الدفع والصرف في النقل,L05-D24-P04,khod l-taman,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الدفع والصرف في النقل,L05-D24-P05,bqa lia shhal?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الحجز بالهاتف أو واتساب,L05-D25-P01,nqder nreservi b-whatsapp?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الحجز بالهاتف أو واتساب,L05-D25-P02,sift lia localisation afak,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الحجز بالهاتف أو واتساب,L05-D25-P03,ana ghadi nji f sitta,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الحجز بالهاتف أو واتساب,L05-D25-P04,smiti f-reservation,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الحجز بالهاتف أو واتساب,L05-D25-P05,"ila tbdel shi haja, 3yt lia",MISSING,MISSING,MISSING,MISSING,MISSING
+26,كراء سيارة وparking,L05-D26-P01,bghit nkri tomobil,MISSING,MISSING,MISSING,MISSING,MISSING
+26,كراء سيارة وparking,L05-D26-P02,3ndi permis,MISSING,MISSING,MISSING,MISSING,MISSING
+26,كراء سيارة وparking,L05-D26-P03,wach l-assurance dakhla?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,كراء سيارة وparking,L05-D26-P04,fin nlqa parking?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,كراء سيارة وparking,L05-D26-P05,wach n9der nkhlliha hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,رحلة قصيرة خارج المدينة,L05-D27-P01,bghit nmsi l-blasa hadi nhar kaml,MISSING,MISSING,MISSING,MISSING,MISSING
+27,رحلة قصيرة خارج المدينة,L05-D27-P02,shno l-wsila bach nrje3?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,رحلة قصيرة خارج المدينة,L05-D27-P03,wach kayn transport f l-3shiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,رحلة قصيرة خارج المدينة,L05-D27-P04,bghit nوقف hna shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+27,رحلة قصيرة خارج المدينة,L05-D27-P05,rje3 lia f had l-waqt afak,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مشكل في الرحلة,L05-D28-P01,waq3 lia mushkil f-tariq,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مشكل في الرحلة,L05-D28-P02,ma lqitsh l-kar,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مشكل في الرحلة,L05-D28-P03,tla3t f-tren ghalat,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مشكل في الرحلة,L05-D28-P04,bghit n3ref shno ndir daba,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مشكل في الرحلة,L05-D28-P05,"3afak 3awenni, ana msafer",MISSING,MISSING,MISSING,MISSING,MISSING
+29,محاكاة تنقل مختلطة,L05-D29-P01,l-yom khasni nmsi l-rbat,MISSING,MISSING,MISSING,MISSING,MISSING
+29,محاكاة تنقل مختلطة,L05-D29-P02,"awal haja, fin l-gar?",MISSING,MISSING,MISSING,MISSING,MISSING
+29,محاكاة تنقل مختلطة,L05-D29-P03,"men b3d, khasni taxi l-hotel",MISSING,MISSING,MISSING,MISSING,MISSING
+29,محاكاة تنقل مختلطة,L05-D29-P04,"ila t2akher l-tren, shno ndir?",MISSING,MISSING,MISSING,MISSING,MISSING
+29,محاكاة تنقل مختلطة,L05-D29-P05,"safi, ana wajed",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التنقل النهائي,L05-D30-P01,bghit nmsi mn hna l-mdina okhra,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التنقل النهائي,L05-D30-P02,"shno l-ahsan, tren wla CTM?",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التنقل النهائي,L05-D30-P03,bghit ticket w blasa mzyana,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التنقل النهائي,L05-D30-P04,"ila waq3 mushkil, ghadi nsowl",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار التنقل النهائي,L05-D30-P05,"wslna bikhir, shukran 3la l-m3awna",MISSING,MISSING,MISSING,MISSING,MISSING
+1,الدخول إلى بيت مغربي,L06-D01-P01,salam alikom,MISSING,MISSING,MISSING,MISSING,MISSING
+1,الدخول إلى بيت مغربي,L06-D01-P02,shukran 3la l-3rda,MISSING,MISSING,MISSING,MISSING,MISSING
+1,الدخول إلى بيت مغربي,L06-D01-P03,hadi awel mara f-dar mghribiya,MISSING,MISSING,MISSING,MISSING,MISSING
+1,الدخول إلى بيت مغربي,L06-D01-P04,wash nhyd s-sbat?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,الدخول إلى بيت مغربي,L06-D01-P05,ndkhol aafak?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,التحية على كل الحاضرين,L06-D02-P01,w alikom salam,MISSING,MISSING,MISSING,MISSING,MISSING
+2,التحية على كل الحاضرين,L06-D02-P02,labas alikom?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,التحية على كل الحاضرين,L06-D02-P03,kolshi bikhir?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,التحية على كل الحاضرين,L06-D02-P04,mzyan ntlaqa bikom,MISSING,MISSING,MISSING,MISSING,MISSING
+2,التحية على كل الحاضرين,L06-D02-P05,smh lia ila nseet chi smiya,MISSING,MISSING,MISSING,MISSING,MISSING
+3,السؤال على العائلة,L06-D03-P01,kif dayra l-3aila?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,السؤال على العائلة,L06-D03-P02,kif dayrin l-walidin?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,السؤال على العائلة,L06-D03-P03,wash 3andk khot?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,السؤال على العائلة,L06-D03-P04,kif dayrin d-drari?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,السؤال على العائلة,L06-D03-P05,allah ykhlihom lik,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الحديث عن عائلتك,L06-D04-P01,3ailti sghira,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الحديث عن عائلتك,L06-D04-P02,3andi khoya w okht,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الحديث عن عائلتك,L06-D04-P03,l-walidin dyali bikhir lhamdullah,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الحديث عن عائلتك,L06-D04-P04,ana b3id 3la dar,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الحديث عن عائلتك,L06-D04-P05,kanhder m3ahom f-whatsapp,MISSING,MISSING,MISSING,MISSING,MISSING
+5,الأتاي داخل العائلة,L06-D05-P01,bghit atay shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+5,الأتاي داخل العائلة,L06-D05-P02,l-atay mzyan bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+5,الأتاي داخل العائلة,L06-D05-P03,bla sokkar aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+5,الأتاي داخل العائلة,L06-D05-P04,n-naanaa zwin,MISSING,MISSING,MISSING,MISSING,MISSING
+5,الأتاي داخل العائلة,L06-D05-P05,shukran 3la l-atay,MISSING,MISSING,MISSING,MISSING,MISSING
+6,مدح الدار والجو,L06-D06-P01,dar zwina bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+6,مدح الدار والجو,L06-D06-P02,l-jlsa mrtiha,MISSING,MISSING,MISSING,MISSING,MISSING
+6,مدح الدار والجو,L06-D06-P03,d-decor l-mghribi zwin,MISSING,MISSING,MISSING,MISSING,MISSING
+6,مدح الدار والجو,L06-D06-P04,l-jaw hna dafi,MISSING,MISSING,MISSING,MISSING,MISSING
+6,مدح الدار والجو,L06-D06-P05,allah y3tikom saha,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الزيارة الأولى,L06-D07-P01,ferhan nji 3ndkom,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الزيارة الأولى,L06-D07-P02,shukran 3la l-marhba,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الزيارة الأولى,L06-D07-P03,l-3aila bikhir?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الزيارة الأولى,L06-D07-P04,l-atay kan mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الزيارة الأولى,L06-D07-P05,bslama w nshofkom qrib,MISSING,MISSING,MISSING,MISSING,MISSING
+8,آداب الأكل مع العائلة,L06-D08-P01,bssaha,MISSING,MISSING,MISSING,MISSING,MISSING
+8,آداب الأكل مع العائلة,L06-D08-P02,l-makla bnina bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+8,آداب الأكل مع العائلة,L06-D08-P03,fin nلس?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,آداب الأكل مع العائلة,L06-D08-P04,wash nakol b-yeddi?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,آداب الأكل مع العائلة,L06-D08-P05,kolshi bnin,MISSING,MISSING,MISSING,MISSING,MISSING
+9,قبول أو رفض المزيد من الأكل,L06-D09-P01,shba3t shukran,MISSING,MISSING,MISSING,MISSING,MISSING
+9,قبول أو رفض المزيد من الأكل,L06-D09-P02,zidni shwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+9,قبول أو رفض المزيد من الأكل,L06-D09-P03,bla ma t3mr lia bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+9,قبول أو رفض المزيد من الأكل,L06-D09-P04,wach kayn shi haja bla lhem?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,قبول أو رفض المزيد من الأكل,L06-D09-P05,3jbni walakin ma nqdrsh nzid,MISSING,MISSING,MISSING,MISSING,MISSING
+10,المساعدة داخل البيت,L06-D10-P01,nqdr n3awnk?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,المساعدة داخل البيت,L06-D10-P02,fin nder hadshi?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,المساعدة داخل البيت,L06-D10-P03,njib lma?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,المساعدة داخل البيت,L06-D10-P04,nkhlli l-kisan hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,المساعدة داخل البيت,L06-D10-P05,ma bghitsh nkhalik khdam بوحدك,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الكلام مع الكبار باحترام,L06-D11-P01,salam aami,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الكلام مع الكبار باحترام,L06-D11-P02,salam khalti,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الكلام مع الكبار باحترام,L06-D11-P03,bghit nsme3 lik,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الكلام مع الكبار باحترام,L06-D11-P04,shukran 3la nsiha,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الكلام مع الكبار باحترام,L06-D11-P05,allah ytawel 3mrek,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الكلام مع الأطفال,L06-D12-P01,shno smitk?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الكلام مع الأطفال,L06-D12-P02,shhal f-3mrek?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الكلام مع الأطفال,L06-D12-P03,wash katfhemni?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الكلام مع الأطفال,L06-D12-P04,bghiti tl3ab?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الكلام مع الأطفال,L06-D12-P05,allah yhafdk,MISSING,MISSING,MISSING,MISSING,MISSING
+13,الصور والذكريات,L06-D13-P01,nqdro nkhdo tswira?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,الصور والذكريات,L06-D13-P02,bghit tswira m3akom,MISSING,MISSING,MISSING,MISSING,MISSING
+13,الصور والذكريات,L06-D13-P03,"ma kayn moshkil, bla tswira",MISSING,MISSING,MISSING,MISSING,MISSING
+13,الصور والذكريات,L06-D13-P04,ghadi nsift lik tswira,MISSING,MISSING,MISSING,MISSING,MISSING
+13,الصور والذكريات,L06-D13-P05,ghadi nbqa ntfkar had nhar,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الغداء العائلي,L06-D14-P01,jit ntghdda m3akom,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الغداء العائلي,L06-D14-P02,ferhan nkon m3akom,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الغداء العائلي,L06-D14-P03,l-makla bnina,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الغداء العائلي,L06-D14-P04,shrhu lia bshwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الغداء العائلي,L06-D14-P05,bslama w shukran bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الدعوات والخطط,L06-D15-P01,wash tqdero tjiw ghdda?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الدعوات والخطط,L06-D15-P02,ntoma m3rodin 3ndi,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الدعوات والخطط,L06-D15-P03,nqadro ntlaqaw f-lqahwa?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الدعوات والخطط,L06-D15-P04,shno l-waqt li mzyan?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الدعوات والخطط,L06-D15-P05,safi ntlaqaw tma,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الوقت والوصول بلطف,L06-D16-P01,ghadi nji m3a sitta,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الوقت والوصول بلطف,L06-D16-P02,ana mtakher shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الوقت والوصول بلطف,L06-D16-P03,smh lia 3la t-taakhir,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الوقت والوصول بلطف,L06-D16-P04,fin ntlaqaw?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,الوقت والوصول بلطف,L06-D16-P05,wslti?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الهدية الصغيرة,L06-D17-P01,jbt likom had l-hdiya,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الهدية الصغيرة,L06-D17-P02,ghi haja sghira,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الهدية الصغيرة,L06-D17-P03,kanتمنا t3jbekom,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الهدية الصغيرة,L06-D17-P04,fin nkhlliha?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,الهدية الصغيرة,L06-D17-P05,bssaha 3likom,MISSING,MISSING,MISSING,MISSING,MISSING
+18,لقاء الأصدقاء خارج البيت,L06-D18-P01,fin nta daba?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,لقاء الأصدقاء خارج البيت,L06-D18-P02,ana qrib mn l-qahwa,MISSING,MISSING,MISSING,MISSING,MISSING
+18,لقاء الأصدقاء خارج البيت,L06-D18-P03,ghadi nji 3ndk daba,MISSING,MISSING,MISSING,MISSING,MISSING
+18,لقاء الأصدقاء خارج البيت,L06-D18-P04,wash sla l-service?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,لقاء الأصدقاء خارج البيت,L06-D18-P05,yallah nmshiw m3a b3diyatna,MISSING,MISSING,MISSING,MISSING,MISSING
+19,المزاح الخفيف,L06-D19-P01,kanḍhk m3ak,MISSING,MISSING,MISSING,MISSING,MISSING
+19,المزاح الخفيف,L06-D19-P02,smh lia kanhder bshwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+19,المزاح الخفيف,L06-D19-P03,ma fhemtsh n-nokta,MISSING,MISSING,MISSING,MISSING,MISSING
+19,المزاح الخفيف,L06-D19-P04,3awdها lia aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+19,المزاح الخفيف,L06-D19-P05,nta mudhik bzzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحدود والاحترام,L06-D20-P01,ma bghitsh nhder 3la had l-mawdo3,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحدود والاحترام,L06-D20-P02,khllina nbdlo l-hdra,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحدود والاحترام,L06-D20-P03,smh lia hadshi khass,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحدود والاحترام,L06-D20-P04,mumkin nhdro mn b3d?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحدود والاحترام,L06-D20-P05,ana mrtaah hakda,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأصدقاء والعائلة,L06-D21-P01,mzyan nkon m3a s-hab,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأصدقاء والعائلة,L06-D21-P02,kanhder bshwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأصدقاء والعائلة,L06-D21-P03,nḍhko shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأصدقاء والعائلة,L06-D21-P04,kanhترم l-3aila,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأصدقاء والعائلة,L06-D21-P05,shukran 3la kolshi,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المناسبات العائلية,L06-D22-P01,fin ghadi ykon l-3rs?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المناسبات العائلية,L06-D22-P02,wash khasni nji bkri?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المناسبات العائلية,L06-D22-P03,shno nلبس?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المناسبات العائلية,L06-D22-P04,wash nshri shi hdiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المناسبات العائلية,L06-D22-P05,mabrouk 3likom,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التهاني والدعوات الطيبة,L06-D23-P01,mabrouk,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التهاني والدعوات الطيبة,L06-D23-P02,allah ykml bikhir,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التهاني والدعوات الطيبة,L06-D23-P03,ferhan lik,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التهاني والدعوات الطيبة,L06-D23-P04,lah ybark fik,MISSING,MISSING,MISSING,MISSING,MISSING
+23,التهاني والدعوات الطيبة,L06-D23-P05,bssaha w raha,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الاعتذار والشكر داخل العلاقة,L06-D24-P01,smh lia jit mtakher,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الاعتذار والشكر داخل العلاقة,L06-D24-P02,shukran 3la s-sber,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الاعتذار والشكر داخل العلاقة,L06-D24-P03,ma kentش qased,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الاعتذار والشكر داخل العلاقة,L06-D24-P04,ghadi n3awdها lik,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الاعتذار والشكر داخل العلاقة,L06-D24-P05,3la slamtk,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الهاتف والواتساب مع الأصدقاء,L06-D25-P01,sift lia l-location,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الهاتف والواتساب مع الأصدقاء,L06-D25-P02,ghadi nsift lik message,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الهاتف والواتساب مع الأصدقاء,L06-D25-P03,sm3t l-vocal,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الهاتف والواتساب مع الأصدقاء,L06-D25-P04,ma sm3tsh mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+25,الهاتف والواتساب مع الأصدقاء,L06-D25-P05,3awd lia bshwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+26,طلب نصيحة محلية,L06-D26-P01,shno katqترح 3lia?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,طلب نصيحة محلية,L06-D26-P02,fin nmshi lyom?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,طلب نصيحة محلية,L06-D26-P03,wash had lblasa mzyana?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,طلب نصيحة محلية,L06-D26-P04,shno khassni ntجنب?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,طلب نصيحة محلية,L06-D26-P05,shukran 3la nsiha,MISSING,MISSING,MISSING,MISSING,MISSING
+27,عرض المساعدة,L06-D27-P01,nqdr n3awnk?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,عرض المساعدة,L06-D27-P02,wash محتاج chi haja?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,عرض المساعدة,L06-D27-P03,njib lma?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,عرض المساعدة,L06-D27-P04,nkhlli l-bab محلول?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,عرض المساعدة,L06-D27-P05,ma kayn moshkil,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الثقة الاجتماعية,L06-D28-P01,jit m3a saahbi,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الثقة الاجتماعية,L06-D28-P02,sllmt 3la l-3aila,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الثقة الاجتماعية,L06-D28-P03,shربt atay,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الثقة الاجتماعية,L06-D28-P04,hdرت bshwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الثقة الاجتماعية,L06-D28-P05,khrjt b-adab,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف اجتماعية مختلطة,L06-D29-P01,salam alikom kamlin,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف اجتماعية مختلطة,L06-D29-P02,shukran 3la ma 3radtوني,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف اجتماعية مختلطة,L06-D29-P03,l-atay zwin,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف اجتماعية مختلطة,L06-D29-P04,khassni nmshi daba,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف اجتماعية مختلطة,L06-D29-P05,ntlaqaw qrib,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الزيارة الاجتماعية النهائي,L06-D30-P01,salam alikom,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الزيارة الاجتماعية النهائي,L06-D30-P02,ferhan nkon m3akom,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الزيارة الاجتماعية النهائي,L06-D30-P03,kolshi kan zwin,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الزيارة الاجتماعية النهائي,L06-D30-P04,shukran 3la d-dyafa,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الزيارة الاجتماعية النهائي,L06-D30-P05,bslama w nshofkom qrib,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار الحي المناسب,L07-D01-P01,wash had l-7oma hadi haniya?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار الحي المناسب,L07-D01-P02,wash kayn hanout qrib?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار الحي المناسب,L07-D01-P03,wash transport sahla mn hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار الحي المناسب,L07-D01-P04,wash had l-blasa amna b-lil?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,اختيار الحي المناسب,L07-D01-P05,bghit nbqa hna wahed l-moda,MISSING,MISSING,MISSING,MISSING,MISSING
+2,رؤية الشقة لأول مرة,L07-D02-P01,n9dr nshof l-appartement?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,رؤية الشقة لأول مرة,L07-D02-P02,sh7al mn bit kayn hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,رؤية الشقة لأول مرة,L07-D02-P03,wash mfrsha?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,رؤية الشقة لأول مرة,L07-D02-P04,wash l-kuzina khdama mzyan?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,رؤية الشقة لأول مرة,L07-D02-P05,bghit nfker lwel,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الثمن والميزانية,L07-D03-P01,bsh7al l-kra f shhar?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الثمن والميزانية,L07-D03-P02,hada foq l-budget dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الثمن والميزانية,L07-D03-P03,wash l-ma w do dakhlin?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الثمن والميزانية,L07-D03-P04,t9dr tnqes shwiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الثمن والميزانية,L07-D03-P05,shno akher taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,المفروش وغير المفروش,L07-D04-P01,shno kayn f l-furniture?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,المفروش وغير المفروش,L07-D04-P02,wash kayna namousiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,المفروش وغير المفروش,L07-D04-P03,wash kayna makina dyal s-sabon?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,المفروش وغير المفروش,L07-D04-P04,n9dr njib hwayji?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,المفروش وغير المفروش,L07-D04-P05,wash kayn shi haja na9sa hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,العقد والضمان,L07-D05-P01,wash kayn contrat?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,العقد والضمان,L07-D05-P02,bsh7al la caution?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,العقد والضمان,L07-D05-P03,imta trje3 liya la caution?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,العقد والضمان,L07-D05-P04,t9dr t3tini reçu?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,العقد والضمان,L07-D05-P05,bghit nqra l-contrat lwel,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الدخول إلى السكن,L07-D06-P01,n9dr nakhod swart?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الدخول إلى السكن,L07-D06-P02,kifash n7el bab l-immeuble?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الدخول إلى السكن,L07-D06-P03,fin nrmmi z-zbel?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الدخول إلى السكن,L07-D06-P04,wash kaynin shi qawanin dyal dar?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الدخول إلى السكن,L07-D06-P05,kayn moshkil sghir hna,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة السكن الأسبوعية,L07-D07-P01,bghit nkri shhar wahed,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة السكن الأسبوعية,L07-D07-P02,wash kolshi dakhel?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة السكن الأسبوعية,L07-D07-P03,n9dr nchof l-appartement marra khra?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة السكن الأسبوعية,L07-D07-P04,n9dr nakhod numero dyalek?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة السكن الأسبوعية,L07-D07-P05,ghadi nqrrer ghdda inshaallah,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الويفي والراوتر,L07-D08-P01,shno l-code dyal l-wifi?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الويفي والراوتر,L07-D08-P02,l-internet d3ifa,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الويفي والراوتر,L07-D08-P03,fin kayn routeur?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الويفي والراوتر,L07-D08-P04,n9dro n3awdo nsh3lo routeur?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,الويفي والراوتر,L07-D08-P05,wash kayna fibre hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الشريحة والبيانات,L07-D09-P01,fin n9dr nshri carte SIM?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الشريحة والبيانات,L07-D09-P02,bghit ncharji internet,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الشريحة والبيانات,L07-D09-P03,sh7al fiha mn giga?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الشريحة والبيانات,L07-D09-P04,ma kaynash réseau f telephone dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الشريحة والبيانات,L07-D09-P05,t9dr t3awenni nrigliha?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,فواتير الماء والضو,L07-D10-P01,imta katji l-facture?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,فواتير الماء والضو,L07-D10-P02,kifash nkhlles l-facture?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,فواتير الماء والضو,L07-D10-P03,t9ta3 do,MISSING,MISSING,MISSING,MISSING,MISSING
+10,فواتير الماء والضو,L07-D10-P04,ma kaynsh l-ma,MISSING,MISSING,MISSING,MISSING,MISSING
+10,فواتير الماء والضو,L07-D10-P05,wash hadshi 3adi hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,المطبخ والأجهزة,L07-D11-P01,kifash nkhdem l-bota?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,المطبخ والأجهزة,L07-D11-P02,wash kayn l-gaz?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,المطبخ والأجهزة,L07-D11-P03,tllaja ma khddamash,MISSING,MISSING,MISSING,MISSING,MISSING
+11,المطبخ والأجهزة,L07-D11-P04,fin n9dr nshri l-ma dyal shrob?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,المطبخ والأجهزة,L07-D11-P05,n9dr nteyb hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الغسيل والتنظيف,L07-D12-P01,fin n9dr nseben l-7wayj?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الغسيل والتنظيف,L07-D12-P02,wash kayna makina dyal s-sabon?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الغسيل والتنظيف,L07-D12-P03,wach kayn shi wahed yn9i marra f simana?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الغسيل والتنظيف,L07-D12-P04,fin n9dr nnshref l-7wayj?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الغسيل والتنظيف,L07-D12-P05,7tajit lizar n9i,MISSING,MISSING,MISSING,MISSING,MISSING
+13,النفايات وقواعد العمارة,L07-D13-P01,imta nkhrej z-zbel?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,النفايات وقواعد العمارة,L07-D13-P02,fin kaynin l-poubelles?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,النفايات وقواعد العمارة,L07-D13-P03,wash n9dr njib dyaf?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,النفايات وقواعد العمارة,L07-D13-P04,ma ghadi ndirsh sda3,MISSING,MISSING,MISSING,MISSING,MISSING
+13,النفايات وقواعد العمارة,L07-D13-P05,shkun n3ayet lih ila kan moshkil?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة خدمات البيت,L07-D14-P01,l-wifi rja3 d3if,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة خدمات البيت,L07-D14-P02,wash l-facture mkhlssa?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة خدمات البيت,L07-D14-P03,makina dyal s-sabon ma khddamash,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة خدمات البيت,L07-D14-P04,t9dr tshre7 lia qawanin l-immeuble?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة خدمات البيت,L07-D14-P05,daba kolshi wad7,MISSING,MISSING,MISSING,MISSING,MISSING
+15,طلب الإصلاحات,L07-D15-P01,hadi khas-ha tsla7,MISSING,MISSING,MISSING,MISSING,MISSING
+15,طلب الإصلاحات,L07-D15-P02,t9dr tsift chi mصلح?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,طلب الإصلاحات,L07-D15-P03,imta ghadi yji l-mصلح?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,طلب الإصلاحات,L07-D15-P04,hadshi msta3jel,MISSING,MISSING,MISSING,MISSING,MISSING
+15,طلب الإصلاحات,L07-D15-P05,ymkn ytsenna l-ghdda,MISSING,MISSING,MISSING,MISSING,MISSING
+16,مشاكل الماء والكهرباء,L07-D16-P01,l-ma skhoun ma khddamsh,MISSING,MISSING,MISSING,MISSING,MISSING
+16,مشاكل الماء والكهرباء,L07-D16-P02,kayn tsriba dyal l-ma,MISSING,MISSING,MISSING,MISSING,MISSING
+16,مشاكل الماء والكهرباء,L07-D16-P03,do mkssor / ma khddamsh,MISSING,MISSING,MISSING,MISSING,MISSING
+16,مشاكل الماء والكهرباء,L07-D16-P04,t9dr tchof disjoncteur?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,مشاكل الماء والكهرباء,L07-D16-P05,kayna ri7t l-gaz,MISSING,MISSING,MISSING,MISSING,MISSING
+17,البواب والحارس,L07-D17-P01,"salam, nta l-gardien?",MISSING,MISSING,MISSING,MISSING,MISSING
+17,البواب والحارس,L07-D17-P02,wash jat chi colis lia?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,البواب والحارس,L07-D17-P03,3ayet lia ila kan chi haja,MISSING,MISSING,MISSING,MISSING,MISSING
+17,البواب والحارس,L07-D17-P04,fin n9dr nparké?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,البواب والحارس,L07-D17-P05,shukran 3la l-mosa3ada,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الجيران والضجيج,L07-D18-P01,"salam, ana jar jdid",MISSING,MISSING,MISSING,MISSING,MISSING
+18,الجيران والضجيج,L07-D18-P02,smah lia 3la sda3,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الجيران والضجيج,L07-D18-P03,t9dr tnqes sda3 shwiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الجيران والضجيج,L07-D18-P04,drri sghir na3s,MISSING,MISSING,MISSING,MISSING,MISSING
+18,الجيران والضجيج,L07-D18-P05,ma kayn 7ta moshkil,MISSING,MISSING,MISSING,MISSING,MISSING
+19,التوصيل والطلبات,L07-D19-P01,wash livraison t9dr tji hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,التوصيل والطلبات,L07-D19-P02,hada l-adresse dyal l-immeuble,MISSING,MISSING,MISSING,MISSING,MISSING
+19,التوصيل والطلبات,L07-D19-P03,ana f t-tabiq t-talit,MISSING,MISSING,MISSING,MISSING,MISSING
+19,التوصيل والطلبات,L07-D19-P04,3ayet lia mlli twsel,MISSING,MISSING,MISSING,MISSING,MISSING
+19,التوصيل والطلبات,L07-D19-P05,had colis machi dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الخدمات القريبة,L07-D20-P01,fin kayna pharmacie?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الخدمات القريبة,L07-D20-P02,fin kayn pressing?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الخدمات القريبة,L07-D20-P03,fin n9dr n-printi wraq?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الخدمات القريبة,L07-D20-P04,fin n9dr nshri 7wayj dyal dar?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الخدمات القريبة,L07-D20-P05,fin kayn supermarché qrib?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة حياة الحي,L07-D21-P01,wash kayn shi mصلح qrib?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة حياة الحي,L07-D21-P02,wash ja chi wahed 3lia?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة حياة الحي,L07-D21-P03,ana jdid f had l-7oma,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة حياة الحي,L07-D21-P04,imta khasni ma ndirsh sda3?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة حياة الحي,L07-D21-P05,shukran 3la t-tawdih,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المواعيد مع الخدمات,L07-D22-P01,n9dro n7ddo rendez-vous?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المواعيد مع الخدمات,L07-D22-P02,wash s-sba7 mumkin?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المواعيد مع الخدمات,L07-D22-P03,ghadi nkun f dar,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المواعيد مع الخدمات,L07-D22-P04,confirmi m3aya qbel ma tji aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+22,المواعيد مع الخدمات,L07-D22-P05,rendez-vous tbdel,MISSING,MISSING,MISSING,MISSING,MISSING
+23,دفع الكراء والوصل,L07-D23-P01,bghit nkhlles l-kra,MISSING,MISSING,MISSING,MISSING,MISSING
+23,دفع الكراء والوصل,L07-D23-P02,n9dr nkhlles b-virement?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,دفع الكراء والوصل,L07-D23-P03,rah khllest,MISSING,MISSING,MISSING,MISSING,MISSING
+23,دفع الكراء والوصل,L07-D23-P04,n9dr nakhod reçu dyal l-kra?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,دفع الكراء والوصل,L07-D23-P05,imta l-khlas jay?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الأبناك والكاش,L07-D24-P01,fin kayn guichet?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الأبناك والكاش,L07-D24-P02,la carte dyali ma khddmatsh,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الأبناك والكاش,L07-D24-P03,wash katqblo la carte?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الأبناك والكاش,L07-D24-P04,wash 3ndk srf?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,الأبناك والكاش,L07-D24-P05,3ndi ghir cash,MISSING,MISSING,MISSING,MISSING,MISSING
+25,العمل عن بعد والمقهى,L07-D25-P01,n9dr nkhdem hna b-pc?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,العمل عن بعد والمقهى,L07-D25-P02,wash kayna tabla haniya?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,العمل عن بعد والمقهى,L07-D25-P03,fin kayna prise?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,العمل عن بعد والمقهى,L07-D25-P04,7tajit internet qwiya l-meeting,MISSING,MISSING,MISSING,MISSING,MISSING
+25,العمل عن بعد والمقهى,L07-D25-P05,n9dr nbqa hna jouj sa3at?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,الأوراق والإقامة الطويلة,L07-D26-P01,fin n9dr ndir photocopie?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,الأوراق والإقامة الطويلة,L07-D26-P02,fin n9dr nprinti had document?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,الأوراق والإقامة الطويلة,L07-D26-P03,wash khasكم copie dyal passport dyali?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,الأوراق والإقامة الطويلة,L07-D26-P04,fin kayn l-bureau?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,الأوراق والإقامة الطويلة,L07-D26-P05,bghit ghir l-ma3lomat,MISSING,MISSING,MISSING,MISSING,MISSING
+27,تمديد الإقامة والتخطيط,L07-D27-P01,bghit nbqa shhar akhor,MISSING,MISSING,MISSING,MISSING,MISSING
+27,تمديد الإقامة والتخطيط,L07-D27-P02,wash l-appartement khawi shhar jay?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,تمديد الإقامة والتخطيط,L07-D27-P03,n9dr nkhwi f akhir shhar?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,تمديد الإقامة والتخطيط,L07-D27-P04,imta ghadi tchof l-appartement?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,تمديد الإقامة والتخطيط,L07-D27-P05,ghadi nn9i qbel ma nmshi,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الإقامة الأطول,L07-D28-P01,n9dro nconfirmiw nhar l-khlas?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الإقامة الأطول,L07-D28-P02,n9dr nakhod numero dyal l-mصلح?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الإقامة الأطول,L07-D28-P03,fin n9dr nprinti wraq qrib mn hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الإقامة الأطول,L07-D28-P04,ymkn nbqa kter,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الإقامة الأطول,L07-D28-P05,shukran 3la l-mosa3ada f had l-moda,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف مختلطة في الإقامة,L07-D29-P01,"l-internet d3ifa, t9dr shi wahed ychofha?",MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف مختلطة في الإقامة,L07-D29-P02,kayna tsriba dyal l-ma f l-kuzina,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف مختلطة في الإقامة,L07-D29-P03,n9dro n2ekhro ziyara l-ghdda?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف مختلطة في الإقامة,L07-D29-P04,nkhelles daba wla mn b3d?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف مختلطة في الإقامة,L07-D29-P05,7tajit kolshi mktob aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الإقامة النهائي,L07-D30-P01,bghit nkri shhar wahed,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الإقامة النهائي,L07-D30-P02,wash l-ma w do w l-wifi dakhlin?,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الإقامة النهائي,L07-D30-P03,makina dyal s-sabon ma khddamash,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الإقامة النهائي,L07-D30-P04,3tini reçu b3d l-khlas aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار الإقامة النهائي,L07-D30-P05,"shukran, daba kolshi wad7",MISSING,MISSING,MISSING,MISSING,MISSING
+1,ما حاسّش براسي مزيان,L08-D01-P01,ma 7assish b-rasi mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+1,ما حاسّش براسي مزيان,L08-D01-P02,khassni tbib,MISSING,MISSING,MISSING,MISSING,MISSING
+1,ما حاسّش براسي مزيان,L08-D01-P03,wash kayna clinique qriba?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,ما حاسّش براسي مزيان,L08-D01-P04,3awenni aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+1,ما حاسّش براسي مزيان,L08-D01-P05,hder bshwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+2,الصيدلية والأعراض البسيطة,L08-D02-P01,fin kayna frmasiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,الصيدلية والأعراض البسيطة,L08-D02-P02,3ndi wja3 f rassi,MISSING,MISSING,MISSING,MISSING,MISSING
+2,الصيدلية والأعراض البسيطة,L08-D02-P03,3ndi wja3 f kershi,MISSING,MISSING,MISSING,MISSING,MISSING
+2,الصيدلية والأعراض البسيطة,L08-D02-P04,3ndi skhana,MISSING,MISSING,MISSING,MISSING,MISSING
+2,الصيدلية والأعراض البسيطة,L08-D02-P05,kifash nakhod had dwa?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,موعد مع الطبيب,L08-D03-P01,n9dr nakhod rendez-vous m3a tbib?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,موعد مع الطبيب,L08-D03-P02,hadshi musta3jil,MISSING,MISSING,MISSING,MISSING,MISSING
+3,موعد مع الطبيب,L08-D03-P03,l-wja3 bda lbare7,MISSING,MISSING,MISSING,MISSING,MISSING
+3,موعد مع الطبيب,L08-D03-P04,khdit shi dwa,MISSING,MISSING,MISSING,MISSING,MISSING
+3,موعد مع الطبيب,L08-D03-P05,wash khasni ndir analyses?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,وصف الألم والجسم,L08-D04-P01,7enji kaywja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+4,وصف الألم والجسم,L08-D04-P02,dahri kaywja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+4,وصف الألم والجسم,L08-D04-P03,rjli katwja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+4,وصف الألم والجسم,L08-D04-P04,l-wja3 qwi,MISSING,MISSING,MISSING,MISSING,MISSING
+4,وصف الألم والجسم,L08-D04-P05,l-wja3 n9es shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المعدة والأكل,L08-D05-P01,kershi mqlqa,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المعدة والأكل,L08-D05-P02,7ass blli ghadi nrje3,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المعدة والأكل,L08-D05-P03,wash 3ndk dwa l-ishal?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المعدة والأكل,L08-D05-P04,wash ma nakolsh daba?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,المعدة والأكل,L08-D05-P05,khassni l-ma,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الحساسية والدواء,L08-D06-P01,3ndi 7asasiya,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الحساسية والدواء,L08-D06-P02,3ndi 7asasiya mn had dwa,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الحساسية والدواء,L08-D06-P03,wash had dwa kaydir n3as?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الحساسية والدواء,L08-D06-P04,wash nakhdo m3a l-makla?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,الحساسية والدواء,L08-D06-P05,t9dr tkteb liya kifash nakhdo?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة صحية أولى,L08-D07-P01,"ma 7assish b-rasi mzyan, khassni frmasiya",MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة صحية أولى,L08-D07-P02,3ndi wja3 f rassi w skhana,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة صحية أولى,L08-D07-P03,sh7al mn mra f nhar?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة صحية أولى,L08-D07-P04,"3ndi 7asasiya, ma n9drsh nakhod hada",MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة صحية أولى,L08-D07-P05,3awenni w hder bshwiya aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+8,حالة طارئة,L08-D08-P01,hadi hala musta3jila,MISSING,MISSING,MISSING,MISSING,MISSING
+8,حالة طارئة,L08-D08-P02,3ayet l-ambulance aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+8,حالة طارئة,L08-D08-P03,kayn chi wahed mdror,MISSING,MISSING,MISSING,MISSING,MISSING
+8,حالة طارئة,L08-D08-P04,ma qadrsh ntneffes mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+8,حالة طارئة,L08-D08-P05,fin kayn sbitar?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الطاكسي إلى السبيطار,L08-D09-P01,sir l-sbitar aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الطاكسي إلى السبيطار,L08-D09-P02,"sre3 shwiya aafak, hadshi musta3jil",MISSING,MISSING,MISSING,MISSING,MISSING
+9,الطاكسي إلى السبيطار,L08-D09-P03,wash clinique qriba?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الطاكسي إلى السبيطار,L08-D09-P04,khassni ngles,MISSING,MISSING,MISSING,MISSING,MISSING
+9,الطاكسي إلى السبيطار,L08-D09-P05,tsennani aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الاستقبال في المستشفى,L08-D10-P01,bghit nshof tbib,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الاستقبال في المستشفى,L08-D10-P02,ma 3ndish rendez-vous,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الاستقبال في المستشفى,L08-D10-P03,fin khasni ntsenna?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الاستقبال في المستشفى,L08-D10-P04,sh7al ghadi tdkhol?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الاستقبال في المستشفى,L08-D10-P05,wash kayn chi wahed kayhder anglais?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,التأمين والدفع,L08-D11-P01,bsh7al consultation?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,التأمين والدفع,L08-D11-P02,wash katqblo assurance?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,التأمين والدفع,L08-D11-P03,n9dr nakhod facture?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,التأمين والدفع,L08-D11-P04,n9dr nakhod certificat médical?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,التأمين والدفع,L08-D11-P05,khassni hada l-assurance,MISSING,MISSING,MISSING,MISSING,MISSING
+12,جرح أو طيحة,L08-D12-P01,t7it,MISSING,MISSING,MISSING,MISSING,MISSING
+12,جرح أو طيحة,L08-D12-P02,t9t3at lia yeddi,MISSING,MISSING,MISSING,MISSING,MISSING
+12,جرح أو طيحة,L08-D12-P03,l-ka3b dyali kaywja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+12,جرح أو طيحة,L08-D12-P04,wash 3ndk bandage?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,جرح أو طيحة,L08-D12-P05,wash khassni l-khyata?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,سرقة أو ضياع,L08-D13-P01,tsraq lia l-portmoni,MISSING,MISSING,MISSING,MISSING,MISSING
+13,سرقة أو ضياع,L08-D13-P02,dya3 lia sac dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+13,سرقة أو ضياع,L08-D13-P03,3ayet l-bolis aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+13,سرقة أو ضياع,L08-D13-P04,fin kayn commissariat?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,سرقة أو ضياع,L08-D13-P05,n9dr nakhod procès-verbal?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الطوارئ والأوراق,L08-D14-P01,"hadshi musta3jil, 3ayet l-ambulance",MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الطوارئ والأوراق,L08-D14-P02,sir l-clinique b-zrba aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الطوارئ والأوراق,L08-D14-P03,fin khasni ntsenna tbib?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الطوارئ والأوراق,L08-D14-P04,"tsraq lia l-portmoni, khassni l-bolis",MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الطوارئ والأوراق,L08-D14-P05,khassni facture l-assurance,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الباسبور والسفارة,L08-D15-P01,dya3 lia passport dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الباسبور والسفارة,L08-D15-P02,fin kayna l-ambassade?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الباسبور والسفارة,L08-D15-P03,t9dr t3awenni n3ayet l-ambassade dyali?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الباسبور والسفارة,L08-D15-P04,khassni copie dyal procès-verbal,MISSING,MISSING,MISSING,MISSING,MISSING
+15,الباسبور والسفارة,L08-D15-P05,fin n9dr nswr taswira dyal passport?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,التليفون والكارت البنكية,L08-D16-P01,dya3 lia tilifon dyali,MISSING,MISSING,MISSING,MISSING,MISSING
+16,التليفون والكارت البنكية,L08-D16-P02,n9dr nst3mel tilifon dyalek aafak?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,التليفون والكارت البنكية,L08-D16-P03,khassni n3ayet l-bank,MISSING,MISSING,MISSING,MISSING,MISSING
+16,التليفون والكارت البنكية,L08-D16-P04,la carte dyali blocat,MISSING,MISSING,MISSING,MISSING,MISSING
+16,التليفون والكارت البنكية,L08-D16-P05,fin n9dr nshri tilifon rkhis?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,ما حاسّش بالأمان,L08-D17-P01,ma 7assish b-l-aman hna,MISSING,MISSING,MISSING,MISSING,MISSING
+17,ما حاسّش بالأمان,L08-D17-P02,n9dro nmshiw l-zanqa 3amra b-nas?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,ما حاسّش بالأمان,L08-D17-P03,wqef aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+17,ما حاسّش بالأمان,L08-D17-P04,ma t9isnish,MISSING,MISSING,MISSING,MISSING,MISSING
+17,ما حاسّش بالأمان,L08-D17-P05,bghit nbqa 7da l-groupe,MISSING,MISSING,MISSING,MISSING,MISSING
+18,مشكل فالطريق أو الطاكسي,L08-D18-P01,hadi machi triq s7i7a,MISSING,MISSING,MISSING,MISSING,MISSING
+18,مشكل فالطريق أو الطاكسي,L08-D18-P02,wqef hna aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+18,مشكل فالطريق أو الطاكسي,L08-D18-P03,bghit nhbet hna,MISSING,MISSING,MISSING,MISSING,MISSING
+18,مشكل فالطريق أو الطاكسي,L08-D18-P04,bsh7al qbel ma nmshiw?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,مشكل فالطريق أو الطاكسي,L08-D18-P05,3tini sac dyali mn coffre aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+19,مشكل فالفندق أو الرياض,L08-D19-P01,l-bab ma kaytsddsh,MISSING,MISSING,MISSING,MISSING,MISSING
+19,مشكل فالفندق أو الرياض,L08-D19-P02,ma kaynsh l-ma skhoun,MISSING,MISSING,MISSING,MISSING,MISSING
+19,مشكل فالفندق أو الرياض,L08-D19-P03,had l-bit ma kaybanish amen,MISSING,MISSING,MISSING,MISSING,MISSING
+19,مشكل فالفندق أو الرياض,L08-D19-P04,n9dr nبدل l-bit?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,مشكل فالفندق أو الرياض,L08-D19-P05,n9dr nhder m3a l-manager?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحرارة والجفاف والطقس,L08-D20-P01,s-skhana bzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحرارة والجفاف والطقس,L08-D20-P02,dakh lia rassi,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحرارة والجفاف والطقس,L08-D20-P03,fin kayn d-dell?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحرارة والجفاف والطقس,L08-D20-P04,wash 3ndk crème solaire?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,الحرارة والجفاف والطقس,L08-D20-P05,khassni nرتاح shwiya,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة السلامة العامة,L08-D21-P01,"dya3 lia passport dyali, khassni mosa3ada",MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة السلامة العامة,L08-D21-P02,n9dr nst3mel tilifon n3ayet l-bank?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة السلامة العامة,L08-D21-P03,"ma 7assish b-l-aman, bghit nmshi",MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة السلامة العامة,L08-D21-P04,wqef hna aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة السلامة العامة,L08-D21-P05,n9dr nبدل l-bit? l-bab ma kaytsddsh,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الصيدلية بالليل,L08-D22-P01,wash kayna frmasiya dyal n-noba?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الصيدلية بالليل,L08-D22-P02,fin kayna frmasiya d n-noba?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الصيدلية بالليل,L08-D22-P03,dwa dyali sala,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الصيدلية بالليل,L08-D22-P04,wash khasni ordonnance?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,الصيدلية بالليل,L08-D22-P05,wash kayn shi dwa b7alo?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,الأسنان والعينين,L08-D23-P01,sinni kaywja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+23,الأسنان والعينين,L08-D23-P02,fin kayn dentiste?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,الأسنان والعينين,L08-D23-P03,3ini katwja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+23,الأسنان والعينين,L08-D23-P04,wash 3ndk gouttes dyal l-3in?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,الأسنان والعينين,L08-D23-P05,wash khasni nshof spécialiste?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,القلق والتعب,L08-D24-P01,ana mقلق bzaf,MISSING,MISSING,MISSING,MISSING,MISSING
+24,القلق والتعب,L08-D24-P02,khassni blasa haniya,MISSING,MISSING,MISSING,MISSING,MISSING
+24,القلق والتعب,L08-D24-P03,t9dr tbqa m3aya shwiya?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,القلق والتعب,L08-D24-P04,khassni n3ayet l-sa7bi,MISSING,MISSING,MISSING,MISSING,MISSING
+24,القلق والتعب,L08-D24-P05,daba ana mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+25,حساسية الأكل والحدود الغذائية,L08-D25-P01,ma n9drsh nakol hada,MISSING,MISSING,MISSING,MISSING,MISSING
+25,حساسية الأكل والحدود الغذائية,L08-D25-P02,3ndi 7asasiya mn l-kawkaw,MISSING,MISSING,MISSING,MISSING,MISSING
+25,حساسية الأكل والحدود الغذائية,L08-D25-P03,wash fih l-7lib?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,حساسية الأكل والحدود الغذائية,L08-D25-P04,7ta shwiya katsbb lia moshkil,MISSING,MISSING,MISSING,MISSING,MISSING
+25,حساسية الأكل والحدود الغذائية,L08-D25-P05,3tini shi haja basita aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+26,مواعيد الدواء,L08-D26-P01,imta nakhod had dwa?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,مواعيد الدواء,L08-D26-P02,sh7al mn 7abba nakhod?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,مواعيد الدواء,L08-D26-P03,sba7 wla lil?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,مواعيد الدواء,L08-D26-P04,nsit wa7d dose,MISSING,MISSING,MISSING,MISSING,MISSING
+26,مواعيد الدواء,L08-D26-P05,n9dr nsog b3d had dwa?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,مساعدة شخص آخر,L08-D27-P01,wash nta/nti bikhir?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,مساعدة شخص آخر,L08-D27-P02,wash khassk l-ma?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,مساعدة شخص آخر,L08-D27-P03,wash khassk tbib?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,مساعدة شخص آخر,L08-D27-P04,3tiw shwiya dyal blasa aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+27,مساعدة شخص آخر,L08-D27-P05,ghadi n3ayet l-mosa3ada,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L08-D28-P01,fin kayna frmasiya d n-noba?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L08-D28-P02,"sinni kaywja3ni, khassni dentiste",MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L08-D28-P03,khassni blasa haniya,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L08-D28-P04,"3ndi 7asasiya, ma n9drsh nakol hada",MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L08-D28-P05,sh7al mn 7abba f nhar?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف صحية مختلطة,L08-D29-P01,ma 7assish b-rasi mzyan w kershi katwja3ni,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف صحية مختلطة,L08-D29-P02,kteb liya kifash nakhod dwa aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف صحية مختلطة,L08-D29-P03,dini l-clinique aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف صحية مختلطة,L08-D29-P04,n9dr nakhod facture l-assurance?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف صحية مختلطة,L08-D29-P05,daba 7assit rasi حسن,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار السلامة النهائي,L08-D30-P01,ana mrid w khassni frmasiya,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار السلامة النهائي,L08-D30-P02,kifash nakhod had dwa?,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار السلامة النهائي,L08-D30-P03,"l-wja3 qwi, khassni tbib",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار السلامة النهائي,L08-D30-P04,khassni facture l-assurance,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار السلامة النهائي,L08-D30-P05,"shukran, daba 7assit b-l-aman",MISSING,MISSING,MISSING,MISSING,MISSING
+1,أول لقاء مهني,L09-D01-P01,"salam, mtsherrfin",MISSING,MISSING,MISSING,MISSING,MISSING
+1,أول لقاء مهني,L09-D01-P02,smiti Alex w kan-khdem f marketing,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أول لقاء مهني,L09-D01-P03,ana hna 3la khdma,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أول لقاء مهني,L09-D01-P04,shkun l-mas2oul hna?,MISSING,MISSING,MISSING,MISSING,MISSING
+1,أول لقاء مهني,L09-D01-P05,n9dro nhadro b darija sahla?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تحديد موعد عمل,L09-D02-P01,bghit n7edded wahed rendez-vous,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تحديد موعد عمل,L09-D02-P02,ashmn nhar ysel7 lik?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تحديد موعد عمل,L09-D02-P03,kan-qter7 nhar tlat f sba7,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تحديد موعد عمل,L09-D02-P04,f sh7al b dabt?,MISSING,MISSING,MISSING,MISSING,MISSING
+2,تحديد موعد عمل,L09-D02-P05,"wakha, rendez-vous m2akked",MISSING,MISSING,MISSING,MISSING,MISSING
+3,الهاتف والواتساب والإيميل,L09-D03-P01,n9dr nakhod numero dyalek?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الهاتف والواتساب والإيميل,L09-D03-P02,wash katst3mel WhatsApp?,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الهاتف والواتساب والإيميل,L09-D03-P03,ghadi nsift lik details b email,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الهاتف والواتساب والإيميل,L09-D03-P04,sift lia localisation aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+3,الهاتف والواتساب والإيميل,L09-D03-P05,2akked lia belli weslek aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الاستقبال والمكتب,L09-D04-P01,3ndi rendez-vous m3a l-manager,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الاستقبال والمكتب,L09-D04-P02,fin ntsenna?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الاستقبال والمكتب,L09-D04-P03,wslit shwiya bkker,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الاستقبال والمكتب,L09-D04-P04,fin salle dyal l-ijtima3?,MISSING,MISSING,MISSING,MISSING,MISSING
+4,الاستقبال والمكتب,L09-D04-P05,n9dr nst3mel Wi-Fi l-khdma?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,فهم حاجة الكليون,L09-D05-P01,ashno khasskom b dabt?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,فهم حاجة الكليون,L09-D05-P02,ashno huwa l-moshkil l-kbir?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,فهم حاجة الكليون,L09-D05-P03,shkun ghadi yst3mel hadshi?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,فهم حاجة الكليون,L09-D05-P04,sh7al l-budget tqreeban?,MISSING,MISSING,MISSING,MISSING,MISSING
+5,فهم حاجة الكليون,L09-D05-P05,imta khasskom hadshi?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,شرح الخدمة أو المنتج,L09-D06-P01,kan-3tiw wahed l-7ell basit,MISSING,MISSING,MISSING,MISSING,MISSING
+6,شرح الخدمة أو المنتج,L09-D06-P02,hadshi kaywffer l-waqt,MISSING,MISSING,MISSING,MISSING,MISSING
+6,شرح الخدمة أو المنتج,L09-D06-P03,hadshi kayn9es l-cost,MISSING,MISSING,MISSING,MISSING,MISSING
+6,شرح الخدمة أو المنتج,L09-D06-P04,bghitiw demo?,MISSING,MISSING,MISSING,MISSING,MISSING
+6,شرح الخدمة أو المنتج,L09-D06-P05,n9dro n-adaptiwha 3likom,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع الأول,L09-D07-P01,"smiti Alex, n9dr nhder m3a l-manager?",MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع الأول,L09-D07-P02,nhar tlat f sba7 m2akked,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع الأول,L09-D07-P03,3tini WhatsApp dyalek w nsift lik localisation,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع الأول,L09-D07-P04,ashno khasskom b dabt?,MISSING,MISSING,MISSING,MISSING,MISSING
+7,مراجعة الأسبوع الأول,L09-D07-P05,n9dr nwerik demo sghira,MISSING,MISSING,MISSING,MISSING,MISSING
+8,بداية الاجتماع,L09-D08-P01,shukran 3la had l-ijtima3,MISSING,MISSING,MISSING,MISSING,MISSING
+8,بداية الاجتماع,L09-D08-P02,wash kolshi wajed?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,بداية الاجتماع,L09-D08-P03,ghadi nbda b l-hadaf,MISSING,MISSING,MISSING,MISSING,MISSING
+8,بداية الاجتماع,L09-D08-P04,n9dr nakhod notes?,MISSING,MISSING,MISSING,MISSING,MISSING
+8,بداية الاجتماع,L09-D08-P05,sh7al 3ndkom mn waqt?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,توضيح الأسئلة,L09-D09-P01,t9dr tshra7 lia 3awtani aafak?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,توضيح الأسئلة,L09-D09-P02,ma fhemtsh had n-no9ta,MISSING,MISSING,MISSING,MISSING,MISSING
+9,توضيح الأسئلة,L09-D09-P03,t9dr t3tini mital?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,توضيح الأسئلة,L09-D09-P04,ashno l-ahem haja?,MISSING,MISSING,MISSING,MISSING,MISSING
+9,توضيح الأسئلة,L09-D09-P05,يعني khasskom livraison sريعة w taman mzyan,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الثمن والعرض التجاري,L09-D10-P01,bsh7al taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الثمن والعرض التجاري,L09-D10-P02,t9dr tsift lia devis?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الثمن والعرض التجاري,L09-D10-P03,taman kaytbedel 3la 7sab scope,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الثمن والعرض التجاري,L09-D10-P04,wash TVA dakla f taman?,MISSING,MISSING,MISSING,MISSING,MISSING
+10,الثمن والعرض التجاري,L09-D10-P05,t9dr t3tina taman 7sen?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الفاتورة والدفع,L09-D11-P01,khassni facture aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الفاتورة والدفع,L09-D11-P02,kifash n9dro nkhlesso?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الفاتورة والدفع,L09-D11-P03,sift lia les coordonnées dyal virement,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الفاتورة والدفع,L09-D11-P04,n9dr nakhod reçu?,MISSING,MISSING,MISSING,MISSING,MISSING
+11,الفاتورة والدفع,L09-D11-P05,l-khlas ghadi ykoun b3d l-approval,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الآجال والتسليم,L09-D12-P01,imta ghadi ykoun wajed?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الآجال والتسليم,L09-D12-P02,l-deadline mohim,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الآجال والتسليم,L09-D12-P03,t9dro tslmo had simana?,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الآجال والتسليم,L09-D12-P04,khassni confirmation lyoum,MISSING,MISSING,MISSING,MISSING,MISSING
+12,الآجال والتسليم,L09-D12-P05,ashno waqef l-khdma?,MISSING,MISSING,MISSING,MISSING,MISSING
+13,تأخير ومشكل صغير,L09-D13-P01,kayn wahed t2khir sghir,MISSING,MISSING,MISSING,MISSING,MISSING
+13,تأخير ومشكل صغير,L09-D13-P02,smeh lia 3la t2khir,MISSING,MISSING,MISSING,MISSING,MISSING
+13,تأخير ومشكل صغير,L09-D13-P03,l-file kan na9es,MISSING,MISSING,MISSING,MISSING,MISSING
+13,تأخير ومشكل صغير,L09-D13-P04,n9dro nsawboha lyoum,MISSING,MISSING,MISSING,MISSING,MISSING
+13,تأخير ومشكل صغير,L09-D13-P05,wash l-waqt jdid ysel7 lik?,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع الثاني,L09-D14-P01,"shukran, sh7al 3ndkom mn waqt?",MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع الثاني,L09-D14-P02,t9dr t3tini mital? يعني khasskom livraison sريعة,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع الثاني,L09-D14-P03,sift lia devis w TVA dakla,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع الثاني,L09-D14-P04,khassni facture w coordonnées dyal virement,MISSING,MISSING,MISSING,MISSING,MISSING
+14,مراجعة الأسبوع الثاني,L09-D14-P05,"smeh lia 3la t2khir, n9dro nslmo ghda?",MISSING,MISSING,MISSING,MISSING,MISSING
+15,التفاوض بلطف,L09-D15-P01,taman shwiya tali3,MISSING,MISSING,MISSING,MISSING,MISSING
+15,التفاوض بلطف,L09-D15-P02,wash kayn chi option akhor?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,التفاوض بلطف,L09-D15-P03,ash t9dro dirو lina?,MISSING,MISSING,MISSING,MISSING,MISSING
+15,التفاوض بلطف,L09-D15-P04,l-jawda ahem mn rkhss,MISSING,MISSING,MISSING,MISSING,MISSING
+15,التفاوض بلطف,L09-D15-P05,khllina nلقاو 7ell wstani,MISSING,MISSING,MISSING,MISSING,MISSING
+16,صاحب القرار والموافقة,L09-D16-P01,shkun kayakhod l-qarar?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,صاحب القرار والموافقة,L09-D16-P02,wash khasskom approval?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,صاحب القرار والموافقة,L09-D16-P03,imta t9dro tjawbo?,MISSING,MISSING,MISSING,MISSING,MISSING
+16,صاحب القرار والموافقة,L09-D16-P04,n9dro ntsennaw qararkom,MISSING,MISSING,MISSING,MISSING,MISSING
+16,صاحب القرار والموافقة,L09-D16-P05,bghitiw tshawro dakhelian?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,العقد والوثائق,L09-D17-P01,t9dr tsift lia l-contrat?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,العقد والوثائق,L09-D17-P02,khassni n9rah luwel,MISSING,MISSING,MISSING,MISSING,MISSING
+17,العقد والوثائق,L09-D17-P03,n9dr nakhod copie?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,العقد والوثائق,L09-D17-P04,fin nوقع?,MISSING,MISSING,MISSING,MISSING,MISSING
+17,العقد والوثائق,L09-D17-P05,n9dro nzido wahed l-condition?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,البنك والمحاسبة البسيطة,L09-D18-P01,ashmn smiya dyal société nktbo f facture?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,البنك والمحاسبة البسيطة,L09-D18-P02,wash khasskom identifiant fiscal?,MISSING,MISSING,MISSING,MISSING,MISSING
+18,البنك والمحاسبة البسيطة,L09-D18-P03,virement tsift,MISSING,MISSING,MISSING,MISSING,MISSING
+18,البنك والمحاسبة البسيطة,L09-D18-P04,sift lia preuve dyal l-khlas aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+18,البنك والمحاسبة البسيطة,L09-D18-P05,wash katqblo cash?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,كواركينغ والطباعة والإنترنت,L09-D19-P01,wash 3ndkom bureau l nhar wahed?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,كواركينغ والطباعة والإنترنت,L09-D19-P02,n9dr nطبّع had document?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,كواركينغ والطباعة والإنترنت,L09-D19-P03,t9dr tscané lia hada?,MISSING,MISSING,MISSING,MISSING,MISSING
+19,كواركينغ والطباعة والإنترنت,L09-D19-P04,l-internet ma khddamsh,MISSING,MISSING,MISSING,MISSING,MISSING
+19,كواركينغ والطباعة والإنترنت,L09-D19-P05,khassni blasa haniya l-call,MISSING,MISSING,MISSING,MISSING,MISSING
+20,خدمة فريلانسر أو مزود,L09-D20-P01,wash nta/nti disponible had simana?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,خدمة فريلانسر أو مزود,L09-D20-P02,l-mission sahla,MISSING,MISSING,MISSING,MISSING,MISSING
+20,خدمة فريلانسر أو مزود,L09-D20-P03,n9dr nshof khdma qdima?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,خدمة فريلانسر أو مزود,L09-D20-P04,bsh7al w sh7al mn waqt?,MISSING,MISSING,MISSING,MISSING,MISSING
+20,خدمة فريلانسر أو مزود,L09-D20-P05,khllina nbdaو b test sghir,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع الثالث,L09-D21-P01,khllina nلقاو 7ell wstani f taman,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع الثالث,L09-D21-P02,shkun kayakhod l-qarar w imta t9dro tjawbo?,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع الثالث,L09-D21-P03,sift l-contrat w 3tini copie aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع الثالث,L09-D21-P04,"virement tsift, ghadi nsift preuve",MISSING,MISSING,MISSING,MISSING,MISSING
+21,مراجعة الأسبوع الثالث,L09-D21-P05,bsh7al w sh7al mn waqt l had l-mission?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,متابعة بعد الاجتماع,L09-D22-P01,shukran 3la waqtkom,MISSING,MISSING,MISSING,MISSING,MISSING
+22,متابعة بعد الاجتماع,L09-D22-P02,ghadi nsift résumé dyal l-ijtima3,MISSING,MISSING,MISSING,MISSING,MISSING
+22,متابعة بعد الاجتماع,L09-D22-P03,wash kayna chi haja na9sa?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,متابعة بعد الاجتماع,L09-D22-P04,imta nرجع ntواصل m3akom?,MISSING,MISSING,MISSING,MISSING,MISSING
+22,متابعة بعد الاجتماع,L09-D22-P05,"ma kayn moshkil, khod waqtkom",MISSING,MISSING,MISSING,MISSING,MISSING
+23,عرض تقديمي أو ديمو,L09-D23-P01,ghadi nوري tlt hajات,MISSING,MISSING,MISSING,MISSING,MISSING
+23,عرض تقديمي أو ديمو,L09-D23-P02,wash katshofo l-screen?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,عرض تقديمي أو ديمو,L09-D23-P03,hadi hiya l-khotwa l-owla,MISSING,MISSING,MISSING,MISSING,MISSING
+23,عرض تقديمي أو ديمو,L09-D23-P04,wash 3ndkom chi as2ila?,MISSING,MISSING,MISSING,MISSING,MISSING
+23,عرض تقديمي أو ديمو,L09-D23-P05,n9dr nsift presentation b3d,MISSING,MISSING,MISSING,MISSING,MISSING
+24,خدمة الزبناء والشكاية,L09-D24-P01,fhemt l-moshkil,MISSING,MISSING,MISSING,MISSING,MISSING
+24,خدمة الزبناء والشكاية,L09-D24-P02,smeh lia 3la had l-iz3aj,MISSING,MISSING,MISSING,MISSING,MISSING
+24,خدمة الزبناء والشكاية,L09-D24-P03,ashno numero dyal commande?,MISSING,MISSING,MISSING,MISSING,MISSING
+24,خدمة الزبناء والشكاية,L09-D24-P04,ghadi nshوفو w njawbo lyoum,MISSING,MISSING,MISSING,MISSING,MISSING
+24,خدمة الزبناء والشكاية,L09-D24-P05,n9dro nبدلوها wla nrj3o lik flوسك,MISSING,MISSING,MISSING,MISSING,MISSING
+25,شراكة وعلاقات مهنية,L09-D25-P01,ymkn n9dro nkhdmo m3a b3diyatna,MISSING,MISSING,MISSING,MISSING,MISSING
+25,شراكة وعلاقات مهنية,L09-D25-P02,ashno katdir société dyalkom?,MISSING,MISSING,MISSING,MISSING,MISSING
+25,شراكة وعلاقات مهنية,L09-D25-P03,kayn wahed l-forsa mzyana hna,MISSING,MISSING,MISSING,MISSING,MISSING
+25,شراكة وعلاقات مهنية,L09-D25-P04,khllina ntlqaw 3la qhwa w nhadro,MISSING,MISSING,MISSING,MISSING,MISSING
+25,شراكة وعلاقات مهنية,L09-D25-P05,khllina nbqaw 3la tواصل,MISSING,MISSING,MISSING,MISSING,MISSING
+26,معرض أو محل تجاري,L09-D26-P01,wash hadi stand dyal société dyalkom?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,معرض أو محل تجاري,L09-D26-P02,wash 3ndkom catalogue?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,معرض أو محل تجاري,L09-D26-P03,wash katbi3o b gros?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,معرض أو محل تجاري,L09-D26-P04,sh7al minimum dyal quantity?,MISSING,MISSING,MISSING,MISSING,MISSING
+26,معرض أو محل تجاري,L09-D26-P05,n9dr nakhod carte visite dyalk?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,إدارة ووثائق رسمية,L09-D27-P01,ashmn document khass?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,إدارة ووثائق رسمية,L09-D27-P02,fin ndfe3 dossier?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,إدارة ووثائق رسمية,L09-D27-P03,wahed document na9es,MISSING,MISSING,MISSING,MISSING,MISSING
+27,إدارة ووثائق رسمية,L09-D27-P04,imta nرجع?,MISSING,MISSING,MISSING,MISSING,MISSING
+27,إدارة ووثائق رسمية,L09-D27-P05,n9dr nakhod copie mtkhtoma?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L09-D28-P01,ghadi nsift résumé dyal l-ijtima3 w nرجع nhar l-khmis,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L09-D28-P02,wash katshofo l-screen? wash 3ndkom chi as2ila?,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L09-D28-P03,"fhemt l-moshkil, ghadi njawbo lyoum",MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L09-D28-P04,khllina ntlqaw 3la qhwa w nhadro 3la partenariat,MISSING,MISSING,MISSING,MISSING,MISSING
+28,مراجعة الأسبوع الرابع,L09-D28-P05,ashmn document khass w fin ndfe3 dossier?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف عمل مختلطة,L09-D29-P01,"mtsherrfin, ymkn n9dro nkhdmo m3a b3diyatna",MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف عمل مختلطة,L09-D29-P02,ashno khasskom b dabt w imta khasskom?,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف عمل مختلطة,L09-D29-P03,sift lia devis w facture aafak,MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف عمل مختلطة,L09-D29-P04,"smeh lia 3la t2khir, n9dro nsawboha lyoum",MISSING,MISSING,MISSING,MISSING,MISSING
+29,مواقف عمل مختلطة,L09-D29-P05,ghadi nsift résumé w nbqaw 3la tواصل,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار بزنس نهائي,L09-D30-P01,3ndi rendez-vous m2akked m3a l-manager,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار بزنس نهائي,L09-D30-P02,"ashno l-moshkil l-kbir, l-budget, w deadline?",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار بزنس نهائي,L09-D30-P03,n9dr nوري demo w nsift devis,MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار بزنس نهائي,L09-D30-P04,"b3d approval, nوقعو l-contrat w yji l-khlas",MISSING,MISSING,MISSING,MISSING,MISSING
+30,اختبار بزنس نهائي,L09-D30-P05,"shukran 3la waqtkom, ghadi nرجع ghda",MISSING,MISSING,MISSING,MISSING,MISSING

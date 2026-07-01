@@ -23,3 +23,13 @@
 
 ## الفحص
 - `node --check js/lesson-player.js` يجب أن يمر.
+
+
+## D88
+أضيف Level 11 — Native Listening / WhatsApp / Media كمسودة بحثية كاملة: 30 يوم × 5 جمل = 150 جملة. الحالة: DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA.
+
+
+## D89 — Level 12 Full Morocco Simulation
+- أضيف Level 12 كمسودة كاملة: 30 يوم × 5 جمل = 150 جملة.
+- الحالة: DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA.
+- لا إنتاج صوت/صور/فيديو قبل مراجعة ناطق مغربي.

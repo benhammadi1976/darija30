@@ -1,0 +1,31 @@
+level,day,week,title,situation,phraseCount,status
+8,1,1,ما حاسّش براسي مزيان,You feel unwell and need to explain the basic problem clearly.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,2,1,الصيدلية والأعراض البسيطة,You go to a pharmacy and explain common symptoms.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,3,1,موعد مع الطبيب,You arrange and attend a basic doctor visit.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,4,1,وصف الألم والجسم,You describe pain location and intensity.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,5,1,المعدة والأكل,You handle stomach sickness after food or water.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,6,1,الحساسية والدواء,You explain allergies and medicine limits.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,7,1,مراجعة صحية أولى,"You review basic symptoms, pharmacy, doctor, and medicine questions.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,8,2,حالة طارئة,You ask for urgent help in an emergency.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,9,2,الطاكسي إلى السبيطار,You take transport to a clinic or hospital quickly.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,10,2,الاستقبال في المستشفى,You speak at hospital or clinic reception.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,11,2,التأمين والدفع,"You handle payment, insurance, and paperwork after care.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,12,2,جرح أو طيحة,"You explain a fall, cut, or injury.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,13,2,سرقة أو ضياع,"You handle theft, lost items, and police help.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,14,2,مراجعة الطوارئ والأوراق,"You review urgent help, transport, hospital reception, and reports.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,15,3,الباسبور والسفارة,You handle lost passport or important papers.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,16,3,التليفون والكارت البنكية,"You manage lost phone, bank card, and urgent contact.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,17,3,ما حاسّش بالأمان,You leave an uncomfortable or unsafe situation.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,18,3,مشكل فالطريق أو الطاكسي,You solve transport-related safety problems.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,19,3,مشكل فالفندق أو الرياض,You report urgent problems at accommodation.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,20,3,الحرارة والجفاف والطقس,"You handle heat, dehydration, sun, rain, and fatigue.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,21,3,مراجعة السلامة العامة,"You review passport, phone, unsafe feeling, transport, and hotel problems.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,22,4,الصيدلية بالليل,You need a pharmacy at night or outside normal hours.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,23,4,الأسنان والعينين,You handle dental or eye problems.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,24,4,القلق والتعب,"You explain anxiety, panic, exhaustion, or needing quiet.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,25,4,حساسية الأكل والحدود الغذائية,You protect yourself from food allergy or dietary restrictions.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,26,4,مواعيد الدواء,You manage medicine schedule and dosage.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,27,4,مساعدة شخص آخر,You help another person who is sick or lost.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,28,4,مراجعة الأسبوع الرابع,"You review night pharmacy, dentist, stress, food limits, medicine, and helping others.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,29,5,مواقف صحية مختلطة,"You handle a mixed sequence of illness, pharmacy, clinic, and documents.",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+8,30,5,اختبار السلامة النهائي,You complete a full health and safety simulation.,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA

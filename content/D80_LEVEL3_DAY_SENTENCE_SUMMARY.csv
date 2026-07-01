@@ -1,0 +1,31 @@
+level,day,week,dayTitleArabic,dayTitleEnglish,phraseCount,status,mediaRule
+3,1,1,الدخول إلى مقهى مغربي,Entering a Moroccan café,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,2,1,اختيار القهوة أو أتاي أو عصير,"Choosing coffee, tea, or juice",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,3,1,الجلوس والطلب من النادل,Sitting and ordering from the waiter,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,4,1,الانتظار والاستفسار بأدب,Waiting and asking politely,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,5,1,الحساب والبقشيش,Bill and small tip,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,6,1,كيف الحال والردود اليومية,How are you and daily replies,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,7,1,مراجعة أسبوع 1: مقهى سريع,Week 1 review: quick café flow,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,8,2,الطقس والحرارة والبرد,"Weather, heat, and cold",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,9,2,الوقت والانتظار والمواعيد,"Time, waiting, and meeting up",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,10,2,حديث قصير مع شخص بجانبك,Short talk with someone nearby,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,11,2,طلب كرسي أو طاولة,Asking for a chair or table,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,12,2,طلب السكر أو بدون سكر,"Sugar, milk, and preferences",5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,13,2,مقهى مزدحم أو لا يوجد مكان,Crowded café or no place,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,14,2,إلغاء طلب أو تغييره,Canceling or changing an order,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,15,3,مدح المكان أو المشروب,Complimenting the place or drink,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,16,3,الحديث عن المدينة,Talking about the city,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,17,3,الحديث عن السفر بشكل بسيط,Simple travel talk,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,18,3,سؤال عن مكان جميل قريب,Asking about a nice nearby place,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,19,3,تجنب كلام لا تفهمه,Handling speech you do not understand,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,20,3,الضحك والمجاملة الخفيفة,Light humor and friendly compliment,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,21,3,مراجعة أسبوع 3: كلام اجتماعي,Week 3 review: social talk,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,22,4,الرد على دعوة صغيرة,Responding to a small invitation,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,23,4,إنهاء حديث بأدب,Ending a conversation politely,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,24,4,مقهى مع صديق مغربي,At a café with a Moroccan friend,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,25,4,موقف سوء فهم في الحساب,Misunderstanding the bill,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,26,4,طلب مساعدة من النادل,Asking the waiter for help,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,27,4,شرح أنك تتعلم الدارجة,Explaining that you are learning Darija,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,28,4,أول محادثة دقيقتين,First two-minute conversation,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,29,5,مراجعة مختلطة يومية,Mixed daily review,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA
+3,30,5,اختبار Level 3: جلسة مقهى كاملة,Level 3 test: full café session,5,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA,audio/image/video after native QA

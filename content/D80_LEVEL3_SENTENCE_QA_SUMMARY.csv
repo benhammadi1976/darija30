@@ -1,0 +1,6 @@
+check,result,expected,status
+Level 3 lesson count,30,30,PASS
+Level 3 phrase count,150,150,PASS
+Each day has 5 phrases,5,5,PASS
+Level 3 default visibility,admin,admin,PASS
+No media files produced,only paths/seeds,no production,PASS

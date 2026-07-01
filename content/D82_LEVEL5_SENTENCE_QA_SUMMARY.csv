@@ -1,0 +1,6 @@
+﻿check,result,expected,status
+Level 5 lesson count,30,30,PASS
+Level 5 phrase count,150,150,PASS
+Every day has 5 phrases,True,True,PASS
+All phrases have media placeholders,True,True,PASS
+All phrases marked draft/native QA required,True,True,PASS

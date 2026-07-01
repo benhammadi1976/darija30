@@ -1,0 +1,31 @@
+﻿level,day,dayTitle,phraseCount,samplePhrase1,samplePhrase5,status
+5,1,اختيار وسيلة النقل المناسبة,5,shno l-wsila l-ahsan lhad lblasa?,"safi, ghadi nmsi b-hadi",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,2,تاكسي صغير داخل المدينة,5,taksi sghir l-mdina afak,"hna mezian, shukran",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,3,طاكسي كبير بين المدن القريبة,5,fin kayn taksi kbir?,"mzyan, hadi blasti",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,4,محطة القطار,5,fin kayna l-gar?,"shukran, ghadi ntbe3 l-3alamat",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,5,شراء تذكرة القطار,5,bghit ticket l-rbat afak,"khdit ticket, shukran",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,6,المنصة ووقت الانطلاق,5,f ash mn quai l-tren?,"hadi blasti, sa7?",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,7,تأخر القطار أو تغيير الرحلة,5,wach l-tren t2akher?,"safi, ghadi ntsenna hna",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,8,محطة الكار / CTM,5,fin kayna mahatta dyal l-kar?,fin ghadi nrkeb?,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,9,شراء تذكرة الكار,5,bghit blasa qddam ila momkin,3tini l-ticket afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,10,الأمتعة في الكار,5,fin nhet l-bagage?,"shukran, hadi dyali",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,11,الترام داخل المدينة,5,fin kayna station dyal tram?,fin nhbet?,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,12,المطار والتحويل للمدينة,5,fin kayn transport l-centre?,"safi, nkhdo taxi",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,13,من المحطة إلى الرياض,5,bghit nmsi mn l-gar l-riad,wasalni l-bab dyal riad afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,14,السؤال عن الطريق قرب المحطة,5,fin kayn l-bab lkbir?,"fhemt, shukran bzaf",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,15,ربط القطار بالطاكسي,5,"mn b3d l-tren, khasni taxi",men hna ghadi nmsi 3la rjli,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,16,تخطيط رحلة بين مدينتين,5,bghit nmsi mn marrakech l-fes,khir ndirha daba,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,17,آداب الطاكسي المشترك,5,wach hadi blasa khawya?,baraka 3lia hna,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,18,تأكيد الوجهة مع السائق,5,"sma7 lia, wach fhemt lblasa?","safi, tawkelna 3la lah",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,19,الطريق الغلط أو النزول الغلط,5,ban lia machi hadi tariq,"mashi mushkil, shukran",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,20,السفر مع الأمتعة,5,3ndi shnita kbira,radd balk 3la shniti afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,21,التنقل ليلًا بأمان,5,wach had tariq amn b-llil?,ghadi ntsenna hna,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,22,السفر مع صديق أو العائلة,5,hna jouj,khllina m3a b3diyatna afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,23,التوقف والاستراحة في الطريق,5,wach ghadi nوقفو f-tariq?,ma tmshiwsh bla bia afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,24,الدفع والصرف في النقل,5,bshhal l-taman?,bqa lia shhal?,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,25,الحجز بالهاتف أو واتساب,5,nqder nreservi b-whatsapp?,"ila tbdel shi haja, 3yt lia",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,26,كراء سيارة وparking,5,bghit nkri tomobil,wach n9der nkhlliha hna?,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,27,رحلة قصيرة خارج المدينة,5,bghit nmsi l-blasa hadi nhar kaml,rje3 lia f had l-waqt afak,DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,28,مشكل في الرحلة,5,waq3 lia mushkil f-tariq,"3afak 3awenni, ana msafer",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,29,محاكاة تنقل مختلطة,5,l-yom khasni nmsi l-rbat,"safi, ana wajed",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
+5,30,اختبار التنقل النهائي,5,bghit nmsi mn hna l-mdina okhra,"wslna bikhir, shukran 3la l-m3awna",DRAFT_WEB_RESEARCHED_NEEDS_NATIVE_AUDIO_QA
