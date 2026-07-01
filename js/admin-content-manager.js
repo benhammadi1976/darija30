@@ -31,6 +31,21 @@
 
   const DARIJA30_LEVEL_COUNT = 12;
 
+  const DARIJA30_LEVEL_PLAN = Object.freeze({
+    1: { title: 'Survival Travel', ar: 'سفر النجاة', promise: 'أول 30 يوم: ماذا تقول كسائح في المغرب.' },
+    2: { title: 'Guest / Riad / Hospitality', ar: 'الضيف والرياض والضيافة', promise: 'التعامل داخل الرياض، البيت، الضيافة، الشاي، الفطور، وطلب الخدمات بلطف.' },
+    3: { title: 'Café & Daily Social Life', ar: 'المقهى والحياة اليومية', promise: 'فتح كلام يومي بسيط في المقهى والشارع بدون خوف.' },
+    4: { title: 'Souk & Shopping Better', ar: 'السوق والشراء بذكاء', promise: 'الشراء، السؤال عن الثمن، التفاوض، اللون، المقاس، والجودة.' },
+    5: { title: 'Moving Around Morocco', ar: 'التنقل داخل المغرب', promise: 'التنقل بين المدن وداخلها: قطار، كار، ترام، محطة، وتذاكر.' },
+    6: { title: 'Friends & Family', ar: 'الأصدقاء والعائلة', promise: 'التواصل داخل علاقة اجتماعية مغربية وزيارات عائلية.' },
+    7: { title: 'Longer Stay / Daily Services', ar: 'إقامة أطول والخدمات اليومية', promise: 'الكراء، الجيران، الإنترنت، الشريحة، الإصلاح، والمواعيد.' },
+    8: { title: 'Health, Safety & Problems', ar: 'الصحة والسلامة والمشاكل', promise: 'طلب المساعدة في الصيدلية، الطبيب، الضياع، الشرطة، والمواقف الصعبة.' },
+    9: { title: 'Work & Practical Business', ar: 'العمل والخدمات العملية', promise: 'الاتفاق، الموعد، التأجيل، الفاتورة، الشكوى، وتسليم الخدمة.' },
+    10: { title: 'Moroccan Culture Deep Dive', ar: 'الثقافة المغربية العميقة', promise: 'رمضان، العيد، الجمعة، الحمام، العرس، الحشومة، الضيافة، والبركة.' },
+    11: { title: 'Native Listening / WhatsApp / Media', ar: 'السماع الحقيقي والواتساب والميديا', promise: 'فهم الكلام المغربي السريع، رسائل واتساب، 3/7/9، والاختصارات.' },
+    12: { title: 'Full Morocco Simulation', ar: 'محاكاة المغرب الكاملة', promise: 'سيناريوهات طويلة تجعل المتعلم يعيش يوماً أو أسبوعاً كاملاً في المغرب.' }
+  });
+
   function levelNumber(value) {
     const parsed = Number(value || 1);
     if (!Number.isFinite(parsed) || parsed < 1) return 1;
@@ -147,6 +162,236 @@
         </div>
       </div>
     `;
+  }
+
+  function adminRouteBase(path) {
+    return String(path || '').split('?')[0] || '/admin';
+  }
+
+  function adminRouteParams(path) {
+    const query = String(path || '').split('?')[1] || '';
+    return new URLSearchParams(query);
+  }
+
+  function levelPlan(level) {
+    return DARIJA30_LEVEL_PLAN[levelNumber(level)] || DARIJA30_LEVEL_PLAN[1];
+  }
+
+  function levelLessons(level) {
+    return lessonsForLevel(level).slice().sort((a, b) => Number(a.day || 0) - Number(b.day || 0));
+  }
+
+  function levelDisplayTitle(level) {
+    const first = levelLessons(level)[0];
+    return first?.levelName || levelPlan(level).title;
+  }
+
+  function levelDisplayArabicTitle(level) {
+    const first = levelLessons(level)[0];
+    return first?.levelArabicName || levelPlan(level).ar;
+  }
+
+  function levelPhraseCount(level) {
+    return levelLessons(level).reduce((sum, lesson) => sum + ((lesson.phrases || []).length), 0);
+  }
+
+  function levelHasLessons(level) {
+    return levelLessons(level).length > 0;
+  }
+
+  function setLevelVisibilityAndRefresh(level, visibility, path) {
+    window.DarijaLevelAccess?.setVisibility?.(level, visibility);
+    renderLevelsManagement(path || window.location.hash.replace(/^#/, '') || '/admin/levels');
+  }
+
+  function renderLevelVisibilityActions(level) {
+    const visibility = window.DarijaLevelAccess?.getVisibility?.(level) || (levelNumber(level) === 1 ? 'public' : levelPublicFallbackVisibility(level));
+    const options = [
+      { key: 'admin', label: 'أدمن فقط', icon: '🔒' },
+      { key: 'collaborators', label: 'للمتعاونين', icon: '🤝' },
+      { key: 'public', label: 'للعموم', icon: '👁️' }
+    ];
+    return `
+      <div class="flex flex-wrap gap-2">
+        ${options.map((option) => `
+          <button type="button" data-admin-level-visibility-action="${escapeHtml(option.key)}" data-admin-level-visibility-level="${escapeHtml(level)}" class="rounded-xl border px-3 py-2 text-xs font-extrabold transition ${visibility === option.key ? 'bg-chefchaouen text-white border-chefchaouen' : 'bg-white text-gray-700 border-gray-200 hover:border-chefchaouen'}">
+            <span class="ml-1">${option.icon}</span>${escapeHtml(option.label)}
+          </button>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  function renderLevelPublicCheckbox(level) {
+    const visibility = window.DarijaLevelAccess?.getVisibility?.(level) || (levelNumber(level) === 1 ? 'public' : levelPublicFallbackVisibility(level));
+    return `
+      <label class="inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 px-3 py-2 text-xs font-extrabold cursor-pointer">
+        <input type="checkbox" data-admin-level-public-checkbox="${escapeHtml(level)}" class="h-4 w-4 rounded border-emerald-300 accent-emerald-600" ${visibility === 'public' ? 'checked' : ''}>
+        إظهار للعموم
+      </label>
+    `;
+  }
+
+  function renderAdminLevelCard(level) {
+    const selectedLessons = levelLessons(level);
+    const count = selectedLessons.length;
+    const phrases = levelPhraseCount(level);
+    const available = count > 0;
+    const summary = mediaSummary(selectedLessons);
+    const plan = levelPlan(level);
+    const collabLink = window.DarijaLevelAccess?.collaboratorLink?.(level) || `#/app/lessons?collab=1&level=${level}`;
+    return `
+      <article class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 flex flex-col gap-4">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Level ${String(level).padStart(2, '0')}</p>
+            <h2 class="text-xl font-black text-gray-900">${escapeHtml(levelDisplayTitle(level))}</h2>
+            <p class="text-sm text-gray-500 mt-1">${escapeHtml(levelDisplayArabicTitle(level))}</p>
+          </div>
+          ${levelVisibilityBadgeMarkup(level)}
+        </div>
+        <p class="text-sm text-gray-600 leading-6">${escapeHtml(plan.promise)}</p>
+        <div class="grid grid-cols-3 gap-2 text-center" dir="ltr">
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${available ? count : '30'}</p><p class="text-[11px] text-gray-500">days</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${available ? phrases : '150'}</p><p class="text-[11px] text-gray-500">phrases</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${summary.total ? `${summary.normalReady}/${summary.total}` : '0/0'}</p><p class="text-[11px] text-gray-500">audio</p></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          ${renderLevelPublicCheckbox(level)}
+          <a href="#/admin/levels/${level}" class="inline-flex items-center justify-center bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">فتح 30 يوم</a>
+          <a href="#/admin/lesson-media?level=${level}&day=1" class="inline-flex items-center justify-center bg-white border border-gray-200 text-gray-700 hover:border-chefchaouen px-4 py-2 rounded-xl text-xs font-black transition">مركز الملفات</a>
+          ${available ? `<a href="${escapeHtml(collabLink)}" class="inline-flex items-center justify-center bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl text-xs font-black transition">Collaborator preview</a>` : ''}
+        </div>
+        ${renderLevelVisibilityActions(level)}
+      </article>
+    `;
+  }
+
+  function renderAdminLevelsIndex(path) {
+    const root = document.getElementById('page-admin-levels');
+    if (!root) return;
+    root.innerHTML = `
+      <div class="max-w-7xl mx-auto px-4" dir="rtl">
+        ${adminHeader('إدارة المستويات', 'كل مستوى مستقل. من هنا تتحكم في ظهوره للعموم أو للمتعاونين أو للأدمن فقط، ثم تفتح صفحة 30 يوم الخاصة به.')}
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          ${Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => renderAdminLevelCard(index + 1)).join('')}
+        </div>
+      </div>
+    `;
+    bindAdminLevelControls(root, path);
+  }
+
+  function renderAdminLevelDayCard(level, day, lesson) {
+    const hasLesson = Boolean(lesson);
+    const stats = hasLesson ? lessonMediaStats(lesson) : { total: 5, normal: 0, slow: 0, videos: 0, visuals: 0, complete: false };
+    const title = hasLesson ? lesson.title : `Day ${day} — مستقل لاحقاً`;
+    const situation = hasLesson ? (lesson.situation || lesson.module || '') : 'تم تثبيت مكان اليوم في خريطة المستوى، والجمل ستضاف لاحقاً مستوى بمستوى.';
+    return `
+      <article class="rounded-2xl border ${hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50'} p-4 shadow-sm">
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Day ${escapeHtml(day)}</p>
+            <h3 class="text-lg font-black text-gray-900">${escapeHtml(title)}</h3>
+            <p class="text-xs text-gray-500 mt-1 leading-5">${escapeHtml(situation)}</p>
+          </div>
+          ${hasLesson ? badge(`${stats.total} جمل`, 'blue') : badge('لاحقاً', 'gray')}
+        </div>
+        <div class="flex flex-wrap gap-2 mb-4">
+          ${badge(`${stats.normal}/${stats.total} Normal`, stats.normal === stats.total && stats.total ? 'green' : 'yellow')}
+          ${badge(`${stats.slow}/${stats.total} Slow`, stats.slow === stats.total && stats.total ? 'green' : 'yellow')}
+          ${badge(`${stats.videos}/${stats.total} Video`, stats.videos ? 'green' : 'gray')}
+          ${badge(`${stats.visuals}/${stats.total} Visual`, stats.visuals ? 'blue' : 'gray')}
+        </div>
+        <div class="flex flex-wrap gap-2" dir="ltr">
+          <a href="#/admin/lesson-media?level=${level}&day=${day}" class="bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">Open media</a>
+          ${hasLesson ? `<a href="${escapeHtml(learnerPhraseHref(lesson, firstPhrase(lesson), 0, 'admin-level-day'))}" class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-xs font-black hover:border-chefchaouen transition">Learner</a>` : ''}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderAdminLevelDaysPage(level, path) {
+    const root = document.getElementById('page-admin-levels');
+    if (!root) return;
+    const lessonsByDay = new Map(levelLessons(level).map((lesson) => [Number(lesson.day || 0), lesson]));
+    const selectedLessons = levelLessons(level);
+    const summary = mediaSummary(selectedLessons);
+    const available = selectedLessons.length > 0;
+    root.innerHTML = `
+      <div class="max-w-7xl mx-auto px-4" dir="rtl">
+        <div class="mb-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div>
+            <a href="#/admin/levels" class="inline-flex mb-3 text-sm font-extrabold text-chefchaouen hover:underline">← رجوع إلى المستويات</a>
+            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta mb-2">Level ${String(level).padStart(2, '0')}</p>
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900">${escapeHtml(levelDisplayTitle(level))}</h1>
+            <p class="text-gray-600 mt-2 max-w-3xl">${escapeHtml(levelPlan(level).promise)}</p>
+          </div>
+          <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-4 min-w-[280px]">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <span class="text-xs font-black text-gray-400 uppercase">صلاحية المستوى</span>
+              ${levelVisibilityBadgeMarkup(level)}
+            </div>
+            <div class="flex flex-wrap items-center gap-2 mb-3">${renderLevelPublicCheckbox(level)}</div>
+            ${renderLevelVisibilityActions(level)}
+          </div>
+        </div>
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+          ${statCard('الأيام', available ? String(selectedLessons.length) : '30', available ? 'current data' : 'planned page', 'blue')}
+          ${statCard('الجمل', available ? String(levelPhraseCount(level)) : '150', available ? 'phrases now' : 'planned situations', 'purple')}
+          ${statCard('Normal', summary.total ? `${summary.normalReady}/${summary.total}` : '0/0', 'audio', 'green')}
+          ${statCard('Video', summary.total ? `${summary.videoReady}/${summary.total}` : '0/0', 'scenes', 'red')}
+        </div>
+        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-6">
+          <h2 class="text-xl font-black text-gray-900 mb-2">صفحة 30 يوم</h2>
+          <p class="text-sm text-gray-500">اضغط على أي يوم لفتح مركز ملفات الدروس مصفى تلقائياً على ذلك المستوى وذلك اليوم.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          ${Array.from({ length: 30 }, (_, index) => {
+            const day = index + 1;
+            return renderAdminLevelDayCard(level, day, lessonsByDay.get(day));
+          }).join('')}
+        </div>
+      </div>
+    `;
+    bindAdminLevelControls(root, path);
+  }
+
+  function adminLevelFromPath(path) {
+    const match = adminRouteBase(path).match(/^\/admin\/levels\/(\d+)/);
+    return match ? levelNumber(match[1]) : null;
+  }
+
+  function renderLevelsManagement(path) {
+    const level = adminLevelFromPath(path);
+    if (level) renderAdminLevelDaysPage(level, path);
+    else renderAdminLevelsIndex(path || '/admin/levels');
+  }
+
+  function bindAdminLevelControls(root, path) {
+    root.querySelectorAll('[data-admin-level-visibility-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const level = levelNumber(button.dataset.adminLevelVisibilityLevel);
+        const visibility = button.dataset.adminLevelVisibilityAction || 'admin';
+        setLevelVisibilityAndRefresh(level, visibility, path);
+      });
+    });
+    root.querySelectorAll('[data-admin-level-public-checkbox]').forEach((input) => {
+      input.addEventListener('change', () => {
+        const level = levelNumber(input.dataset.adminLevelPublicCheckbox);
+        const visibility = input.checked ? 'public' : levelPublicFallbackVisibility(level);
+        setLevelVisibilityAndRefresh(level, visibility, path);
+      });
+    });
+  }
+
+  function applyLessonMediaRouteState(path) {
+    const params = adminRouteParams(path);
+    const level = params.get('level');
+    const day = params.get('day');
+    if (level) state.selectedLevel = levelNumber(level);
+    if (day) state.selectedDay = Number(day) || 1;
+    const lesson = ensureSelectedLessonInLevel();
+    state.selectedPhraseId = firstPhrase(lesson)?.id || null;
   }
 
   function lessonsForLevel(level = state.selectedLevel) {
@@ -977,7 +1222,7 @@
               <p>✅ يعرف أين يضع الفيديو لكل جملة.</p>
               <p>✅ يدير المستوى واليوم والجملة والملفات من مكان واحد.</p>
             </div>
-            <a href="#/admin/lesson-media" class="inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح مركز ملفات الدروس</a>
+            <div class="flex flex-wrap gap-2"><a href="#/admin/levels" class="inline-flex bg-chefchaouen hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition">إدارة المستويات</a><a href="#/admin/lesson-media" class="inline-flex bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 px-5 py-3 rounded-xl font-bold transition">مركز ملفات الدروس</a></div>
           </div>
         </div>
 
@@ -1178,8 +1423,7 @@
             <select data-admin-level-select class="w-full border border-gray-200 rounded-2xl px-4 py-3 bg-white font-extrabold text-gray-900">
               ${levelOptionsMarkup(state.selectedLevel)}
             </select>
-            <p class="text-xs text-gray-500 mt-2">كل مستوى مستقل: دروسه، جمله، ملفاته، تقدمه، ومراجعته لاحقاً.</p>
-            ${renderLevelPublicCheckboxes()}
+            <p class="text-xs text-gray-500 mt-2">اختيار المستوى هنا للتصفية فقط. إدارة الظهور والتنظيم أصبحت في صفحة المستويات.</p>
           </div>
           <div class="flex-1">
             <label class="block text-xs font-extrabold uppercase tracking-wide text-gray-400 mb-2">اليوم / الدرس</label>
@@ -1188,15 +1432,20 @@
             </select>
             <p class="text-xs text-gray-500 mt-2">اعمل على درس واحد في كل مرة لتفادي التكرار والفوضى.</p>
           </div>
-          ${renderLevelVisibilityControl()}
+          <div class="rounded-2xl bg-emerald-50 border border-emerald-100 p-4 text-sm text-emerald-900 lg:max-w-sm">
+            <p class="font-extrabold mb-2">إدارة المستوى</p>
+            <p class="mb-3">افتح صفحة المستوى لرؤية 30 يوم وإدارة صلاحية الظهور.</p>
+            <a href="#/admin/levels/${escapeHtml(state.selectedLevel)}" class="inline-flex bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-100 px-4 py-2 rounded-xl text-xs font-black">فتح صفحة المستوى</a>
+          </div>
           <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-blue-900 lg:max-w-sm">
             <p class="font-extrabold mb-1">قاعدة D68B</p>
-            <p>مركز ملفات الدروس هو المكان الرئيسي: الجملة تفتح التعديل، والحالات ترفع Normal / Slow / Video / Visual.</p>
+            <p>مركز ملفات الدروس يبقى لرفع Normal / Slow / Video / Visual فقط بعد اختيار المستوى واليوم.</p>
           </div>
         </div>
       </div>
     `;
   }
+
 
   function renderNoLevelLessonsMessage() {
     return `
@@ -1569,12 +1818,13 @@
 
   function renderForPath(path) {
     if (!String(path || '').startsWith('/admin')) return;
-    if (path === '/admin/reset-password') return;
-    if (path === '/admin/audio' || path === '/admin/lessons' || path === '/admin/phrases') {
+    const basePath = adminRouteBase(path);
+    if (basePath === '/admin/reset-password') return;
+    if (basePath === '/admin/audio' || basePath === '/admin/lessons' || basePath === '/admin/phrases') {
       window.location.replace('#/admin/lesson-media');
       return;
     }
-    if (path === '/admin/login') {
+    if (basePath === '/admin/login') {
       renderAdminLoginGateway();
       return;
     }
@@ -1582,10 +1832,14 @@
       adminGate(path);
       return;
     }
-    if (path === '/admin') renderDashboard();
-    else if (path === '/admin/lesson-media') renderAudio();
-    else if (path === '/admin/users') renderUsers();
-    else if (path === '/admin/payments') renderPayments();
+    if (basePath === '/admin') renderDashboard();
+    else if (basePath === '/admin/levels' || basePath.startsWith('/admin/levels/')) renderLevelsManagement(path);
+    else if (basePath === '/admin/lesson-media') {
+      applyLessonMediaRouteState(path);
+      renderAudio();
+    }
+    else if (basePath === '/admin/users') renderUsers();
+    else if (basePath === '/admin/payments') renderPayments();
   }
 
   window.DarijaAdminPreview = { renderForPath };

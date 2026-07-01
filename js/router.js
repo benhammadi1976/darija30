@@ -27,6 +27,7 @@
   const adminRoutes = {
     '/admin': 'page-admin-dashboard',
     '/admin/login': 'page-admin-login',
+    '/admin/levels': 'page-admin-levels',
     '/admin/lesson-media': 'page-admin-audio',
     '/admin/users': 'page-admin-users',
     '/admin/payments': 'page-admin-payments',
@@ -49,7 +50,7 @@
   function updateNavLinks(selector, path) {
     document.querySelectorAll(selector).forEach((link) => {
       const hrefPath = (link.getAttribute('href') || '').replace(/^#/, '');
-      const isActive = hrefPath === path || hrefPath === routeBase(path);
+      const isActive = hrefPath === path || hrefPath === routeBase(path) || (hrefPath === '/admin/levels' && routeBase(path).startsWith('/admin/levels/'));
       link.classList.toggle('is-active', isActive);
       if (selector.includes('app-nav') || selector.includes('admin-nav')) {
         link.classList.toggle('opacity-100', isActive);
@@ -65,6 +66,7 @@
     if (appRoutes[basePath]) return appRoutes[basePath];
     if (basePath.startsWith('/app/lesson/')) return 'page-app-lesson';
     if (basePath.startsWith('/blog/')) return 'page-blog-article';
+    if (basePath.startsWith('/admin/levels/')) return 'page-admin-levels';
     if (adminRoutes[basePath]) return adminRoutes[basePath];
     return 'page-home';
   }
