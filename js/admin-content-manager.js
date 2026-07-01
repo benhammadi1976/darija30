@@ -326,34 +326,27 @@
   function renderAdminWeekDay(level, day, lesson) {
     const hasLesson = Boolean(lesson);
     const stats = hasLesson ? lessonMediaStats(lesson) : { total: 5, normal: 0, slow: 0, videos: 0, visuals: 0, complete: false };
-    const dayKey = adminLevelOpenDayKey(level, day);
-    const isOpen = Boolean(adminLevelsOpenDays[dayKey]);
     const title = hasLesson ? lesson.title : `Day ${day} — مخطط لاحقاً`;
     const description = hasLesson ? (lesson.situation || lesson.module || '') : 'تم تثبيت مكان اليوم في خريطة المستوى، والجمل ستضاف لاحقاً مستوى بمستوى.';
     const dayTone = hasLesson && stats.complete ? 'border-emerald-200 bg-emerald-50' : (hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50');
     return `
-      <article class="rounded-2xl border ${dayTone} overflow-hidden">
-        <button type="button" data-admin-level-day-toggle="${dayKey}" class="w-full p-4 text-right hover:bg-white/70 transition" aria-expanded="${isOpen ? 'true' : 'false'}">
-          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-            <div class="flex items-start gap-3">
-              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${hasLesson ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'} font-black text-xs" dir="ltr">DAY<br>${String(day).padStart(2, '0')}</span>
-              <div>
-                <h4 class="font-black text-gray-900">${escapeHtml(title)}</h4>
-                <p class="text-xs text-gray-500 mt-1 leading-5">${escapeHtml(description)}</p>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-2">
-              ${badge(`${stats.total || 5} جمل`, hasLesson ? 'blue' : 'gray')}
-              ${badge(`${stats.normal}/${stats.total || 5} Normal`, stats.normal === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
-              ${badge(`${stats.slow}/${stats.total || 5} Slow`, stats.slow === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
-              ${badge(`${stats.videos}/${stats.total || 5} Video`, stats.videos ? 'green' : 'gray')}
-              ${badge(`${stats.visuals}/${stats.total || 5} Visual`, stats.visuals ? 'blue' : 'gray')}
-              <span class="h-9 w-9 rounded-full bg-white border border-gray-200 flex items-center justify-center font-black text-gray-700">${isOpen ? '⌃' : '⌄'}</span>
+      <article class="rounded-2xl border ${dayTone} p-4">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div class="flex items-start gap-3">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${hasLesson ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'} font-black text-xs" dir="ltr">DAY<br>${String(day).padStart(2, '0')}</span>
+            <div>
+              <h4 class="font-black text-gray-900">${escapeHtml(title)}</h4>
+              <p class="text-xs text-gray-500 mt-1 leading-5">${escapeHtml(description)}</p>
             </div>
           </div>
-        </button>
-        <div class="${isOpen ? '' : 'hidden'}" data-admin-level-day-panel="${dayKey}">
-          ${renderAdminLevelDayPhraseTable(level, day, lesson)}
+          <div class="flex flex-wrap items-center gap-2">
+            ${badge(`${stats.total || 5} جمل`, hasLesson ? 'blue' : 'gray')}
+            ${badge(`${stats.normal}/${stats.total || 5} Normal`, stats.normal === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
+            ${badge(`${stats.slow}/${stats.total || 5} Slow`, stats.slow === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
+            ${badge(`${stats.videos}/${stats.total || 5} Video`, stats.videos ? 'green' : 'gray')}
+            ${badge(`${stats.visuals}/${stats.total || 5} Visual`, stats.visuals ? 'blue' : 'gray')}
+            <a href="#/admin/lesson-media?level=${levelNumber(level)}&day=${day}" class="inline-flex rounded-xl bg-chefchaouen px-4 py-2 text-xs font-black text-white hover:bg-blue-700 transition">فتح مركز الملفات</a>
+          </div>
         </div>
       </article>
     `;
@@ -436,7 +429,7 @@
     const activeLevel = levelNumber(adminLevelsActiveLevel || 1);
     root.innerHTML = `
       <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('إدارة المستويات', 'إدارة هرم Darija30: المستوى ثم بنك الأسبوع ثم اليوم ثم 5 جمل وملفاتها.')}
+        ${adminHeader('إدارة المستويات', 'إدارة هرم Darija30: المستوى ثم بنك الأسبوع ثم اليوم. تفاصيل الجمل ورفع الميديا تبقى داخل مركز ملفات الدروس.')}
         ${renderAdminLevelTabs(activeLevel)}
         ${renderAdminActiveLevelWorkspace(activeLevel)}
         ${phraseEditModalMarkup()}
