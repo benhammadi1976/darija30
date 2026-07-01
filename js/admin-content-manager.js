@@ -98,7 +98,6 @@
           </div>
           ${levelVisibilityBadgeMarkup(state.selectedLevel)}
         </div>
-        <p class="text-xs text-gray-600 mb-3">${escapeHtml(meta.description || '')}</p>
         <div class="grid grid-cols-3 gap-2 mb-3">
           ${options.map((option) => `
             <button type="button" data-admin-level-visibility="${escapeHtml(option.key)}" class="rounded-xl border px-2 py-2 text-xs font-extrabold transition ${visibility === option.key ? 'bg-chefchaouen text-white border-chefchaouen' : 'bg-white text-gray-700 border-gray-200 hover:border-chefchaouen'}">
@@ -127,12 +126,10 @@
       const visibility = window.DarijaLevelAccess?.getVisibility?.(value) || (value === 1 ? 'public' : levelPublicFallbackVisibility(value));
       const isPublic = visibility === 'public';
       const current = value === levelNumber(state.selectedLevel);
-      const status = isPublic ? 'ظاهر للعموم' : (visibility === 'collaborators' ? 'للمتعاونين' : 'أدمن فقط');
       return `
         <label class="flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-extrabold transition ${current ? 'border-chefchaouen bg-blue-50' : 'border-gray-200 bg-white'} ${available ? 'hover:border-chefchaouen cursor-pointer' : 'opacity-60 cursor-not-allowed'}">
           <input type="checkbox" data-admin-level-public-toggle="${value}" class="h-4 w-4 rounded border-gray-300 accent-emerald-600" ${isPublic ? 'checked' : ''} ${available ? '' : 'disabled'} aria-label="تفعيل Level ${String(value).padStart(2, '0')} للعموم">
           <span class="text-gray-900">Level ${String(value).padStart(2, '0')}</span>
-          <span class="text-[10px] ${isPublic ? 'text-emerald-700' : 'text-gray-500'}">${escapeHtml(status)}</span>
         </label>
       `;
     }).join('');
