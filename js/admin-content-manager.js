@@ -25,6 +25,9 @@
   };
 
   let adminLevelsExpanded = null;
+  let adminLevelsActiveLevel = 1;
+  const adminLevelsOpenWeeks = {};
+  const adminLevelsOpenDays = {};
 
   function lessons() {
     return Array.isArray(window.DARIJA30_LESSONS) ? window.DARIJA30_LESSONS : [];
@@ -202,6 +205,7 @@
   }
 
   function setLevelVisibilityAndRefresh(level, visibility, path) {
+    adminLevelsActiveLevel = levelNumber(level);
     window.DarijaLevelAccess?.setVisibility?.(level, visibility);
     renderLevelsManagement(path || window.location.hash.replace(/^#/, '') || '/admin/levels');
   }
@@ -235,29 +239,46 @@
   }
 
 
-  function renderAdminLevelInlineDays(level) {
-    const lessonsByDay = new Map(levelLessons(level).map((lesson) => [Number(lesson.day || 0), lesson]));
+  function adminLevelWeekBanks(level) {
+    const cleanLevel = levelNumber(level);
+    const isLevelOne = cleanLevel === 1;
+    return [
+      { key: 'w1', label: 'Days 1–7 — Week 1 Survival Wheel Bank', ar: 'الأسبوع 1', days: [1, 2, 3, 4, 5, 6, 7], note: isLevelOne ? 'Seven daily lessons. The weekly wheel has 35 numbered situations.' : 'الأسبوع الأول من المستوى: 7 أيام و35 موقفاً.' },
+      { key: 'w2', label: 'Days 8–14 — Week 2 Cumulative Wheel Bank', ar: 'الأسبوع 2', days: [8, 9, 10, 11, 12, 13, 14], note: isLevelOne ? 'The wheel grows to 70 situations and still reviews older moments.' : 'الأسبوع الثاني يضيف 35 موقفاً جديداً مع مراجعة ما سبق.' },
+      { key: 'w3', label: 'Days 15–21 — Week 3 Cumulative Wheel Bank', ar: 'الأسبوع 3', days: [15, 16, 17, 18, 19, 20, 21], note: isLevelOne ? 'The wheel grows to 105 situations across the first three weeks.' : 'الأسبوع الثالث يوسع بنك المواقف إلى 105 مواقف.' },
+      { key: 'w4', label: 'Days 22–28 — Week 4 Cumulative Wheel Bank', ar: 'الأسبوع 4', days: [22, 23, 24, 25, 26, 27, 28], note: isLevelOne ? 'The four-week wheel reaches 140 situations before the final two days.' : 'الأسبوع الرابع يكمل 140 موقفاً قبل الأيام النهائية.' },
+      { key: 'd29', label: 'Days 29–29 — Day 29 — Real Morocco Mixed Situations', ar: 'اليوم 29', days: [29], note: 'A mixed daily simulation before the final day.' },
+      { key: 'd30', label: 'Days 30–30 — Day 30 — Final Survival Day', ar: 'اليوم 30', days: [30], note: 'The final day plus the full-level wheel.' }
+    ];
+  }
+
+  function adminLevelDayRangeLabel(days) {
+    if (!Array.isArray(days) || !days.length) return '0 lessons • 0 situations';
+    return `${days.length} lesson${days.length > 1 ? 's' : ''} • ${days.length * 5} situations`;
+  }
+
+  function adminLevelOpenDayKey(level, day) {
+    return `${levelNumber(level)}-${Number(day || 1)}`;
+  }
+
+  function renderAdminLevelTabs(activeLevel) {
     return `
-      <div class="mt-4 border-t border-gray-100 pt-4">
-        <div class="flex items-center justify-between gap-3 mb-3">
-          <div>
-            <p class="text-sm font-black text-gray-900">صفحة 30 يوم</p>
-            <p class="text-xs text-gray-500">اضغط على اليوم لفتح مركز ملفات الدروس مصفى على المستوى واليوم.</p>
-          </div>
-          <a href="#/admin/levels/${level}" class="text-xs font-black text-chefchaouen hover:underline">فتح كصفحة كاملة</a>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-          ${Array.from({ length: 30 }, (_, index) => {
-            const day = index + 1;
-            const lesson = lessonsByDay.get(day);
-            const stats = lesson ? lessonMediaStats(lesson) : { total: 5, normal: 0, slow: 0, videos: 0, visuals: 0 };
-            const hasLesson = Boolean(lesson);
+      <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-3 mb-5" dir="ltr">
+        <div class="flex flex-wrap gap-2 justify-end">
+          ${Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => {
+            const level = index + 1;
+            const visibility = window.DarijaLevelAccess?.getVisibility?.(level) || (level === 1 ? 'public' : levelPublicFallbackVisibility(level));
+            const isActive = levelNumber(activeLevel) === level;
+            const isPublic = visibility === 'public';
+            const isCollaborator = visibility === 'collaborators';
+            const inactiveClass = isPublic
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+              : (isCollaborator ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100' : 'bg-white text-gray-600 border-gray-200 hover:border-chefchaouen');
+            const activeClass = isPublic ? 'bg-emerald-600 text-white border-emerald-700' : 'bg-chefchaouen text-white border-chefchaouen';
             return `
-              <a href="#/admin/lesson-media?level=${level}&day=${day}" class="rounded-2xl border ${hasLesson ? 'border-gray-200 bg-white hover:border-chefchaouen' : 'border-dashed border-gray-200 bg-gray-50 hover:border-gray-300'} p-3 text-right transition">
-                <span class="block text-[11px] font-black text-terracotta">Day ${String(day).padStart(2, '0')}</span>
-                <span class="block text-xs font-extrabold text-gray-900 truncate">${escapeHtml(lesson?.title || 'مخطط لاحقاً')}</span>
-                <span class="block mt-2 text-[10px] font-bold text-gray-500" dir="ltr">N ${stats.normal}/${stats.total} · V ${stats.videos}/${stats.total}</span>
-              </a>
+              <button type="button" data-admin-level-tab="${level}" class="px-4 py-3 rounded-2xl border text-sm font-black transition ${isActive ? activeClass : inactiveClass}">
+                Level ${String(level).padStart(2, '0')}
+              </button>
             `;
           }).join('')}
         </div>
@@ -265,55 +286,160 @@
     `;
   }
 
-  function renderAdminLevelCard(level) {
-    const selectedLessons = levelLessons(level);
-    const count = selectedLessons.length;
-    const phrases = levelPhraseCount(level);
-    const available = count > 0;
-    const expanded = Number(adminLevelsExpanded) === Number(level);
-    const summary = mediaSummary(selectedLessons);
-    const plan = levelPlan(level);
-    const collabLink = window.DarijaLevelAccess?.collaboratorLink?.(level) || `#/app/lessons?collab=1&level=${level}`;
+  function renderAdminLevelPhraseRow(lesson, phrase, index) {
     return `
-      <article class="rounded-3xl bg-white border ${expanded ? 'border-chefchaouen shadow-md' : 'border-gray-200 shadow-sm'} p-5 flex flex-col gap-4 transition">
-        <div class="flex items-start justify-between gap-3">
-          <button type="button" data-admin-level-card-toggle="${level}" class="flex-1 text-right group">
-            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Level ${String(level).padStart(2, '0')}</p>
-            <h2 class="text-xl font-black text-gray-900 group-hover:text-chefchaouen transition">${escapeHtml(levelDisplayTitle(level))}</h2>
+      <tr class="hover:bg-gray-50 align-top">
+        <td class="p-3 font-black text-terracotta">${index + 1}</td>
+        <td class="p-3 min-w-[240px]">${phraseContentButton(lesson, phrase)}</td>
+        <td class="p-3 min-w-[160px]">${mediaStatusButton(lesson, phrase, 'normal')}</td>
+        <td class="p-3 min-w-[160px]">${mediaStatusButton(lesson, phrase, 'slow')}</td>
+        <td class="p-3 min-w-[160px]">${mediaStatusButton(lesson, phrase, 'video')}</td>
+        <td class="p-3 min-w-[160px]">${mediaStatusButton(lesson, phrase, 'visual')}</td>
+        <td class="p-3 min-w-[100px]"><a href="${escapeHtml(learnerPhraseHref(lesson, phrase, index, 'admin-levels'))}" class="text-blue-700 font-bold hover:underline">عرض</a></td>
+        <td class="p-3 min-w-[120px]"><a href="#/admin/lesson-media?level=${getLessonLevel(lesson)}&day=${lesson.day}&phrase=${index + 1}" class="inline-flex rounded-xl border border-gray-200 px-3 py-2 text-xs font-black text-gray-700 hover:border-chefchaouen">مركز الملفات</a></td>
+      </tr>
+    `;
+  }
+
+  function renderAdminLevelDayPhraseTable(level, day, lesson) {
+    if (!lesson) {
+      return `
+        <div class="border-t border-gray-100 bg-gray-50 p-5 text-sm text-gray-600">
+          الجمل الخمس لهذا اليوم لم تُكتب بعد. افتح هذا المستوى لاحقاً بعد مرحلة كتابة الجمل الخاصة به.
+        </div>
+      `;
+    }
+    return `
+      <div class="overflow-x-auto border-t border-gray-100">
+        <table class="w-full text-sm text-right">
+          <thead class="bg-gray-50 text-gray-500">
+            <tr><th class="p-3">#</th><th class="p-3">الجملة</th><th class="p-3">Normal</th><th class="p-3">Slow</th><th class="p-3">Video</th><th class="p-3">Visual</th><th class="p-3">Learner</th><th class="p-3">ملفات</th></tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            ${(lesson.phrases || []).map((phrase, index) => renderAdminLevelPhraseRow(lesson, phrase, index)).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function renderAdminWeekDay(level, day, lesson) {
+    const hasLesson = Boolean(lesson);
+    const stats = hasLesson ? lessonMediaStats(lesson) : { total: 5, normal: 0, slow: 0, videos: 0, visuals: 0, complete: false };
+    const dayKey = adminLevelOpenDayKey(level, day);
+    const isOpen = Boolean(adminLevelsOpenDays[dayKey]);
+    const title = hasLesson ? lesson.title : `Day ${day} — مخطط لاحقاً`;
+    const description = hasLesson ? (lesson.situation || lesson.module || '') : 'تم تثبيت مكان اليوم في خريطة المستوى، والجمل ستضاف لاحقاً مستوى بمستوى.';
+    const dayTone = hasLesson && stats.complete ? 'border-emerald-200 bg-emerald-50' : (hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50');
+    return `
+      <article class="rounded-2xl border ${dayTone} overflow-hidden">
+        <button type="button" data-admin-level-day-toggle="${dayKey}" class="w-full p-4 text-right hover:bg-white/70 transition" aria-expanded="${isOpen ? 'true' : 'false'}">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${hasLesson ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'} font-black text-xs" dir="ltr">DAY<br>${String(day).padStart(2, '0')}</span>
+              <div>
+                <h4 class="font-black text-gray-900">${escapeHtml(title)}</h4>
+                <p class="text-xs text-gray-500 mt-1 leading-5">${escapeHtml(description)}</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              ${badge(`${stats.total || 5} جمل`, hasLesson ? 'blue' : 'gray')}
+              ${badge(`${stats.normal}/${stats.total || 5} Normal`, stats.normal === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
+              ${badge(`${stats.slow}/${stats.total || 5} Slow`, stats.slow === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
+              ${badge(`${stats.videos}/${stats.total || 5} Video`, stats.videos ? 'green' : 'gray')}
+              ${badge(`${stats.visuals}/${stats.total || 5} Visual`, stats.visuals ? 'blue' : 'gray')}
+              <span class="h-9 w-9 rounded-full bg-white border border-gray-200 flex items-center justify-center font-black text-gray-700">${isOpen ? '⌃' : '⌄'}</span>
+            </div>
+          </div>
+        </button>
+        <div class="${isOpen ? '' : 'hidden'}" data-admin-level-day-panel="${dayKey}">
+          ${renderAdminLevelDayPhraseTable(level, day, lesson)}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderAdminWeekBank(level, bank, lessonsByDay) {
+    const weekKey = `${levelNumber(level)}-${bank.key}`;
+    const isOpen = Boolean(adminLevelsOpenWeeks[weekKey]);
+    const lessonsInBank = bank.days.map((day) => lessonsByDay.get(day)).filter(Boolean);
+    const summary = mediaSummary(lessonsInBank);
+    return `
+      <article class="rounded-3xl bg-white border border-gray-200 shadow-sm overflow-hidden">
+        <button type="button" data-admin-week-toggle="${escapeHtml(weekKey)}" class="w-full p-5 text-right hover:bg-gray-50 transition" aria-expanded="${isOpen ? 'true' : 'false'}">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="h-8 w-8 rounded-full ${isOpen ? 'bg-red-600 text-white' : 'bg-blue-50 text-blue-700'} flex items-center justify-center text-sm font-black">${isOpen ? '▲' : '▶'}</span>
+              <div>
+                <h3 class="text-xl font-black text-gray-900">${escapeHtml(bank.label)}</h3>
+                <p class="text-sm text-gray-500 mt-1">${escapeHtml(bank.note)}</p>
+                <div class="mt-2 flex flex-wrap gap-2" dir="ltr">
+                  <span class="text-xs font-black text-red-700 underline">Open ${escapeHtml(bank.ar)}</span>
+                  <span class="text-xs font-black text-blue-700 underline">Optional prompt</span>
+                </div>
+              </div>
+            </div>
+            <div class="text-left" dir="ltr">
+              <p class="text-xs font-bold text-gray-400">${bank.days.length ? `Days ${bank.days[0]}–${bank.days[bank.days.length - 1]}` : ''}</p>
+              <p class="text-xs font-black text-blue-700 mt-1">${adminLevelDayRangeLabel(bank.days)}</p>
+              ${summary.total ? `<p class="text-xs font-black text-emerald-700 mt-1">Normal ${summary.normalReady}/${summary.total} · Video ${summary.videoReady}/${summary.total}</p>` : ''}
+            </div>
+          </div>
+        </button>
+        <div class="${isOpen ? '' : 'hidden'} border-t border-gray-100 bg-gray-50/70 p-4 space-y-3">
+          ${bank.days.map((day) => renderAdminWeekDay(level, day, lessonsByDay.get(day))).join('')}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderAdminActiveLevelWorkspace(level) {
+    const selectedLessons = levelLessons(level);
+    const lessonsByDay = new Map(selectedLessons.map((lesson) => [Number(lesson.day || 0), lesson]));
+    const summary = mediaSummary(selectedLessons);
+    const available = selectedLessons.length > 0;
+    const plan = levelPlan(level);
+    return `
+      <section class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wide text-terracotta mb-2">Level ${String(level).padStart(2, '0')} • ${available ? `${selectedLessons.length} days` : 'planned'}</p>
+            <h2 class="text-3xl font-black text-gray-900">${escapeHtml(levelDisplayTitle(level))}</h2>
             <p class="text-sm text-gray-500 mt-1">${escapeHtml(levelDisplayArabicTitle(level))}</p>
-          </button>
-          <div class="flex items-center gap-2">
-            ${levelVisibilityBadgeMarkup(level)}
-            <button type="button" data-admin-level-card-toggle="${level}" class="h-9 w-9 rounded-full border border-gray-200 bg-gray-50 text-gray-700 font-black hover:border-chefchaouen hover:text-chefchaouen transition" aria-label="فتح أو طي مستوى ${String(level).padStart(2, '0')}">${expanded ? '⌃' : '⌄'}</button>
+            <p class="text-sm text-gray-600 mt-3 leading-6 max-w-3xl">${escapeHtml(plan.promise)}</p>
+          </div>
+          <div class="flex flex-col gap-3 lg:min-w-[320px]">
+            <div class="flex flex-wrap items-center gap-2">
+              ${levelVisibilityBadgeMarkup(level)}
+              ${renderLevelPublicCheckbox(level)}
+            </div>
+            ${renderLevelVisibilityActions(level)}
           </div>
         </div>
-        <p class="text-sm text-gray-600 leading-6">${escapeHtml(plan.promise)}</p>
-        <div class="grid grid-cols-3 gap-2 text-center" dir="ltr">
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${available ? count : '30'}</p><p class="text-[11px] text-gray-500">days</p></div>
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${available ? phrases : '150'}</p><p class="text-[11px] text-gray-500">phrases</p></div>
-          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3"><p class="text-lg font-black text-gray-900">${summary.total ? `${summary.normalReady}/${summary.total}` : '0/0'}</p><p class="text-[11px] text-gray-500">audio</p></div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mt-5" dir="ltr">
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3 text-center"><p class="text-lg font-black text-gray-900">${available ? selectedLessons.length : 30}</p><p class="text-[11px] text-gray-500">days</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3 text-center"><p class="text-lg font-black text-gray-900">${available ? levelPhraseCount(level) : 150}</p><p class="text-[11px] text-gray-500">phrases</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3 text-center"><p class="text-lg font-black text-gray-900">${summary.total ? `${summary.normalReady}/${summary.total}` : '0/0'}</p><p class="text-[11px] text-gray-500">normal</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3 text-center"><p class="text-lg font-black text-gray-900">${summary.total ? `${summary.slowReady}/${summary.total}` : '0/0'}</p><p class="text-[11px] text-gray-500">slow</p></div>
+          <div class="rounded-2xl bg-gray-50 border border-gray-100 p-3 text-center"><p class="text-lg font-black text-gray-900">${summary.total ? `${summary.videoReady}/${summary.total}` : '0/0'}</p><p class="text-[11px] text-gray-500">video</p></div>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
-          ${renderLevelPublicCheckbox(level)}
-          <button type="button" data-admin-level-card-toggle="${level}" class="inline-flex items-center justify-center bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">${expanded ? 'طي 30 يوم' : 'فتح 30 يوم'}</button>
-          <a href="#/admin/lesson-media?level=${level}&day=1" class="inline-flex items-center justify-center bg-white border border-gray-200 text-gray-700 hover:border-chefchaouen px-4 py-2 rounded-xl text-xs font-black transition">مركز الملفات</a>
-          ${available ? `<a href="${escapeHtml(collabLink)}" class="inline-flex items-center justify-center bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl text-xs font-black transition">Collaborator preview</a>` : ''}
-        </div>
-        ${renderLevelVisibilityActions(level)}
-        ${expanded ? renderAdminLevelInlineDays(level) : ''}
-      </article>
+      </section>
+      <div class="space-y-4">
+        ${adminLevelWeekBanks(level).map((bank) => renderAdminWeekBank(level, bank, lessonsByDay)).join('')}
+      </div>
     `;
   }
 
   function renderAdminLevelsIndex(path) {
     const root = document.getElementById('page-admin-levels');
     if (!root) return;
+    const activeLevel = levelNumber(adminLevelsActiveLevel || 1);
     root.innerHTML = `
       <div class="max-w-7xl mx-auto px-4" dir="rtl">
-        ${adminHeader('إدارة المستويات', 'كل مستوى مستقل. من هنا تتحكم في ظهوره للعموم أو للمتعاونين أو للأدمن فقط، ثم تفتح صفحة 30 يوم الخاصة به.')}
-        <div class="grid gap-5">
-          ${Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => renderAdminLevelCard(index + 1)).join('')}
-        </div>
+        ${adminHeader('إدارة المستويات', 'إدارة هرم Darija30: المستوى ثم بنك الأسبوع ثم اليوم ثم 5 جمل وملفاتها.')}
+        ${renderAdminLevelTabs(activeLevel)}
+        ${renderAdminActiveLevelWorkspace(activeLevel)}
+        ${phraseEditModalMarkup()}
       </div>
     `;
     bindAdminLevelControls(root, path);
@@ -406,10 +532,23 @@
   }
 
   function bindAdminLevelControls(root, path) {
-    root.querySelectorAll('[data-admin-level-card-toggle]').forEach((button) => {
+    root.querySelectorAll('[data-admin-level-tab]').forEach((button) => {
       button.addEventListener('click', () => {
-        const level = levelNumber(button.dataset.adminLevelCardToggle);
-        adminLevelsExpanded = Number(adminLevelsExpanded) === Number(level) ? null : level;
+        adminLevelsActiveLevel = levelNumber(button.dataset.adminLevelTab);
+        renderAdminLevelsIndex(path || '/admin/levels');
+      });
+    });
+    root.querySelectorAll('[data-admin-week-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = String(button.dataset.adminWeekToggle || '');
+        adminLevelsOpenWeeks[key] = !adminLevelsOpenWeeks[key];
+        renderAdminLevelsIndex(path || '/admin/levels');
+      });
+    });
+    root.querySelectorAll('[data-admin-level-day-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = String(button.dataset.adminLevelDayToggle || '');
+        adminLevelsOpenDays[key] = !adminLevelsOpenDays[key];
         renderAdminLevelsIndex(path || '/admin/levels');
       });
     });
@@ -427,16 +566,24 @@
         setLevelVisibilityAndRefresh(level, visibility, path);
       });
     });
+    bindPhraseInlineEditor(root);
+    bindAdminMediaUploadButtons(root);
   }
 
   function applyLessonMediaRouteState(path) {
     const params = adminRouteParams(path);
     const level = params.get('level');
     const day = params.get('day');
+    const phraseParam = params.get('phrase');
     if (level) state.selectedLevel = levelNumber(level);
     if (day) state.selectedDay = Number(day) || 1;
     const lesson = ensureSelectedLessonInLevel();
-    state.selectedPhraseId = firstPhrase(lesson)?.id || null;
+    if (phraseParam && lesson?.phrases?.length) {
+      const phraseIndex = Math.max(0, Math.min((Number(phraseParam) || 1) - 1, lesson.phrases.length - 1));
+      state.selectedPhraseId = lesson.phrases[phraseIndex]?.id || firstPhrase(lesson)?.id || null;
+    } else {
+      state.selectedPhraseId = firstPhrase(lesson)?.id || null;
+    }
   }
 
   function lessonsForLevel(level = state.selectedLevel) {
