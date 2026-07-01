@@ -1403,7 +1403,7 @@
             <div class="space-y-2 text-sm text-gray-700 mb-5">
               <p>✅ يرى أول 3 دروس مجانية كاملة.</p>
               <p>✅ يرى الدروس المقفولة كـ English outcomes فقط.</p>
-              <p>✅ يتنقل عبر Dashboard / Lessons / Review / Favorites.</p>
+              <p>✅ يتنقل عبر Dashboard / Lessons / Favorites.</p>
             </div>
             <a href="#/app/lesson/1" class="inline-flex bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl font-bold transition">افتح مثال كمتعلم</a>
           </div>

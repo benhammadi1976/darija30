@@ -102,8 +102,8 @@
       {
         id: 'app-pages-present',
         label: 'Core app pages exist',
-        pass: ['page-app-dashboard', 'page-app-lessons', 'page-app-lesson', 'page-app-review', 'page-app-favorites', 'page-app-certificate'].every((id) => Boolean(document.getElementById(id))),
-        detail: 'Dashboard, lessons, lesson player, review, favorites, and certificate pages are present.'
+        pass: ['page-app-dashboard', 'page-app-lessons', 'page-app-lesson', 'page-app-favorites', 'page-app-certificate'].every((id) => Boolean(document.getElementById(id))),
+        detail: 'Dashboard, lessons, lesson player, favorites, and certificate pages are present. Review is intentionally removed from learner navigation.'
       },
       {
         id: 'blog-content-ready',
@@ -139,7 +139,7 @@
         id: 'progress-store',
         label: 'Local progress engine is available',
         pass: Boolean(window.DarijaProgressStore && typeof window.DarijaProgressStore.getState === 'function'),
-        detail: 'LocalStorage progress, favorites, and review depend on this engine.'
+        detail: 'LocalStorage progress, favorites, and quiz choices depend on this engine.'
       }
     ];
 

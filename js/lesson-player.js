@@ -5,7 +5,6 @@
     situationIndexByLesson: Object.create(null),
     appliedRoutePhraseByLesson: Object.create(null),
     freeLessonId: 'lesson-001',
-    reviewIndex: 0,
     weeklyWheel: {
       planKey: 'week1',
       challengeSize: 5,
@@ -3201,7 +3200,7 @@
                 <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">✓</div>
                 <div><p class="font-bold font-mono">${escapeHtml(phrase.friendlyLatin)}</p><p class="text-xs text-gray-500">Day ${escapeHtml(lesson.day)} • ${escapeHtml(lesson.title)}</p></div>
               </div>
-              <a href="#/app/lesson/${escapeHtml(lesson.day)}?level=${lessonLevel(lesson)}&phraseId=${encodeURIComponent(String(phrase.id || ''))}" class="text-sm text-chefchaouen font-medium hover:underline">Review</a>
+              <a href="#/app/lesson/${escapeHtml(lesson.day)}?level=${lessonLevel(lesson)}&phraseId=${encodeURIComponent(String(phrase.id || ''))}" class="text-sm text-chefchaouen font-medium hover:underline">Open Lesson</a>
             </div>
           `).join('') : `
             <div class="bg-white p-6 rounded-xl border border-gray-100 text-gray-500">No learned phrases yet. Open a lesson and click “Mark Phrase Learned.”</div>
@@ -3295,6 +3294,19 @@
     bindLessonControls(root, lesson);
   }
 
+  function favoriteLessonHref(lesson, phrase) {
+    if (!lesson || !phrase) return '#/app/lessons';
+    const phrases = Array.isArray(lesson.phrases) ? lesson.phrases : [];
+    const index = phrases.findIndex((item) => String(item?.id || '') === String(phrase?.id || ''));
+    const phraseNumber = index >= 0 ? index + 1 : '';
+    const params = [
+      phraseNumber ? `phrase=${encodeURIComponent(String(phraseNumber))}` : '',
+      phrase?.id ? `phraseId=${encodeURIComponent(String(phrase.id))}` : '',
+      'from=favorites'
+    ].filter(Boolean).join('&');
+    return appLessonHref(lesson, params);
+  }
+
   function phraseListCard({ lesson, phrase }, extra = '') {
     const active = Store()?.isFavorite(phrase.id);
     return `
@@ -3308,7 +3320,10 @@
             ${extra}
           </div>
         </div>
-        <button type="button" data-favorite-phrase-id="${escapeHtml(phrase.id)}" data-lesson-id="${escapeHtml(lesson.id)}" class="${active ? 'text-red-500' : 'text-gray-300'} hover:text-red-500 p-2 text-2xl" title="Toggle favorite">♥</button>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="${escapeHtml(favoriteLessonHref(lesson, phrase))}" class="inline-flex items-center justify-center rounded-xl bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 text-sm font-bold transition">Open Lesson</a>
+          <button type="button" data-favorite-phrase-id="${escapeHtml(phrase.id)}" data-lesson-id="${escapeHtml(lesson.id)}" class="${active ? 'text-red-500' : 'text-gray-300'} hover:text-red-500 p-2 text-2xl" title="Toggle favorite">♥</button>
+        </div>
       </div>
     `;
   }
@@ -3332,70 +3347,6 @@
     `;
     bindSharedControls(root, null, renderFavorites);
   }
-
-  function renderReview() {
-    const root = document.getElementById('page-app-review');
-    if (!root) return;
-    const entries = Store()?.reviewEntries(lessons()) || [];
-    const max = Math.max(entries.length - 1, 0);
-    state.reviewIndex = Math.min(Math.max(state.reviewIndex, 0), max);
-    const entry = entries[state.reviewIndex];
-    if (!entry) {
-      root.innerHTML = `<div class="max-w-3xl mx-auto px-4 text-center"><div class="bg-white rounded-2xl border border-gray-100 p-8 text-gray-500">No phrases to review yet.</div></div>`;
-      return;
-    }
-    const { lesson, phrase } = entry;
-    const rating = Store()?.getState()?.reviewRatings?.[phrase.id]?.rating;
-    root.innerHTML = `
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h1 class="text-3xl font-bold text-medina mb-4">Daily Review</h1>
-        <p class="text-gray-600 mb-8">Review phrases you learned or saved. No pressure, just repetition.</p>
-        <div class="bg-white p-8 md:p-10 rounded-3xl shadow-md border border-gray-100">
-          <p class="text-sm text-gray-500 mb-2">Scenario</p>
-          <p class="text-lg text-gray-700 mb-8">${escapeHtml(phrase.scenario)}</p>
-          <p class="text-sm text-gray-500 mb-3">Say this in Friendly Latin Darija:</p>
-          <h2 class="text-3xl font-bold text-medina mb-8">“${escapeHtml(phrase.meaning || phrase.english)}”</h2>
-          <button data-reveal-review class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-4 px-8 rounded-xl transition w-full max-w-md mx-auto ${rating ? 'hidden' : ''}">Reveal Answer</button>
-          <div data-review-answer class="${rating ? '' : 'hidden'} mt-8">
-            <div class="border-t border-gray-200 pt-8 mb-8">
-              <p class="text-4xl font-bold text-chefchaouen mb-2 font-mono">${escapeHtml(phrase.friendlyLatin)}</p>
-              <p class="text-gray-500">${escapeHtml(phrase.intent || '')}</p>
-              <button data-audio-play data-speed="1" data-audio-url="${escapeHtml(phrase.audioNormal)}" class="mt-5 inline-flex items-center gap-2 bg-chefchaouen hover:bg-blue-700 text-white px-5 py-2 rounded-full font-bold transition">▶ Listen</button>
-            </div>
-            <p class="text-sm font-bold text-gray-500 mb-4">How well did you remember?</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-3">
-              ${['Forgot', 'Hard', 'Easy'].map((label) => `<button data-review-rating="${label.toLowerCase()}" data-phrase-id="${escapeHtml(phrase.id)}" class="${rating === label.toLowerCase() ? 'ring-2 ring-chefchaouen' : ''} ${label === 'Forgot' ? 'bg-red-100 hover:bg-red-200 text-red-700' : label === 'Hard' ? 'bg-yellow-100 hover:bg-yellow-200 text-yellow-700' : 'bg-green-100 hover:bg-green-200 text-green-700'} px-6 py-3 rounded-xl font-bold">${label}</button>`).join('')}
-            </div>
-          </div>
-        </div>
-        <div class="mt-8 flex justify-between items-center">
-          <button data-review-prev class="px-5 py-2 text-gray-500 font-bold hover:bg-gray-100 rounded-lg" ${state.reviewIndex <= 0 ? 'disabled' : ''}>Previous</button>
-          <span class="text-sm text-gray-400">${state.reviewIndex + 1} / ${entries.length}</span>
-          <button data-review-next class="px-5 py-2 text-gray-500 font-bold hover:bg-gray-100 rounded-lg" ${state.reviewIndex >= max ? 'disabled' : ''}>Next</button>
-        </div>
-      </div>
-    `;
-    window.DarijaAudio?.bindAudioButtons(root);
-    root.querySelector('[data-reveal-review]')?.addEventListener('click', () => {
-      root.querySelector('[data-review-answer]')?.classList.remove('hidden');
-      root.querySelector('[data-reveal-review]')?.classList.add('hidden');
-    });
-    root.querySelectorAll('[data-review-rating]').forEach((button) => {
-      button.addEventListener('click', () => {
-        Store()?.saveReviewRating(button.dataset.phraseId, button.dataset.reviewRating);
-        renderReview();
-      });
-    });
-    root.querySelector('[data-review-prev]')?.addEventListener('click', () => {
-      state.reviewIndex -= 1;
-      renderReview();
-    });
-    root.querySelector('[data-review-next]')?.addEventListener('click', () => {
-      state.reviewIndex += 1;
-      renderReview();
-    });
-  }
-
   function renderCertificate() {
     const root = document.getElementById('page-app-certificate');
     if (!root) return;
@@ -3425,7 +3376,6 @@
     if (basePath === '/app/dashboard') renderDashboard();
     if (basePath === '/app/lessons') renderLessonsList();
     if (String(basePath).startsWith('/app/lesson/')) renderAppLesson(getRouteLessonId(path));
-    if (basePath === '/app/review') renderReview();
     if (basePath === '/app/weekly-wheel') renderWeeklyWheel();
     if (basePath === '/app/favorites') renderFavorites();
     if (basePath === '/app/certificate') renderCertificate();
@@ -3439,7 +3389,6 @@
     renderAppLesson,
     renderWeeklyWheel,
     renderFavorites,
-    renderReview,
     renderCertificate
   };
 })();

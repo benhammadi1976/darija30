@@ -18,7 +18,6 @@
   const appRoutes = {
     '/app/dashboard': 'page-app-dashboard',
     '/app/lessons': 'page-app-lessons',
-    '/app/review': 'page-app-review',
     '/app/weekly-wheel': 'page-app-weekly-wheel',
     '/app/favorites': 'page-app-favorites',
     '/app/certificate': 'page-app-certificate'
@@ -76,6 +75,10 @@
     const basePath = routeBase(path);
     if (basePath === '/admin/audio' || basePath === '/admin/lessons' || basePath === '/admin/phrases') {
       window.location.replace('#/admin/lesson-media');
+      return;
+    }
+    if (basePath === '/app/review') {
+      window.location.replace('#/app/lessons');
       return;
     }
     const isAppRoute = basePath.startsWith('/app/');
