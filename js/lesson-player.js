@@ -48,6 +48,24 @@
     return window.DarijaLevelAccess?.canSeeLesson?.(lesson, path || window.location.hash.replace(/^#/, '')) ?? (lessonLevel(lesson) === 1);
   }
 
+  function routeBase(path) {
+    return String(path || '').split('?')[0];
+  }
+
+  function appLessonHref(lesson, extraParams = '') {
+    if (!lesson) return '#/app/lessons';
+    const day = encodeURIComponent(String(lesson.day || lesson.id || 1));
+    const level = lessonLevel(lesson);
+    const cleanExtra = String(extraParams || '').replace(/^&+/, '');
+    return `#/app/lesson/${day}?level=${encodeURIComponent(String(level))}${cleanExtra ? `&${cleanExtra}` : ''}`;
+  }
+
+  function appLessonsHref(level, extraParams = '') {
+    const cleanLevel = window.DarijaLevelAccess?.normalizeLevel?.(level) || Math.max(1, Math.round(Number(level || 1) || 1));
+    const cleanExtra = String(extraParams || '').replace(/^&+/, '');
+    return `#/app/lessons?level=${encodeURIComponent(String(cleanLevel))}${cleanExtra ? `&${cleanExtra}` : ''}`;
+  }
+
   function isLevelCollaboratorOpen(lesson, path) {
     const access = window.DarijaLevelAccess;
     if (!lesson || !access) return false;
@@ -155,7 +173,8 @@
   function nextLesson(lesson) {
     const all = lessons();
     const currentDay = Number(lesson?.day || 0);
-    return all.find((item) => Number(item.day) === currentDay + 1) || null;
+    const currentLevel = lessonLevel(lesson);
+    return all.find((item) => lessonLevel(item) === currentLevel && Number(item.day) === currentDay + 1) || null;
   }
 
   function getRouteLessonId(path) {
@@ -733,7 +752,7 @@
           </div>
           <div class="practice-slide__exit-row">
             <button type="button" class="practice-slide__exit-btn" data-return-to-last-phrase aria-label="Review phrase" title="Review phrase">⟲</button>
-            ${next ? `<a class="practice-slide__exit-btn practice-slide__exit-btn--warm" href="#/app/lesson/${escapeHtml(next.day)}" data-start-next-day-lesson="${escapeHtml(next.id || next.day)}" aria-label="Start Day ${escapeHtml(next.day)} lesson" title="Start Day ${escapeHtml(next.day)} lesson">⏭</a>` : `<a class="practice-slide__exit-btn practice-slide__exit-btn--warm" href="#/app/lessons" aria-label="30-day plan" title="30-day plan">⌂</a>`}
+            ${next ? `<a class="practice-slide__exit-btn practice-slide__exit-btn--warm" href="${escapeHtml(appLessonHref(next))}" data-start-next-day-lesson="${escapeHtml(next.id || next.day)}" aria-label="Start Day ${escapeHtml(next.day)} lesson" title="Start Day ${escapeHtml(next.day)} lesson">⏭</a>` : `<a class="practice-slide__exit-btn practice-slide__exit-btn--warm" href="#/app/lessons" aria-label="30-day plan" title="30-day plan">⌂</a>`}
           </div>
         ` : ''}
         ${renderOptions.slide && isWeeklyWheel ? `
@@ -1061,7 +1080,7 @@
         </div>
         <div class="lesson-completion-choice__actions">
           <button type="button" class="lesson-completion-choice__primary" data-open-situation-practice>Do you remember?</button>
-          ${next ? `<a class="lesson-completion-choice__secondary" href="#/app/lesson/${escapeHtml(next.day)}">Continue to Day ${escapeHtml(next.day)}</a>` : `<a class="lesson-completion-choice__secondary" href="#/app/lessons">Back to the 30-day plan</a>`}
+          ${next ? `<a class="lesson-completion-choice__secondary" href="${escapeHtml(appLessonHref(next))}">Continue to Day ${escapeHtml(next.day)}</a>` : `<a class="lesson-completion-choice__secondary" href="#/app/lessons">Back to the 30-day plan</a>`}
         </div>
       </div>
     `;
@@ -2101,7 +2120,7 @@
 
   function weeklyPromptNextLessonHref(lesson) {
     const next = nextLesson(lesson);
-    return next ? `#/app/lesson/${encodeURIComponent(String(next.day))}` : '#/app/lessons';
+    return next ? appLessonHref(next) : appLessonsHref(lessonLevel(lesson));
   }
 
   function weeklyWheelPromptMarkup(lesson, planKey) {
@@ -2876,14 +2895,67 @@
 
     const routePath = window.location.hash.replace(/^#/, '');
     const allRuntimeLessons = lessons();
+    const availableLevels = Array.from(new Set(allRuntimeLessons.map((lesson) => lessonLevel(lesson))))
+      .sort((a, b) => a - b);
     const visibleLevels = Array.from(new Set(allRuntimeLessons
       .filter((lesson) => canSeeLesson(lesson, routePath))
       .map((lesson) => lessonLevel(lesson))))
       .sort((a, b) => a - b);
     const routeLevel = requestedLevel(routePath);
-    const selectedLevel = visibleLevels.includes(routeLevel) ? routeLevel : (visibleLevels[0] || 1);
-    const allLessons = allRuntimeLessons.filter((lesson) => lessonLevel(lesson) === selectedLevel && canSeeLesson(lesson, routePath));
     const collabParam = window.DarijaLevelAccess?.isCollaboratorPreview?.(routePath) ? '&collab=1' : '';
+
+    if (!allRuntimeLessons.length) {
+      root.innerHTML = `
+        <div class="bg-white rounded-3xl border border-red-100 shadow-sm p-8 text-center">
+          <p class="text-xs font-black uppercase tracking-wide text-terracotta mb-2">Lesson data unavailable</p>
+          <h2 class="text-2xl font-black text-medina mb-3">The 30-day plan could not load lesson data.</h2>
+          <p class="text-gray-600">Please confirm that <code class="bg-gray-100 px-2 py-1 rounded">js/data/lessons-data.js</code> is deployed.</p>
+        </div>
+      `;
+      return;
+    }
+
+    if (availableLevels.includes(routeLevel) && !visibleLevels.includes(routeLevel)) {
+      const access = window.DarijaLevelAccess;
+      const meta = access?.levelMeta?.(routeLevel) || { shortLabel: 'Locked', label: 'Locked' };
+      const visibility = access?.getVisibility?.(routeLevel) || 'admin';
+      const collaboratorLink = access?.collaboratorLink?.(routeLevel) || appLessonsHref(routeLevel, 'collab=1');
+      root.innerHTML = `
+        <div class="bg-white rounded-3xl border border-yellow-100 shadow-sm p-8 text-center max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 bg-yellow-50 text-yellow-700 border border-yellow-100 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wide mb-4">🔒 Level ${escapeHtml(String(routeLevel).padStart(2, '0'))} • ${escapeHtml(meta.shortLabel || meta.label || 'Locked')}</span>
+          <h2 class="text-3xl font-black text-medina mb-3">This level is not open in learner view yet.</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto mb-6">The level data exists, but its current visibility is <strong>${escapeHtml(meta.label || meta.shortLabel || visibility)}</strong>. The page now stops cleanly instead of staying on “Loading 30-day plan…”.</p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="${escapeHtml(appLessonsHref(1))}" class="bg-chefchaouen hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-black transition">Open Level 01</a>
+            ${visibility === 'collaborators' ? `<a href="${escapeHtml(collaboratorLink)}" class="bg-white border border-blue-200 text-chefchaouen px-5 py-3 rounded-xl font-black hover:bg-blue-50 transition">Open collaborator preview</a>` : ''}
+            <a href="#/admin/levels" class="bg-white border border-gray-200 text-medina px-5 py-3 rounded-xl font-black hover:bg-gray-50 transition">Manage levels</a>
+          </div>
+          ${visibleLevels.length ? `
+            <div class="mt-8 pt-6 border-t border-gray-100">
+              <p class="text-xs font-black uppercase tracking-wide text-gray-400 mb-3">Available learner levels</p>
+              <div class="flex flex-wrap justify-center gap-2">
+                ${visibleLevels.map((level) => `<a href="${escapeHtml(appLessonsHref(level, collabParam))}" class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-extrabold text-gray-700 hover:border-chefchaouen">Level ${escapeHtml(String(level).padStart(2, '0'))}</a>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      return;
+    }
+
+    const selectedLevel = visibleLevels.includes(routeLevel) ? routeLevel : (visibleLevels[0] || availableLevels[0] || 1);
+    const allLessons = allRuntimeLessons.filter((lesson) => lessonLevel(lesson) === selectedLevel && canSeeLesson(lesson, routePath));
+
+    if (!allLessons.length) {
+      root.innerHTML = `
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 text-center max-w-4xl mx-auto">
+          <p class="text-xs font-black uppercase tracking-wide text-gray-400 mb-2">No visible lessons</p>
+          <h2 class="text-2xl font-black text-medina mb-3">No lessons are available for this level in the current view.</h2>
+          <a href="${escapeHtml(appLessonsHref(1))}" class="inline-flex bg-chefchaouen hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-black transition">Back to Level 01</a>
+        </div>
+      `;
+      return;
+    }
     const planStartKey = `darija30_plan_start_date_level${selectedLevel}`;
     const sectionStateKey = 'darija30_plan_section_state_v1';
     const defaultStartDate = '2026-06-27';
@@ -2945,7 +3017,7 @@
             ${visibleLevels.map((level) => {
               const active = level === selectedLevel;
               const meta = window.DarijaLevelAccess?.levelMeta?.(level) || { label: 'Public' };
-              const href = `#/app/lessons?level=${level}${collabParam}`;
+              const href = appLessonsHref(level, collabParam);
               return `<a href="${href}" class="rounded-xl border px-4 py-2 text-sm font-extrabold ${active ? 'bg-chefchaouen text-white border-chefchaouen' : 'bg-white text-gray-700 border-gray-200 hover:border-chefchaouen'}">Level ${String(level).padStart(2, '0')} <span class="opacity-70">${escapeHtml(meta.label || '')}</span></a>`;
             }).join('')}
           </div>
@@ -3095,7 +3167,7 @@
           <h2 class="text-2xl font-bold text-medina mb-2">${escapeHtml(next?.title || 'Next Lesson')}</h2>
           <p class="text-gray-600 mb-4 md:mb-0">${escapeHtml(next?.situation || '')}</p>
         </div>
-        <a href="#/app/lesson/${encodeURIComponent(String(next?.day || 1))}" class="shrink-0 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">Start Lesson ${escapeHtml(next?.day || 1)}</a>
+        <a href="${escapeHtml(appLessonHref(next))}" class="shrink-0 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">Start Lesson ${escapeHtml(next?.day || 1)}</a>
       </div>
       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
@@ -3344,18 +3416,19 @@
   }
 
   function renderForPath(path) {
-    if (!String(path).startsWith('/app/lesson/')) {
+    const basePath = routeBase(path);
+    if (!String(basePath).startsWith('/app/lesson/')) {
       document.body.classList.remove('is-remember-standalone');
       document.body.classList.remove('is-weekly-wheel-embedded');
     }
-    if (path === '/free-lesson') renderFreeLesson();
-    if (path === '/app/dashboard') renderDashboard();
-    if (path === '/app/lessons') renderLessonsList();
-    if (String(path).startsWith('/app/lesson/')) renderAppLesson(getRouteLessonId(path));
-    if (path === '/app/review') renderReview();
-    if (String(path).split('?')[0] === '/app/weekly-wheel') renderWeeklyWheel();
-    if (path === '/app/favorites') renderFavorites();
-    if (path === '/app/certificate') renderCertificate();
+    if (basePath === '/free-lesson') renderFreeLesson();
+    if (basePath === '/app/dashboard') renderDashboard();
+    if (basePath === '/app/lessons') renderLessonsList();
+    if (String(basePath).startsWith('/app/lesson/')) renderAppLesson(getRouteLessonId(path));
+    if (basePath === '/app/review') renderReview();
+    if (basePath === '/app/weekly-wheel') renderWeeklyWheel();
+    if (basePath === '/app/favorites') renderFavorites();
+    if (basePath === '/app/certificate') renderCertificate();
   }
 
   window.DarijaLessonPlayer = {
