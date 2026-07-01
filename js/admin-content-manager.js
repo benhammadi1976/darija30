@@ -24,6 +24,8 @@
     filter: 'all'
   };
 
+  let adminLevelsExpanded = null;
+
   function lessons() {
     return Array.isArray(window.DARIJA30_LESSONS) ? window.DARIJA30_LESSONS : [];
   }
@@ -232,23 +234,58 @@
     `;
   }
 
+
+  function renderAdminLevelInlineDays(level) {
+    const lessonsByDay = new Map(levelLessons(level).map((lesson) => [Number(lesson.day || 0), lesson]));
+    return `
+      <div class="mt-4 border-t border-gray-100 pt-4">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <div>
+            <p class="text-sm font-black text-gray-900">صفحة 30 يوم</p>
+            <p class="text-xs text-gray-500">اضغط على اليوم لفتح مركز ملفات الدروس مصفى على المستوى واليوم.</p>
+          </div>
+          <a href="#/admin/levels/${level}" class="text-xs font-black text-chefchaouen hover:underline">فتح كصفحة كاملة</a>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+          ${Array.from({ length: 30 }, (_, index) => {
+            const day = index + 1;
+            const lesson = lessonsByDay.get(day);
+            const stats = lesson ? lessonMediaStats(lesson) : { total: 5, normal: 0, slow: 0, videos: 0, visuals: 0 };
+            const hasLesson = Boolean(lesson);
+            return `
+              <a href="#/admin/lesson-media?level=${level}&day=${day}" class="rounded-2xl border ${hasLesson ? 'border-gray-200 bg-white hover:border-chefchaouen' : 'border-dashed border-gray-200 bg-gray-50 hover:border-gray-300'} p-3 text-right transition">
+                <span class="block text-[11px] font-black text-terracotta">Day ${String(day).padStart(2, '0')}</span>
+                <span class="block text-xs font-extrabold text-gray-900 truncate">${escapeHtml(lesson?.title || 'مخطط لاحقاً')}</span>
+                <span class="block mt-2 text-[10px] font-bold text-gray-500" dir="ltr">N ${stats.normal}/${stats.total} · V ${stats.videos}/${stats.total}</span>
+              </a>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   function renderAdminLevelCard(level) {
     const selectedLessons = levelLessons(level);
     const count = selectedLessons.length;
     const phrases = levelPhraseCount(level);
     const available = count > 0;
+    const expanded = Number(adminLevelsExpanded) === Number(level);
     const summary = mediaSummary(selectedLessons);
     const plan = levelPlan(level);
     const collabLink = window.DarijaLevelAccess?.collaboratorLink?.(level) || `#/app/lessons?collab=1&level=${level}`;
     return `
-      <article class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 flex flex-col gap-4">
+      <article class="rounded-3xl bg-white border ${expanded ? 'border-chefchaouen shadow-md' : 'border-gray-200 shadow-sm'} p-5 flex flex-col gap-4 transition">
         <div class="flex items-start justify-between gap-3">
-          <div>
+          <button type="button" data-admin-level-card-toggle="${level}" class="flex-1 text-right group">
             <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Level ${String(level).padStart(2, '0')}</p>
-            <h2 class="text-xl font-black text-gray-900">${escapeHtml(levelDisplayTitle(level))}</h2>
+            <h2 class="text-xl font-black text-gray-900 group-hover:text-chefchaouen transition">${escapeHtml(levelDisplayTitle(level))}</h2>
             <p class="text-sm text-gray-500 mt-1">${escapeHtml(levelDisplayArabicTitle(level))}</p>
+          </button>
+          <div class="flex items-center gap-2">
+            ${levelVisibilityBadgeMarkup(level)}
+            <button type="button" data-admin-level-card-toggle="${level}" class="h-9 w-9 rounded-full border border-gray-200 bg-gray-50 text-gray-700 font-black hover:border-chefchaouen hover:text-chefchaouen transition" aria-label="فتح أو طي مستوى ${String(level).padStart(2, '0')}">${expanded ? '⌃' : '⌄'}</button>
           </div>
-          ${levelVisibilityBadgeMarkup(level)}
         </div>
         <p class="text-sm text-gray-600 leading-6">${escapeHtml(plan.promise)}</p>
         <div class="grid grid-cols-3 gap-2 text-center" dir="ltr">
@@ -258,11 +295,12 @@
         </div>
         <div class="flex flex-wrap items-center gap-2">
           ${renderLevelPublicCheckbox(level)}
-          <a href="#/admin/levels/${level}" class="inline-flex items-center justify-center bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">فتح 30 يوم</a>
+          <button type="button" data-admin-level-card-toggle="${level}" class="inline-flex items-center justify-center bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">${expanded ? 'طي 30 يوم' : 'فتح 30 يوم'}</button>
           <a href="#/admin/lesson-media?level=${level}&day=1" class="inline-flex items-center justify-center bg-white border border-gray-200 text-gray-700 hover:border-chefchaouen px-4 py-2 rounded-xl text-xs font-black transition">مركز الملفات</a>
           ${available ? `<a href="${escapeHtml(collabLink)}" class="inline-flex items-center justify-center bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-xl text-xs font-black transition">Collaborator preview</a>` : ''}
         </div>
         ${renderLevelVisibilityActions(level)}
+        ${expanded ? renderAdminLevelInlineDays(level) : ''}
       </article>
     `;
   }
@@ -273,7 +311,7 @@
     root.innerHTML = `
       <div class="max-w-7xl mx-auto px-4" dir="rtl">
         ${adminHeader('إدارة المستويات', 'كل مستوى مستقل. من هنا تتحكم في ظهوره للعموم أو للمتعاونين أو للأدمن فقط، ثم تفتح صفحة 30 يوم الخاصة به.')}
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div class="grid gap-5">
           ${Array.from({ length: DARIJA30_LEVEL_COUNT }, (_, index) => renderAdminLevelCard(index + 1)).join('')}
         </div>
       </div>
@@ -368,6 +406,13 @@
   }
 
   function bindAdminLevelControls(root, path) {
+    root.querySelectorAll('[data-admin-level-card-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const level = levelNumber(button.dataset.adminLevelCardToggle);
+        adminLevelsExpanded = Number(adminLevelsExpanded) === Number(level) ? null : level;
+        renderAdminLevelsIndex(path || '/admin/levels');
+      });
+    });
     root.querySelectorAll('[data-admin-level-visibility-action]').forEach((button) => {
       button.addEventListener('click', () => {
         const level = levelNumber(button.dataset.adminLevelVisibilityLevel);
