@@ -330,7 +330,7 @@
     const description = hasLesson ? (lesson.situation || lesson.module || '') : 'تم تثبيت مكان اليوم في خريطة المستوى، والجمل ستضاف لاحقاً مستوى بمستوى.';
     const dayTone = hasLesson && stats.complete ? 'border-emerald-200 bg-emerald-50' : (hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50');
     return `
-      <article class="rounded-2xl border ${dayTone} p-4">
+      <a href="#/admin/lesson-media?level=${levelNumber(level)}&day=${day}" class="block rounded-2xl border ${dayTone} p-4 hover:border-chefchaouen hover:bg-blue-50/30 transition">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           <div class="flex items-start gap-3">
             <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${hasLesson ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'} font-black text-xs" dir="ltr">DAY<br>${String(day).padStart(2, '0')}</span>
@@ -345,10 +345,9 @@
             ${badge(`${stats.slow}/${stats.total || 5} Slow`, stats.slow === (stats.total || 5) && hasLesson ? 'green' : 'yellow')}
             ${badge(`${stats.videos}/${stats.total || 5} Video`, stats.videos ? 'green' : 'gray')}
             ${badge(`${stats.visuals}/${stats.total || 5} Visual`, stats.visuals ? 'blue' : 'gray')}
-            <a href="#/admin/lesson-media?level=${levelNumber(level)}&day=${day}" class="inline-flex rounded-xl bg-chefchaouen px-4 py-2 text-xs font-black text-white hover:bg-blue-700 transition">فتح مركز الملفات</a>
           </div>
         </div>
-      </article>
+      </a>
     `;
   }
 
@@ -444,7 +443,7 @@
     const title = hasLesson ? lesson.title : `Day ${day} — مستقل لاحقاً`;
     const situation = hasLesson ? (lesson.situation || lesson.module || '') : 'تم تثبيت مكان اليوم في خريطة المستوى، والجمل ستضاف لاحقاً مستوى بمستوى.';
     return `
-      <article class="rounded-2xl border ${hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50'} p-4 shadow-sm">
+      <a href="#/admin/lesson-media?level=${level}&day=${day}" class="block rounded-2xl border ${hasLesson ? 'border-gray-200 bg-white' : 'border-dashed border-gray-200 bg-gray-50'} p-4 shadow-sm hover:border-chefchaouen hover:bg-blue-50/30 transition">
         <div class="flex items-start justify-between gap-3 mb-3">
           <div>
             <p class="text-[11px] font-black uppercase tracking-wide text-terracotta">Day ${escapeHtml(day)}</p>
@@ -453,17 +452,13 @@
           </div>
           ${hasLesson ? badge(`${stats.total} جمل`, 'blue') : badge('لاحقاً', 'gray')}
         </div>
-        <div class="flex flex-wrap gap-2 mb-4">
+        <div class="flex flex-wrap gap-2">
           ${badge(`${stats.normal}/${stats.total} Normal`, stats.normal === stats.total && stats.total ? 'green' : 'yellow')}
           ${badge(`${stats.slow}/${stats.total} Slow`, stats.slow === stats.total && stats.total ? 'green' : 'yellow')}
           ${badge(`${stats.videos}/${stats.total} Video`, stats.videos ? 'green' : 'gray')}
           ${badge(`${stats.visuals}/${stats.total} Visual`, stats.visuals ? 'blue' : 'gray')}
         </div>
-        <div class="flex flex-wrap gap-2" dir="ltr">
-          <a href="#/admin/lesson-media?level=${level}&day=${day}" class="bg-chefchaouen hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black transition">Open media</a>
-          ${hasLesson ? `<a href="${escapeHtml(learnerPhraseHref(lesson, firstPhrase(lesson), 0, 'admin-level-day'))}" class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-xs font-black hover:border-chefchaouen transition">Learner</a>` : ''}
-        </div>
-      </article>
+      </a>
     `;
   }
 
@@ -1350,6 +1345,25 @@
     `;
   }
 
+  function renderAudioSelectedLessonTable(lesson) {
+    if (!lesson) return renderNoLevelLessonsMessage();
+    return `
+      <div class="admin-audio-day rounded-3xl bg-white border border-gray-200 shadow-sm overflow-hidden" data-admin-audio-day="${escapeHtml(lessonKey(lesson))}">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-right">
+            <thead class="bg-gray-50 text-gray-500">
+              <tr><th class="p-3">#</th><th class="p-3">الجملة</th><th class="p-3">Normal</th><th class="p-3">Slow</th><th class="p-3">Video</th><th class="p-3">Visual</th><th class="p-3">Learner</th></tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              ${(lesson.phrases || []).map((phrase, index) => renderAudioPhraseRow(lesson, phrase, index)).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+
   function adminHeader(title, subtitle) {
     return `
       <div class="mb-8">
@@ -1650,19 +1664,13 @@
     const summary = mediaSummary(selectedLessons);
     const openDays = readAdminAudioOpenDays();
     if (selectedLesson) openDays.add(lessonKey(selectedLesson));
-    const lessonContent = selectedLesson ? renderAudioDayGroup(selectedLesson, openDays) : renderNoLevelLessonsMessage();
+    const lessonContent = selectedLesson ? renderAudioSelectedLessonTable(selectedLesson) : renderNoLevelLessonsMessage();
     root.innerHTML = `
       <div class="admin-lesson-media-shell max-w-7xl mx-auto px-4" dir="rtl">
         <header class="admin-lesson-media-title text-center mb-6">
           <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-2">مركز ملفات الدروس</h1>
-          <p class="text-gray-600 max-w-3xl mx-auto">المركز الرئيسي لإدارة كل مستوى مستقل: اختر Level ثم Day، وعدّل الجملة أو ارفع Normal / Slow / Video / Visual من نفس الجدول.</p>
+          <p class="text-gray-600 max-w-3xl mx-auto">مكان رفع واستبدال ملفات الجمل فقط. اختيار المستوى واليوم يتم من صفحة المستويات أو عبر رابط مباشر.</p>
         </header>
-        <div class="grid md:grid-cols-4 gap-4 mb-6">
-          ${statCard('Normal Ready', `${summary.normalReady}/${summary.total}`, 'MP3 normal', 'green')}
-          ${statCard('Slow Ready', `${summary.slowReady}/${summary.total}`, 'MP3 slow', 'yellow')}
-          ${statCard('Videos Ready', `${summary.videoReady}/${summary.total}`, 'MP4 scenes', 'red')}
-          ${statCard('Visuals Ready', `${summary.visualReady}/${summary.total}`, 'images/SVG', 'blue')}
-        </div>
         ${supabaseMediaAdminPanel()}
         <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-6 mb-6">
           <h2 class="text-xl font-extrabold text-gray-900 mb-3">قاعدة تسمية الملفات للمستويات 12</h2>
@@ -1673,11 +1681,6 @@
             ${pathBox('micro video', 'assets/video/level01/day01/phrase-id-scene.mp4')}
             ${pathBox('visual image', 'assets/images/lesson-scenes/level01/day01-phrase-id-scene.webp')}
           </div>
-        </div>
-        ${renderLevelLessonControls(selectedLesson, selectedLessons)}
-        <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-5 mb-5">
-          <h2 class="text-xl font-extrabold text-gray-900">جدول الدرس المختار</h2>
-          <p class="text-sm text-gray-500">اضغط على الجملة لتعديلها. اضغط على حالة الملف للرفع أو الاستبدال. مركز ملفات الدروس هو المكان الرسمي الآن.</p>
         </div>
         <div class="space-y-4">
           ${lessonContent}
