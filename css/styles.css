@@ -6628,3 +6628,38 @@ body.is-weekly-wheel-fullscreen #lessonPlayerRoot {
 .weekly-wheel-disc__inner--fullscreen .weekly-wheel-center-brand {
   font-size: clamp(1.05rem, 2.25vw, 1.95rem) !important;
 }
+
+
+/* D89-FIX-G: locked preview / paywall page must always be readable and scrollable. */
+body.has-locked-preview {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  background: #f8fafc;
+}
+
+body.has-locked-preview #page-app-lesson,
+body.has-locked-preview #lessonPlayerRoot {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  background: #f8fafc !important;
+}
+
+.locked-preview-scroll-shell {
+  min-height: calc(100vh - 5rem);
+  padding-bottom: max(7rem, env(safe-area-inset-bottom));
+  scroll-margin-top: 5rem;
+}
+
+.locked-preview-scroll-shell > .bg-white {
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  .locked-preview-scroll-shell {
+    padding-top: 1.25rem !important;
+    padding-bottom: max(8rem, env(safe-area-inset-bottom));
+  }
+}

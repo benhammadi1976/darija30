@@ -566,6 +566,18 @@
     return item?.outcome || item?.englishOutcome || item?.meaning || 'A practical phrase for this situation';
   }
 
+  function resetInteractiveLessonBodyState(options = {}) {
+    const lockedPreview = Boolean(options.lockedPreview);
+    document.body.classList.remove('is-remember-standalone');
+    document.body.classList.remove('is-weekly-wheel-embedded');
+    document.body.classList.remove('is-weekly-wheel-fullscreen');
+    document.body.classList.toggle('has-locked-preview', lockedPreview);
+    const appNav = document.getElementById('app-nav');
+    if (appNav) appNav.style.display = 'block';
+    const publicNav = document.querySelector('header');
+    if (publicNav && lockedPreview) publicNav.style.display = '';
+  }
+
   function lockedLessonPreviewMarkup(lesson) {
     const preview = Array.isArray(lesson.previewPhrases) ? lesson.previewPhrases : [];
     return `
@@ -3313,8 +3325,10 @@
     const lesson = findLesson(identifier || getRouteLessonId(routePath));
     const backTarget = lessonBackTarget(routePath);
     if (isLockedLesson(lesson, routePath)) {
-      root.innerHTML = `<div class="max-w-4xl mx-auto px-4 py-8">${lockedLessonPreviewMarkup(lesson)}</div>`;
+      resetInteractiveLessonBodyState({ lockedPreview: true });
+      root.innerHTML = `<div class="locked-preview-scroll-shell max-w-4xl mx-auto px-4 py-8 md:py-10">${lockedLessonPreviewMarkup(lesson)}</div>`;
       window.DarijaAudio?.bindAudioButtons(root);
+      window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'auto' }));
       return;
     }
     applyRoutePhraseTarget(lesson, routePath);
@@ -3356,6 +3370,7 @@
       return;
     }
 
+    document.body.classList.remove('has-locked-preview');
     document.body.classList.toggle('is-weekly-wheel-embedded', false);
     document.body.classList.toggle('is-weekly-wheel-fullscreen', false);
     document.body.classList.toggle('is-remember-standalone', Boolean(practiceOpen));
@@ -3517,6 +3532,10 @@
     if (!String(basePath).startsWith('/app/lesson/')) {
       document.body.classList.remove('is-remember-standalone');
       document.body.classList.remove('is-weekly-wheel-embedded');
+      document.body.classList.remove('is-weekly-wheel-fullscreen');
+      document.body.classList.remove('has-locked-preview');
+      const appNav = document.getElementById('app-nav');
+      if (appNav) appNav.style.display = 'block';
     }
     if (basePath === '/free-lesson') renderFreeLesson();
     if (basePath === '/app/dashboard') renderDashboard();
