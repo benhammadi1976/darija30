@@ -21,7 +21,8 @@
       resultTimer: 0,
       returnRootId: '',
       returnEmbedded: false,
-      returnPlanKey: 'week1'
+      returnPlanKey: 'week1',
+      level: 1
     }
   };
 
@@ -776,7 +777,8 @@
           data-choice-attempts="0"
           data-weekly-wheel-return="${isWeeklyWheel ? '1' : '0'}"
           data-weekly-wheel-entry-id="${escapeHtml(renderOptions.weeklyEntryId || '')}"
-          data-weekly-wheel-entry-number="${escapeHtml(renderOptions.weeklyEntryNumber || '')}">
+          data-weekly-wheel-entry-number="${escapeHtml(renderOptions.weeklyEntryNumber || '')}"
+          data-weekly-wheel-level="${escapeHtml(renderOptions.weeklyLevel || lessonLevel(lesson))}">
           <div class="situation-card__visual practice-slide__visual">
             ${visual ? `<img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" loading="lazy">` : `<div class="situation-card__placeholder"><span>🇲🇦</span><strong>${escapeHtml(lesson.title || 'Situation')}</strong><small>${escapeHtml(phrase.scenario || phrase.goal || '')}</small></div>`}
             <div class="practice-slide__topbar">
@@ -1025,7 +1027,7 @@
     window.clearTimeout(Number(card.dataset.weeklyPromptTimer || 0));
     const timer = window.setTimeout(() => {
       setLessonPracticeOpen(lesson, false);
-      window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=prompt`;
+      window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?level=${encodeURIComponent(String(lessonLevel(lesson)))}&weekly=prompt`;
     }, 1900);
     card.dataset.weeklyPromptTimer = String(timer);
     return true;
@@ -1046,16 +1048,18 @@
       window.clearTimeout(Number(card.dataset.weeklyReturnTimer || 0));
       const timer = window.setTimeout(() => {
         const planKey = state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey;
+        const weeklyLevel = normalizeWeeklyLevel(card.dataset.weeklyWheelLevel || state.weeklyWheel.level || 1);
         const plan = weeklyWheelPlan(planKey);
-        const bank = weeklySituationBank(plan);
+        const bank = weeklySituationBank(plan, weeklyLevel);
         const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
-        const score = weeklyWheelScore(planKey, challengeSize);
+        const score = weeklyWheelScore(planKey, challengeSize, weeklyLevel);
         state.weeklyWheel.mode = score.total >= challengeSize ? 'complete' : 'wheel';
         state.weeklyWheel.isSpinning = false;
         const returnRoot = document.getElementById(state.weeklyWheel.returnRootId || 'weeklyWheelRoot');
         renderWeeklyWheel({
           root: returnRoot || undefined,
           planKey,
+          level: weeklyLevel,
           embedded: Boolean(state.weeklyWheel.returnEmbedded)
         });
       }, result?.correct ? 1700 : 1900);
@@ -2096,14 +2100,16 @@
     return '';
   }
 
-  function weeklyPlanCheckpointHref(plan, mode = 'prompt') {
+  function weeklyPlanCheckpointHref(plan, mode = 'prompt', level = 1) {
     const checkpointDay = Number(plan?.checkpointDay || plan?.endDay || 7);
     const safeMode = mode === 'wheel' ? '1' : 'prompt';
-    return `#/app/lesson/${encodeURIComponent(String(checkpointDay))}?weekly=${safeMode}`;
+    const safeLevel = normalizeWeeklyLevel(level);
+    return `#/app/lesson/${encodeURIComponent(String(checkpointDay))}?level=${encodeURIComponent(String(safeLevel))}&weekly=${safeMode}`;
   }
 
-  function weeklyPlanDirectWheelHref(plan) {
-    return `#/app/weekly-wheel?week=${encodeURIComponent(String(plan?.key || 'week1'))}`;
+  function weeklyPlanDirectWheelHref(plan, level = 1) {
+    const safeLevel = normalizeWeeklyLevel(level);
+    return `#/app/weekly-wheel?level=${encodeURIComponent(String(safeLevel))}&week=${encodeURIComponent(String(plan?.key || 'week1'))}`;
   }
 
   function weeklyPlanCheckpointSummary(plan) {
@@ -2124,9 +2130,10 @@
 
   function weeklyWheelPromptMarkup(lesson, planKey) {
     const plan = weeklyWheelPlan(planKey);
-    const bank = weeklySituationBank(plan);
+    const promptLevel = normalizeWeeklyLevel(lessonLevel(lesson));
+    const bank = weeklySituationBank(plan, promptLevel);
     const promptEntries = weeklyRequiresSourceSpin(plan) ? weeklyMemorySourceEntries(plan) : bank;
-    const promptNumberEntries = weeklyRequiresSourceSpin(plan) ? weeklySourcePhaseNumberBank(plan) : bank;
+    const promptNumberEntries = weeklyRequiresSourceSpin(plan) ? weeklySourcePhaseNumberBank(plan, promptLevel) : bank;
     const promptCenterBrandColor = weeklyRequiresSourceSpin(plan) ? '#111827' : weeklySourceColor(1);
     const nextHref = weeklyPromptNextLessonHref(lesson);
     const next = nextLesson(lesson);
@@ -2185,15 +2192,34 @@
     return weeklyWheelPlans().some((plan) => plan.key === raw) ? raw : state.weeklyWheel.planKey;
   }
 
-  function weeklySituationBank(plan) {
+  function normalizeWeeklyLevel(value) {
+    const parsed = Number(value);
+    const clean = window.DarijaLevelAccess?.normalizeLevel?.(parsed) || Math.max(1, Math.round(parsed || 1));
+    return Math.min(Math.max(clean, 1), 12);
+  }
+
+  function getWeeklyWheelRouteLevel(path, fallback = state.weeklyWheel.level || 1) {
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const raw = params.get('level') || params.get('lvl') || '';
+    return normalizeWeeklyLevel(raw || fallback || 1);
+  }
+
+  function weeklyScopedKey(planKey, level = state.weeklyWheel.level || 1) {
+    return `level${normalizeWeeklyLevel(level)}:${String(planKey || 'week1')}`;
+  }
+
+  function weeklySituationBank(plan, level = state.weeklyWheel.level || 1) {
+    const selectedLevel = normalizeWeeklyLevel(level);
     let number = 0;
     return lessons()
+      .filter((lesson) => lessonLevel(lesson) === selectedLevel)
       .filter((lesson) => Number(lesson.day) >= 1 && Number(lesson.day) <= Number(plan.endDay))
       .flatMap((lesson) => (lesson.phrases || []).map((phrase, phraseIndex) => {
         number += 1;
         return {
-          id: `${lesson.id || lesson.day}:${phrase.id || phraseIndex}`,
+          id: `L${selectedLevel}:${lesson.id || lesson.day}:${phrase.id || phraseIndex}`,
           number,
+          level: selectedLevel,
           lesson,
           phrase,
           phraseIndex
@@ -2253,10 +2279,10 @@
     return entries.find((entry) => entry.key === key) || entries[0] || null;
   }
 
-  function weeklySourceSituationBank(plan, sourceKey) {
+  function weeklySourceSituationBank(plan, sourceKey, level = state.weeklyWheel.level || 1) {
     const source = weeklySourceEntryForKey(plan, sourceKey);
-    if (!source) return weeklySituationBank(plan);
-    return weeklySituationBank(plan)
+    if (!source) return weeklySituationBank(plan, level);
+    return weeklySituationBank(plan, level)
       .filter((entry) => {
         const day = Number(entry?.lesson?.day || 0);
         return day >= Number(source.startDay) && day <= Number(source.endDay);
@@ -2270,10 +2296,10 @@
       }));
   }
 
-  function weeklySourcePhaseNumberBank(plan) {
+  function weeklySourcePhaseNumberBank(plan, level = state.weeklyWheel.level || 1) {
     const firstSource = weeklySourceEntryForKey(plan, 'source-week1');
-    const firstWeekBank = firstSource ? weeklySourceSituationBank(plan, firstSource.key) : [];
-    return firstWeekBank.length ? firstWeekBank : weeklySituationBank(plan).slice(0, 35).map((entry, index) => ({ ...entry, number: index + 1 }));
+    const firstWeekBank = firstSource ? weeklySourceSituationBank(plan, firstSource.key, level) : [];
+    return firstWeekBank.length ? firstWeekBank : weeklySituationBank(plan, level).slice(0, 35).map((entry, index) => ({ ...entry, number: index + 1 }));
   }
 
   function weeklySituationWheelColor(plan, selectedSource) {
@@ -2281,10 +2307,10 @@
     return weeklySourceColor(source?.number || 1);
   }
 
-  function weeklyActiveSituationBank(plan) {
-    if (!weeklyRequiresSourceSpin(plan)) return weeklySituationBank(plan);
-    if (!state.weeklyWheel.memorySourceKey) return weeklySituationBank(plan);
-    return weeklySourceSituationBank(plan, state.weeklyWheel.memorySourceKey);
+  function weeklyActiveSituationBank(plan, level = state.weeklyWheel.level || 1) {
+    if (!weeklyRequiresSourceSpin(plan)) return weeklySituationBank(plan, level);
+    if (!state.weeklyWheel.memorySourceKey) return weeklySituationBank(plan, level);
+    return weeklySourceSituationBank(plan, state.weeklyWheel.memorySourceKey, level);
   }
 
   function weeklyIsSourcePhase(plan) {
@@ -2295,34 +2321,35 @@
     return '';
   }
 
-  function readWeeklyUsedIds(planKey) {
-    const used = state.weeklyWheel.usedIdsByPlan[planKey];
+  function readWeeklyUsedIds(planKey, level = state.weeklyWheel.level || 1) {
+    const used = state.weeklyWheel.usedIdsByPlan[weeklyScopedKey(planKey, level)];
     return Array.isArray(used) ? used : [];
   }
 
-  function setWeeklyUsedIds(planKey, usedIds) {
-    state.weeklyWheel.usedIdsByPlan[planKey] = Array.isArray(usedIds) ? usedIds : [];
+  function setWeeklyUsedIds(planKey, usedIds, level = state.weeklyWheel.level || 1) {
+    state.weeklyWheel.usedIdsByPlan[weeklyScopedKey(planKey, level)] = Array.isArray(usedIds) ? usedIds : [];
   }
 
-  function readWeeklyResults(planKey) {
-    const results = state.weeklyWheel.resultsByPlan[planKey];
+  function readWeeklyResults(planKey, level = state.weeklyWheel.level || 1) {
+    const results = state.weeklyWheel.resultsByPlan[weeklyScopedKey(planKey, level)];
     return Array.isArray(results) ? results : [];
   }
 
-  function setWeeklyResults(planKey, results) {
-    state.weeklyWheel.resultsByPlan[planKey] = Array.isArray(results) ? results : [];
+  function setWeeklyResults(planKey, results, level = state.weeklyWheel.level || 1) {
+    state.weeklyWheel.resultsByPlan[weeklyScopedKey(planKey, level)] = Array.isArray(results) ? results : [];
   }
 
   function recordWeeklyWheelResult(card) {
     if (!card || card.dataset.weeklyWheelReturn !== '1') return null;
     const planKey = state.weeklyWheel.returnPlanKey || state.weeklyWheel.planKey;
+    const level = normalizeWeeklyLevel(card.dataset.weeklyWheelLevel || state.weeklyWheel.level || 1);
     const entryId = card.dataset.weeklyWheelEntryId || state.weeklyWheel.currentId || '';
     if (!entryId) return null;
     const correct = card.dataset.weeklyMissed !== '1';
     const entryNumber = Number(card.dataset.weeklyWheelEntryNumber || 0);
-    const results = readWeeklyResults(planKey).filter((item) => item && item.id !== entryId);
-    results.push({ id: entryId, correct, number: entryNumber, at: Date.now() });
-    setWeeklyResults(planKey, results);
+    const results = readWeeklyResults(planKey, level).filter((item) => item && item.id !== entryId);
+    results.push({ id: entryId, correct, number: entryNumber, level, at: Date.now() });
+    setWeeklyResults(planKey, results, level);
     if (weeklyRequiresSourceSpin(weeklyWheelPlan(planKey))) {
       state.weeklyWheel.memoryStep = 'source';
       state.weeklyWheel.memorySourceKey = '';
@@ -2331,8 +2358,8 @@
     return { entryId, correct, results };
   }
 
-  function weeklyWheelScore(planKey, challengeSize) {
-    const results = readWeeklyResults(planKey).slice(0, Math.max(Number(challengeSize) || 0, 0));
+  function weeklyWheelScore(planKey, challengeSize, level = state.weeklyWheel.level || 1) {
+    const results = readWeeklyResults(planKey, level).slice(0, Math.max(Number(challengeSize) || 0, 0));
     const total = results.length;
     const correct = results.filter((item) => item?.correct).length;
     const percent = total ? Math.round((correct / total) * 100) : 0;
@@ -2343,11 +2370,13 @@
     return `<div class="weekly-wheel-confetti" aria-hidden="true">${Array.from({ length: count }, (_, index) => `<i style="--confetti-x:${Math.round((Math.random() * 2 - 1) * 220)}px; --confetti-delay:${(Math.random() * 0.36).toFixed(2)}s; --confetti-rot:${Math.round(Math.random() * 540)}deg;"></i>`).join('')}</div>`;
   }
 
-  function setWeeklyWheelPlan(planKey) {
+  function setWeeklyWheelPlan(planKey, level = state.weeklyWheel.level || 1) {
+    const nextLevel = normalizeWeeklyLevel(level);
     const plan = weeklyWheelPlan(planKey);
     window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
     window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
     state.weeklyWheel.planKey = plan.key;
+    state.weeklyWheel.level = nextLevel;
     const sizes = plan.challengeSizes || [5];
     if (!sizes.includes(state.weeklyWheel.challengeSize)) state.weeklyWheel.challengeSize = sizes[0];
     state.weeklyWheel.currentId = '';
@@ -2371,16 +2400,17 @@
     state.weeklyWheel.currentSourceKey = '';
     state.weeklyWheel.mode = 'wheel';
     state.weeklyWheel.isSpinning = false;
-    setWeeklyUsedIds(plan.key, []);
-    setWeeklyResults(plan.key, []);
+    setWeeklyUsedIds(plan.key, [], state.weeklyWheel.level);
+    setWeeklyResults(plan.key, [], state.weeklyWheel.level);
   }
 
-  function resetWeeklyWheelGame(planKey = state.weeklyWheel.planKey) {
+  function resetWeeklyWheelGame(planKey = state.weeklyWheel.planKey, level = state.weeklyWheel.level || 1) {
     const plan = weeklyWheelPlan(planKey);
+    const scopedLevel = normalizeWeeklyLevel(level);
     window.clearTimeout(Number(state.weeklyWheel.openTimer || 0));
     window.clearTimeout(Number(state.weeklyWheel.resultTimer || 0));
-    setWeeklyUsedIds(planKey, []);
-    setWeeklyResults(planKey, []);
+    setWeeklyUsedIds(planKey, [], scopedLevel);
+    setWeeklyResults(planKey, [], scopedLevel);
     state.weeklyWheel.currentId = '';
     state.weeklyWheel.memoryStep = weeklyRequiresSourceSpin(plan) ? 'source' : 'situation';
     state.weeklyWheel.memorySourceKey = '';
@@ -2413,21 +2443,22 @@
 
   function spinWeeklyWheel() {
     const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
-    const bank = weeklyActiveSituationBank(plan);
-    const fullBank = weeklySituationBank(plan);
+    const scopedLevel = normalizeWeeklyLevel(state.weeklyWheel.level || 1);
+    const bank = weeklyActiveSituationBank(plan, scopedLevel);
+    const fullBank = weeklySituationBank(plan, scopedLevel);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), fullBank.length || 0);
     if (!bank.length || !challengeSize || state.weeklyWheel.isSpinning) return null;
-    const score = weeklyWheelScore(plan.key, challengeSize);
-    let used = readWeeklyUsedIds(plan.key).filter((id) => fullBank.some((entry) => entry.id === id));
+    const score = weeklyWheelScore(plan.key, challengeSize, scopedLevel);
+    let used = readWeeklyUsedIds(plan.key, scopedLevel).filter((id) => fullBank.some((entry) => entry.id === id));
     if (score.total >= challengeSize || used.length >= challengeSize) {
       used = [];
-      setWeeklyResults(plan.key, []);
+      setWeeklyResults(plan.key, [], scopedLevel);
     }
     let available = bank.filter((entry) => !used.includes(entry.id));
     if (!available.length) available = bank;
     const choice = available[Math.floor(Math.random() * available.length)] || bank[0];
     used.push(choice.id);
-    setWeeklyUsedIds(plan.key, used);
+    setWeeklyUsedIds(plan.key, used, scopedLevel);
     state.weeklyWheel.currentId = choice.id;
 
     const degreesPerSlice = 360 / Math.max(bank.length, 1);
@@ -2446,7 +2477,7 @@
   }
 
   function currentWeeklyWheelEntry(plan, activeBank = null) {
-    const bank = Array.isArray(activeBank) && activeBank.length ? activeBank : weeklySituationBank(plan);
+    const bank = Array.isArray(activeBank) && activeBank.length ? activeBank : weeklySituationBank(plan, state.weeklyWheel.level || 1);
     return bank.find((entry) => entry.id === state.weeklyWheel.currentId) || null;
   }
 
@@ -2610,24 +2641,27 @@
     if (!root) return;
     const embedded = Boolean(options.embedded);
     const fixedPlanKey = options.planKey || '';
-    const routeKey = fixedPlanKey || getWeeklyWheelRoutePlanKey(window.location.hash.replace(/^#/, ''));
-    if (routeKey !== state.weeklyWheel.planKey) setWeeklyWheelPlan(routeKey);
+    const routePath = window.location.hash.replace(/^#/, '');
+    const routeKey = fixedPlanKey || getWeeklyWheelRoutePlanKey(routePath);
+    const routeLevel = normalizeWeeklyLevel(options.level || getWeeklyWheelRouteLevel(routePath, state.weeklyWheel.level || 1));
+    if (routeKey !== state.weeklyWheel.planKey || routeLevel !== state.weeklyWheel.level) setWeeklyWheelPlan(routeKey, routeLevel);
     const plan = weeklyWheelPlan(state.weeklyWheel.planKey);
+    const weeklyLevel = normalizeWeeklyLevel(state.weeklyWheel.level || routeLevel || 1);
     state.weeklyWheel.returnRootId = root.id || '';
     state.weeklyWheel.returnEmbedded = embedded;
     state.weeklyWheel.returnPlanKey = plan.key;
-    const bank = weeklySituationBank(plan);
+    const bank = weeklySituationBank(plan, weeklyLevel);
     if (weeklyRequiresSourceSpin(plan) && !state.weeklyWheel.memoryStep) state.weeklyWheel.memoryStep = 'source';
     if (!weeklyRequiresSourceSpin(plan)) state.weeklyWheel.memoryStep = 'situation';
     const isSourcePhase = weeklyIsSourcePhase(plan);
     const selectedSource = weeklySourceEntryForKey(plan, state.weeklyWheel.memorySourceKey);
-    const targetBank = weeklyActiveSituationBank(plan);
+    const targetBank = weeklyActiveSituationBank(plan, weeklyLevel);
     const visualEntries = isSourcePhase ? weeklyMemorySourceEntries(plan) : targetBank;
-    const numberRingEntries = isSourcePhase ? weeklySourcePhaseNumberBank(plan) : targetBank;
-    const used = readWeeklyUsedIds(plan.key).filter((id) => bank.some((entry) => entry.id === id));
-    if (used.length !== readWeeklyUsedIds(plan.key).length) setWeeklyUsedIds(plan.key, used);
+    const numberRingEntries = isSourcePhase ? weeklySourcePhaseNumberBank(plan, weeklyLevel) : targetBank;
+    const used = readWeeklyUsedIds(plan.key, weeklyLevel).filter((id) => bank.some((entry) => entry.id === id));
+    if (used.length !== readWeeklyUsedIds(plan.key, weeklyLevel).length) setWeeklyUsedIds(plan.key, used, weeklyLevel);
     const challengeSize = Math.min(Number(state.weeklyWheel.challengeSize || 5), bank.length || 0);
-    const score = weeklyWheelScore(plan.key, challengeSize);
+    const score = weeklyWheelScore(plan.key, challengeSize, weeklyLevel);
     const activeTheme = normalizeWeeklyWheelTheme(state.weeklyWheel.theme);
     const current = currentWeeklyWheelEntry(plan, targetBank);
     const currentBankIndex = current ? targetBank.findIndex((entry) => entry.id === current.id) : -1;
@@ -2666,7 +2700,8 @@
             displayIndex: currentRound - 1,
             displayTotal: challengeSize,
             weeklyEntryId: current.id,
-            weeklyEntryNumber: current.number
+            weeklyEntryNumber: current.number,
+            weeklyLevel
           })}
         </div>
       `;
@@ -2803,7 +2838,7 @@
       button.addEventListener('click', () => {
         if (state.weeklyWheel.isSpinning) return;
         setWeeklyWheelPlan(button.dataset.weeklyPlan);
-        window.location.hash = `#/app/weekly-wheel?week=${encodeURIComponent(state.weeklyWheel.planKey)}`;
+        window.location.hash = `#/app/weekly-wheel?level=${encodeURIComponent(String(state.weeklyWheel.level || 1))}&week=${encodeURIComponent(state.weeklyWheel.planKey)}`;
         renderWeeklyWheel(options);
       });
     });
@@ -3055,11 +3090,11 @@
                   <div>
                     <h2 class="text-xl font-black text-medina">Days ${escapeHtml(section.start)}–${escapeHtml(section.end)} — ${escapeHtml(section.title)}</h2>
                     <p class="text-sm text-gray-500 mt-1">${escapeHtml(section.description)}</p>
-                    ${section.wheelKey && selectedLevel === 1 ? `
+                    ${section.wheelKey ? `
                       <span class="inline-flex flex-wrap items-center gap-2 mt-2 text-xs font-extrabold">
-                        <a class="text-terracotta hover:text-red-700 underline decoration-red-200" href="#/app/weekly-wheel?week=${escapeHtml(section.wheelKey)}">Open ${escapeHtml(weeklyWheelPlan(section.wheelKey).label)} Wheel</a>
+                        <a class="text-terracotta hover:text-red-700 underline decoration-red-200" href="${escapeHtml(weeklyPlanDirectWheelHref(weeklyWheelPlan(section.wheelKey), selectedLevel))}">Open ${escapeHtml(weeklyWheelPlan(section.wheelKey).label)} Wheel</a>
                         <span class="text-gray-300">•</span>
-                        <a class="text-chefchaouen hover:text-blue-700 underline decoration-blue-200" href="${escapeHtml(weeklyPlanCheckpointHref(weeklyWheelPlan(section.wheelKey), 'prompt'))}">Optional prompt</a>
+                        <a class="text-chefchaouen hover:text-blue-700 underline decoration-blue-200" href="${escapeHtml(weeklyPlanCheckpointHref(weeklyWheelPlan(section.wheelKey), 'prompt', selectedLevel))}">Optional prompt</a>
                       </span>
                     ` : ''}
                   </div>
@@ -3175,7 +3210,7 @@
             <h2 class="text-xl font-black text-medina">Level 1 has four cumulative situation wheels</h2>
             <p class="text-gray-600">Day 7, 14, 21, and 28 keep the normal daily check first. After that, the optional weekly wheel opens.</p>
           </div>
-          <a href="#/app/weekly-wheel?week=week1" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Preview Week 1 Wheel</a>
+          <a href="#/app/weekly-wheel?level=1&week=week1" class="shrink-0 bg-terracotta hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm">Preview Week 1 Wheel</a>
         </div>
         <div class="grid md:grid-cols-4 gap-3">
           ${levelOneWeeklyCheckpointPlans().map((plan) => `
@@ -3184,8 +3219,8 @@
               <strong class="block text-medina text-lg">${escapeHtml(String(plan.bankSize))} situations</strong>
               <p class="text-sm text-gray-600 mt-1 mb-3">${escapeHtml(weeklyPlanCheckpointSummary(plan))}</p>
               <div class="flex flex-wrap gap-2 text-xs font-bold">
-                <a class="bg-medina text-white px-3 py-2 rounded-full hover:bg-slate-800" href="${escapeHtml(weeklyPlanCheckpointHref(plan, 'prompt'))}">Prompt</a>
-                <a class="bg-white text-chefchaouen border border-blue-100 px-3 py-2 rounded-full hover:border-blue-300" href="${escapeHtml(weeklyPlanDirectWheelHref(plan))}">Wheel</a>
+                <a class="bg-medina text-white px-3 py-2 rounded-full hover:bg-slate-800" href="${escapeHtml(weeklyPlanCheckpointHref(plan, 'prompt', 1))}">Prompt</a>
+                <a class="bg-white text-chefchaouen border border-blue-100 px-3 py-2 rounded-full hover:border-blue-300" href="${escapeHtml(weeklyPlanDirectWheelHref(plan, 1))}">Wheel</a>
               </div>
             </div>
           `).join('')}
@@ -3242,7 +3277,7 @@
       if (appNav) appNav.style.display = 'none';
       root.innerHTML = weeklyWheelPromptMarkup(lesson, weeklyPlanKey);
       root.querySelector('[data-start-weekly-wheel]')?.addEventListener('click', () => {
-        window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?weekly=1`;
+        window.location.hash = `#/app/lesson/${encodeURIComponent(String(lesson.day))}?level=${encodeURIComponent(String(lessonLevel(lesson)))}&weekly=1`;
       });
       root.querySelectorAll('[data-weekly-theme]').forEach((button) => {
         button.addEventListener('click', () => {
@@ -3256,7 +3291,7 @@
 
     if (weeklyRequested) {
       setLessonPracticeOpen(lesson, false);
-      renderWeeklyWheel({ root, planKey: weeklyPlanKey, embedded: true });
+      renderWeeklyWheel({ root, planKey: weeklyPlanKey, level: lessonLevel(lesson), embedded: true });
       return;
     }
 
