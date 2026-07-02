@@ -43,7 +43,7 @@
     if (!form) return;
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      window.location.hash = '#/app/dashboard';
+      window.location.hash = '#/app/lesson/1?level=1&paid=1&from=login';
     });
   }
 

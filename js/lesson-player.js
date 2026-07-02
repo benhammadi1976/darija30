@@ -538,6 +538,7 @@
     const routePath = path || window.location.hash.replace(/^#/, '');
     if (!lesson) return false;
     if (isAdminActive() && !learnerPreviewForced(routePath)) return false;
+    if (lessonLevel(lesson) === 1 && window.DarijaLevelAccess?.hasStarterPackAccess?.(routePath)) return false;
     if (isLevel2BridgeLesson(lesson, routePath)) return false;
     if (!canSeeLesson(lesson, routePath)) return true;
     if (isLevelCollaboratorOpen(lesson, routePath)) return false;
@@ -3359,7 +3360,8 @@
     document.body.classList.toggle('is-weekly-wheel-fullscreen', false);
     document.body.classList.toggle('is-remember-standalone', Boolean(practiceOpen));
     const appNav = document.getElementById('app-nav');
-    if (appNav) appNav.style.display = practiceOpen ? 'none' : 'block';
+    const useLearnerChrome = Boolean(window.DarijaLevelAccess?.hasStarterPackAccess?.(routePath));
+    if (appNav) appNav.style.display = (practiceOpen || !useLearnerChrome) ? 'none' : 'block';
 
     if (practiceOpen) {
       root.innerHTML = `

@@ -2,6 +2,7 @@
   const LEVEL_COUNT = 12;
   const STORAGE_KEY = 'darija30_level_visibility_v1';
   const COLLAB_PREVIEW_KEY = 'darija30_collaborator_preview_v1';
+  const STARTER_PACK_ACCESS_KEY = 'darija30_starter_pack_unlocked_v1';
 
   const DEFAULT_VISIBILITY = Object.freeze({
     1: 'public',
@@ -81,6 +82,43 @@
     return new URLSearchParams(query);
   }
 
+  function isStarterPackActivation(path) {
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const paid = String(params.get('paid') || params.get('subscribed') || '').toLowerCase();
+    const unlock = String(params.get('unlock') || '').toLowerCase();
+    const from = String(params.get('from') || '').toLowerCase();
+    return paid === '1' ||
+      paid === 'true' ||
+      ['starter-pack', 'level1', 'paid', 'subscription'].includes(unlock) ||
+      ['subscription', 'paid', 'starter-pack', 'login'].includes(from);
+  }
+
+  function unlockStarterPack() {
+    try {
+      localStorage.setItem(STARTER_PACK_ACCESS_KEY, '1');
+    } catch (error) {
+      // Storage may fail in private mode; the activation URL still opens the current route.
+    }
+  }
+
+  function hasStarterPackAccess(path) {
+    if (isStarterPackActivation(path)) {
+      unlockStarterPack();
+      return true;
+    }
+    try {
+      return localStorage.getItem(STARTER_PACK_ACCESS_KEY) === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function clearStarterPackAccess() {
+    try {
+      localStorage.removeItem(STARTER_PACK_ACCESS_KEY);
+    } catch (error) {}
+  }
+
   function isAdminActive() {
     return Boolean(window.DarijaAdminSession?.isActive?.());
   }
@@ -139,6 +177,10 @@
     getVisibility,
     setVisibility,
     getRouteParams,
+    isStarterPackActivation,
+    unlockStarterPack,
+    hasStarterPackAccess,
+    clearStarterPackAccess,
     isCollaboratorPreview,
     clearCollaboratorPreview,
     canSeeLevel,

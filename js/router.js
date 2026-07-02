@@ -84,6 +84,9 @@
     const isAppRoute = basePath.startsWith('/app/');
     const isAdminRoute = basePath.startsWith('/admin');
     const isAdminSessionActive = Boolean(window.DarijaAdminSession?.isActive?.() && window.DarijaSupabaseMedia?.readSession?.()?.access_token);
+    const hasPaidLearnerAccess = Boolean(window.DarijaLevelAccess?.hasStarterPackAccess?.(path));
+    const useLearnerChrome = isAppRoute && hasPaidLearnerAccess;
+    const usePublicChromeForApp = isAppRoute && !hasPaidLearnerAccess;
     const isLoginRoute = basePath === '/login';
     const targetPageId = resolveTargetPage(path);
 
@@ -92,13 +95,15 @@
     const isPublicRoute = !isAppRoute && !isAdminRoute;
     const showPublicFooter = isPublicRoute && !isLoginRoute;
     document.body.classList.toggle('is-public-route', isPublicRoute);
+    document.body.classList.toggle('is-public-trial-route', usePublicChromeForApp);
     document.body.classList.toggle('is-app-route', isAppRoute);
+    document.body.classList.toggle('is-paid-learner-route', useLearnerChrome);
     document.body.classList.toggle('is-admin-route', isAdminRoute);
     document.body.classList.toggle('is-admin-session-active', isAdminSessionActive);
     document.body.classList.toggle('has-mobile-public-cta', showPublicFooter);
 
-    setDisplay(document.getElementById('main-nav'), isPublicRoute);
-    setDisplay(document.getElementById('app-nav'), isAppRoute);
+    setDisplay(document.getElementById('main-nav'), isPublicRoute || usePublicChromeForApp);
+    setDisplay(document.getElementById('app-nav'), useLearnerChrome);
     setDisplay(document.getElementById('admin-nav'), isAdminRoute && isAdminSessionActive);
     setDisplay(document.getElementById('main-footer'), showPublicFooter);
 
