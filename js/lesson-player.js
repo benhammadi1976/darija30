@@ -66,6 +66,64 @@
     return `#/app/lessons?level=${encodeURIComponent(String(cleanLevel))}${cleanExtra ? `&${cleanExtra}` : ''}`;
   }
 
+  const LEVEL2_BRIDGE_KEY = 'darija30_level2_day1_bridge_unlocked_v1';
+
+  function lessonsForLevel(level) {
+    const cleanLevel = window.DarijaLevelAccess?.normalizeLevel?.(level) || Math.max(1, Math.round(Number(level || 1) || 1));
+    return lessons()
+      .filter((lesson) => lessonLevel(lesson) === cleanLevel)
+      .sort((a, b) => Number(a.day || 0) - Number(b.day || 0));
+  }
+
+  function levelCompletion(level) {
+    const levelLessons = lessonsForLevel(level);
+    const completed = levelLessons.filter((lesson) => Store()?.isLessonComplete(lesson)).length;
+    const total = levelLessons.length || 30;
+    return {
+      completed,
+      total,
+      percent: total ? Math.round((completed / total) * 100) : 0,
+      complete: total > 0 && completed >= Math.min(total, 30)
+    };
+  }
+
+  function isLevelComplete(level) {
+    return levelCompletion(level).complete;
+  }
+
+  function readLevel2BridgeUnlock() {
+    try {
+      return localStorage.getItem(LEVEL2_BRIDGE_KEY) === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function writeLevel2BridgeUnlock() {
+    try {
+      localStorage.setItem(LEVEL2_BRIDGE_KEY, '1');
+    } catch (error) {
+      // Keep the navigation usable even if localStorage is unavailable.
+    }
+  }
+
+  function isLevel2BridgeRequest(path) {
+    const params = getRouteParams(path || window.location.hash.replace(/^#/, ''));
+    const source = params.get('bridge') || params.get('from') || params.get('gift') || '';
+    return ['level1', 'level1-certificate', 'certificate', 'teacher-bridge'].includes(String(source));
+  }
+
+  function isLevel2BridgeLesson(lesson, path = window.location.hash.replace(/^#/, '')) {
+    if (!lesson) return false;
+    if (lessonLevel(lesson) !== 2 || Number(lesson.day || 0) !== 1) return false;
+    if (!isLevelComplete(1)) return false;
+    if (isLevel2BridgeRequest(path)) {
+      writeLevel2BridgeUnlock();
+      return true;
+    }
+    return readLevel2BridgeUnlock();
+  }
+
   function isLevelCollaboratorOpen(lesson, path) {
     const access = window.DarijaLevelAccess;
     if (!lesson || !access) return false;
@@ -480,6 +538,7 @@
     const routePath = path || window.location.hash.replace(/^#/, '');
     if (!lesson) return false;
     if (isAdminActive() && !learnerPreviewForced(routePath)) return false;
+    if (isLevel2BridgeLesson(lesson, routePath)) return false;
     if (!canSeeLesson(lesson, routePath)) return true;
     if (isLevelCollaboratorOpen(lesson, routePath)) return false;
     return Boolean(lesson && !lesson.isFree && lesson.isLocked);
@@ -519,7 +578,7 @@
           <div class="rounded-2xl border border-terracotta/20 bg-red-50 p-5 mb-6 text-center">
             <p class="text-xs font-extrabold uppercase tracking-widest text-terracotta mb-2">Preview only</p>
             <h2 class="text-2xl font-extrabold text-medina mb-2">These are the English meanings you will learn to say in Moroccan Darija.</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">You already saw the full Darija30 method in the 3 free lessons. Inside this locked lesson, each line becomes a full phrase page with Darija pronunciation, normal and slow audio, video dialogue, cultural intent, and quick practice.</p>
+            <p class="text-gray-600 max-w-2xl mx-auto">You already saw the full Darija30 method in the first free lesson. Inside this locked lesson, each line becomes a full phrase page with Darija pronunciation, normal and slow audio, video dialogue, cultural intent, and quick practice.</p>
           </div>
 
           <div class="grid md:grid-cols-3 gap-4 mb-8">
@@ -548,11 +607,11 @@
 
           <div class="rounded-2xl border-2 border-terracotta bg-red-50 p-6 text-center">
             <p class="text-sm font-bold text-terracotta uppercase tracking-wide mb-2">Not connected to Stripe yet</p>
-            <h2 class="text-2xl font-bold text-medina mb-2">Starter Pack will unlock all 30 lessons for $29 one time.</h2>
+            <h2 class="text-2xl font-bold text-medina mb-2">Starter Pack will unlock the full 30-day Level 1 plan for $29 one time.</h2>
             <p class="text-gray-600 mb-5">Unlock the full lesson to turn these English needs into Moroccan Darija you can say in real situations.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-3">
               <a href="#/pricing" class="bg-terracotta hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold shadow-md transition">View Pricing</a>
-              <a href="#/free-lesson" class="bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-6 py-3 rounded-xl font-bold transition">Try Free Lessons First</a>
+              <a href="#/free-lesson" class="bg-white border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-6 py-3 rounded-xl font-bold transition">Try Day 1 Free First</a>
             </div>
           </div>
         </div>
@@ -2015,6 +2074,7 @@
     const level = lessonLevel(lesson);
     const access = window.DarijaLevelAccess;
     const visibility = access?.getVisibility?.(level) || (level === 1 ? 'public' : 'admin');
+    if (isLevel2BridgeLesson(lesson)) return '<span class="text-sm text-green-700 font-bold">🎁 Free bridge</span>';
     if (level > 1 && visibility === 'collaborators') return '<span class="text-sm text-blue-700 font-bold">🤝 Collaborators</span>';
     if (level > 1 && visibility === 'admin') return '<span class="text-sm text-gray-500 font-bold">🔒 Admin only</span>';
     if (isLearnerLockedLesson(lesson) && isAdminActive()) return '<span class="text-sm text-blue-700 font-bold">🔓 Admin • 🔒 learner</span>';
@@ -3071,7 +3131,7 @@
           </div>
         </div>
         <div class="grid sm:grid-cols-3 gap-3 mt-5 text-sm">
-          <div class="rounded-xl bg-green-50 border border-green-100 p-3"><strong class="text-green-700">Free demo</strong><br><span class="text-gray-600">Days 1–3 prove the method.</span></div>
+          <div class="rounded-xl bg-green-50 border border-green-100 p-3"><strong class="text-green-700">Free demo</strong><br><span class="text-gray-600">Day 1 proves the full method.</span></div>
           <div class="rounded-xl bg-red-50 border border-red-100 p-3"><strong class="text-terracotta">Locked preview</strong><br><span class="text-gray-600">Before payment, paid lessons show preview only.</span></div>
           <div class="rounded-xl bg-blue-50 border border-blue-100 p-3"><strong class="text-chefchaouen">After purchase</strong><br><span class="text-gray-600">All 30 lessons open; the plan remains as guidance.</span></div>
         </div>
@@ -3385,20 +3445,69 @@
   function renderCertificate() {
     const root = document.getElementById('page-app-certificate');
     if (!root) return;
-    const summary = Store()?.getSummary(lessons()) || { completedCount: 0, courseProgress: 0 };
-    const unlocked = summary.completedCount >= 30;
+    const routePath = window.location.hash.replace(/^#/, '');
+    const selectedLevel = requestedLevel(routePath);
+    const levelLessons = lessonsForLevel(selectedLevel);
+    const completion = levelCompletion(selectedLevel);
+    const unlocked = completion.complete;
+    const levelName = selectedLevel === 1 ? 'Survival Travel' : (levelLessons[0]?.levelName || `Level ${selectedLevel}`);
+    const nextLevel = Math.min(selectedLevel + 1, window.DarijaLevelAccess?.LEVEL_COUNT || 12);
+    const nextLessonHref = selectedLevel === 1
+      ? '#/app/lesson/1?level=2&bridge=level1-certificate'
+      : appLessonsHref(nextLevel);
     root.innerHTML = `
-      <div class="max-w-2xl mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto px-4 text-center">
         <div class="${unlocked ? 'bg-green-100' : 'bg-gray-200'} w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
           <span class="text-5xl">${unlocked ? '🏆' : '🔒'}</span>
         </div>
+        <span class="inline-flex items-center gap-2 bg-blue-50 text-chefchaouen px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wide mb-4">LEVEL ${escapeHtml(String(selectedLevel).padStart(2, '0'))} CERTIFICATE</span>
         <h1 class="text-3xl font-bold text-medina mb-4">Certificate of Completion</h1>
-        <p class="text-lg text-gray-600 mb-8">Complete all 30 days of the course to unlock your official Darija30 survival certificate.</p>
-        <div class="w-full bg-gray-200 rounded-full h-4 mb-2"><div class="bg-terracotta h-4 rounded-full" style="width:${summary.courseProgress}%"></div></div>
-        <p class="text-sm font-bold text-gray-500">${summary.completedCount}/30 Lessons Completed</p>
-        <a href="#/app/lessons" class="inline-block mt-8 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition">Keep Learning</a>
+        <p class="text-lg text-gray-600 mb-8">Complete all 30 days of ${escapeHtml(levelName)} to unlock your Darija30 Level ${escapeHtml(selectedLevel)} certificate.</p>
+        <div class="w-full bg-gray-200 rounded-full h-4 mb-2"><div class="bg-terracotta h-4 rounded-full" style="width:${completion.percent}%"></div></div>
+        <p class="text-sm font-bold text-gray-500">${completion.completed}/30 Lessons Completed</p>
+
+        ${unlocked ? `
+          <section class="mt-8 rounded-3xl bg-white border border-green-100 shadow-lg p-6 md:p-8 text-left">
+            <div class="text-center mb-6">
+              <p class="text-xs font-black uppercase tracking-widest text-green-700 mb-2">Next step</p>
+              <h2 class="text-2xl font-black text-medina mb-2">مبروك! شهادة Level ${escapeHtml(selectedLevel)} جاهزة.</h2>
+              <p class="text-gray-600 max-w-2xl mx-auto">اختر هل تريد اختبار محادثة مباشر مع أستاذ مغربي، أو تجربة أول درس من المستوى التالي مجانًا.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <a href="#/pricing?service=teacher-test&level=${escapeHtml(selectedLevel)}" class="block rounded-2xl border-2 border-chefchaouen bg-blue-50 p-5 hover:bg-blue-100 transition">
+                <p class="text-3xl mb-3">🎙️</p>
+                <h3 class="font-black text-chefchaouen text-lg mb-2">Live Speaking Test</h3>
+                <p class="text-sm text-blue-900">اختبار صوت وصورة مع أستاذ مغربي عبر WhatsApp/Video لاحقًا لتقييم النطق والاستعداد الواقعي.</p>
+              </a>
+              ${selectedLevel === 1 ? `
+                <a href="${nextLessonHref}" data-unlock-level2-bridge class="block rounded-2xl border-2 border-green-500 bg-green-50 p-5 hover:bg-green-100 transition">
+                  <p class="text-3xl mb-3">🎁</p>
+                  <h3 class="font-black text-green-700 text-lg mb-2">Try Level 2 — Lesson 1 Free</h3>
+                  <p class="text-sm text-green-900">قبل حجز الأستاذ أو شراء Level 2، جرّب أول درس من مستوى الضيافة والرياض مجانًا.</p>
+                </a>
+              ` : `
+                <a href="${nextLessonHref}" class="block rounded-2xl border-2 border-green-500 bg-green-50 p-5 hover:bg-green-100 transition">
+                  <p class="text-3xl mb-3">➡️</p>
+                  <h3 class="font-black text-green-700 text-lg mb-2">Continue to Level ${escapeHtml(nextLevel)}</h3>
+                  <p class="text-sm text-green-900">انتقل إلى المستوى التالي عندما تكون جاهزًا.</p>
+                </a>
+              `}
+            </div>
+          </section>
+        ` : `
+          <div class="mt-8 rounded-2xl bg-white border border-gray-100 p-6 text-left shadow-sm">
+            <p class="text-sm font-extrabold uppercase tracking-wide text-chefchaouen mb-2">After completion</p>
+            <h2 class="text-xl font-extrabold text-medina mb-2">Optional Live Darija Check</h2>
+            <p class="text-sm text-gray-600">After the certificate opens, the learner can choose a live teacher test or continue to the next level.</p>
+          </div>
+        `}
+
+        <a href="${escapeHtml(appLessonsHref(selectedLevel))}" class="inline-block mt-8 bg-chefchaouen hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition">${unlocked ? 'Back to Level Plan' : 'Keep Learning'}</a>
       </div>
     `;
+    root.querySelector('[data-unlock-level2-bridge]')?.addEventListener('click', () => {
+      writeLevel2BridgeUnlock();
+    });
   }
 
   function renderForPath(path) {

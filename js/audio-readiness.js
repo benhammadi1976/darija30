@@ -60,12 +60,12 @@
         <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
           <p class="text-xs font-extrabold text-gray-400 uppercase">Expected MP3 files</p>
           <p class="text-3xl font-black text-medina">${items.length}</p>
-          <p class="text-sm text-gray-500">Normal + Slow for every free phrase.</p>
+          <p class="text-sm text-gray-500">Normal + Slow for every free demo phrase.</p>
         </div>
         <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
           <p class="text-xs font-extrabold text-gray-400 uppercase">Free phrases</p>
           <p class="text-3xl font-black text-medina">${items.length / 2}</p>
-          <p class="text-sm text-gray-500">3 free lessons, 15 phrases.</p>
+          <p class="text-sm text-gray-500">1 free lesson, 5 phrases.</p>
         </div>
         <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
           <p class="text-xs font-extrabold text-gray-400 uppercase">Status</p>
